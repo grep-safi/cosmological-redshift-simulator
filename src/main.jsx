@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MainView from './MainView';
 import ZodiacStrip from './ZodiacStrip';
 import { forceNumber } from './utils';
 
@@ -8,32 +7,14 @@ class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
         super(props);
         this.initialState = {
-            targetFixed: true,
-            observerPlanetAngle: 0,
-            targetPlanetAngle: 0,
             radiusObserverPlanet: 1.00,
             radiusTargetPlanet: 2.40,
-            radiusPixelObserver: 166.66,
-            radiusPixelTarget: 400,
-            maximumPixelRadius: 400,
-            observerMultiplier: Math.pow(1.0, -1.5),
-            targetMultiplier:  Math.pow(2.4, -1.5),
             animationRate: 1.5,
-            targetAngle: 0,
-            sunAngle: -Math.PI,
-            elongationAngle: -Math.PI,
-            optionObserver: 0,
-            optionTarget: 0,
-            observerName: 'observer planet',
-            targetName: 'target planet',
             holdObserver: 1.00,
             holdTarget: 2.40,
-            labelOrbits: true,
-            showElongation: false,
-            zoomOut: false,
+            distanceTravelled: 0,
             startBtnText: 'start animation',
             isPlaying: false,
-            days: 0
         };
 
         this.state = this.initialState;
@@ -61,23 +42,10 @@ class CosmologicalRedshiftSim extends React.Component {
             <div className="row mt-2">
                 <div className="col-8">
                     <ZodiacStrip
+                        distanceTravelled={this.state.distanceTravelled}
                     />
                     <div className="col">
-                        <h4 id="text">Animation Control</h4>
-                        <div className="animationText">
-                            <label htmlFor="diamRange" id="text">Speed:</label>
-                        </div>
-                        <div className="animationSlider">
-                            <input
-                                type="range"
-                                step={0.1}
-                                min={0.1}
-                                max={Math.PI}
-                                value={this.state.animationRate}
-                                onChange={this.onAnimationRateChange.bind(this)}
-                            />
-                        </div>
-                        <div className="animationButton">
+                       <div className="animationButton">
                             <button type="button"
                                     className="btn btn-primary btn-sm"
                                     onClick={this.onStartClick.bind(this)}>
@@ -150,18 +118,15 @@ class CosmologicalRedshiftSim extends React.Component {
                         </div>
 
                     </div>
-               </div>
+                </div>
             </div>
         </React.Fragment>;
     }
 
     animate() {
         const me = this;
-        this.updateMultiplier();
         this.setState(prevState => ({
-            observerPlanetAngle: me.incrementObserverPlanetAngle(prevState.observerPlanetAngle, 0.0115 * this.state.animationRate),
-            targetPlanetAngle: me.incrementTargetPlanetAngle(prevState.targetPlanetAngle, 0.0115 * this.state.animationRate),
-            days: prevState.days + me.incrementDays(this.state.animationRate)
+            distanceTravelled: prevState.distanceTravelled + me.state.animationRate
         }));
 
         this.raf = requestAnimationFrame(this.animate.bind(this));

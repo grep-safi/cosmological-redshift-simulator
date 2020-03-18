@@ -194,13 +194,18 @@ export default class ZodiacStrip extends React.Component {
 
     updateLine() {
         this.directLine.clear();
+        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelled;
         let downShift = -0;
 
         this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y);
         this.directLine.visible = true;
         this.directLine.lineStyle(2, 0xa64e4e);
 
-        this.directLine.lineTo(this.sunZodiacContainer.x + this.state.distVal, this.sunZodiacContainer.y - downShift);
+        if (distanceMoved >= this.targetPlanetZodiacContainer.x) {
+            distanceMoved = this.targetPlanetZodiacContainer.x;
+        }
+
+        this.directLine.lineTo(distanceMoved, this.sunZodiacContainer.y - downShift);
 
         this.setState(prevState => ({
             distVal: prevState.distVal + 0.10 * 1.5,
