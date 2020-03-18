@@ -102,12 +102,13 @@ export default class MainView extends React.Component {
     drawGalaxy() {
         const galaxyContainer = new PIXI.Container();
         galaxyContainer.name = 'galaxy';
-        galaxyContainer.position = new PIXI.Point(50, 50);
+        galaxyContainer.position = new PIXI.Point(75, 100);
 
         const galaxyImage = new PIXI.Sprite(PIXI.Texture.from('img/galaxy.png'));
         galaxyImage.anchor.set(0.5);
-        galaxyImage.width = 15;
-        galaxyImage.height = 15;
+        galaxyImage.rotation = 90;
+        galaxyImage.width = 50;
+        galaxyImage.height = 50;
         galaxyContainer.addChild(galaxyImage);
 
         this.app.stage.addChild(galaxyContainer);

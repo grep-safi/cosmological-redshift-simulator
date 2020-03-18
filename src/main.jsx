@@ -60,10 +60,7 @@ class CosmologicalRedshiftSim extends React.Component {
             </nav>
             <div className="row mt-2">
                 <div className="col-8">
-                    <MainView
-                        // isPlaying={this.state.isPlaying}
-                        // onTargetPlanetAngleUpdate={this.onTargetPlanetAngleUpdate.bind(this)}
-                        // zoomOut={this.state.zoomOut}
+                    <ZodiacStrip
                     />
                     <div className="col">
                         <h4 id="text">Animation Control</h4>
