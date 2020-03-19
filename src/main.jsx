@@ -13,7 +13,7 @@ class CosmologicalRedshiftSim extends React.Component {
             holdObserver: 1.00,
             holdTarget: 2.40,
             distanceTravelled: 0,
-            startBtnText: 'start animation',
+            startBtnText: 'play animation',
             isPlaying: false,
         };
 
@@ -39,85 +39,76 @@ class CosmologicalRedshiftSim extends React.Component {
                     </li>
                 </ul>
             </nav>
-            <div className="row mt-2">
-                <div className="col-8">
-                    <ZodiacStrip
-                        distanceTravelled={this.state.distanceTravelled}
-                    />
-                    <div className="col">
-                       <div className="animationButton">
-                            <button type="button"
-                                    className="btn btn-primary btn-sm"
-                                    onClick={this.onStartClick.bind(this)}>
-                                {this.state.startBtnText}
-                            </button>
-                        </div>
-                    </div>
-
+            <div className="bot">
+                <ZodiacStrip
+                    distanceTravelled={this.state.distanceTravelled}
+                />
+            </div>
+            
+            <div className="animationButton">
+                <button type="button"
+                        className="btn btn-danger btn-sm"
+                        onClick={this.onStartClick.bind(this)}>
+                    {this.state.startBtnText}
+                </button>
+            </div>
+                
+            <div className="col">
+                <h4 id="text">Redshift Controls Sizes</h4>
+                <div className="radiusText">
+                    <label htmlFor="radObserverPlanetRange" id="text">Galaxy Distance</label>
+                </div>
+                <div className="observerInput">
+                    <form onSubmit={this.onSubmitObserver.bind(this)}>
+                        <input
+                            className="input"
+                            type="number"
+                            min={0.25}
+                            max={10.00}
+                            step={0.01}
+                            value={this.state.holdObserver}
+                            onChange={this.changeValObserver.bind(this)}
+                        />
+                    </form>
                 </div>
 
-                <div className="bot">
-                    <div className="rowx">
-                        <div className="col">
-                            <h4 id="text">Redshift Controls Sizes</h4>
-                            <div className="radiusText">
-                                <label htmlFor="radObserverPlanetRange" id="text">Galaxy Distance</label>
-                            </div>
-                            <div className="observerInput">
-                                <form onSubmit={this.onSubmitObserver.bind(this)}>
-                                    <input
-                                        className="input"
-                                        type="number"
-                                        min={0.25}
-                                        max={10.00}
-                                        step={0.01}
-                                        value={this.state.holdObserver}
-                                        onChange={this.changeValObserver.bind(this)}
-                                    />
-                                </form>
-                            </div>
+                <div className="observerSlider">
+                    <input
+                        type="range"
+                        min={0.25}
+                        max={10.00}
+                        step={0.01}
+                        value={this.state.radiusObserverPlanet}
+                        // onChange={}
+                    />
+                </div>
 
-                            <div className="observerSlider">
-                                <input
-                                    type="range"
-                                    min={0.25}
-                                    max={10.00}
-                                    step={0.01}
-                                    value={this.state.radiusObserverPlanet}
-                                    // onChange={}
-                                />
-                            </div>
+                <div className="radiusText">
+                    <label htmlFor="radTargetPlanetRange" id="text">Galaxy Expansion Rate</label>
+                </div>
+                <div className="targetInput">
+                    <form onSubmit={this.onSubmitTarget.bind(this)}>
+                        <input
+                            className="input"
+                            type="number"
+                            min={0.25}
+                            max={10.00}
+                            step={0.01}
+                            value={this.state.holdTarget}
+                            onChange={this.changeValTarget.bind(this)}
+                        />
+                    </form>
+                </div>
 
-                            <div className="radiusText">
-                                <label htmlFor="radTargetPlanetRange" id="text">Galaxy Expansion Rate</label>
-                            </div>
-                            <div className="targetInput">
-                                <form onSubmit={this.onSubmitTarget.bind(this)}>
-                                    <input
-                                        className="input"
-                                        type="number"
-                                        min={0.25}
-                                        max={10.00}
-                                        step={0.01}
-                                        value={this.state.holdTarget}
-                                        onChange={this.changeValTarget.bind(this)}
-                                    />
-                                </form>
-                            </div>
-
-                            <div className="targetSlider">
-                                <input
-                                    type="range"
-                                    min={0.25}
-                                    max={10.00}
-                                    step={0.01}
-                                    value={this.state.radiusTargetPlanet}
-                                    // onChange={}
-                                />
-                            </div>
-                        </div>
-
-                    </div>
+                <div className="targetSlider">
+                    <input
+                        type="range"
+                        min={0.25}
+                        max={10.00}
+                        step={0.01}
+                        value={this.state.radiusTargetPlanet}
+                        // onChange={}
+                    />
                 </div>
             </div>
         </React.Fragment>;
@@ -137,13 +128,13 @@ class CosmologicalRedshiftSim extends React.Component {
             this.raf = requestAnimationFrame(this.animate.bind(this));
             this.setState({
                 isPlaying: true,
-                startBtnText: 'stop animation'
+                startBtnText: 'pause animation'
             });
         } else {
             this.stopAnimation();
             this.setState({
                 isPlaying: false,
-                startBtnText: 'start animation'
+                startBtnText: 'play animation'
             });
         }
     }
