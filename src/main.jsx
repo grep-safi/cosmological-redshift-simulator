@@ -127,7 +127,7 @@ class CosmologicalRedshiftSim extends React.Component {
         this.setState(({
             distanceTravelledLight: newLightDist,
             distanceBetween: newDistanceBetween,
-            initialSeparationDistance: newDistanceBetween
+
         }));
 
         this.raf = requestAnimationFrame(this.animate.bind(this));
@@ -191,8 +191,6 @@ class CosmologicalRedshiftSim extends React.Component {
         } else {
             newDist = initialSeparationDist;
         }
-
-        console.log('fuck fuck', this.state.initialSeparationDistance, this.state.distanceBetween);
 
         this.setState({
             initialSeparationDistance: newDist,
