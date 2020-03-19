@@ -204,9 +204,6 @@ export default class ZodiacStrip extends React.Component {
 
         if (distanceMoved >= this.targetPlanetZodiacContainer.x) {
             distanceMoved = this.targetPlanetZodiacContainer.x;
-            this.setState({
-                lightReached: true
-            });
         }
 
         this.directLine.lineTo(distanceMoved, this.sunZodiacContainer.y - downShift);
@@ -219,31 +216,32 @@ export default class ZodiacStrip extends React.Component {
         // this.directLine.lineStyle(2, 0xa64e4e);
         // this.directLine.moveTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y + 15);
         // this.directLine.lineTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y + 57);
-        //
+
         // // Does bottom vertical line for sun
         // this.directLine.lineStyle(2, 0xa64e4e);
         // this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y + 15);
         // this.directLine.lineTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y + 57);
-        //
-        // // Does top vertical line for target planet
-        // this.directLine.lineStyle(2, 0xa64e4e);
-        // this.directLine.moveTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y - 15);
-        // this.directLine.lineTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y - 35);
-        //
-        // // Does top vertical line for sun
-        // this.directLine.lineStyle(2, 0xa64e4e);
-        // this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y - 15);
-        // this.directLine.lineTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y - 50);
-        //
-        // this.sunName.x = this.sunZodiacContainer.x;
-        // this.sunName.y = this.sunZodiacContainer.y - 60;
-        //
-        // this.targetName.x = this.targetPlanetZodiacContainer.x;
-        // this.targetName.y = this.targetPlanetZodiacContainer.y - 45;
+
+        // Does top vertical line for target planet
+        this.directLine.lineStyle(2, 0xa64e4e);
+        this.directLine.moveTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y - 15);
+        this.directLine.lineTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y - 35);
+
+        // Does top vertical line for sun
+        this.directLine.lineStyle(2, 0xa64e4e);
+        this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y - 15);
+        this.directLine.lineTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y - 50);
+
+        this.sunName.x = this.sunZodiacContainer.x;
+        this.sunName.y = this.sunZodiacContainer.y - 60;
+
+        this.targetName.x = this.targetPlanetZodiacContainer.x;
+        this.targetName.y = this.targetPlanetZodiacContainer.y - 45;
     }
 
     updateBodies() {
-        if (!this.state.lightReached) {
+        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
+        if (distanceMoved < this.targetPlanetZodiacContainer.x) {
             this.targetPlanetZodiacContainer.x = (3 * 600 / 4) + this.props.separationDistance;
             this.sunZodiacContainer.x = (600 / 4) - this.props.separationDistance;
         }

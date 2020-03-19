@@ -155,11 +155,31 @@ class CosmologicalRedshiftSim extends React.Component {
         this.setState(this.initialState);
     }
 
+    // Runs when user is typing numbers in the box
+    changeValSeparationDistance(e) {
+        let enteredValue = forceNumber(e.target.value);
+        this.setState({holdSeparationDistance: enteredValue});
+    }
+
+    // Runs when user is typing numbers in the box
+    changeValExpansionRate(e) {
+        let enteredValue = forceNumber(e.target.value);
+        this.setState({holdExpansionRate: enteredValue});
+    }
+
+    // Runs when user hits enter after typing in the number in the box
     onSubmitSeparationDistance(e) {
         e.preventDefault();
         this.onSeparationDistanceChange(this.state.holdSeparationDistance);
     }
 
+    // Runs when user hits enter after typing in the number in the box
+    onSubmitExpansionRate(e) {
+        e.preventDefault();
+        this.onExpansionRateChange(this.state.holdExpansionRate);
+    }
+
+    // Runs either after user hits enter (method chaining) or when the slider is being dragged
     onSeparationDistanceChange(separationDist) {
         let newDist;
         if (typeof (separationDist) === 'object') {
@@ -173,6 +193,7 @@ class CosmologicalRedshiftSim extends React.Component {
         });
     }
 
+    // Runs either after user hits enter (method chaining) or when the slider is being dragged
     onExpansionRateChange(expansionRate) {
         let newExpansionRate;
         if (typeof (expansionRate) === 'object') {
@@ -185,21 +206,6 @@ class CosmologicalRedshiftSim extends React.Component {
             expansionRate: newExpansionRate,
             holdExpansionRate: newExpansionRate
         });
-    }
-
-    onSubmitExpansionRate(e) {
-        e.preventDefault();
-        this.onExpansionRateChange(this.state.holdExpansionRate);
-    }
-
-    changeValSeparationDistance(e) {
-        let enteredValue = forceNumber(e.target.value);
-        this.setState({holdSeparationDistance: enteredValue});
-    }
-
-    changeValExpansionRate(e) {
-        let enteredValue = forceNumber(e.target.value);
-        this.setState({holdExpansionRate: enteredValue});
     }
 }
 
