@@ -7,10 +7,11 @@ class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
         super(props);
         this.initialState = {
-            separationDistance: 2.00,
+            initialSeparationDistance: 2.00,
+            distanceBetween: 2.00,
             expansionRate: 1.00,
             animationRate: 1.5,
-            holdSeparationDistance: 2.00,
+            holdInitialSeparationDistance: 2.00,
             holdExpansionRate: 1.00,
             distanceTravelledLight: 0,
             distanceTravelledBodies: 0,
@@ -43,7 +44,9 @@ class CosmologicalRedshiftSim extends React.Component {
             <div className="bot">
                 <ZodiacStrip
                     distanceTravelledLight={this.state.distanceTravelledLight}
-                    separationDistance={this.state.separationDistance}
+                    initialSeparationDistance={this.state.initialSeparationDistance}
+                    distanceBetween={this.state.distanceBetween}
+                    isPlaying={this.state.isPlaying}
                 />
             </div>
             
@@ -58,30 +61,30 @@ class CosmologicalRedshiftSim extends React.Component {
             <div className="col">
                 <h4 id="text">Redshift Controls</h4>
                 <div className="radiusText">
-                    <label htmlFor="radSeparationDistanceRange" id="text">Separation Distance</label>
+                    <label htmlFor="radInitialSeparationDistanceRange" id="text">Initial Separation Distance</label>
                 </div>
-                <div className="separationDistanceInput">
-                    <form onSubmit={this.onSubmitSeparationDistance.bind(this)}>
+                <div className="initialSeparationDistanceInput">
+                    <form onSubmit={this.onSubmitInitialSeparationDistance.bind(this)}>
                         <input
                             className="input"
                             type="number"
                             min={0.25}
                             max={10.00}
                             step={0.01}
-                            value={this.state.holdSeparationDistance}
-                            onChange={this.changeValSeparationDistance.bind(this)}
+                            value={this.state.holdInitialSeparationDistance}
+                            onChange={this.changeValInitialSeparationDistance.bind(this)}
                         />
                     </form>
                 </div>
 
-                <div className="separationDistanceSlider">
+                <div className="initialSeparationDistanceSlider">
                     <input
                         type="range"
                         min={0.25}
                         max={10.00}
                         step={0.01}
-                        value={this.state.separationDistance}
-                        onChange={this.onSeparationDistanceChange.bind(this)}
+                        value={this.state.initialSeparationDistance}
+                        onChange={this.onInitialSeparationDistanceChange.bind(this)}
                     />
                 </div>
 
@@ -120,10 +123,10 @@ class CosmologicalRedshiftSim extends React.Component {
         const me = this;
         let speedOfLight = 3;
         let newLightDist = this.state.distanceTravelledLight + speedOfLight;
-        let newSeparationDist = this.state.separationDistance + (0.05 * me.state.expansionRate);
+        let newDistanceBetween = this.state.distanceBetween + (0.05 * me.state.expansionRate);
         this.setState(({
             distanceTravelledLight: newLightDist,
-            separationDistance: newSeparationDist
+            distanceBetween: newDistanceBetween
         }));
 
         this.raf = requestAnimationFrame(this.animate.bind(this));
@@ -156,9 +159,9 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     // Runs when user is typing numbers in the box
-    changeValSeparationDistance(e) {
+    changeValInitialSeparationDistance(e) {
         let enteredValue = forceNumber(e.target.value);
-        this.setState({holdSeparationDistance: enteredValue});
+        this.setState({holdInitialSeparationDistance: enteredValue});
     }
 
     // Runs when user is typing numbers in the box
@@ -168,9 +171,9 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     // Runs when user hits enter after typing in the number in the box
-    onSubmitSeparationDistance(e) {
+    onSubmitInitialSeparationDistance(e) {
         e.preventDefault();
-        this.onSeparationDistanceChange(this.state.holdSeparationDistance);
+        this.onInitialSeparationDistanceChange(this.state.holdInitialSeparationDistance);
     }
 
     // Runs when user hits enter after typing in the number in the box
@@ -180,16 +183,17 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     // Runs either after user hits enter (method chaining) or when the slider is being dragged
-    onSeparationDistanceChange(separationDist) {
+    onInitialSeparationDistanceChange(initialSeparationDist) {
         let newDist;
-        if (typeof (separationDist) === 'object') {
-            newDist = forceNumber(separationDist.target.value);
+        if (typeof (initialSeparationDist) === 'object') {
+            newDist = forceNumber(initialSeparationDist.target.value);
         } else {
-            newDist = separationDist;
+            newDist = initialSeparationDist;
         }
         this.setState({
-            separationDistance: newDist,
-            holdSeparationDistance: newDist
+            initialSeparationDistance: newDist,
+            distanceBetween: newDist,
+            holdInitialSeparationDistance: newDist
         });
     }
 
