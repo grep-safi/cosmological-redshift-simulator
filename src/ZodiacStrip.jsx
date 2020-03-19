@@ -216,13 +216,16 @@ export default class ZodiacStrip extends React.Component {
     }
 
     updateBodiesSliderChange() {
-        this.targetPlanetZodiacContainer.x = ORBIT_CENTER_X + this.props.distanceBetween;
-        this.sunZodiacContainer.x = ORBIT_CENTER_X - this.props.distanceBetween;
+        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
+        if (distanceMoved <= this.targetPlanetZodiacContainer.x) {
+            this.targetPlanetZodiacContainer.x = ORBIT_CENTER_X + this.props.distanceBetween;
+            this.sunZodiacContainer.x = ORBIT_CENTER_X - this.props.distanceBetween;
+        }
     }
 
     updateBodiesAnimation() {
         let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
-        if (distanceMoved < this.targetPlanetZodiacContainer.x) {
+        if (distanceMoved <= this.targetPlanetZodiacContainer.x) {
             this.targetPlanetZodiacContainer.x = ORBIT_CENTER_X + this.props.distanceBetween;
             this.sunZodiacContainer.x = ORBIT_CENTER_X - this.props.distanceBetween;
         }
