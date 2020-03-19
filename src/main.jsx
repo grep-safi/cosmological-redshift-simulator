@@ -7,12 +7,13 @@ class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
         super(props);
         this.initialState = {
-            radiusObserverPlanet: 1.00,
-            radiusTargetPlanet: 2.40,
+            separationDistance: 2.00,
+            expansionRate: 1.00,
             animationRate: 1.5,
-            holdObserver: 1.00,
-            holdTarget: 2.40,
-            distanceTravelled: 0,
+            holdSeparationDistance: 2.00,
+            holdExpansionRate: 1.00,
+            distanceTravelledLight: 0,
+            distanceTravelledBodies: 0,
             startBtnText: 'play animation',
             isPlaying: false,
         };
@@ -41,7 +42,8 @@ class CosmologicalRedshiftSim extends React.Component {
             </nav>
             <div className="bot">
                 <ZodiacStrip
-                    distanceTravelled={this.state.distanceTravelled}
+                    distanceTravelledLight={this.state.distanceTravelledLight}
+                    separationDistance={this.state.separationDistance}
                 />
             </div>
             
@@ -54,60 +56,60 @@ class CosmologicalRedshiftSim extends React.Component {
             </div>
                 
             <div className="col">
-                <h4 id="text">Redshift Controls Sizes</h4>
+                <h4 id="text">Redshift Controls</h4>
                 <div className="radiusText">
-                    <label htmlFor="radObserverPlanetRange" id="text">Galaxy Distance</label>
+                    <label htmlFor="radSeparationDistanceRange" id="text">Separation Distance</label>
                 </div>
-                <div className="observerInput">
-                    <form onSubmit={this.onSubmitObserver.bind(this)}>
+                <div className="separationDistanceInput">
+                    <form onSubmit={this.onSubmitSeparationDistance.bind(this)}>
                         <input
                             className="input"
                             type="number"
                             min={0.25}
                             max={10.00}
                             step={0.01}
-                            value={this.state.holdObserver}
-                            onChange={this.changeValObserver.bind(this)}
+                            value={this.state.holdSeparationDistance}
+                            onChange={this.changeValSeparationDistance.bind(this)}
                         />
                     </form>
                 </div>
 
-                <div className="observerSlider">
+                <div className="separationDistanceSlider">
                     <input
                         type="range"
                         min={0.25}
                         max={10.00}
                         step={0.01}
-                        value={this.state.radiusObserverPlanet}
-                        // onChange={}
+                        value={this.state.separationDistance}
+                        onChange={this.onSeparationDistanceChange.bind(this)}
                     />
                 </div>
 
                 <div className="radiusText">
-                    <label htmlFor="radTargetPlanetRange" id="text">Galaxy Expansion Rate</label>
+                    <label htmlFor="radExpansionRateRange" id="text">Galaxy Expansion Rate</label>
                 </div>
-                <div className="targetInput">
-                    <form onSubmit={this.onSubmitTarget.bind(this)}>
+                <div className="expansionRateInput">
+                    <form onSubmit={this.onSubmitExpansionRate.bind(this)}>
                         <input
                             className="input"
                             type="number"
                             min={0.25}
                             max={10.00}
                             step={0.01}
-                            value={this.state.holdTarget}
-                            onChange={this.changeValTarget.bind(this)}
+                            value={this.state.holdExpansionRate}
+                            onChange={this.changeValExpansionRate.bind(this)}
                         />
                     </form>
                 </div>
 
-                <div className="targetSlider">
+                <div className="expansionRateSlider">
                     <input
                         type="range"
                         min={0.25}
                         max={10.00}
                         step={0.01}
-                        value={this.state.radiusTargetPlanet}
-                        // onChange={}
+                        value={this.state.expansionRate}
+                        onChange={this.onExpansionRateChange.bind(this)}
                     />
                 </div>
             </div>
@@ -116,8 +118,12 @@ class CosmologicalRedshiftSim extends React.Component {
 
     animate() {
         const me = this;
-        this.setState(prevState => ({
-            distanceTravelled: prevState.distanceTravelled + me.state.animationRate
+        let speedOfLight = 3;
+        let newLightDist = this.state.distanceTravelledLight + speedOfLight;
+        let newSeparationDist = this.state.separationDistance + (0.05 * me.state.expansionRate);
+        this.setState(({
+            distanceTravelledLight: newLightDist,
+            separationDistance: newSeparationDist
         }));
 
         this.raf = requestAnimationFrame(this.animate.bind(this));
@@ -139,12 +145,6 @@ class CosmologicalRedshiftSim extends React.Component {
         }
     }
 
-    onAnimationRateChange(e) {
-        this.setState({
-            animationRate: forceNumber(e.target.value)
-        });
-    }
-
     stopAnimation() {
         cancelAnimationFrame(this.raf);
     }
@@ -155,54 +155,51 @@ class CosmologicalRedshiftSim extends React.Component {
         this.setState(this.initialState);
     }
 
-    onSubmitObserver(e) {
+    onSubmitSeparationDistance(e) {
         e.preventDefault();
-        this.onObserverPlanetRadiusChange(this.state.holdObserver);
+        this.onSeparationDistanceChange(this.state.holdSeparationDistance);
     }
 
-    onSubmitTarget(e) {
+    onSeparationDistanceChange(separationDist) {
+        let newDist;
+        if (typeof (separationDist) === 'object') {
+            newDist = forceNumber(separationDist.target.value);
+        } else {
+            newDist = separationDist;
+        }
+        this.setState({
+            separationDistance: newDist,
+            holdSeparationDistance: newDist
+        });
+    }
+
+    onExpansionRateChange(expansionRate) {
+        let newExpansionRate;
+        if (typeof (expansionRate) === 'object') {
+            newExpansionRate = forceNumber(expansionRate.target.value);
+        } else {
+            newExpansionRate = expansionRate;
+        }
+
+        this.setState({
+            expansionRate: newExpansionRate,
+            holdExpansionRate: newExpansionRate
+        });
+    }
+
+    onSubmitExpansionRate(e) {
         e.preventDefault();
-        this.onTargetPlanetRadiusChange(this.state.holdTarget);
+        this.onExpansionRateChange(this.state.holdExpansionRate);
     }
 
-    changeValObserver(e) {
-        let enteredValue = e.target.value;
-
-        // This functionality ensures you cannoot
-        // enter the same radius value for both
-        // target and observer. But since the Prof didn't want it,
-        // it's commented out for now.
-
-        // let otherVal = this.state.holdTarget;
-        // if (enteredValue == otherVal) {
-        //     if (otherVal == 10.0) {
-        //         enteredValue -= 0.01;
-        //     } else {
-        //         enteredValue += 0.01;
-        //     }
-        // }
-
-        this.setState({holdObserver: enteredValue});
+    changeValSeparationDistance(e) {
+        let enteredValue = forceNumber(e.target.value);
+        this.setState({holdSeparationDistance: enteredValue});
     }
 
-    changeValTarget(e) {
-        let enteredValue = e.target.value;
-
-        // This functionality ensures you cannoot
-        // enter the same radius value for both
-        // target and observer. But since the Prof didn't want it,
-        // it's commented out for now.
-
-        // let otherVal = this.state.holdObserver;
-        // if (enteredValue == otherVal) {
-        //     if (otherVal == 10.0) {
-        //         enteredValue -= 0.01;
-        //     } else {
-        //         enteredValue += 0.01;
-        //     }
-        // }
-
-        this.setState({holdTarget: enteredValue});
+    changeValExpansionRate(e) {
+        let enteredValue = forceNumber(e.target.value);
+        this.setState({holdExpansionRate: enteredValue});
     }
 }
 
