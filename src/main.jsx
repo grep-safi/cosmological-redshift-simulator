@@ -7,11 +7,11 @@ class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
         super(props);
         this.initialState = {
-            initialSeparationDistance: 2.00,
-            distanceBetween: 2.00,
+            initialSeparationDistance: 150,
+            distanceBetween: 150,
             expansionRate: 1.00,
             animationRate: 1.5,
-            holdInitialSeparationDistance: 2.00,
+            holdInitialSeparationDistance: 150,
             holdExpansionRate: 1.00,
             distanceTravelledLight: 0,
             distanceTravelledBodies: 0,
@@ -68,8 +68,8 @@ class CosmologicalRedshiftSim extends React.Component {
                         <input
                             className="input"
                             type="number"
-                            min={0.25}
-                            max={10.00}
+                            min={150}
+                            max={250}
                             step={0.01}
                             value={this.state.holdInitialSeparationDistance}
                             onChange={this.changeValInitialSeparationDistance.bind(this)}
@@ -80,8 +80,8 @@ class CosmologicalRedshiftSim extends React.Component {
                 <div className="initialSeparationDistanceSlider">
                     <input
                         type="range"
-                        min={0.25}
-                        max={10.00}
+                        min={150}
+                        max={250}
                         step={0.01}
                         value={this.state.initialSeparationDistance}
                         onChange={this.onInitialSeparationDistanceChange.bind(this)}
@@ -126,7 +126,8 @@ class CosmologicalRedshiftSim extends React.Component {
         let newDistanceBetween = this.state.distanceBetween + (0.05 * me.state.expansionRate);
         this.setState(({
             distanceTravelledLight: newLightDist,
-            distanceBetween: newDistanceBetween
+            distanceBetween: newDistanceBetween,
+            initialSeparationDistance: newDistanceBetween
         }));
 
         this.raf = requestAnimationFrame(this.animate.bind(this));
@@ -190,6 +191,9 @@ class CosmologicalRedshiftSim extends React.Component {
         } else {
             newDist = initialSeparationDist;
         }
+
+        console.log('fuck fuck', this.state.initialSeparationDistance, this.state.distanceBetween);
+
         this.setState({
             initialSeparationDistance: newDist,
             distanceBetween: newDist,

@@ -2,8 +2,14 @@ import React from 'react';
 import * as PIXI from 'pixi.js';
 import PropTypes from 'prop-types';
 
-const ORBIT_CENTER_X = 600;
+const ORBIT_CENTER_X = 300;
 const ORBIT_CENTER_Y = 212;
+
+// We start at 3/4 of the strip
+const STARTING_US_X = (3 / 4) * (ORBIT_CENTER_X * 2);
+
+// Galaxy starts at 1/4 of the strip
+const STARTING_GALAXY_X = (1 / 4) * (ORBIT_CENTER_X * 2);
 
 const getPlanetPos = function(radius, phase) {
     return new PIXI.Point(
@@ -36,7 +42,7 @@ export default class ZodiacStrip extends React.Component {
 
     componentDidMount() {
         this.app = new PIXI.Application({
-            width: ORBIT_CENTER_X,
+            width: ORBIT_CENTER_X * 2,
             height: ORBIT_CENTER_Y,
             backgroundColor: 0x241B23,
             antialias: true,
@@ -146,10 +152,9 @@ export default class ZodiacStrip extends React.Component {
     }
 
     drawSunZodiac() {
-
         const sunZodiacContainer = new PIXI.Container();
         sunZodiacContainer.name = 'sunZodiac';
-        sunZodiacContainer.position = new PIXI.Point(600 / 4, 48.5 + 50);
+        sunZodiacContainer.position = new PIXI.Point(STARTING_GALAXY_X, 48.5 + 50);
 
         const sunZodiac = new PIXI.Sprite(PIXI.Texture.from('img/galaxy.png'));
         sunZodiac.anchor.set(0.5);
@@ -166,7 +171,7 @@ export default class ZodiacStrip extends React.Component {
     drawTargetPlanetZodiac() {
         const targetPlanetContainer = new PIXI.Container();
         targetPlanetContainer.name = 'targetPlanetZodiac';
-        targetPlanetContainer.position = new PIXI.Point(3 * 600 / 4, 48.5 + 50);
+        targetPlanetContainer.position = new PIXI.Point(STARTING_US_X, 48.5 + 50);
 
         const targetPlanetImage = new PIXI.Sprite(PIXI.Texture.from('img/earth.svg'));
         targetPlanetImage.anchor.set(0.5);
@@ -195,10 +200,10 @@ export default class ZodiacStrip extends React.Component {
 
     updateLines() {
         this.directLine.clear();
-        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
-
-        this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y);
         this.directLine.lineStyle(2, 0xa64e4e);
+
+        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
+        this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y);
 
         if (distanceMoved >= this.targetPlanetZodiacContainer.x) {
             distanceMoved = this.targetPlanetZodiacContainer.x;
@@ -208,6 +213,19 @@ export default class ZodiacStrip extends React.Component {
 
         this.drawVerticalLineForGalaxy();
         this.drawVerticalLineForUs();
+    }
+
+    updateBodiesSliderChange() {
+        this.targetPlanetZodiacContainer.x = ORBIT_CENTER_X + this.props.distanceBetween;
+        this.sunZodiacContainer.x = ORBIT_CENTER_X - this.props.distanceBetween;
+    }
+
+    updateBodiesAnimation() {
+        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
+        if (distanceMoved < this.targetPlanetZodiacContainer.x) {
+            this.targetPlanetZodiacContainer.x = ORBIT_CENTER_X + this.props.distanceBetween;
+            this.sunZodiacContainer.x = ORBIT_CENTER_X - this.props.distanceBetween;
+        }
     }
 
     drawVerticalLineForGalaxy() {
@@ -230,19 +248,6 @@ export default class ZodiacStrip extends React.Component {
         // Draws name
         this.sunName.x = this.sunZodiacContainer.x;
         this.sunName.y = this.sunZodiacContainer.y - 60;
-    }
-
-    updateBodiesSliderChange() {
-        this.targetPlanetZodiacContainer.x = (3 * 600 / 4) + this.props.initialSeparationDistance;
-        this.sunZodiacContainer.x = (600 / 4) - this.props.initialSeparationDistance;
-    }
-
-    updateBodiesAnimation() {
-        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
-        if (distanceMoved < this.targetPlanetZodiacContainer.x) {
-            this.targetPlanetZodiacContainer.x = (3 * 600 / 4) + this.props.distanceBetween;
-            this.sunZodiacContainer.x = (600 / 4) - this.props.distanceBetween;
-        }
     }
 
     drawElongationArrow(line, xShift, yShift, size) {
