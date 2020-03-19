@@ -17,7 +17,8 @@ export default class ZodiacStrip extends React.Component {
         super(props);
 
         this.state = {
-            distVal: 0
+            distVal: 0,
+            lightReached: false
         };
 
         this.start = this.start.bind(this);
@@ -203,6 +204,9 @@ export default class ZodiacStrip extends React.Component {
 
         if (distanceMoved >= this.targetPlanetZodiacContainer.x) {
             distanceMoved = this.targetPlanetZodiacContainer.x;
+            this.setState({
+                lightReached: true
+            });
         }
 
         this.directLine.lineTo(distanceMoved, this.sunZodiacContainer.y - downShift);
@@ -239,8 +243,10 @@ export default class ZodiacStrip extends React.Component {
     }
 
     updateBodies() {
-        this.targetPlanetZodiacContainer.x = (3 * 600 / 4) + this.props.separationDistance;
-        this.sunZodiacContainer.x = (600 / 4) - this.props.separationDistance;
+        if (!this.state.lightReached) {
+            this.targetPlanetZodiacContainer.x = (3 * 600 / 4) + this.props.separationDistance;
+            this.sunZodiacContainer.x = (600 / 4) - this.props.separationDistance;
+        }
     }
 
     drawElongationArrow(line, xShift, yShift, size) {
