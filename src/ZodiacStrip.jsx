@@ -194,7 +194,7 @@ export default class ZodiacStrip extends React.Component {
 
     updateLine() {
         this.directLine.clear();
-        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelled;
+        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
         let downShift = -0;
 
         this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y);
@@ -238,6 +238,11 @@ export default class ZodiacStrip extends React.Component {
         // this.targetName.y = this.targetPlanetZodiacContainer.y - 45;
     }
 
+    updateBodies() {
+        this.targetPlanetZodiacContainer.x = (3 * 600 / 4) + this.props.separationDistance;
+        this.sunZodiacContainer.x = (600 / 4) - this.props.separationDistance;
+    }
+
     drawElongationArrow(line, xShift, yShift, size) {
         let actualXShift = xShift;
         let thicc = 2.0;
@@ -262,6 +267,7 @@ export default class ZodiacStrip extends React.Component {
     animate() {
 
         this.updateLine();
+        this.updateBodies();
 
         // this.updateText(textNum);
         // this.updateDirection(direction);
