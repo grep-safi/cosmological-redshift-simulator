@@ -64,7 +64,7 @@ export default class ZodiacStrip extends React.Component {
 
     drawLine() {
         const g = new PIXI.Graphics();
-        g.visible = false;
+        g.visible = true;
 
         g.clear();
         g.lineStyle(2, 0xe8c3c3);
@@ -193,57 +193,55 @@ export default class ZodiacStrip extends React.Component {
         cancelAnimationFrame(this.frameId);
     }
 
-    updateLine() {
+    updateLines() {
         this.directLine.clear();
         let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
-        let downShift = -0;
 
         this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y);
-        this.directLine.visible = true;
         this.directLine.lineStyle(2, 0xa64e4e);
 
         if (distanceMoved >= this.targetPlanetZodiacContainer.x) {
             distanceMoved = this.targetPlanetZodiacContainer.x;
         }
 
-        this.directLine.lineTo(distanceMoved, this.sunZodiacContainer.y - downShift);
+        this.directLine.lineTo(distanceMoved, this.sunZodiacContainer.y);
 
-        this.setState(prevState => ({
-            distVal: prevState.distVal + 0.10 * 1.5,
-        }));
+        this.drawVerticalLineForGalaxy();
+        this.drawVerticalLineForUs();
+    }
 
-        // // Does bottom vertical line for target planet
-        // this.directLine.lineStyle(2, 0xa64e4e);
-        // this.directLine.moveTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y + 15);
-        // this.directLine.lineTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y + 57);
-
-        // // Does bottom vertical line for sun
-        // this.directLine.lineStyle(2, 0xa64e4e);
-        // this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y + 15);
-        // this.directLine.lineTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y + 57);
-
+    drawVerticalLineForGalaxy() {
         // Does top vertical line for target planet
         this.directLine.lineStyle(2, 0xa64e4e);
         this.directLine.moveTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y - 15);
         this.directLine.lineTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y - 35);
 
+        // Draws Name
+        this.targetName.x = this.targetPlanetZodiacContainer.x;
+        this.targetName.y = this.targetPlanetZodiacContainer.y - 45;
+    }
+
+    drawVerticalLineForUs() {
         // Does top vertical line for sun
         this.directLine.lineStyle(2, 0xa64e4e);
         this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y - 15);
         this.directLine.lineTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y - 50);
 
+        // Draws name
         this.sunName.x = this.sunZodiacContainer.x;
         this.sunName.y = this.sunZodiacContainer.y - 60;
-
-        this.targetName.x = this.targetPlanetZodiacContainer.x;
-        this.targetName.y = this.targetPlanetZodiacContainer.y - 45;
     }
 
-    updateBodies() {
+    updateBodiesSliderChange() {
+        this.targetPlanetZodiacContainer.x = (3 * 600 / 4) + this.props.initialSeparationDistance;
+        this.sunZodiacContainer.x = (600 / 4) - this.props.initialSeparationDistance;
+    }
+
+    updateBodiesAnimation() {
         let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
         if (distanceMoved < this.targetPlanetZodiacContainer.x) {
-            this.targetPlanetZodiacContainer.x = (3 * 600 / 4) + this.props.separationDistance;
-            this.sunZodiacContainer.x = (600 / 4) - this.props.separationDistance;
+            this.targetPlanetZodiacContainer.x = (3 * 600 / 4) + this.props.distanceBetween;
+            this.sunZodiacContainer.x = (600 / 4) - this.props.distanceBetween;
         }
     }
 
@@ -270,8 +268,12 @@ export default class ZodiacStrip extends React.Component {
 
     animate() {
 
-        this.updateLine();
-        this.updateBodies();
+        if (this.props.isPlaying) {
+            this.updateBodiesAnimation();
+        } else {
+            this.updateBodiesSliderChange();
+        }
+        this.updateLines();
 
         // this.updateText(textNum);
         // this.updateDirection(direction);
