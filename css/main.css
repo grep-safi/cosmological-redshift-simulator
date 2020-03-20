@@ -1,0 +1,147 @@
+html {
+    background: rgb(51,57,64);
+}
+
+body>.container {
+    background: rgb(51,57,64);
+    width: 960px;
+}
+
+#sim-container {
+    background: rgb(51,57,64);
+    user-select: none;
+    width: 930px;
+}
+
+.rowx {
+    background: rgb(51,57,64);
+    display: inline-block;
+    width: 307px;
+}
+
+.controls {
+    background: rgb(212,212,212);
+    margin-bottom: 15px;
+    border: 2px solid rgb(51,57,64);
+}
+
+.col {
+    display: inline-block;
+    background: rgb(212,212,212);
+    margin-bottom: 10px;
+    border: 2px solid black;
+    width: 600px;
+}
+
+.col .presets .controls {
+    /*display: inline-block;*/
+}
+
+.bot {
+    float: left;
+}
+
+.survey {
+    position: absolute;
+}
+
+.input[type="number"] {
+    width: 52px;
+    border-radius: 2px;
+}
+
+.initialSeparationDistanceInput{
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 30%;
+}
+
+.initialSeparationDistanceSlider{
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 30%;
+}
+
+.observerPresets {
+    display: inline-block;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 30%;
+}
+
+.expansionRateInput {
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 30%;
+}
+
+.expansionRateSlider {
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 30%;
+}
+
+.targetPresets {
+    display: inline-block;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 30%;
+}
+
+.animationText {
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 30%;
+}
+
+.animationSlider {
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 30%;
+}
+
+.animationButton {
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 85px;
+}
+
+.radiusText label {
+    font-size: 15px;
+}
+
+#radP #radText {
+    display: inline-block;
+}
+
+#text {
+    color: rgb(36,27,35);
+}
+
+body {
+    background: rgb(51,57,64);
+}
+
+/* .increment-area button {
+    font-weight: bold;
+    width: 27px;
+} */
+
+.ZodiacStrip>canvas {
+    background: rgb(20, 20, 170);
+    position: relative;
+    /*right: 180px;*/
+    width: 600px;
+    height: 212px;
+}
