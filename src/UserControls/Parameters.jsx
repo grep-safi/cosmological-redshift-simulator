@@ -20,7 +20,7 @@ export default class Parameters extends React.Component {
                 <fieldset>
                     <legend>Parameters</legend>
                     <SingleVariableControl
-                        name="InitialSeparationDistance"
+                        name="initialSeparationDistance"
                         displayName="Initial Separation Distance"
                         min={100}
                         max={250}
@@ -52,9 +52,10 @@ export default class Parameters extends React.Component {
     }
 
     handleSingleVariableChange(key, value) {
+        let newChanges = this.props.params;
+        newChanges[key] = value;
         this.props.onChange({
-            ...this.props.params,
-            [key]: value
+            newChanges
         });
     }
 }

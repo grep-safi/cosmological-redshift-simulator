@@ -2,7 +2,7 @@ import React from 'react';
 import * as PIXI from 'pixi.js';
 import PropTypes from 'prop-types';
 
-const ORBIT_CENTER_X = 300;
+const ORBIT_CENTER_X = 460;
 const ORBIT_CENTER_Y = 212;
 
 // We start at 3/4 of the strip
@@ -10,13 +10,6 @@ const STARTING_US_X = (3 / 4) * (ORBIT_CENTER_X * 2);
 
 // Galaxy starts at 1/4 of the strip
 const STARTING_GALAXY_X = (1 / 4) * (ORBIT_CENTER_X * 2);
-
-const getPlanetPos = function(radius, phase) {
-    return new PIXI.Point(
-        // these magic numbers come from this.orbitCenter
-        radius * Math.cos(-phase) + 600,
-        radius * Math.sin(-phase) + 460);
-};
 
 export default class ZodiacStrip extends React.Component {
     constructor(props) {
@@ -30,7 +23,6 @@ export default class ZodiacStrip extends React.Component {
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
         this.animate = this.animate.bind(this);
-
     }
 
     render() {
@@ -67,11 +59,8 @@ export default class ZodiacStrip extends React.Component {
 
         me.directLine = me.drawLine();
 
-        // me.angleText = me.drawAngleText();
-        me.angleDirectionText = me.drawAngleDirectionText();
         me.sunName = me.drawPlanetText('Galaxy', me.sunZodiacContainer.x, me.sunZodiacContainer.y);
         me.targetName = me.drawPlanetText('Us', me.targetPlanetZodiacContainer.x, me.targetPlanetZodiacContainer.y);
-        me.zodiacText = me.drawZodiac();
 
         me.start();
     }
@@ -106,57 +95,6 @@ export default class ZodiacStrip extends React.Component {
 
         return planetText;
 
-    }
-
-    drawAngleText() {
-        const angleText = new PIXI.Text('The Cold, Desolate Emptiness of Space', {
-            fontFamily: 'Garamond',
-            fontSize: 24,
-            fill: 0xe4d1a0,  // butter
-            // fill: 0xFFD700, // gold
-        });
-
-        angleText.resolution = 2;
-        angleText.anchor.set(0.5);
-        angleText.position.x = 300;
-        angleText.position.y = 175;
-        this.app.stage.addChild(angleText);
-
-        return angleText;
-    }
-
-    drawAngleDirectionText() {
-        const angleDirectionText = new PIXI.Text('', {
-            fontFamily: 'Garamond',
-            fontSize: 42,
-            fill: 0xe4d1a0,
-        });
-
-        angleDirectionText.resolution = 2;
-        angleDirectionText.anchor.set(0.5);
-        angleDirectionText.position.x = 375;
-        angleDirectionText.position.y = 175;
-        this.app.stage.addChild(angleDirectionText);
-
-        return angleDirectionText;
-    }
-
-    drawZodiac() {
-        const zodiacText = new PIXI.Text('', {
-            fontFamily: 'Garamond',
-            fontSize: 24,
-            // fontWeight: 'bold',
-            fill: 0xe4d1a0, // butter
-            // fill: 0xFFD700, // gold
-        });
-
-        zodiacText.resolution = 2;
-        zodiacText.anchor.set(0.5);
-        zodiacText.position.x = 300;
-        zodiacText.position.y = 15;
-        this.app.stage.addChild(zodiacText);
-
-        return zodiacText;
     }
 
     drawSunZodiac() {
@@ -261,27 +199,6 @@ export default class ZodiacStrip extends React.Component {
         this.sunName.y = this.sunZodiacContainer.y - 60;
     }
 
-    drawElongationArrow(line, xShift, yShift, size) {
-        let actualXShift = xShift;
-        let thicc = 2.0;
-        let downShift = -40;
-        if (size < 30){
-            actualXShift = size / 30 * xShift;
-            thicc = (size / 30) * 2.0;
-        }
-        line.lineStyle(thicc, 0xa64e4e);
-        line.moveTo(this.targetPlanetZodiacContainer.x + actualXShift, this.targetPlanetZodiacContainer.y - downShift + (yShift * 7));
-        line.lineTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y - downShift+ (-1 * yShift));
-    }
-
-    updateText(newAngle) {
-        this.angleText.text = newAngle;
-    }
-
-    updateDirection(direction) {
-        this.angleDirectionText.text = direction;
-    }
-
     animate() {
 
         if (this.props.isPlaying) {
@@ -301,10 +218,9 @@ export default class ZodiacStrip extends React.Component {
 // These are all the parameters that MUST be passed
 // Into ZodiacStrip by main.jsx
 ZodiacStrip.propTypes = {
-    // radiusObserverPlanet: PropTypes.number.isRequired,
-    // observerPlanetAngle: PropTypes.number.isRequired,
-    // radiusTargetPlanet: PropTypes.number.isRequired,
-    // targetPlanetAngle: PropTypes.number.isRequired,
-    //
-    // updateAngles: PropTypes.func.isRequired
+    params: PropTypes.exact({
+        initialSeparationDistance: PropTypes.number.isRequired,
+        expansionRate: PropTypes.number.isRequired,
+    }).isRequired,
+    isPlaying: PropTypes.bool.isRequired
 };

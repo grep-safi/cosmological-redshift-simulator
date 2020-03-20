@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ZodiacStrip from './ZodiacStrip';
-import { forceNumber } from './utils';
 import NavBar from "./UserControls/NavBar";
 import Parameters from "./UserControls/Parameters";
 
@@ -10,8 +9,8 @@ class CosmologicalRedshiftSim extends React.Component {
         super(props);
         this.initialState = {
             parameters: {
-                initialSeparationDistance: 300,
-                expansionRate: 1.00,
+                initialSeparationDistance: 175,
+                expansionRate: 7.50,
             },
             animationRate: 1.5,
             startBtnText: 'play animation',
@@ -33,17 +32,16 @@ class CosmologicalRedshiftSim extends React.Component {
                 onResetClick={this.onResetClick.bind(this)}
             />
 
-            <div className="bot">
+            <div className="box">
                 <ZodiacStrip
-                    distanceTravelledLight={this.state.distanceTravelledLight}
-                    initialSeparationDistance={this.state.initialSeparationDistance}
-                    distanceBetween={this.state.distanceBetween}
+                    initialSeparationDistance={this.state.parameters.initialSeparationDistance}
+                    expansionRate={this.state.parameters.expansionRate}
                     isPlaying={this.state.isPlaying}
                 />
             </div>
 
             <div className="animationButton">
-                <button type="button"
+                <button type="box"
                         className="btn btn-danger btn-sm"
                         onClick={this.onStartClick.bind(this)}>
                     {this.state.startBtnText}
@@ -104,61 +102,6 @@ class CosmologicalRedshiftSim extends React.Component {
         e.preventDefault();
         this.stopAnimation();
         this.setState(this.initialState);
-    }
-
-    // Runs when user is typing numbers in the box
-    changeValInitialSeparationDistance(e) {
-        let enteredValue = forceNumber(e.target.value);
-        this.setState({holdInitialSeparationDistance: enteredValue});
-    }
-
-    // Runs when user is typing numbers in the box
-    changeValExpansionRate(e) {
-        let enteredValue = forceNumber(e.target.value);
-        this.setState({holdExpansionRate: enteredValue});
-    }
-
-    // Runs when user hits enter after typing in the number in the box
-    onSubmitInitialSeparationDistance(e) {
-        e.preventDefault();
-        this.onInitialSeparationDistanceChange(this.state.holdInitialSeparationDistance);
-    }
-
-    // Runs when user hits enter after typing in the number in the box
-    onSubmitExpansionRate(e) {
-        e.preventDefault();
-        this.onExpansionRateChange(this.state.holdExpansionRate);
-    }
-
-    // Runs either after user hits enter (method chaining) or when the slider is being dragged
-    onInitialSeparationDistanceChange(initialSeparationDist) {
-        let newDist;
-        if (typeof (initialSeparationDist) === 'object') {
-            newDist = forceNumber(initialSeparationDist.target.value);
-        } else {
-            newDist = initialSeparationDist;
-        }
-
-        this.setState({
-            initialSeparationDistance: newDist,
-            distanceBetween: newDist,
-            holdInitialSeparationDistance: newDist
-        });
-    }
-
-    // Runs either after user hits enter (method chaining) or when the slider is being dragged
-    onExpansionRateChange(expansionRate) {
-        let newExpansionRate;
-        if (typeof (expansionRate) === 'object') {
-            newExpansionRate = forceNumber(expansionRate.target.value);
-        } else {
-            newExpansionRate = expansionRate;
-        }
-
-        this.setState({
-            expansionRate: newExpansionRate,
-            holdExpansionRate: newExpansionRate
-        });
     }
 }
 

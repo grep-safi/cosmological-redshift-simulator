@@ -17,8 +17,8 @@ body>.container {
 }
 
 .ZodiacStrip>canvas {
-    width: 600px;
+    width: 910px;
     height: 212px;
-    position: relative;
+    /*position: relative;*/
     /*right: 180px;*/
 }
