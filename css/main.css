@@ -16,7 +16,7 @@ body>.container {
     padding: 0.5em;
 }
 
-.ZodiacStrip>canvas {
+.Redshift>canvas {
     width: 910px;
     height: 212px;
     /*position: relative;*/

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ZodiacStrip from './ZodiacStrip';
+import Redshift from './Redshift';
 import NavBar from "./UserControls/NavBar";
 import Parameters from "./UserControls/Parameters";
 
@@ -33,9 +33,8 @@ class CosmologicalRedshiftSim extends React.Component {
             />
 
             <div className="box">
-                <ZodiacStrip
-                    initialSeparationDistance={this.state.parameters.initialSeparationDistance}
-                    expansionRate={this.state.parameters.expansionRate}
+                <Redshift
+                    params={this.state.parameters}
                     isPlaying={this.state.isPlaying}
                 />
             </div>
