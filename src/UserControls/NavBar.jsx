@@ -8,17 +8,17 @@ export default class NavBar extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <nav className="navbar navbar-expand-md navbar-light bg-dark d-flex justify-content-between">
-                    <span className="navbar-brand mb-0 text-light h1">Cosmological Redshift Simulator</span>
+                <nav className="navbar navbar-expand-md navbar-light d-flex justify-content-between">
+                    <span className="navbar-brand mb-0 text-dark h1">Cosmological Redshift Simulator</span>
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link text-light" href="#" onClick={this.props.onResetClick}>Reset</a>
+                            <a className="nav-link text-dark" href="#" onClick={this.props.onResetClick}>Reset</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-light" href="#" data-toggle="modal" data-target="#helpModal">Help</a>
+                            <a className="nav-link text-dark" href="#" data-toggle="modal" data-target="#helpModal">Help</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-light" href="#" data-toggle="modal" data-target="#aboutModal">About</a>
+                            <a className="nav-link text-dark" href="#" data-toggle="modal" data-target="#aboutModal">About</a>
                         </li>
                     </ul>
                 </nav>

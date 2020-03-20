@@ -50,7 +50,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 </button>
             </div>
 
-            <div className="bot">
+            <div className="box">
                 <Parameters
                     params={this.state.parameters}
                     onChange={this.handleNewParameters.bind(this)}

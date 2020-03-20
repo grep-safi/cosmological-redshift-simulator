@@ -54,12 +54,20 @@ export default class ZodiacStrip extends React.Component {
         const stage = new PIXI.Container();
         this.app.stage.addChild(stage);
 
+        const starryBackground = new PIXI.Sprite(
+            PIXI.Texture.from('img/starry-background.jpg')
+        );
+
+        starryBackground.x -= 300;
+        starryBackground.y -= 100;
+        stage.addChild(starryBackground);
+
         me.targetPlanetZodiacContainer = me.drawTargetPlanetZodiac();
         me.sunZodiacContainer = me.drawSunZodiac();
 
         me.directLine = me.drawLine();
 
-        me.angleText = me.drawAngleText();
+        // me.angleText = me.drawAngleText();
         me.angleDirectionText = me.drawAngleDirectionText();
         me.sunName = me.drawPlanetText('Galaxy', me.sunZodiacContainer.x, me.sunZodiacContainer.y);
         me.targetName = me.drawPlanetText('Us', me.targetPlanetZodiacContainer.x, me.targetPlanetZodiacContainer.y);
