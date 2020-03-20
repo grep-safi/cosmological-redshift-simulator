@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import NumberInputField from "./NumberInputField";
 
 /**
@@ -7,7 +8,7 @@ import NumberInputField from "./NumberInputField";
  * @extends React
  */
 
-class SingleVariableControl extends React.Component {
+export default class SingleVariableControl extends React.Component {
     constructor(props) {
         super(props);
     }

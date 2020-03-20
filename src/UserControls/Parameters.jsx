@@ -16,7 +16,6 @@ export default class Parameters extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h2>Redshift Controls Parameters</h2>
                 <br/>
                 <fieldset>
                     <legend>Parameters</legend>
@@ -27,7 +26,7 @@ export default class Parameters extends React.Component {
                         max={250}
                         step={0.01}
                         decimals={2}
-                        value={this.props.params.initSeparationDist}
+                        value={this.props.params.initialSeparationDistance}
                         onChange={this.handleSingleVariableChange}
                     />
                     <br/>
@@ -63,7 +62,7 @@ export default class Parameters extends React.Component {
 Parameters.propTypes = {
     onChange: PropTypes.func.isRequired,
     params: PropTypes.exact({
-        initSeparationDist: PropTypes.number.isRequired,
+        initialSeparationDistance: PropTypes.number.isRequired,
         expansionRate: PropTypes.number.isRequired,
     }).isRequired,
 }
