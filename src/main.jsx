@@ -3,21 +3,22 @@ import ReactDOM from 'react-dom';
 import ZodiacStrip from './ZodiacStrip';
 import { forceNumber } from './utils';
 import NavBar from "./UserControls/NavBar";
+import Parameters from "./UserControls/Parameters";
 
 class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
         super(props);
         this.initialState = {
-            initialSeparationDistance: 150,
-            distanceBetween: 150,
-            expansionRate: 1.00,
+            parameters: {
+                initialSeparationDistance: 300,
+                expansionRate: 1.00,
+            },
             animationRate: 1.5,
-            holdInitialSeparationDistance: 150,
-            holdExpansionRate: 1.00,
-            distanceTravelledLight: 0,
-            distanceTravelledBodies: 0,
             startBtnText: 'play animation',
             isPlaying: false,
+
+            distanceTravelledLight: 0,
+            distanceTravelledBodies: 0,
         };
 
         this.state = this.initialState;
@@ -28,11 +29,9 @@ class CosmologicalRedshiftSim extends React.Component {
 
     render() {
         return <React.Fragment>
-            <div>
-                <NavBar
-                    onResetClick={this.onResetClick.bind(this)}
-                />
-            </div>
+            <NavBar
+                onResetClick={this.onResetClick.bind(this)}
+            />
 
             <div className="bot">
                 <ZodiacStrip
@@ -50,9 +49,19 @@ class CosmologicalRedshiftSim extends React.Component {
                     {this.state.startBtnText}
                 </button>
             </div>
-                
+
+            <div className="bot">
+                <Parameters
+                    params={this.state.parameters}
+                    onChange={this.handleNewParameters.bind(this)}
+                />
+            </div>
 
         </React.Fragment>;
+    }
+
+    handleNewParameters(newParams) {
+        this.setState({ planetaryParameters: newParams });
     }
 
     animate() {
