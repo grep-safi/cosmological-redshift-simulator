@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ZodiacStrip from './ZodiacStrip';
 import { forceNumber } from './utils';
+import NavBar from "./UserControls/NavBar";
 
 class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
@@ -27,20 +28,12 @@ class CosmologicalRedshiftSim extends React.Component {
 
     render() {
         return <React.Fragment>
-            <nav className="navbar navbar-expand-md navbar-light bg-dark d-flex justify-content-between">
-                <span className="navbar-brand mb-0 text-light h1">Cosmological Redshift Simulator</span>
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <a className="nav-link text-light" href="#" onClick={this.onResetClick.bind(this)}>Reset</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link text-light" href="#" data-toggle="modal" data-target="#helpModal">Help</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link text-light" href="#" data-toggle="modal" data-target="#aboutModal">About</a>
-                    </li>
-                </ul>
-            </nav>
+            <div>
+                <NavBar
+                    onResetClick={this.onResetClick.bind(this)}
+                />
+            </div>
+
             <div className="bot">
                 <ZodiacStrip
                     distanceTravelledLight={this.state.distanceTravelledLight}
@@ -49,7 +42,7 @@ class CosmologicalRedshiftSim extends React.Component {
                     isPlaying={this.state.isPlaying}
                 />
             </div>
-            
+
             <div className="animationButton">
                 <button type="button"
                         className="btn btn-danger btn-sm"
@@ -58,64 +51,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 </button>
             </div>
                 
-            <div className="col">
-                <h4 id="text">Redshift Controls</h4>
-                <div className="radiusText">
-                    <label htmlFor="radInitialSeparationDistanceRange" id="text">Initial Separation Distance</label>
-                </div>
-                <div className="initialSeparationDistanceInput">
-                    <form onSubmit={this.onSubmitInitialSeparationDistance.bind(this)}>
-                        <input
-                            className="input"
-                            type="number"
-                            min={150}
-                            max={250}
-                            step={0.01}
-                            value={this.state.holdInitialSeparationDistance}
-                            onChange={this.changeValInitialSeparationDistance.bind(this)}
-                        />
-                    </form>
-                </div>
 
-                <div className="initialSeparationDistanceSlider">
-                    <input
-                        type="range"
-                        min={150}
-                        max={250}
-                        step={0.01}
-                        value={this.state.initialSeparationDistance}
-                        onChange={this.onInitialSeparationDistanceChange.bind(this)}
-                    />
-                </div>
-
-                <div className="radiusText">
-                    <label htmlFor="radExpansionRateRange" id="text">Galaxy Expansion Rate</label>
-                </div>
-                <div className="expansionRateInput">
-                    <form onSubmit={this.onSubmitExpansionRate.bind(this)}>
-                        <input
-                            className="input"
-                            type="number"
-                            min={0.25}
-                            max={10.00}
-                            step={0.01}
-                            value={this.state.holdExpansionRate}
-                            onChange={this.changeValExpansionRate.bind(this)}
-                        />
-                    </form>
-                </div>
-
-                <div className="expansionRateSlider">
-                    <input
-                        type="range"
-                        min={0.25}
-                        max={10.00}
-                        step={0.01}
-                        value={this.state.expansionRate}
-                        onChange={this.onExpansionRateChange.bind(this)}
-                    />
-                </div>
-            </div>
         </React.Fragment>;
     }
 
