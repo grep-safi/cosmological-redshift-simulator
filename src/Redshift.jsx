@@ -151,11 +151,6 @@ export default class Redshift extends React.Component {
     }
 
     updateBodiesSliderChange() {
-        // let distanceMoved = this.galaxy.x + this.props.distanceTravelledLight;
-        // if (distanceMoved <= this.us.x) {
-        //     this.us.x = ORBIT_CENTER_X + this.props.distanceBetween;
-        //     this.galaxy.x = ORBIT_CENTER_X - this.props.distanceBetween;
-        // }
         this.us.x = ORBIT_CENTER_X + this.props.params.initialSeparationDistance;
         this.galaxy.x = ORBIT_CENTER_X - this.props.params.initialSeparationDistance;
     }
@@ -166,8 +161,8 @@ export default class Redshift extends React.Component {
         //     this.us.x = ORBIT_CENTER_X + this.props.distanceBetween;
         //     this.galaxy.x = ORBIT_CENTER_X - this.props.distanceBetween;
         // }
-        this.us.x = ORBIT_CENTER_X + this.props.distanceBetween;
-        this.galaxy.x = ORBIT_CENTER_X - this.props.distanceBetween;
+        this.us.x = STARTING_US_X + this.props.distanceTravelledBodies;
+        this.galaxy.x = STARTING_GALAXY_X - this.props.distanceTravelledBodies;
     }
 
     drawVerticalLineForGalaxy() {
@@ -212,5 +207,6 @@ Redshift.propTypes = {
         expansionRate: PropTypes.number.isRequired,
     }).isRequired,
     distanceTravelledLight: PropTypes.number.isRequired,
+    distanceTravelledBodies: PropTypes.number.isRequired,
     isPlaying: PropTypes.bool.isRequired
 };
