@@ -134,37 +134,44 @@ export default class Redshift extends React.Component {
 
         // Initializes the start point of the line
         let lineStart = ORBIT_CENTER_X - this.props.params.initialSeparationDistance;
-        this.directLine.moveTo(lineStart, this.galaxy.y);
+        this.directLine.moveTo(lineStart, ORBIT_CENTER_Y);
 
+        // If light has reached us, then don't let the line go any further
         let distanceMoved = lineStart + this.props.distanceTravelledLight;
         if (distanceMoved >= this.us.x) {
             distanceMoved = this.us.x;
         }
 
+        // Draws the other end of the light ray (line)
         this.directLine.lineTo(distanceMoved, ORBIT_CENTER_Y);
 
+        // Draws the vertical lines that show name of bodies
         this.drawVerticalLineForGalaxy();
         this.drawVerticalLineForUs();
     }
 
     updateBodiesSliderChange() {
-        let distanceMoved = this.galaxy.x + this.props.distanceTravelledLight;
-        if (distanceMoved <= this.us.x) {
-            this.us.x = ORBIT_CENTER_X + this.props.distanceBetween;
-            this.galaxy.x = ORBIT_CENTER_X - this.props.distanceBetween;
-        }
+        // let distanceMoved = this.galaxy.x + this.props.distanceTravelledLight;
+        // if (distanceMoved <= this.us.x) {
+        //     this.us.x = ORBIT_CENTER_X + this.props.distanceBetween;
+        //     this.galaxy.x = ORBIT_CENTER_X - this.props.distanceBetween;
+        // }
+        this.us.x = ORBIT_CENTER_X + this.props.params.initialSeparationDistance;
+        this.galaxy.x = ORBIT_CENTER_X - this.props.params.initialSeparationDistance;
     }
 
     updateBodiesAnimation() {
-        let distanceMoved = this.galaxy.x + this.props.distanceTravelledLight;
-        if (distanceMoved <= this.us.x) {
-            this.us.x = ORBIT_CENTER_X + this.props.distanceBetween;
-            this.galaxy.x = ORBIT_CENTER_X - this.props.distanceBetween;
-        }
+        // let distanceMoved = this.galaxy.x + this.props.distanceTravelledLight;
+        // if (distanceMoved <= this.us.x) {
+        //     this.us.x = ORBIT_CENTER_X + this.props.distanceBetween;
+        //     this.galaxy.x = ORBIT_CENTER_X - this.props.distanceBetween;
+        // }
+        this.us.x = ORBIT_CENTER_X + this.props.distanceBetween;
+        this.galaxy.x = ORBIT_CENTER_X - this.props.distanceBetween;
     }
 
     drawVerticalLineForGalaxy() {
-        // Does top vertical line for us planet
+        // Does top vertical line for us
         this.directLine.lineStyle(2, 0xa64e4e);
         this.directLine.moveTo(this.us.x, this.us.y - 15);
         this.directLine.lineTo(this.us.x, this.us.y - 35);
@@ -204,5 +211,6 @@ Redshift.propTypes = {
         initialSeparationDistance: PropTypes.number.isRequired,
         expansionRate: PropTypes.number.isRequired,
     }).isRequired,
+    distanceTravelledLight: PropTypes.number.isRequired,
     isPlaying: PropTypes.bool.isRequired
 };

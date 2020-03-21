@@ -37,6 +37,7 @@ class CosmologicalRedshiftSim extends React.Component {
             <div className="box">
                 <Redshift
                     params={this.state.parameters}
+                    distanceTravelledLight={this.state.distanceTravelledLight}
                     isPlaying={this.state.isPlaying}
                 />
             </div>
