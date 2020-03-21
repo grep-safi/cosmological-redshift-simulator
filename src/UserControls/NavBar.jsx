@@ -29,5 +29,5 @@ export default class NavBar extends React.Component {
 
 NavBar.propTypes = {
     onResetClick: PropTypes.func.isRequired
-}
+};
 
