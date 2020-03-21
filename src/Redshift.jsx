@@ -15,14 +15,11 @@ export default class Redshift extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            distVal: 0,
-            lightReached: false
-        };
-
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
         this.animate = this.animate.bind(this);
+
+        this.lightReached = false;
     }
 
     render() {
@@ -140,6 +137,9 @@ export default class Redshift extends React.Component {
         let distanceMoved = lineStart + this.props.distanceTravelledLight;
         if (distanceMoved >= this.us.x) {
             distanceMoved = this.us.x;
+            this.lightReached = true;
+        } else {
+            this.lightReached = false;
         }
 
         // Draws the other end of the light ray (line)
@@ -156,8 +156,10 @@ export default class Redshift extends React.Component {
     }
 
     updateBodiesAnimation() {
-        this.us.x = STARTING_US_X + this.props.distanceTravelledBodies + this.props.params.initialSeparationDistance;
-        this.galaxy.x = STARTING_GALAXY_X - this.props.distanceTravelledBodies - this.props.params.initialSeparationDistance;
+        if (!this.lightReached) {
+            this.us.x = STARTING_US_X + this.props.distanceTravelledBodies + this.props.params.initialSeparationDistance;
+            this.galaxy.x = STARTING_GALAXY_X - this.props.distanceTravelledBodies - this.props.params.initialSeparationDistance;
+        }
     }
 
     drawVerticalLineForGalaxy() {
