@@ -56,6 +56,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 <Parameters
                     params={this.state.parameters}
                     onChange={this.handleNewParameters.bind(this)}
+                    simulationStarted={this.state.simulationStarted}
                 />
             </div>
 
@@ -63,9 +64,7 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     handleNewParameters(newParams) {
-        if (!this.state.simulationStarted) {
-            this.setState({ parameters: newParams });
-        }
+        this.setState({ parameters: newParams });
     }
 
     animate() {

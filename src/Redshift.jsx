@@ -151,8 +151,10 @@ export default class Redshift extends React.Component {
     }
 
     updateBodiesSliderChange() {
-        this.us.x = STARTING_US_X + this.props.params.initialSeparationDistance;
-        this.galaxy.x = STARTING_GALAXY_X - this.props.params.initialSeparationDistance;
+        if (!this.props.simulationStarted) {
+            this.us.x = STARTING_US_X + this.props.params.initialSeparationDistance;
+            this.galaxy.x = STARTING_GALAXY_X - this.props.params.initialSeparationDistance;
+        }
     }
 
     updateBodiesAnimation() {

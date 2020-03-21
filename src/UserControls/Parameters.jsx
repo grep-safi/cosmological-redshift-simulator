@@ -52,11 +52,12 @@ export default class Parameters extends React.Component {
     }
 
     handleSingleVariableChange(key, value) {
-        this.props.onChange({
-            ...this.props.params,
-            [key]: value
-        });
-
+        if (!(key === 'initialSeparationDistance' && this.props.simulationStarted)) {
+            this.props.onChange({
+                ...this.props.params,
+                [key]: value
+            });
+        }
     }
 }
 
@@ -65,6 +66,7 @@ Parameters.propTypes = {
         initialSeparationDistance: PropTypes.number.isRequired,
         expansionRate: PropTypes.number.isRequired,
     }).isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    simulationStarted: PropTypes.bool.isRequired
 };
 
