@@ -151,18 +151,14 @@ export default class Redshift extends React.Component {
     }
 
     updateBodiesSliderChange() {
-        this.us.x = ORBIT_CENTER_X + this.props.params.initialSeparationDistance;
-        this.galaxy.x = ORBIT_CENTER_X - this.props.params.initialSeparationDistance;
+        this.us.x = STARTING_US_X + this.props.params.initialSeparationDistance;
+        this.galaxy.x = STARTING_GALAXY_X - this.props.params.initialSeparationDistance;
     }
 
     updateBodiesAnimation() {
-        // let distanceMoved = this.galaxy.x + this.props.distanceTravelledLight;
-        // if (distanceMoved <= this.us.x) {
-        //     this.us.x = ORBIT_CENTER_X + this.props.distanceBetween;
-        //     this.galaxy.x = ORBIT_CENTER_X - this.props.distanceBetween;
-        // }
-        this.us.x = STARTING_US_X + this.props.distanceTravelledBodies;
-        this.galaxy.x = STARTING_GALAXY_X - this.props.distanceTravelledBodies;
+        console.log('our starting points', this.us.x, this.props.distanceTravelledBodies);
+        this.us.x = STARTING_US_X + this.props.distanceTravelledBodies + this.props.params.initialSeparationDistance;
+        this.galaxy.x = STARTING_GALAXY_X - this.props.distanceTravelledBodies - this.props.params.initialSeparationDistance;
     }
 
     drawVerticalLineForGalaxy() {
