@@ -40,6 +40,7 @@ class CosmologicalRedshiftSim extends React.Component {
                     distanceTravelledLight={this.state.distanceTravelledLight}
                     distanceTravelledBodies={this.state.distanceTravelledBodies}
                     isPlaying={this.state.isPlaying}
+                    simulationStarted={this.state.simulationStarted}
                 />
             </div>
 

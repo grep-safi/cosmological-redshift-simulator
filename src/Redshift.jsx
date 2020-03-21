@@ -130,7 +130,7 @@ export default class Redshift extends React.Component {
         this.directLine.lineStyle(2, 0xa64e4e);
 
         // Initializes the start point of the line
-        let lineStart = ORBIT_CENTER_X - this.props.params.initialSeparationDistance;
+        let lineStart = STARTING_GALAXY_X - this.props.params.initialSeparationDistance;
         this.directLine.moveTo(lineStart, ORBIT_CENTER_Y);
 
         // If light has reached us, then don't let the line go any further
