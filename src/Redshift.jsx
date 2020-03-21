@@ -54,13 +54,13 @@ export default class Redshift extends React.Component {
         starryBackground.y -= 100;
         stage.addChild(starryBackground);
 
-        me.us = me.drawusPlanetZodiac();
-        me.galaxy = me.drawgalaxyZodiac();
+        me.us = me.drawBody('us', STARTING_US_X, 'img/earth.svg', 20);
+        me.galaxy = me.drawBody('galaxy', STARTING_GALAXY_X, 'img/galaxy.png', 45);
 
         me.directLine = me.drawLine();
 
-        me.galaxyName = me.drawPlanetText('Galaxy', me.galaxy.x, me.galaxy.y);
-        me.usName = me.drawPlanetText('Us', me.us.x, me.us.y);
+        me.galaxyName = me.drawText('Galaxy', me.galaxy.x, me.galaxy.y);
+        me.usName = me.drawText('Us', me.us.x, me.us.y);
 
         me.start();
     }
@@ -77,8 +77,8 @@ export default class Redshift extends React.Component {
         return g;
     }
 
-    drawPlanetText(name, x, y) {
-        const planetText = new PIXI.Text(name, {
+    drawText(name, x, y) {
+        const bodyText = new PIXI.Text(name, {
             fontFamily: 'Garamond',
             fontSize: 14,
             // fontWeight: 'bold',
@@ -87,47 +87,30 @@ export default class Redshift extends React.Component {
         });
 
         // angleText.rotation = degToRad(-90);
-        planetText.resolution = 3;
-        planetText.anchor.set(0.5);
-        planetText.position.x = x;
-        planetText.position.y = y - 60;
-        this.app.stage.addChild(planetText);
+        bodyText.resolution = 3;
+        bodyText.anchor.set(0.5);
+        bodyText.position.x = x;
+        bodyText.position.y = y - 60;
+        this.app.stage.addChild(bodyText);
 
-        return planetText;
-
-    }
-
-    drawgalaxyZodiac() {
-        const galaxy = new PIXI.Container();
-        galaxy.name = 'galaxyZodiac';
-        galaxy.position = new PIXI.Point(STARTING_GALAXY_X, 48.5 + 50);
-
-        const galaxyZodiac = new PIXI.Sprite(PIXI.Texture.from('img/galaxy.png'));
-        galaxyZodiac.anchor.set(0.5);
-        galaxyZodiac.width = 20;
-        galaxyZodiac.height = 20;
-        galaxy.addChild(galaxyZodiac);
-
-        this.app.stage.addChild(galaxy);
-
-        return galaxy;
+        return bodyText;
 
     }
 
-    drawusPlanetZodiac() {
-        const usPlanetContainer = new PIXI.Container();
-        usPlanetContainer.name = 'usPlanetZodiac';
-        usPlanetContainer.position = new PIXI.Point(STARTING_US_X, 48.5 + 50);
+    drawBody(name, startX, file, size) {
+        const body = new PIXI.Container();
+        body.name = name;
+        body.position = new PIXI.Point(startX, 48.5 + 50);
 
-        const usPlanetImage = new PIXI.Sprite(PIXI.Texture.from('img/earth.svg'));
-        usPlanetImage.anchor.set(0.5);
-        usPlanetImage.width = 15;
-        usPlanetImage.height = 15;
-        usPlanetContainer.addChild(usPlanetImage);
+        const bodySprite = new PIXI.Sprite(PIXI.Texture.from(file));
+        bodySprite.anchor.set(0.5);
+        bodySprite.width = size;
+        bodySprite.height = size;
+        body.addChild(bodySprite);
 
-        this.app.stage.addChild(usPlanetContainer);
+        this.app.stage.addChild(body);
 
-        return usPlanetContainer;
+        return body;
     }
 
     componentWillUnmount() {
@@ -145,17 +128,20 @@ export default class Redshift extends React.Component {
     }
 
     updateLines() {
+        // Prepares line for redrawing on canvas
         this.directLine.clear();
         this.directLine.lineStyle(2, 0xa64e4e);
 
-        let distanceMoved = this.galaxy.x + this.props.distanceTravelledLight;
-        this.directLine.moveTo(this.galaxy.x, this.galaxy.y);
+        // Initializes the start point of the line
+        let lineStart = ORBIT_CENTER_X - this.props.params.initialSeparationDistance;
+        this.directLine.moveTo(lineStart, this.galaxy.y);
 
+        let distanceMoved = lineStart + this.props.distanceTravelledLight;
         if (distanceMoved >= this.us.x) {
             distanceMoved = this.us.x;
         }
 
-        this.directLine.lineTo(distanceMoved, this.galaxy.y);
+        this.directLine.lineTo(distanceMoved, ORBIT_CENTER_Y);
 
         this.drawVerticalLineForGalaxy();
         this.drawVerticalLineForUs();
@@ -200,16 +186,12 @@ export default class Redshift extends React.Component {
     }
 
     animate() {
-
         if (this.props.isPlaying) {
             this.updateBodiesAnimation();
         } else {
             this.updateBodiesSliderChange();
         }
         this.updateLines();
-
-        // this.updateText(textNum);
-        // this.updateDirection(direction);
 
         this.frameId = requestAnimationFrame(this.animate);
     }
