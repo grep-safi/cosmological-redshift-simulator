@@ -20,8 +20,8 @@ export default class Parameters extends React.Component {
                 <fieldset>
                     <legend>Parameters</legend>
                     <SingleVariableControl
-                        name="initialSeparationDistance"
-                        displayName="Initial Separation Distance"
+                        name={"initialSeparationDistance"}
+                        displayName={"Initial Separation Distance"}
                         min={100}
                         max={250}
                         step={0.01}
@@ -31,8 +31,8 @@ export default class Parameters extends React.Component {
                     />
                     <br/>
                     <SingleVariableControl
-                        name="expansionRate"
-                        displayName="Expansion Rate"
+                        name={"expansionRate"}
+                        displayName={"Expansion Rate"}
                         min={3.00}
                         max={12.00}
                         step={0.01}
@@ -52,19 +52,19 @@ export default class Parameters extends React.Component {
     }
 
     handleSingleVariableChange(key, value) {
-        let newChanges = this.props.params;
-        newChanges[key] = value;
         this.props.onChange({
-            newChanges
+            ...this.props.params,
+            [key]: value
         });
+
     }
 }
 
 Parameters.propTypes = {
-    onChange: PropTypes.func.isRequired,
     params: PropTypes.exact({
         initialSeparationDistance: PropTypes.number.isRequired,
         expansionRate: PropTypes.number.isRequired,
     }).isRequired,
-}
+    onChange: PropTypes.func.isRequired
+};
 

@@ -41,9 +41,9 @@ export default class SingleVariableControl extends React.Component {
         )
     }
 
-    handleNewValue(value) {
+    handleNewValue(newValue) {
         let name = this.props.name;
-        value = this.convertEntryToValidNumber(value);
+        let value = this.convertEntryToValidNumber(newValue);
         this.props.onChange(name, value);
     }
 
@@ -75,11 +75,11 @@ export default class SingleVariableControl extends React.Component {
 
 SingleVariableControl.propTypes = {
     name: PropTypes.string,
+    displayName: PropTypes.string,
     min: PropTypes.number,
     max: PropTypes.number,
     step: PropTypes.number,
     value: PropTypes.number,
     decimals: PropTypes.number,
     onChange: PropTypes.func,
-    displayName: PropTypes.string,
 }

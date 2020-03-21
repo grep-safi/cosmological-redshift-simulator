@@ -58,7 +58,7 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     handleNewParameters(newParams) {
-        this.setState({ planetaryParameters: newParams });
+        this.setState({ parameters: newParams });
     }
 
     animate() {
@@ -100,6 +100,7 @@ class CosmologicalRedshiftSim extends React.Component {
     onResetClick(e) {
         e.preventDefault();
         this.stopAnimation();
+        console.log('hello freak bitches', this.initialState);
         this.setState(this.initialState);
     }
 }
