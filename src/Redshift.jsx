@@ -3,7 +3,7 @@ import * as PIXI from 'pixi.js';
 import PropTypes from 'prop-types';
 
 const ORBIT_CENTER_X = 460;
-const ORBIT_CENTER_Y = 212;
+const ORBIT_CENTER_Y = 106;
 
 // We start at 3/4 of the strip
 const STARTING_US_X = (3 / 4) * (ORBIT_CENTER_X * 2);
@@ -35,7 +35,7 @@ export default class Redshift extends React.Component {
     componentDidMount() {
         this.app = new PIXI.Application({
             width: ORBIT_CENTER_X * 2,
-            height: ORBIT_CENTER_Y,
+            height: ORBIT_CENTER_Y * 2,
             backgroundColor: 0x241B23,
             antialias: true,
         });
@@ -54,13 +54,13 @@ export default class Redshift extends React.Component {
         starryBackground.y -= 100;
         stage.addChild(starryBackground);
 
-        me.targetPlanetZodiacContainer = me.drawTargetPlanetZodiac();
-        me.sunZodiacContainer = me.drawSunZodiac();
+        me.us = me.drawusPlanetZodiac();
+        me.galaxy = me.drawgalaxyZodiac();
 
         me.directLine = me.drawLine();
 
-        me.sunName = me.drawPlanetText('Galaxy', me.sunZodiacContainer.x, me.sunZodiacContainer.y);
-        me.targetName = me.drawPlanetText('Us', me.targetPlanetZodiacContainer.x, me.targetPlanetZodiacContainer.y);
+        me.galaxyName = me.drawPlanetText('Galaxy', me.galaxy.x, me.galaxy.y);
+        me.usName = me.drawPlanetText('Us', me.us.x, me.us.y);
 
         me.start();
     }
@@ -97,37 +97,37 @@ export default class Redshift extends React.Component {
 
     }
 
-    drawSunZodiac() {
-        const sunZodiacContainer = new PIXI.Container();
-        sunZodiacContainer.name = 'sunZodiac';
-        sunZodiacContainer.position = new PIXI.Point(STARTING_GALAXY_X, 48.5 + 50);
+    drawgalaxyZodiac() {
+        const galaxy = new PIXI.Container();
+        galaxy.name = 'galaxyZodiac';
+        galaxy.position = new PIXI.Point(STARTING_GALAXY_X, 48.5 + 50);
 
-        const sunZodiac = new PIXI.Sprite(PIXI.Texture.from('img/galaxy.png'));
-        sunZodiac.anchor.set(0.5);
-        sunZodiac.width = 20;
-        sunZodiac.height = 20;
-        sunZodiacContainer.addChild(sunZodiac);
+        const galaxyZodiac = new PIXI.Sprite(PIXI.Texture.from('img/galaxy.png'));
+        galaxyZodiac.anchor.set(0.5);
+        galaxyZodiac.width = 20;
+        galaxyZodiac.height = 20;
+        galaxy.addChild(galaxyZodiac);
 
-        this.app.stage.addChild(sunZodiacContainer);
+        this.app.stage.addChild(galaxy);
 
-        return sunZodiacContainer;
+        return galaxy;
 
     }
 
-    drawTargetPlanetZodiac() {
-        const targetPlanetContainer = new PIXI.Container();
-        targetPlanetContainer.name = 'targetPlanetZodiac';
-        targetPlanetContainer.position = new PIXI.Point(STARTING_US_X, 48.5 + 50);
+    drawusPlanetZodiac() {
+        const usPlanetContainer = new PIXI.Container();
+        usPlanetContainer.name = 'usPlanetZodiac';
+        usPlanetContainer.position = new PIXI.Point(STARTING_US_X, 48.5 + 50);
 
-        const targetPlanetImage = new PIXI.Sprite(PIXI.Texture.from('img/earth.svg'));
-        targetPlanetImage.anchor.set(0.5);
-        targetPlanetImage.width = 15;
-        targetPlanetImage.height = 15;
-        targetPlanetContainer.addChild(targetPlanetImage);
+        const usPlanetImage = new PIXI.Sprite(PIXI.Texture.from('img/earth.svg'));
+        usPlanetImage.anchor.set(0.5);
+        usPlanetImage.width = 15;
+        usPlanetImage.height = 15;
+        usPlanetContainer.addChild(usPlanetImage);
 
-        this.app.stage.addChild(targetPlanetContainer);
+        this.app.stage.addChild(usPlanetContainer);
 
-        return targetPlanetContainer;
+        return usPlanetContainer;
     }
 
     componentWillUnmount() {
@@ -148,55 +148,55 @@ export default class Redshift extends React.Component {
         this.directLine.clear();
         this.directLine.lineStyle(2, 0xa64e4e);
 
-        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
-        this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y);
+        let distanceMoved = this.galaxy.x + this.props.distanceTravelledLight;
+        this.directLine.moveTo(this.galaxy.x, this.galaxy.y);
 
-        if (distanceMoved >= this.targetPlanetZodiacContainer.x) {
-            distanceMoved = this.targetPlanetZodiacContainer.x;
+        if (distanceMoved >= this.us.x) {
+            distanceMoved = this.us.x;
         }
 
-        this.directLine.lineTo(distanceMoved, this.sunZodiacContainer.y);
+        this.directLine.lineTo(distanceMoved, this.galaxy.y);
 
         this.drawVerticalLineForGalaxy();
         this.drawVerticalLineForUs();
     }
 
     updateBodiesSliderChange() {
-        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
-        if (distanceMoved <= this.targetPlanetZodiacContainer.x) {
-            this.targetPlanetZodiacContainer.x = ORBIT_CENTER_X + this.props.distanceBetween;
-            this.sunZodiacContainer.x = ORBIT_CENTER_X - this.props.distanceBetween;
+        let distanceMoved = this.galaxy.x + this.props.distanceTravelledLight;
+        if (distanceMoved <= this.us.x) {
+            this.us.x = ORBIT_CENTER_X + this.props.distanceBetween;
+            this.galaxy.x = ORBIT_CENTER_X - this.props.distanceBetween;
         }
     }
 
     updateBodiesAnimation() {
-        let distanceMoved = this.sunZodiacContainer.x + this.props.distanceTravelledLight;
-        if (distanceMoved <= this.targetPlanetZodiacContainer.x) {
-            this.targetPlanetZodiacContainer.x = ORBIT_CENTER_X + this.props.distanceBetween;
-            this.sunZodiacContainer.x = ORBIT_CENTER_X - this.props.distanceBetween;
+        let distanceMoved = this.galaxy.x + this.props.distanceTravelledLight;
+        if (distanceMoved <= this.us.x) {
+            this.us.x = ORBIT_CENTER_X + this.props.distanceBetween;
+            this.galaxy.x = ORBIT_CENTER_X - this.props.distanceBetween;
         }
     }
 
     drawVerticalLineForGalaxy() {
-        // Does top vertical line for target planet
+        // Does top vertical line for us planet
         this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y - 15);
-        this.directLine.lineTo(this.targetPlanetZodiacContainer.x, this.targetPlanetZodiacContainer.y - 35);
+        this.directLine.moveTo(this.us.x, this.us.y - 15);
+        this.directLine.lineTo(this.us.x, this.us.y - 35);
 
         // Draws Name
-        this.targetName.x = this.targetPlanetZodiacContainer.x;
-        this.targetName.y = this.targetPlanetZodiacContainer.y - 45;
+        this.usName.x = this.us.x;
+        this.usName.y = this.us.y - 45;
     }
 
     drawVerticalLineForUs() {
-        // Does top vertical line for sun
+        // Does top vertical line for galaxy
         this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y - 15);
-        this.directLine.lineTo(this.sunZodiacContainer.x, this.sunZodiacContainer.y - 50);
+        this.directLine.moveTo(this.galaxy.x, this.galaxy.y - 15);
+        this.directLine.lineTo(this.galaxy.x, this.galaxy.y - 50);
 
         // Draws name
-        this.sunName.x = this.sunZodiacContainer.x;
-        this.sunName.y = this.sunZodiacContainer.y - 60;
+        this.galaxyName.x = this.galaxy.x;
+        this.galaxyName.y = this.galaxy.y - 60;
     }
 
     animate() {

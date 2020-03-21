@@ -12,9 +12,11 @@ class CosmologicalRedshiftSim extends React.Component {
                 initialSeparationDistance: 175,
                 expansionRate: 7.50,
             },
+
             animationRate: 1.5,
             startBtnText: 'play animation',
             isPlaying: false,
+            simulationStarted: false,
 
             distanceTravelledLight: 0,
             distanceTravelledBodies: 0,
@@ -70,7 +72,7 @@ class CosmologicalRedshiftSim extends React.Component {
             this.setState(({
                 distanceTravelledLight: newLightDist,
                 distanceBetween: newDistanceBetween,
-
+                simulationStarted: true
             }));
         }
 
