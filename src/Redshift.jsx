@@ -6,10 +6,10 @@ const ORBIT_CENTER_X = 460;
 const ORBIT_CENTER_Y = 106;
 
 // We start at 3/4 of the strip
-const STARTING_US_X = (3 / 4) * (ORBIT_CENTER_X * 2);
+const STARTING_US_X = (3 / 4) * (ORBIT_CENTER_X * 2) - 200;
 
 // Galaxy starts at 1/4 of the strip
-const STARTING_GALAXY_X = (1 / 4) * (ORBIT_CENTER_X * 2);
+const STARTING_GALAXY_X = (1 / 4) * (ORBIT_CENTER_X * 2) + 200;
 
 export default class Redshift extends React.Component {
     constructor(props) {
@@ -156,7 +156,6 @@ export default class Redshift extends React.Component {
     }
 
     updateBodiesAnimation() {
-        console.log('our starting points', this.us.x, this.props.distanceTravelledBodies);
         this.us.x = STARTING_US_X + this.props.distanceTravelledBodies + this.props.params.initialSeparationDistance;
         this.galaxy.x = STARTING_GALAXY_X - this.props.distanceTravelledBodies - this.props.params.initialSeparationDistance;
     }
