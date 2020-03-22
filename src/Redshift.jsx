@@ -146,9 +146,11 @@ export default class Redshift extends React.Component {
         this.directLine.lineTo(distanceMoved, ORBIT_CENTER_Y - 7);
 
         // Draws the vertical lines that show name of bodies
-        this.drawVerticalLineForGalaxy(this.galaxy, this.galaxyName);
-        this.drawVerticalLineForGalaxy(this.us, this.usName);
-        // this.drawVerticalLineForUs();
+        this.drawTopVerticalLine(this.galaxy, this.galaxyName);
+        this.drawTopVerticalLine(this.us, this.usName);
+
+        this.drawBottomVerticalLine(this.galaxy);
+        this.drawBottomVerticalLine(this.us);
     }
 
     updateBodiesSliderChange() {
@@ -165,7 +167,7 @@ export default class Redshift extends React.Component {
         }
     }
 
-    drawVerticalLineForGalaxy(body, text) {
+    drawTopVerticalLine(body, text) {
         // Does top vertical line for us
         this.directLine.lineStyle(2, 0xa64e4e);
         this.directLine.moveTo(body.x, body.y - 15);
@@ -174,6 +176,22 @@ export default class Redshift extends React.Component {
         // Draws Name
         text.x = body.x;
         text.y = body.y - 45;
+    }
+
+    drawBottomVerticalLine(body) {
+        // Does top vertical line for us
+        this.directLine.lineStyle(2, 0xa64e4e);
+        this.directLine.moveTo(STARTING_US_X + this.props.params.initialSeparationDistance, body.y + 35);
+        this.directLine.lineTo(STARTING_GALAXY_X - this.props.params.initialSeparationDistance, body.y + 35);
+
+        this.directLine.lineStyle(2, 0xa64e4e);
+        this.directLine.moveTo(STARTING_US_X + this.props.params.initialSeparationDistance, body.y + 15);
+        this.directLine.lineTo(STARTING_US_X + this.props.params.initialSeparationDistance, body.y + 35);
+
+        this.directLine.lineStyle(2, 0xa64e4e);
+        this.directLine.moveTo(STARTING_GALAXY_X - this.props.params.initialSeparationDistance, body.y + 15);
+        this.directLine.lineTo(STARTING_GALAXY_X - this.props.params.initialSeparationDistance, body.y + 35);
+
     }
 
     animate() {
