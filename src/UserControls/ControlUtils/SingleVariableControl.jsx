@@ -4,7 +4,7 @@ import NumberInputField from "./NumberInputField";
 
 /**
  * A Single Variable Control is a combination of both a number input box and a
- * slider.  It can be used to adjust a single "planetary parameter" at a time.
+ * slider.  It can be used to adjust a single parameter at a time.
  * @extends React
  */
 
@@ -70,7 +70,6 @@ export default class SingleVariableControl extends React.Component {
         value = Math.max(this.props.min, value);
         return value;
     }
-
 }
 
 SingleVariableControl.propTypes = {

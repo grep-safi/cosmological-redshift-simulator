@@ -127,11 +127,11 @@ export default class Redshift extends React.Component {
     updateLines() {
         // Prepares line for redrawing on canvas
         this.directLine.clear();
-        this.directLine.lineStyle(2, 0xa64e4e);
+        this.directLine.lineStyle(2, 0xfcff4d);
 
         // Initializes the start point of the line
         let lineStart = STARTING_GALAXY_X - this.props.params.initialSeparationDistance;
-        this.directLine.moveTo(lineStart, ORBIT_CENTER_Y);
+        this.directLine.moveTo(lineStart, ORBIT_CENTER_Y - 7);
 
         // If light has reached us, then don't let the line go any further
         let distanceMoved = lineStart + this.props.distanceTravelledLight;
@@ -143,11 +143,12 @@ export default class Redshift extends React.Component {
         }
 
         // Draws the other end of the light ray (line)
-        this.directLine.lineTo(distanceMoved, ORBIT_CENTER_Y);
+        this.directLine.lineTo(distanceMoved, ORBIT_CENTER_Y - 7);
 
         // Draws the vertical lines that show name of bodies
-        this.drawVerticalLineForGalaxy();
-        this.drawVerticalLineForUs();
+        this.drawVerticalLineForGalaxy(this.galaxy, this.galaxyName);
+        this.drawVerticalLineForGalaxy(this.us, this.usName);
+        // this.drawVerticalLineForUs();
     }
 
     updateBodiesSliderChange() {
@@ -164,26 +165,15 @@ export default class Redshift extends React.Component {
         }
     }
 
-    drawVerticalLineForGalaxy() {
+    drawVerticalLineForGalaxy(body, text) {
         // Does top vertical line for us
         this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(this.us.x, this.us.y - 15);
-        this.directLine.lineTo(this.us.x, this.us.y - 35);
+        this.directLine.moveTo(body.x, body.y - 15);
+        this.directLine.lineTo(body.x, body.y - 35);
 
         // Draws Name
-        this.usName.x = this.us.x;
-        this.usName.y = this.us.y - 45;
-    }
-
-    drawVerticalLineForUs() {
-        // Does top vertical line for galaxy
-        this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(this.galaxy.x, this.galaxy.y - 15);
-        this.directLine.lineTo(this.galaxy.x, this.galaxy.y - 50);
-
-        // Draws name
-        this.galaxyName.x = this.galaxy.x;
-        this.galaxyName.y = this.galaxy.y - 60;
+        text.x = body.x;
+        text.y = body.y - 45;
     }
 
     animate() {
