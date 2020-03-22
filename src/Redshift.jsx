@@ -183,7 +183,6 @@ export default class Redshift extends React.Component {
     }
 
     drawBottomVerticalLine(body) {
-        // Does top vertical line for us
         this.directLine.lineStyle(2, 0xa64e4e);
         this.directLine.moveTo(STARTING_US_X + this.props.params.initialSeparationDistance, body.y + 35);
         this.directLine.lineTo(STARTING_GALAXY_X - this.props.params.initialSeparationDistance, body.y + 35);
@@ -195,6 +194,23 @@ export default class Redshift extends React.Component {
         this.directLine.lineStyle(2, 0xa64e4e);
         this.directLine.moveTo(STARTING_GALAXY_X - this.props.params.initialSeparationDistance, body.y + 15);
         this.directLine.lineTo(STARTING_GALAXY_X - this.props.params.initialSeparationDistance, body.y + 35);
+
+    }
+
+    drawChangingBottomLine() {
+
+        this.directLine.lineStyle(2, 0xa64e4e);
+        this.directLine.moveTo(this.us.x, this.us.y + 80);
+        this.directLine.lineTo(this.galaxy.x, this.us.y + 80);
+
+
+        this.directLine.lineStyle(2, 0xa64e4e);
+        this.directLine.moveTo(this.us.x, this.us.y + 30);
+        this.directLine.lineTo(this.us.x, this.us.y + 80);
+
+        this.directLine.lineStyle(2, 0xa64e4e);
+        this.directLine.moveTo(this.galaxy.x, this.galaxy.y + 30);
+        this.directLine.lineTo(this.galaxy.x, this.galaxy.y + 80);
 
     }
 
@@ -213,6 +229,7 @@ export default class Redshift extends React.Component {
         }
         this.updateTextValues();
         this.updateLines();
+        this.drawChangingBottomLine();
 
         this.frameId = requestAnimationFrame(this.animate);
     }
