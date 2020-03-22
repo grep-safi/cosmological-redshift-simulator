@@ -10,7 +10,7 @@ class CosmologicalRedshiftSim extends React.Component {
         this.initialState = {
             parameters: {
                 initialSeparationDistance: 175,
-                expansionRate: 7.50,
+                expansionRate: 10,
             },
 
             animationRate: 1.5,

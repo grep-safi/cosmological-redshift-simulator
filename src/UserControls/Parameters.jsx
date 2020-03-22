@@ -10,7 +10,6 @@ export default class Parameters extends React.Component {
     constructor(props) {
         super(props);
         this.handleSingleVariableChange = this.handleSingleVariableChange.bind(this);
-        this.handleChange = this.handleChange.bind(this);
     }
 
     render() {
@@ -34,7 +33,7 @@ export default class Parameters extends React.Component {
                         name={"expansionRate"}
                         displayName={"Expansion Rate"}
                         min={3.00}
-                        max={12.00}
+                        max={20.00}
                         step={0.01}
                         decimals={1}
                         value={this.props.params.expansionRate}
@@ -47,12 +46,9 @@ export default class Parameters extends React.Component {
         )
     }
 
-    handleChange(newParams) {
-        this.props.onChange(newParams);
-    }
-
     handleSingleVariableChange(key, value) {
-        if (!(key === 'initialSeparationDistance' && this.props.simulationStarted)) {
+        let changeInitialParamIsLegal = !(key === 'initialSeparationDistance' && this.props.simulationStarted);
+        if (changeInitialParamIsLegal) {
             this.props.onChange({
                 ...this.props.params,
                 [key]: value
