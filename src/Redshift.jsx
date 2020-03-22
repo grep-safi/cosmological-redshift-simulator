@@ -203,7 +203,6 @@ export default class Redshift extends React.Component {
         this.directLine.moveTo(this.us.x, this.us.y + 80);
         this.directLine.lineTo(this.galaxy.x, this.us.y + 80);
 
-
         this.directLine.lineStyle(2, 0xa64e4e);
         this.directLine.moveTo(this.us.x, this.us.y + 30);
         this.directLine.lineTo(this.us.x, this.us.y + 80);
