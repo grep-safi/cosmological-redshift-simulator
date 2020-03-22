@@ -58,6 +58,8 @@ export default class Redshift extends React.Component {
 
         me.galaxyName = me.drawText('Galaxy', me.galaxy.x, me.galaxy.y);
         me.usName = me.drawText('Us', me.us.x, me.us.y);
+        me.initialSeparationText = me.drawText('Initial Separation', ORBIT_CENTER_X, ORBIT_CENTER_Y + 100);
+        me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, ORBIT_CENTER_X, ORBIT_CENTER_Y + 115);
 
         me.start();
     }
@@ -194,12 +196,17 @@ export default class Redshift extends React.Component {
 
     }
 
+    updateInitialDistance() {
+        this.initialSeparationValue.text = this.props.params.initialSeparationDistance;
+    }
+
     animate() {
         if (this.props.isPlaying) {
             this.updateBodiesAnimation();
         } else {
             this.updateBodiesSliderChange();
         }
+        this.updateInitialDistance();
         this.updateLines();
 
         this.frameId = requestAnimationFrame(this.animate);
