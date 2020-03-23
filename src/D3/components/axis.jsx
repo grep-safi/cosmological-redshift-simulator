@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as d3 from 'd3';
+import * as d3 from "d3/dist/d3";
 
 export default class Axes extends Component {
     constructor(props) {
         super(props);
-        this.xAxisL = React.createRef();
         this.xAxis = React.createRef();
         this.yAxis = React.createRef();
     }
@@ -19,31 +18,18 @@ export default class Axes extends Component {
     }
 
     renderAxes() {
-        const xAxisL = d3.axisBottom(this.props.xScale || 1).tickValues([
-            0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9
-        ]);
-        const xAxis = d3.axisBottom(this.props.xScale || 1).ticks(10);
-        const yAxis = d3.axisLeft(this.props.yScale).tickValues([
-            0, 0.25, 0.5, 0.75, 1
-        ]).tickFormat(d3.format('.2r'));
+        const xAxis = d3.axisBottom(this.props.xScale);
+        const yAxis = d3.axisLeft(this.props.yScale);
 
         const node1 = this.xAxis.current;
         d3.select(node1).call(xAxis);
-
-        const node3 = this.xAxisL.current;
-        d3.select(node3).call(xAxisL);
 
         const node2 = this.yAxis.current;
         d3.select(node2).call(yAxis);
     }
 
     render() {
-        const xPos =
-            this.props.xScale(
-                (
-                    (this.props.offset - this.props.paddingLeft) / (
-                    this.props.width - this.props.paddingLeft)
-                    + 0.5) % 1);
+        const xPos = this.props.xScale();
 
         return <React.Fragment>
             <text
@@ -78,15 +64,15 @@ export default class Axes extends Component {
         </React.Fragment>;
     }
 }
-
-Axes.propTypes = {
-    yScale: PropTypes.func.isRequired,
-    xScale: PropTypes.func.isRequired,
-    height: PropTypes.number.isRequired,
-    offset: PropTypes.number.isRequired,
-    padding: PropTypes.number.isRequired,
-    paddingLeft: PropTypes.number.isRequired
-};
+//
+// Axes.propTypes = {
+//     yScale: PropTypes.func.isRequired,
+//     xScale: PropTypes.func.isRequired,
+//     height: PropTypes.number.isRequired,
+//     offset: PropTypes.number.isRequired,
+//     padding: PropTypes.number.isRequired,
+//     paddingLeft: PropTypes.number.isRequired
+// };
 
 
 // import React from 'react';
