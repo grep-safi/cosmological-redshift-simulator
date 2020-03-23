@@ -45,8 +45,8 @@ export default class Redshift extends React.Component {
         starryBackground.y -= 100;
         stage.addChild(starryBackground);
 
-        me.us = me.drawBody('us', CENTER_X, 'img/earth.svg', 20);
-        me.galaxy = me.drawBody('galaxy', CENTER_X, 'img/galaxy.png', 45);
+        me.us = me.drawBody('us', 'img/earth.svg', 20);
+        me.galaxy = me.drawBody('galaxy', 'img/galaxy.png', 45);
 
         me.directLine = me.drawLine();
 
@@ -58,6 +58,7 @@ export default class Redshift extends React.Component {
 
         me.separationText = me.drawText('Separation', CENTER_X, CENTER_Y + 130);
         me.separationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 145);
+
         me.start();
     }
 
@@ -97,10 +98,10 @@ export default class Redshift extends React.Component {
 
     }
 
-    drawBody(name, startX, file, size) {
+    drawBody(name, file, size) {
         const body = new PIXI.Container();
         body.name = name;
-        body.position = new PIXI.Point(startX, 48.5 + 50);
+        body.position = new PIXI.Point(CENTER_X, 48.5 + 50);
 
         const bodySprite = new PIXI.Sprite(PIXI.Texture.from(file));
         bodySprite.anchor.set(0.5);
@@ -123,7 +124,7 @@ export default class Redshift extends React.Component {
         cancelAnimationFrame(this.frameId);
     }
 
-    updateLines() {
+    updateLightLine() {
         // Prepares line for redrawing on canvas
         this.directLine.clear();
         this.directLine.lineStyle(2, 0xfcff4d);
@@ -145,8 +146,22 @@ export default class Redshift extends React.Component {
         this.directLine.lineTo(distanceMoved, CENTER_Y - 7);
 
         // Draws the vertical lines that show name of bodies
-        this.drawTopVerticalLine(this.galaxy, this.galaxyName);
-        this.drawTopVerticalLine(this.us, this.usName);
+        this.updateLine(
+            this.galaxy.x,
+            this.galaxy.x,
+            this.galaxy.y - 15,
+            this.galaxy.y - 35
+        );
+
+        this.updateLine(
+            this.us.x,
+            this.us.x,
+            this.us.y - 15,
+            this.us.y - 35
+        );
+
+        this.updateText(this.galaxy, this.galaxyName);
+        this.updateText(this.us, this.usName);
 
         this.drawBottomVerticalLine(this.galaxy);
         this.drawBottomVerticalLine(this.us);
@@ -159,15 +174,14 @@ export default class Redshift extends React.Component {
         }
     }
 
-    drawTopVerticalLine(body, text) {
-        // Does top vertical line for us
-        this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(body.x, body.y - 15);
-        this.directLine.lineTo(body.x, body.y - 35);
-
+    updateText(body, text) {
         // Draws Name
-        text.x = body.x;
-        text.y = body.y - 45;
+    }
+
+    updateLine(startX, endX, firstYShift, secondYShift) {
+        this.directLine.lineStyle(2, 0xa64e4e);
+        this.directLine.moveTo(startX, firstYShift);
+        this.directLine.lineTo(endX, secondYShift);
     }
 
     drawBottomVerticalLine(body) {
@@ -182,7 +196,6 @@ export default class Redshift extends React.Component {
         this.directLine.lineStyle(2, 0xa64e4e);
         this.directLine.moveTo(CENTER_X - this.props.params.initialSeparationDistance, body.y + 15);
         this.directLine.lineTo(CENTER_X - this.props.params.initialSeparationDistance, body.y + 35);
-
     }
 
     drawChangingBottomLine() {
@@ -192,11 +205,11 @@ export default class Redshift extends React.Component {
         this.directLine.lineTo(this.galaxy.x, this.us.y + 80);
 
         this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(this.us.x, this.us.y + 30);
+        this.directLine.moveTo(this.us.x, this.us.y + 60);
         this.directLine.lineTo(this.us.x, this.us.y + 80);
 
         this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(this.galaxy.x, this.galaxy.y + 30);
+        this.directLine.moveTo(this.galaxy.x, this.galaxy.y + 60);
         this.directLine.lineTo(this.galaxy.x, this.galaxy.y + 80);
 
     }
@@ -207,13 +220,19 @@ export default class Redshift extends React.Component {
 
         this.initialSeparationValue.text = initialSeparation.toFixed(0).toString();
         this.separationValue.text = separationDist.toFixed(0).toString();
+
+        this.galaxyName.x = this.galaxy.x;
+        this.galaxyName.y = this.galaxy.y - 45;
+
+        this.usName.x = this.us.x;
+        this.usName.y = this.us.y - 45;
     }
 
     animate() {
 
         this.updateBodiesAnimation();
         this.updateTextValues();
-        this.updateLines();
+        this.updateLightLine();
         this.drawChangingBottomLine();
 
         this.frameId = requestAnimationFrame(this.animate);
