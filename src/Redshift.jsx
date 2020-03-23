@@ -124,6 +124,13 @@ export default class Redshift extends React.Component {
         cancelAnimationFrame(this.frameId);
     }
 
+    // General function that updates a given line
+    updateLine(startX, endX, firstYShift, secondYShift) {
+        this.directLine.lineStyle(2, 0xa64e4e);
+        this.directLine.moveTo(startX, firstYShift);
+        this.directLine.lineTo(endX, secondYShift);
+    }
+
     updateLightLine() {
         // Prepares line for redrawing on canvas
         this.directLine.clear();
@@ -144,82 +151,74 @@ export default class Redshift extends React.Component {
 
         // Draws the other end of the light ray (line)
         this.directLine.lineTo(distanceMoved, CENTER_Y - 7);
+    }
 
+    updateTopLineBody(body) {
+        this.updateLine(
+            body.x,
+            body.x,
+            body.y - 15,
+            body.y - 35
+        );
+    }
+
+    updateInitialSeparationLine(constant) {
+        this.updateLine(
+            CENTER_X + constant * this.props.params.initialSeparationDistance,
+            CENTER_X - 60,
+            this.us.y + 35,
+            this.us.y + 35
+        );
+    }
+
+    updateFinalSeparationLine(body, constant) {
+        this.updateLine(
+            body.x,
+            CENTER_X + constant * 60,
+            this.us.y + 80,
+            this.us.y + 80
+        );
+    }
+
+    updateBottomLineInitial(constant) {
+        this.updateLine(
+            CENTER_X + constant * this.props.params.initialSeparationDistance,
+            CENTER_X + constant * this.props.params.initialSeparationDistance,
+            this.us.y + 15,
+            this.us.y + 35
+        );
+    }
+
+    updateBottomLineFinal(body) {
+        this.updateLine(
+            body.x,
+            body.x,
+            this.us.y + 60,
+            this.us.y + 80
+        );
     }
 
     // Updates all the lines
     updateLines() {
-        // Draws the vertical lines that show name of bodies
-        this.updateLine(
-            this.galaxy.x,
-            this.galaxy.x,
-            this.galaxy.y - 15,
-            this.galaxy.y - 35
-        );
+        // Draws the vertical lines on top of galaxy and planet
+        this.updateTopLineBody(this.us);
+        this.updateTopLineBody(this.galaxy);
 
-        this.updateLine(
-            this.us.x,
-            this.us.x,
-            this.us.y - 15,
-            this.us.y - 35
-        );
+        // Draws initial separation distance lines on the bottom
+        this.updateInitialSeparationLine(-1);
+        this.updateInitialSeparationLine(1);
 
-        // Draws bottom initial separation distance line
-        this.updateLine(
-            CENTER_X - this.props.params.initialSeparationDistance,
-            CENTER_X - 60,
-            this.us.y + 35,
-            this.us.y + 35
-        );
+        // Draws final separation distance lines on the bottom (below initial separation distance lines)
+        this.updateFinalSeparationLine(this.us, -1);
+        this.updateFinalSeparationLine(this.galaxy, -1);
 
-        this.updateLine(
-            CENTER_X + this.props.params.initialSeparationDistance,
-            CENTER_X + 60,
-            this.us.y + 35,
-            this.us.y + 35
-        );
+        // Draws vertical lines on the bottom of the galaxy and planet connecting to INITIAL separation distance lines
+        this.updateBottomLineInitial(1);
+        this.updateBottomLineInitial(-1);
 
-        this.updateLine(
-            CENTER_X + this.props.params.initialSeparationDistance,
-            CENTER_X + this.props.params.initialSeparationDistance,
-            this.us.y + 15,
-            this.us.y + 35
-        );
-
-        this.updateLine(
-            CENTER_X - this.props.params.initialSeparationDistance,
-            CENTER_X - this.props.params.initialSeparationDistance,
-            this.us.y + 15,
-            this.us.y + 35
-        );
-
-       this.updateLine(
-            this.us.x,
-            CENTER_X + 60,
-            this.us.y + 80,
-            this.us.y + 80
-        );
-
-        this.updateLine(
-            this.galaxy.x,
-            CENTER_X - 60,
-            this.us.y + 80,
-            this.us.y + 80
-        );
-
-        this.updateLine(
-            this.us.x,
-            this.us.x,
-            this.us.y + 60,
-            this.us.y + 80
-        );
-
-        this.updateLine(
-            this.galaxy.x,
-            this.galaxy.x,
-            this.us.y + 60,
-            this.us.y + 80
-        );
+        // Draws vertical lines on the bottom of the galaxy and planet connecting to FINAL separation distance lines
+        this.updateBottomLineFinal(this.us);
+        this.updateBottomLineFinal(this.galaxy);
     }
 
     updateBodiesAnimation() {
@@ -227,13 +226,6 @@ export default class Redshift extends React.Component {
             this.us.x = CENTER_X + this.props.distanceTravelledBodies + this.props.params.initialSeparationDistance;
             this.galaxy.x = CENTER_X - this.props.distanceTravelledBodies - this.props.params.initialSeparationDistance;
         }
-    }
-
-    // General function that updates a given line
-    updateLine(startX, endX, firstYShift, secondYShift) {
-        this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(startX, firstYShift);
-        this.directLine.lineTo(endX, secondYShift);
     }
 
     updateTextValues() {
@@ -251,7 +243,6 @@ export default class Redshift extends React.Component {
     }
 
     animate() {
-
         this.updateBodiesAnimation();
         this.updateTextValues();
         this.updateLightLine();
