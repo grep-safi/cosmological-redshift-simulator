@@ -53,11 +53,11 @@ export default class Redshift extends React.Component {
         me.galaxyName = me.drawText('Galaxy', me.galaxy.x, me.galaxy.y);
         me.usName = me.drawText('Us', me.us.x, me.us.y);
 
-        me.initialSeparationText = me.drawText('Initial Separation', CENTER_X, CENTER_Y + 100);
-        me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 115);
+        me.initialSeparationText = me.drawText('Initial Separation', CENTER_X, CENTER_Y + 87);
+        me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 105);
 
-        me.separationText = me.drawText('Separation', CENTER_X, CENTER_Y + 130);
-        me.separationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 145);
+        me.separationText = me.drawText('Final Separation', CENTER_X, CENTER_Y + 132);
+        me.separationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 148);
 
         me.start();
     }
@@ -166,8 +166,15 @@ export default class Redshift extends React.Component {
 
         // Draws bottom initial separation distance line
         this.updateLine(
-            CENTER_X + this.props.params.initialSeparationDistance,
             CENTER_X - this.props.params.initialSeparationDistance,
+            CENTER_X - 60,
+            this.us.y + 35,
+            this.us.y + 35
+        );
+
+        this.updateLine(
+            CENTER_X + this.props.params.initialSeparationDistance,
+            CENTER_X + 60,
             this.us.y + 35,
             this.us.y + 35
         );
@@ -186,9 +193,16 @@ export default class Redshift extends React.Component {
             this.us.y + 35
         );
 
-        this.updateLine(
+       this.updateLine(
             this.us.x,
+            CENTER_X + 60,
+            this.us.y + 80,
+            this.us.y + 80
+        );
+
+        this.updateLine(
             this.galaxy.x,
+            CENTER_X - 60,
             this.us.y + 80,
             this.us.y + 80
         );
