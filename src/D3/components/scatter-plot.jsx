@@ -4,7 +4,7 @@ import XYAxis       from './x-y-axis';
 import * as d3 from "d3/dist/d3";
 
 // Returns the largest X coordinate from the data set
-const xMax   = (data)  => data.length;
+const xMax   = (data)  => data.length + 1;
 
 // Returns the highest Y coordinate from the data set
 const yMax   = (data)  => Math.max( ...data );
