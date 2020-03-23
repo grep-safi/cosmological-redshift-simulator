@@ -35,11 +35,6 @@ export default class Chart extends React.Component{
                 data={this.props.lightValues}
                 {...styles}
             />
-            <div className="controls">
-                <button className="btn randomize" onClick={this.randomizeData.bind(this)}>
-                    Randomize Data
-                </button>
-            </div>
         </div>
     }
 }
