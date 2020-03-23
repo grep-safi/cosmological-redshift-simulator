@@ -69,6 +69,10 @@ export default class Redshift extends React.Component {
         me.start();
     }
 
+    componentWillUnmount() {
+        this.app.stop();
+    }
+
     drawLine() {
         const g = new PIXI.Graphics();
         g.visible = true;
@@ -117,10 +121,6 @@ export default class Redshift extends React.Component {
         return body;
     }
 
-    componentWillUnmount() {
-        this.app.stop();
-    }
-
     start() {
         if (!this.frameId) {
             this.frameId = requestAnimationFrame(this.animate);
@@ -158,13 +158,6 @@ export default class Redshift extends React.Component {
 
         this.drawBottomVerticalLine(this.galaxy);
         this.drawBottomVerticalLine(this.us);
-    }
-
-    updateBodiesSliderChange() {
-        if (!this.props.simulationStarted) {
-            this.us.x = STARTING_US_X + this.props.params.initialSeparationDistance;
-            this.galaxy.x = STARTING_GALAXY_X - this.props.params.initialSeparationDistance;
-        }
     }
 
     updateBodiesAnimation() {
@@ -225,11 +218,8 @@ export default class Redshift extends React.Component {
     }
 
     animate() {
-        if (this.props.isPlaying) {
-            this.updateBodiesAnimation();
-        } else {
-            this.updateBodiesSliderChange();
-        }
+
+        this.updateBodiesAnimation();
         this.updateTextValues();
         this.updateLines();
         this.drawChangingBottomLine();
