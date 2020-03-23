@@ -30,7 +30,7 @@ export default class Chart extends React.Component{
 
     render() {
         return <div>
-            <h1>Playing With React and D3</h1>
+            <h1>Graph</h1>
             <ScatterPlot
                 data={this.props.lightValues}
                 {...styles}
