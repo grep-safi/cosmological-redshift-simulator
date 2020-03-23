@@ -2,16 +2,8 @@ import React from 'react';
 import * as PIXI from 'pixi.js';
 import PropTypes from 'prop-types';
 
-const ORBIT_CENTER_X = 460;
-const ORBIT_CENTER_Y = 106;
-
-// We start at 3/4 of the strip
-// const STARTING_US_X = (3 / 4) * (ORBIT_CENTER_X * 2) - 200;
-const STARTING_US_X = 460;
-
-// Galaxy starts at 1/4 of the strip
-// const STARTING_GALAXY_X = (1 / 4) * (ORBIT_CENTER_X * 2) + 200;
-const STARTING_GALAXY_X = 460;
+const CENTER_X = 460;
+const CENTER_Y = 106;
 
 export default class Redshift extends React.Component {
     constructor(props) {
@@ -33,8 +25,8 @@ export default class Redshift extends React.Component {
 
     componentDidMount() {
         this.app = new PIXI.Application({
-            width: ORBIT_CENTER_X * 2,
-            height: ORBIT_CENTER_Y * 2,
+            width: CENTER_X * 2,
+            height: CENTER_Y * 2,
             backgroundColor: 0x241B23,
             antialias: true,
         });
@@ -53,19 +45,19 @@ export default class Redshift extends React.Component {
         starryBackground.y -= 100;
         stage.addChild(starryBackground);
 
-        me.us = me.drawBody('us', STARTING_US_X, 'img/earth.svg', 20);
-        me.galaxy = me.drawBody('galaxy', STARTING_GALAXY_X, 'img/galaxy.png', 45);
+        me.us = me.drawBody('us', CENTER_X, 'img/earth.svg', 20);
+        me.galaxy = me.drawBody('galaxy', CENTER_X, 'img/galaxy.png', 45);
 
         me.directLine = me.drawLine();
 
         me.galaxyName = me.drawText('Galaxy', me.galaxy.x, me.galaxy.y);
         me.usName = me.drawText('Us', me.us.x, me.us.y);
 
-        me.initialSeparationText = me.drawText('Initial Separation', ORBIT_CENTER_X, ORBIT_CENTER_Y + 100);
-        me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, ORBIT_CENTER_X, ORBIT_CENTER_Y + 115);
+        me.initialSeparationText = me.drawText('Initial Separation', CENTER_X, CENTER_Y + 100);
+        me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 115);
 
-        me.separationText = me.drawText('Separation', ORBIT_CENTER_X, ORBIT_CENTER_Y + 130);
-        me.separationValue = me.drawText(me.props.params.initialSeparationDistance, ORBIT_CENTER_X, ORBIT_CENTER_Y + 145);
+        me.separationText = me.drawText('Separation', CENTER_X, CENTER_Y + 130);
+        me.separationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 145);
         me.start();
     }
 
@@ -137,8 +129,8 @@ export default class Redshift extends React.Component {
         this.directLine.lineStyle(2, 0xfcff4d);
 
         // Initializes the start point of the line
-        let lineStart = STARTING_GALAXY_X - this.props.params.initialSeparationDistance;
-        this.directLine.moveTo(lineStart, ORBIT_CENTER_Y - 7);
+        let lineStart = CENTER_X - this.props.params.initialSeparationDistance;
+        this.directLine.moveTo(lineStart, CENTER_Y - 7);
 
         // If light has reached us, then don't let the line go any further
         let distanceMoved = lineStart + this.props.distanceTravelledLight;
@@ -150,7 +142,7 @@ export default class Redshift extends React.Component {
         }
 
         // Draws the other end of the light ray (line)
-        this.directLine.lineTo(distanceMoved, ORBIT_CENTER_Y - 7);
+        this.directLine.lineTo(distanceMoved, CENTER_Y - 7);
 
         // Draws the vertical lines that show name of bodies
         this.drawTopVerticalLine(this.galaxy, this.galaxyName);
@@ -162,8 +154,8 @@ export default class Redshift extends React.Component {
 
     updateBodiesAnimation() {
         if (!this.lightReached) {
-            this.us.x = STARTING_US_X + this.props.distanceTravelledBodies + this.props.params.initialSeparationDistance;
-            this.galaxy.x = STARTING_GALAXY_X - this.props.distanceTravelledBodies - this.props.params.initialSeparationDistance;
+            this.us.x = CENTER_X + this.props.distanceTravelledBodies + this.props.params.initialSeparationDistance;
+            this.galaxy.x = CENTER_X - this.props.distanceTravelledBodies - this.props.params.initialSeparationDistance;
         }
     }
 
@@ -180,16 +172,16 @@ export default class Redshift extends React.Component {
 
     drawBottomVerticalLine(body) {
         this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(STARTING_US_X + this.props.params.initialSeparationDistance, body.y + 35);
-        this.directLine.lineTo(STARTING_GALAXY_X - this.props.params.initialSeparationDistance, body.y + 35);
+        this.directLine.moveTo(CENTER_X + this.props.params.initialSeparationDistance, body.y + 35);
+        this.directLine.lineTo(CENTER_X - this.props.params.initialSeparationDistance, body.y + 35);
 
         this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(STARTING_US_X + this.props.params.initialSeparationDistance, body.y + 15);
-        this.directLine.lineTo(STARTING_US_X + this.props.params.initialSeparationDistance, body.y + 35);
+        this.directLine.moveTo(CENTER_X + this.props.params.initialSeparationDistance, body.y + 15);
+        this.directLine.lineTo(CENTER_X + this.props.params.initialSeparationDistance, body.y + 35);
 
         this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(STARTING_GALAXY_X - this.props.params.initialSeparationDistance, body.y + 15);
-        this.directLine.lineTo(STARTING_GALAXY_X - this.props.params.initialSeparationDistance, body.y + 35);
+        this.directLine.moveTo(CENTER_X - this.props.params.initialSeparationDistance, body.y + 15);
+        this.directLine.lineTo(CENTER_X - this.props.params.initialSeparationDistance, body.y + 35);
 
     }
 
