@@ -145,6 +145,10 @@ export default class Redshift extends React.Component {
         // Draws the other end of the light ray (line)
         this.directLine.lineTo(distanceMoved, CENTER_Y - 7);
 
+    }
+
+    // Updates all the lines
+    updateLines() {
         // Draws the vertical lines that show name of bodies
         this.updateLine(
             this.galaxy.x,
@@ -160,11 +164,48 @@ export default class Redshift extends React.Component {
             this.us.y - 35
         );
 
-        this.updateText(this.galaxy, this.galaxyName);
-        this.updateText(this.us, this.usName);
+        // Draws bottom initial separation distance line
+        this.updateLine(
+            CENTER_X + this.props.params.initialSeparationDistance,
+            CENTER_X - this.props.params.initialSeparationDistance,
+            this.us.y + 35,
+            this.us.y + 35
+        );
 
-        this.drawBottomVerticalLine(this.galaxy);
-        this.drawBottomVerticalLine(this.us);
+        this.updateLine(
+            CENTER_X + this.props.params.initialSeparationDistance,
+            CENTER_X + this.props.params.initialSeparationDistance,
+            this.us.y + 15,
+            this.us.y + 35
+        );
+
+        this.updateLine(
+            CENTER_X - this.props.params.initialSeparationDistance,
+            CENTER_X - this.props.params.initialSeparationDistance,
+            this.us.y + 15,
+            this.us.y + 35
+        );
+
+        this.updateLine(
+            this.us.x,
+            this.galaxy.x,
+            this.us.y + 80,
+            this.us.y + 80
+        );
+
+        this.updateLine(
+            this.us.x,
+            this.us.x,
+            this.us.y + 60,
+            this.us.y + 80
+        );
+
+        this.updateLine(
+            this.galaxy.x,
+            this.galaxy.x,
+            this.us.y + 60,
+            this.us.y + 80
+        );
     }
 
     updateBodiesAnimation() {
@@ -174,44 +215,11 @@ export default class Redshift extends React.Component {
         }
     }
 
-    updateText(body, text) {
-        // Draws Name
-    }
-
+    // General function that updates a given line
     updateLine(startX, endX, firstYShift, secondYShift) {
         this.directLine.lineStyle(2, 0xa64e4e);
         this.directLine.moveTo(startX, firstYShift);
         this.directLine.lineTo(endX, secondYShift);
-    }
-
-    drawBottomVerticalLine(body) {
-        this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(CENTER_X + this.props.params.initialSeparationDistance, body.y + 35);
-        this.directLine.lineTo(CENTER_X - this.props.params.initialSeparationDistance, body.y + 35);
-
-        this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(CENTER_X + this.props.params.initialSeparationDistance, body.y + 15);
-        this.directLine.lineTo(CENTER_X + this.props.params.initialSeparationDistance, body.y + 35);
-
-        this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(CENTER_X - this.props.params.initialSeparationDistance, body.y + 15);
-        this.directLine.lineTo(CENTER_X - this.props.params.initialSeparationDistance, body.y + 35);
-    }
-
-    drawChangingBottomLine() {
-
-        this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(this.us.x, this.us.y + 80);
-        this.directLine.lineTo(this.galaxy.x, this.us.y + 80);
-
-        this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(this.us.x, this.us.y + 60);
-        this.directLine.lineTo(this.us.x, this.us.y + 80);
-
-        this.directLine.lineStyle(2, 0xa64e4e);
-        this.directLine.moveTo(this.galaxy.x, this.galaxy.y + 60);
-        this.directLine.lineTo(this.galaxy.x, this.galaxy.y + 80);
-
     }
 
     updateTextValues() {
@@ -233,7 +241,7 @@ export default class Redshift extends React.Component {
         this.updateBodiesAnimation();
         this.updateTextValues();
         this.updateLightLine();
-        this.drawChangingBottomLine();
+        this.updateLines();
 
         this.frameId = requestAnimationFrame(this.animate);
     }
