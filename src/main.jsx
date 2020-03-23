@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Redshift from './Redshift';
 import NavBar from "./UserControls/NavBar";
 import Parameters from "./UserControls/Parameters";
+import Chart from "./D3/components/chart.jsx";
 
 class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
@@ -13,10 +14,14 @@ class CosmologicalRedshiftSim extends React.Component {
                 expansionRate: 10,
             },
 
+            lightValuesSet: new Set(),
+            lightValuesArray: [],
+
             animationRate: 1.5,
             startBtnText: 'play animation',
             isPlaying: false,
             simulationStarted: false,
+            simulationEnded: false,
 
             distanceTravelledLight: 0,
             distanceTravelledBodies: 0,
@@ -41,13 +46,14 @@ class CosmologicalRedshiftSim extends React.Component {
                     distanceTravelledBodies={this.state.distanceTravelledBodies}
                     isPlaying={this.state.isPlaying}
                     simulationStarted={this.state.simulationStarted}
+                    changeSimState={() => {this.changeSimState()} }
                 />
             </div>
 
             <div className="animationButton">
                 <button type="box"
                         className="btn btn-danger btn-sm"
-                        onClick={this.onStartClick.bind(this)}>
+                        onClick={() => {this.onStartClick()} }>
                     {this.state.startBtnText}
                 </button>
             </div>
@@ -60,6 +66,11 @@ class CosmologicalRedshiftSim extends React.Component {
                 />
             </div>
 
+            <div className="box">
+                <Chart
+                    lightValues={this.state.lightValuesArray}
+                />
+            </div>
         </React.Fragment>;
     }
 
@@ -67,16 +78,32 @@ class CosmologicalRedshiftSim extends React.Component {
         this.setState({ parameters: newParams });
     }
 
+    changeSimState() {
+        this.setState({
+            simulationEnded: true
+        })
+    }
+
     animate() {
+        if (this.state.simulationEnded) {
+            return;
+        }
+
         const me = this;
         let speedOfLight = 3;
+
         let newLightDist = me.state.distanceTravelledLight + speedOfLight;
         let newDistanceBetween = me.state.distanceTravelledBodies + (0.05 * me.state.parameters.expansionRate);
+
+        console.log('yep, this si me', this.initialState.lightValuesSet, this.state.lightValuesArray);
+
         if (me.state.isPlaying) {
             me.setState(({
                 distanceTravelledLight: newLightDist,
                 distanceTravelledBodies: newDistanceBetween,
-                simulationStarted: true
+                simulationStarted: true,
+                lightValuesSet: me.state.lightValuesSet.add(newDistanceBetween),
+                lightValuesArray: Array.from(me.state.lightValuesSet)
             }));
         }
 
@@ -106,6 +133,7 @@ class CosmologicalRedshiftSim extends React.Component {
     onResetClick(e) {
         e.preventDefault();
         this.stopAnimation();
+        this.state.lightValuesSet.clear();
         this.setState(this.initialState);
     }
 }

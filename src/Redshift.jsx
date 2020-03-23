@@ -145,6 +145,7 @@ export default class Redshift extends React.Component {
         if (distanceMoved >= this.us.x) {
             distanceMoved = this.us.x;
             this.lightReached = true;
+            this.props.changeSimState();
         } else {
             this.lightReached = false;
         }
@@ -165,7 +166,7 @@ export default class Redshift extends React.Component {
     updateInitialSeparationLine(constant) {
         this.updateLine(
             CENTER_X + constant * this.props.params.initialSeparationDistance,
-            CENTER_X - 60,
+            CENTER_X + constant * 60,
             this.us.y + 35,
             this.us.y + 35
         );
@@ -180,7 +181,7 @@ export default class Redshift extends React.Component {
         );
     }
 
-    updateBottomLineInitial(constant) {
+    updateInitialVerticals(constant) {
         this.updateLine(
             CENTER_X + constant * this.props.params.initialSeparationDistance,
             CENTER_X + constant * this.props.params.initialSeparationDistance,
@@ -189,7 +190,7 @@ export default class Redshift extends React.Component {
         );
     }
 
-    updateBottomLineFinal(body) {
+    updateFinalVerticals(body) {
         this.updateLine(
             body.x,
             body.x,
@@ -209,16 +210,16 @@ export default class Redshift extends React.Component {
         this.updateInitialSeparationLine(1);
 
         // Draws final separation distance lines on the bottom (below initial separation distance lines)
-        this.updateFinalSeparationLine(this.us, -1);
+        this.updateFinalSeparationLine(this.us, 1);
         this.updateFinalSeparationLine(this.galaxy, -1);
 
         // Draws vertical lines on the bottom of the galaxy and planet connecting to INITIAL separation distance lines
-        this.updateBottomLineInitial(1);
-        this.updateBottomLineInitial(-1);
+        this.updateInitialVerticals(1);
+        this.updateInitialVerticals(-1);
 
         // Draws vertical lines on the bottom of the galaxy and planet connecting to FINAL separation distance lines
-        this.updateBottomLineFinal(this.us);
-        this.updateBottomLineFinal(this.galaxy);
+        this.updateFinalVerticals(this.us);
+        this.updateFinalVerticals(this.galaxy);
     }
 
     updateBodiesAnimation() {
