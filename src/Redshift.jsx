@@ -6,10 +6,12 @@ const ORBIT_CENTER_X = 460;
 const ORBIT_CENTER_Y = 106;
 
 // We start at 3/4 of the strip
-const STARTING_US_X = (3 / 4) * (ORBIT_CENTER_X * 2) - 200;
+// const STARTING_US_X = (3 / 4) * (ORBIT_CENTER_X * 2) - 200;
+const STARTING_US_X = 460;
 
 // Galaxy starts at 1/4 of the strip
-const STARTING_GALAXY_X = (1 / 4) * (ORBIT_CENTER_X * 2) + 200;
+// const STARTING_GALAXY_X = (1 / 4) * (ORBIT_CENTER_X * 2) + 200;
+const STARTING_GALAXY_X = 460;
 
 export default class Redshift extends React.Component {
     constructor(props) {
@@ -58,6 +60,7 @@ export default class Redshift extends React.Component {
 
         me.galaxyName = me.drawText('Galaxy', me.galaxy.x, me.galaxy.y);
         me.usName = me.drawText('Us', me.us.x, me.us.y);
+
         me.initialSeparationText = me.drawText('Initial Separation', ORBIT_CENTER_X, ORBIT_CENTER_Y + 100);
         me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, ORBIT_CENTER_X, ORBIT_CENTER_Y + 115);
 
@@ -214,10 +217,11 @@ export default class Redshift extends React.Component {
     }
 
     updateTextValues() {
-        this.initialSeparationValue.text = this.props.params.initialSeparationDistance;
+        let initialSeparation = this.props.params.initialSeparationDistance;
+        let separationDist = (this.us.x - this.galaxy.x) / 2;
 
-        let separationDist = this.props.params.initialSeparationDistance + this.us.x - 665;
-        this.separationValue.text = separationDist.toFixed(0).toString(10);
+        this.initialSeparationValue.text = initialSeparation.toFixed(0).toString();
+        this.separationValue.text = separationDist.toFixed(0).toString();
     }
 
     animate() {
