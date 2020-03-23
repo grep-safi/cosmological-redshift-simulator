@@ -29,38 +29,38 @@ export default class Axes extends Component {
     }
 
     render() {
-        const xPos = this.props.xScale();
+        // const xPos = this.props.xScale();
+        const xPos = -10;
 
         return <React.Fragment>
-            <text
-                x="250"
-                y="260"
-                dy=".8em"
-                fontSize=".9em"
-                fontWeight="bold"
-                textAnchor="end">
-                Time
-            </text>
+            {/*<text*/}
+            {/*    x="250"*/}
+            {/*    y="260"*/}
+            {/*    dy=".8em"*/}
+            {/*    fontSize=".9em"*/}
+            {/*    fontWeight="bold"*/}
+            {/*    textAnchor="end">*/}
+            {/*    Time*/}
+            {/*</text>*/}
 
             <g className="yAxis" ref={this.yAxis}
                transform={`translate(${this.props.paddingLeft}, 0)`}
             />
 
             <g className="xAxis" ref={this.xAxis}
-               transform={
-                   `translate(${xPos}, ${this.props.height - this.props.padding})`
-               }
+               transform={`translate(${xPos}, ${this.props.height - this.props.padding + 75.35})`}
             />
-            <text
-                transform="rotate(-90)"
-                x="-80"
-                y="6"
-                dy=".8em"
-                fontSize=".9em"
-                fontWeight="bold"
-                textAnchor="end">
-                Distance
-            </text>
+
+            {/*<text*/}
+            {/*    transform="rotate(-90)"*/}
+            {/*    x="-120"*/}
+            {/*    y="5"*/}
+            {/*    dy=".8em"*/}
+            {/*    fontSize=".9em"*/}
+            {/*    fontWeight="bold"*/}
+            {/*    textAnchor="end">*/}
+            {/*    Distance*/}
+            {/*</text>*/}
         </React.Fragment>;
     }
 }
