@@ -24,7 +24,7 @@ export default class Parameters extends React.Component {
                         min={100}
                         max={250}
                         step={0.01}
-                        decimals={1}
+                        decimals={0}
                         value={this.props.params.initialSeparationDistance}
                         onChange={this.handleSingleVariableChange}
                     />
