@@ -28,8 +28,7 @@ const yScale = (props) => {
 const lineGenerator = (xScaleLine, yScaleLine) => {
     return d3.line()
         .x((d, i) => xScaleLine(i))
-        .y(d => yScaleLine(d.y))
-        .curve(d3.curveMonotoneX);
+        .y(d => yScaleLine(d.y));
 };
 
 export default (props) => {

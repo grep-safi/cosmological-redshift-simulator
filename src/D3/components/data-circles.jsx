@@ -6,6 +6,8 @@ const renderCircles = (props) => {
             cx: props.xScale(index),
             cy: props.yScale(coords),
             r: 2,
+            stroke: "red",
+            fill: "red",
             key: index,
         };
         return <circle {...circleProps} />;
