@@ -34,7 +34,7 @@ const lineGenerator = (xScaleLine, yScaleLine) => {
 
 export default (props) => {
     const scales = { xScale: xScale(props), yScale: yScale(props) };
-    let lineData = props.data.map(d => {return {"y": d}; });
+    const lineData = props.data.map(d => {return {"y": d}; });
     const lineGen = lineGenerator(scales.xScale, scales.yScale);
     return <svg width={props.width} height={props.height}>
         <DataCircles {...props} {...scales} />
