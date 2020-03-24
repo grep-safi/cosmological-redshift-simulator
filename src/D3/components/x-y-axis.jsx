@@ -16,8 +16,6 @@ export default (props) => {
         scale: props.yScale,
     };
 
-    console.log('look here', xSettings);
-
     return <g className="xy-axis">
         <Axis {...xSettings}/>
         {/*<Axis {...ySettings}/>*/}
