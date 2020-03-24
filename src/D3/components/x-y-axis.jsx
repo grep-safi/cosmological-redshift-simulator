@@ -3,7 +3,7 @@ import Axis   from './axis';
 
 export default (props) => {
     const xSettings = {
-        translate: `translate(0, ${props.height + props.padding})`,
+        translate: `translate(0, ${props.height - props.padding})`,
         xScale: props.xScale,
         yScale: props.yScale,
         height: 255,
@@ -11,6 +11,7 @@ export default (props) => {
         padding: 60,
         paddingLeft: 20
     };
+
     const ySettings = {
         translate: `translate(${props.padding}, 0)`,
         scale: props.yScale,
