@@ -29,10 +29,16 @@ export default class Axes extends Component {
     }
 
     render() {
-        // const xPos = this.props.xScale();
-        const xPos = -10;
-
         return <React.Fragment>
+
+            <g className="yAxis" ref={this.yAxis}
+               transform={`translate(${this.props.paddingLeft}, 0)`}
+            />
+
+            <g className="xAxis" ref={this.xAxis}
+               transform={`translate(0, ${this.props.height - this.props.padding + 75.35})`}
+            />
+
             {/*<text*/}
             {/*    x="250"*/}
             {/*    y="260"*/}
@@ -42,14 +48,6 @@ export default class Axes extends Component {
             {/*    textAnchor="end">*/}
             {/*    Time*/}
             {/*</text>*/}
-
-            <g className="yAxis" ref={this.yAxis}
-               transform={`translate(${this.props.paddingLeft}, 0)`}
-            />
-
-            <g className="xAxis" ref={this.xAxis}
-               transform={`translate(${xPos}, ${this.props.height - this.props.padding + 75.35})`}
-            />
 
             {/*<text*/}
             {/*    transform="rotate(-90)"*/}
