@@ -1,21 +1,62 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as d3 from "d3/dist/d3";
 
-export default (props) => {
-    //x scale
-    const xScale = props.xScale;
-    //y scale
-    const yScale = props.yScale;
+export default class Line extends Component {
+    constructor(props) {
+        super(props);
+        this.lineRef = React.createRef();
 
-    //line generator: each point is [x(d.a), y(d.b)] where d is a row in data
-    // and x, y are scales (e.g. x(10) returns pixel value of 10 scaled by x)
-    const line = d3.line()
-        .x((d, i) => xScale(i))
-        .y(d => yScale(d))
-        .curve(d3.curveCatmullRom.alpha(0.5)); //curve line
+        this.line = d3.line()
+            .x((d, i) => this.props.xScale(i))
+            .y(d => this.props.yScale(d))
+            .curve(d3.curveCatmullRom.alpha(0.5)); //curve line
+    }
 
-    return <path d={line(props.data)}/>
+    componentDidMount() {
+        this.renderLine();
+    }
+
+    componentDidUpdate() {
+        this.renderLine();
+    }
+
+    renderLine() {
+       const node = this.lineRef.current;
+        d3.select(node).call(this.line);
+        // console.log('ive got a good feeling about this onee',this.props.data);
+    }
+
+    render() {
+        return <React.Fragment>
+            <path d={this.line(this.props.data)} className="line" ref={this.lineRef}/>
+        </React.Fragment>;
+    }
 }
+
+
+
+
+
+//
+// import React from 'react';
+// import * as d3 from "d3/dist/d3";
+//
+// export default (props) => {
+//     //x scale
+//     const xScale = props.xScale;
+//     //y scale
+//     const yScale = props.yScale;
+//
+//     //line generator: each point is [x(d.a), y(d.b)] where d is a row in data
+//     // and x, y are scales (e.g. x(10) returns pixel value of 10 scaled by x)
+//     const line = d3.line()
+//         .x((d, i) => xScale(i))
+//         .y(d => yScale(d))
+//         .curve(d3.curveCatmullRom.alpha(0.5)); //curve line
+//
+//     return <path d={line(props.data)}/>
+// }
 
 // const renderCircles = (props) => {
 //     return (coords, index) => {
