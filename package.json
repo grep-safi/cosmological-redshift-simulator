@@ -20,7 +20,8 @@
     "pixi.js": "^5.2.1",
     "react": "~16.13.0",
     "react-dom": "~16.13.0",
-    "react-range-step-input": "^1.2.4"
+    "react-range-step-input": "^1.2.4",
+    "d3-selection": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
