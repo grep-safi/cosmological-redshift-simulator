@@ -1,6 +1,6 @@
 import React from 'react';
 import DataCircles  from './data-circles';
-import LineChart  from './line-chart';
+import Line  from './line';
 import XYAxis       from './x-y-axis';
 import * as d3 from "d3/dist/d3";
 
@@ -25,11 +25,30 @@ const yScale = (props) => {
         .range([props.height - props.padding, props.padding]);
 };
 
+const lineGenerator = d3.line()
+    .x((d, i) => xScale(i))
+    .y(d => yScale(d))
+    .curve(d3.curveMonotoneX);
+
 export default (props) => {
     const scales = { xScale: xScale(props), yScale: yScale(props) };
+    if (props.data.length < 5) {
+        // let lineData = props.data.map((d, i) => { return {"name": i, "value": d}})
+        // let result = lineData.reduce((acc, cur) => ({ ...acc, [cur.color]: cur.id }), {});
+        // console.log('lord have mercy', lineData, 'reseu;t', result);
+    }
+    let lineData = props.data.map((d, i) => { return {"name": i, "value": d}});
     return <svg width={props.width} height={props.height}>
         <DataCircles {...props} {...scales} />
-        <LineChart {...props} {...scales} />
+        <g>
+            <Line
+                // data={props.data}
+                data={lineData}
+                lineGenerator={lineGenerator}
+                width={props.width}
+                height={props.height}
+            />
+        </g>
         <XYAxis {...props} {...scales} />
     </svg>
 }
