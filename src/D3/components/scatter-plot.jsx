@@ -1,5 +1,6 @@
 import React from 'react';
 import DataCircles  from './data-circles';
+import Line  from './line';
 import XYAxis       from './x-y-axis';
 import * as d3 from "d3/dist/d3";
 
@@ -22,15 +23,13 @@ const yScale = (props) => {
     return d3.scaleLinear()
         .domain([0, yMax(props.data)])
         .range([props.height - props.padding, props.padding]);
-    // .range([props.height - props.padding, props.padding]);
 };
-
 
 export default (props) => {
     const scales = { xScale: xScale(props), yScale: yScale(props) };
-    console.log('all the settings', scales.yScale(props.data[3]));
     return <svg width={props.width} height={props.height}>
         <DataCircles {...props} {...scales} />
+        <Line {...props} {...scales} />
         <XYAxis {...props} {...scales} />
     </svg>
 }
