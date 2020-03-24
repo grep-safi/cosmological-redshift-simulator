@@ -7,7 +7,6 @@ export default class Axes extends Component {
         super(props);
         this.xAxis = React.createRef();
         this.yAxis = React.createRef();
-        this.sideAxis = React.createRef();
     }
 
     componentDidMount() {

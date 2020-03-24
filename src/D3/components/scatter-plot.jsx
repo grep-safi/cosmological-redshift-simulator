@@ -1,6 +1,6 @@
 import React from 'react';
 import DataCircles  from './data-circles';
-import Line  from './line';
+import LineChart  from './line-chart';
 import XYAxis       from './x-y-axis';
 import * as d3 from "d3/dist/d3";
 
@@ -29,7 +29,7 @@ export default (props) => {
     const scales = { xScale: xScale(props), yScale: yScale(props) };
     return <svg width={props.width} height={props.height}>
         <DataCircles {...props} {...scales} />
-        <Line {...props} {...scales} />
+        <LineChart {...props} {...scales} />
         <XYAxis {...props} {...scales} />
     </svg>
 }
