@@ -5,15 +5,16 @@ import XYAxis       from './x-y-axis';
 import * as d3 from "d3/dist/d3";
 
 // Returns the largest X coordinate from the data set
-const xMax   = (data)  => data.length;
+const xMax = (data) => data.length;
 
 // Returns the largest Y coordinate from the data set
-const yMax   = (data)  => d3.max(data);
+const yMax = (data) => d3.max(data);
 
 // Returns a function that "scales" X coordinates from the data to fit the chart
 const xScale = (props) => {
     return d3.scaleLinear()
-        .domain([0, xMax(props.data)])
+        // .domain([0, xMax(props.data)])
+        .domain([0, 280])
         .range([props.padding, props.width - props.padding]);
         // .range([props.padding, props.width - props.padding * 2]);
 };
@@ -21,7 +22,8 @@ const xScale = (props) => {
 // Returns a function that "scales" Y coordinates from the data to fit the chart
 const yScale = (props) => {
     return d3.scaleLinear()
-        .domain([0, yMax(props.data) + 1])
+        // .domain([0, yMax(props.data) + 1])
+        .domain([0, 150])
         .range([props.height - props.padding, props.padding]);
 };
 
@@ -44,7 +46,7 @@ export default (props) => {
             width={props.width}
             height={props.height}
         />
-        <line x1={30} y1={30.5} x2={771} y2={30.5} style={{stroke: "rgb(0,0,0)"}} />
+        <line x1={31} y1={30.5} x2={771} y2={30.5} style={{stroke: "rgb(0,0,0)"}} />
         <line x1={770.5} y1={270} x2={770.5} y2={30} style={{stroke: "rgb(0,0,0)"}} />
     </svg>
 }
