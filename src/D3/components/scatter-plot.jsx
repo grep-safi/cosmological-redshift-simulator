@@ -25,9 +25,17 @@ const yScale = (props) => {
         .range([props.height - props.padding, props.padding]);
 };
 
+const xScale2 = d3.scaleLinear()
+    .domain([0, 4])
+    .range([30, 770]);
+
+const yScale2 = d3.scaleLinear()
+    .domain([0, 50])
+    .range([300, 30]);
+
 const lineGenerator = d3.line()
-    .x((d, i) => xScale(i))
-    .y(d => yScale(d))
+    .x((d, i) => xScale2(i))
+    .y(d => yScale2(d.y))
     .curve(d3.curveMonotoneX);
 
 export default (props) => {
@@ -37,12 +45,13 @@ export default (props) => {
         // let result = lineData.reduce((acc, cur) => ({ ...acc, [cur.color]: cur.id }), {});
         // console.log('lord have mercy', lineData, 'reseu;t', result);
     }
-    let lineData = props.data.map((d, i) => { return {"name": i, "value": d}});
+    // let lineData = props.data.map((d) => { return {"y": d}; });
+    let lineData = [{"y": 30}, {"y": 10}, {"y": 20}, {"y": 50}];
+    console.log('please fucking work', lineData, props.data);
     return <svg width={props.width} height={props.height}>
         <DataCircles {...props} {...scales} />
         <g>
             <Line
-                // data={props.data}
                 data={lineData}
                 lineGenerator={lineGenerator}
                 width={props.width}
