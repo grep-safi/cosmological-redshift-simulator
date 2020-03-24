@@ -53,7 +53,10 @@ export default class Parameters extends React.Component {
                 ...this.props.params,
                 [key]: value
             });
+            return;
         }
+
+        alert("You can't change the INITIAL Separation Distance after starting the simulation, silly");
     }
 }
 

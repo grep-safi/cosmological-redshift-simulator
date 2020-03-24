@@ -37,14 +37,12 @@ export default (props) => {
     const lineGen = lineGenerator(scales.xScale, scales.yScale);
     return <svg width={props.width} height={props.height}>
         <DataCircles {...props} {...scales} />
-        <g>
-            <Line
-                data={lineData}
-                lineGenerator={lineGen}
-                width={props.width}
-                height={props.height}
-            />
-        </g>
         <XYAxis {...props} {...scales} />
+        <Line
+            data={lineData}
+            lineGenerator={lineGen}
+            width={props.width}
+            height={props.height}
+        />
     </svg>
 }
