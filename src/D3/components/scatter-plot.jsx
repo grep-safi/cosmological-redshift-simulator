@@ -21,7 +21,7 @@ const xScale = (props) => {
 // Returns a function that "scales" Y coordinates from the data to fit the chart
 const yScale = (props) => {
     return d3.scaleLinear()
-        .domain([0, yMax(props.data)])
+        .domain([0, yMax(props.data) + 1])
         .range([props.height - props.padding, props.padding]);
 };
 
@@ -44,5 +44,7 @@ export default (props) => {
             width={props.width}
             height={props.height}
         />
+        <line x1={30} y1={30.5} x2={771} y2={30.5} style={{stroke: "rgb(0,0,0)"}} />
+        <line x1={770.5} y1={270} x2={770.5} y2={30} style={{stroke: "rgb(0,0,0)"}} />
     </svg>
 }
