@@ -56,7 +56,8 @@ export default class Parameters extends React.Component {
             return;
         }
 
-        alert("You can't change the INITIAL Separation Distance after starting the simulation, silly");
+        alert("You can't change the INITIAL Separation Distance after starting the simulation, silly." +
+            " Hit reset and give it another go");
     }
 }
 
