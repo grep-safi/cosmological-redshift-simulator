@@ -38,26 +38,27 @@ export default class Axes extends Component {
                transform={`translate(0, ${this.props.height})`}
             />
 
-            {/*<text*/}
-            {/*    x="250"*/}
-            {/*    y="260"*/}
-            {/*    dy=".8em"*/}
-            {/*    fontSize=".9em"*/}
-            {/*    fontWeight="bold"*/}
-            {/*    textAnchor="end">*/}
-            {/*    Time*/}
-            {/*</text>*/}
+            <text
+                x="415"
+                y="285"
+                dy=".8em"
+                fontSize=".9em"
+                fontWeight="bold"
+                textAnchor="end">
+                Time
+            </text>
 
-            {/*<text*/}
-            {/*    transform="rotate(-90)"*/}
-            {/*    x="-120"*/}
-            {/*    y="5"*/}
-            {/*    dy=".8em"*/}
-            {/*    fontSize=".9em"*/}
-            {/*    fontWeight="bold"*/}
-            {/*    textAnchor="end">*/}
-            {/*    Distance*/}
-            {/*</text>*/}
+            <text
+                transform="rotate(-90)"
+                x="-120"
+                y="0"
+                dy=".8em"
+                fontSize=".9em"
+                fontWeight="bold"
+                textAnchor="end">
+                Distance
+            </text>
+
         </React.Fragment>;
     }
 }

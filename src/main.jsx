@@ -15,7 +15,7 @@ class CosmologicalRedshiftSim extends React.Component {
             },
 
             lightValuesSet: new Set(),
-            lightValuesArray: [],
+            lightValuesArray: [0],
 
             animationRate: 1.5,
             startBtnText: 'play animation',
@@ -27,7 +27,10 @@ class CosmologicalRedshiftSim extends React.Component {
             distanceTravelledBodies: 0,
         };
 
+
         this.state = this.initialState;
+        this.state.lightValuesSet.add(0);
+
         this.raf = null;
 
         this.stopAnimation = this.stopAnimation.bind(this);
@@ -132,6 +135,7 @@ class CosmologicalRedshiftSim extends React.Component {
         e.preventDefault();
         this.stopAnimation();
         this.state.lightValuesSet.clear();
+        this.state.lightValuesSet.add(0);
         this.setState(this.initialState);
     }
 }
