@@ -7,6 +7,7 @@ export default class Axes extends Component {
         super(props);
         this.xAxis = React.createRef();
         this.yAxis = React.createRef();
+        this.sideAxis = React.createRef();
     }
 
     componentDidMount() {
@@ -30,13 +31,12 @@ export default class Axes extends Component {
 
     render() {
         return <React.Fragment>
-
             <g className="yAxis" ref={this.yAxis}
                transform={`translate(${this.props.paddingLeft}, 0)`}
             />
 
             <g className="xAxis" ref={this.xAxis}
-               transform={`translate(0, ${this.props.height - this.props.padding + 75.35})`}
+               transform={`translate(0, ${this.props.height})`}
             />
 
             {/*<text*/}
