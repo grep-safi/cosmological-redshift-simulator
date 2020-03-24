@@ -20,7 +20,7 @@ export default class Parameters extends React.Component {
                     <legend>Parameters</legend>
                     <SingleVariableControl
                         name={"initialSeparationDistance"}
-                        displayName={"Initial Separation Distance"}
+                        displayName={"Initial Separation Distance: "}
                         min={100}
                         max={250}
                         step={0.01}
@@ -31,7 +31,7 @@ export default class Parameters extends React.Component {
                     <br/>
                     <SingleVariableControl
                         name={"expansionRate"}
-                        displayName={"Expansion Rate"}
+                        displayName={"Universe Expansion Rate: "}
                         min={3.00}
                         max={20.00}
                         step={0.01}
