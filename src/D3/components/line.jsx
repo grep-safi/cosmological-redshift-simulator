@@ -13,8 +13,8 @@ export default class Line extends React.Component {
         select(node)
             .append('path')
             .datum(this.props.data)
-            .attr('id', 'line')
-            .attr('stroke', 'blue')
+            .attr('id', this.props.id)
+            .attr('stroke', this.props.color)
             .attr('stroke-width', 2)
             .attr('fill', 'none')
             .attr('d', this.props.lineGenerator);
@@ -23,7 +23,8 @@ export default class Line extends React.Component {
         this.updateChart();
     }
     updateChart() {
-        const line = select('#line');
+        const str = '#' + this.props.id;
+        const line = select(str);
 
         line
             .datum(this.props.data)
