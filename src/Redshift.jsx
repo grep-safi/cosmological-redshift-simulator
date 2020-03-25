@@ -1,9 +1,13 @@
 import React from 'react';
 import * as PIXI from 'pixi.js';
 import PropTypes from 'prop-types';
+import * as d3 from "d3/dist/d3";
 
 const CENTER_X = 460;
 const CENTER_Y = 106;
+
+const scaleToDistance = (pixel)    => pixel / 1000;
+const scaleToPixel    = (distance) => distance * 1000;
 
 export default class Redshift extends React.Component {
     constructor(props) {
@@ -82,9 +86,7 @@ export default class Redshift extends React.Component {
         const bodyText = new PIXI.Text(name, {
             fontFamily: 'Garamond',
             fontSize: 14,
-            // fontWeight: 'bold',
             fill: 0xe4d1a0, // butter
-            // fill: 0xFFD700, // gold
         });
 
         // angleText.rotation = degToRad(-90);

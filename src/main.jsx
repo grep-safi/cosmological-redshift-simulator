@@ -100,8 +100,6 @@ class CosmologicalRedshiftSim extends React.Component {
         let rate = (0.05 * me.state.parameters.expansionRate);
 
         let newDistanceBetween = me.state.distanceTravelledBodies + rate;
-
-        console.log('part 2 iive reset so what the fuck is going on here', this.state.lightTravelledDistances);
         if (me.state.isPlaying) {
             this.updateDataSets(this.state.lightTravelledDistances, rate);
             this.updateDataSets(this.state.targetDistances, rate);
@@ -118,7 +116,6 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     updateDataSets(dataSet, progressionRate) {
-        console.log('pratsy 3 iive reset so what the fuck is going on here', this.state.lightTravelledDistances);
         let possibleValue = progressionRate + dataSet[dataSet.length - 1];
         if (!dataSet.includes(possibleValue)) {
             this.setState({
