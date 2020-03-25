@@ -23,7 +23,7 @@ const xScale = (props) => {
 const yScale = (props) => {
     return d3.scaleLinear()
         // .domain([0, yMax(props.data) + 1])
-        .domain([0, 150])
+        .domain([0, 300])
         .range([props.height - props.padding, props.padding]);
 };
 
@@ -37,8 +37,12 @@ export default (props) => {
     const scales = { xScale: xScale(props), yScale: yScale(props) };
     const lineData = props.data.map(d => {return {"y": d}; });
     const lineGen = lineGenerator(scales.xScale, scales.yScale);
+    console.log('these are the required values', props.targetDistances, props.data);
     return <svg width={props.width} height={props.height}>
         <DataCircles {...props} {...scales} />
+        <DataCircles
+            data={props.targetDistances}
+            {...scales} />
         <XYAxis {...props} {...scales} />
         <Line
             data={lineData}
