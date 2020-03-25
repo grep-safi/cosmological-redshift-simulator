@@ -1,7 +1,7 @@
 import React from 'react';
 import * as PIXI from 'pixi.js';
 import PropTypes from 'prop-types';
-import * as d3 from "d3/dist/d3";
+// import * as d3 from "d3/dist/d3";
 
 const CENTER_X = 460;
 const CENTER_Y = 106;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { axisBottom, axisLeft, select } from 'd3/dist/d3';
 import PropTypes from 'prop-types';
-import * as d3 from "d3/dist/d3";
 
 export default class Axes extends Component {
     constructor(props) {
@@ -18,14 +18,14 @@ export default class Axes extends Component {
     }
 
     renderAxes() {
-        const xAxis = d3.axisBottom(this.props.xScale);
-        const yAxis = d3.axisLeft(this.props.yScale);
+        const xAxis = axisBottom(this.props.xScale);
+        const yAxis = axisLeft(this.props.yScale);
 
         const node1 = this.xAxis.current;
-        d3.select(node1).call(xAxis);
+        select(node1).call(xAxis);
 
         const node2 = this.yAxis.current;
-        d3.select(node2).call(yAxis);
+        select(node2).call(yAxis);
     }
 
     render() {

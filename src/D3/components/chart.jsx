@@ -2,9 +2,9 @@ import React       from 'react';
 import LineGraph from './scatter-plot';
 
 const styles = {
-    width   : 800,
+    width   : 850,
     height  : 300,
-    padding : 30,
+    padding : 45,
 };
 
 export default class Chart extends React.Component{
