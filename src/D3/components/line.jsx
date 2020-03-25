@@ -1,6 +1,5 @@
 import React from 'react';
 import { select } from 'd3-selection';
-import * as d3 from "d3/dist/d3";
 
 export default class Line extends React.Component {
     constructor() {

@@ -6,10 +6,10 @@ export default (props) => {
         translate: `translate(0, ${props.height - props.padding})`,
         xScale: props.xScale,
         yScale: props.yScale,
-        height: 270,
+        height: 265,
         offSet: 0,
-        padding: 60,
-        paddingLeft: 30
+        padding: 30,
+        paddingLeft: 45
     };
 
     const ySettings = {
