@@ -108,32 +108,34 @@ class CosmologicalRedshiftSim extends React.Component {
         let speedOfLight = 2;
 
         let newLightDist = me.state.distanceTravelledLight + speedOfLight;
+        let rate = (0.05 * me.state.parameters.expansionRate);
 
-        let newDistanceBetween = me.state.distanceTravelledBodies + (0.05 * me.state.parameters.expansionRate);
-        let newTargetDistanceValue = (0.05 * me.state.parameters.expansionRate)
-            + this.state.targetDistances[this.state.targetDistances.length - 1];
-
-        let newLightDistance = -(0.05 * me.state.parameters.expansionRate)
-            + this.state.lightDistances[this.state.lightDistances.length - 1];
+        let newDistanceBetween = me.state.distanceTravelledBodies + rate;
 
         if (me.state.isPlaying) {
+            this.updateDataSets(this.state.lightTravelledDistances, rate);
+            this.updateDataSets(this.state.targetDistances, rate);
+            this.updateDataSets(this.state.lightDistances, -rate);
+
             me.setState(({
                 distanceTravelledLight: newLightDist,
                 distanceTravelledBodies: newDistanceBetween,
                 simulationStarted: true,
-
-                lightValuesSet: me.state.lightValuesSet.add(newDistanceBetween),
-                lightTravelledDistances: Array.from(me.state.lightValuesSet),
-
-                targetDistancesSet: me.state.targetDistancesSet.add(newTargetDistanceValue),
-                targetDistances: Array.from(me.state.targetDistancesSet),
-
-                lightDistancesSet: me.state.lightDistancesSet.add(newLightDistance),
-                lightDistances: Array.from(me.state.lightDistancesSet)
             }));
         }
 
         this.raf = requestAnimationFrame(this.animate.bind(this));
+    }
+
+    updateDataSets(dataSet, progressionRate) {
+
+        console.log('this is an array', dataSet, 'lightDistances', this.state.lightTravelledDistances);
+        let possibleValue = progressionRate + dataSet[dataSet.length - 1];
+        if (!dataSet.includes(possibleValue)) {
+            this.setState({
+                dataSet: dataSet.push(possibleValue)
+            });
+        }
     }
 
     onStartClick() {
@@ -159,16 +161,6 @@ class CosmologicalRedshiftSim extends React.Component {
     onResetClick(e) {
         e.preventDefault();
         this.stopAnimation();
-
-        this.state.lightValuesSet.clear();
-        this.state.lightValuesSet.add(0);
-
-        this.state.targetDistancesSet.clear();
-        this.state.targetDistancesSet.add(175);
-
-        this.state.lightDistancesSet.clear();
-        this.state.lightDistancesSet.add(175);
-
         this.setState(this.initialState);
     }
 }

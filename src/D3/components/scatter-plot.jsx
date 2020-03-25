@@ -38,6 +38,7 @@ export default (props) => {
     const lineData = props.data.map(d => {return {"y": d}; });
     const lineGen = lineGenerator(scales.xScale, scales.yScale);
     return <svg width={props.width} height={props.height}>
+
         <DataCircles {...props} {...scales} />
         <DataCircles
             data={props.targetDistances}
@@ -45,6 +46,7 @@ export default (props) => {
         <DataCircles
             data={props.lightDistances}
             {...scales} />
+
         <XYAxis {...props} {...scales} />
         <Line
             data={lineData}
