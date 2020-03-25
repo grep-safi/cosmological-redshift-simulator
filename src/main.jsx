@@ -15,7 +15,10 @@ class CosmologicalRedshiftSim extends React.Component {
             },
 
             lightValuesSet: new Set(),
-            lightValuesArray: [0],
+            lightTravelledDistances: [0],
+
+            targetDistancesSet: new Set(),
+            targetDistances: [0],
 
             animationRate: 1.5,
             startBtnText: 'play animation',
@@ -29,7 +32,10 @@ class CosmologicalRedshiftSim extends React.Component {
 
 
         this.state = this.initialState;
+
+        // Initializing the sets with their initial data values
         this.state.lightValuesSet.add(0);
+        this.state.targetDistancesSet.add(this.state.parameters.initialSeparationDistance);
 
         this.raf = null;
 
@@ -71,7 +77,8 @@ class CosmologicalRedshiftSim extends React.Component {
 
             <div className="box">
                 <Chart
-                    lightValues={this.state.lightValuesArray}
+                    lightValues={this.state.lightTravelledDistances}
+                    targetDistances={this.state.targetDistances}
                 />
             </div>
         </React.Fragment>;
@@ -96,15 +103,22 @@ class CosmologicalRedshiftSim extends React.Component {
         let speedOfLight = 2;
 
         let newLightDist = me.state.distanceTravelledLight + speedOfLight;
+
         let newDistanceBetween = me.state.distanceTravelledBodies + (0.05 * me.state.parameters.expansionRate);
+        let newTargetDistanceValue = me.state.parameters.initialSeparationDistance
+            + (0.05 * me.state.parameters.expansionRate);
 
         if (me.state.isPlaying) {
             me.setState(({
                 distanceTravelledLight: newLightDist,
                 distanceTravelledBodies: newDistanceBetween,
                 simulationStarted: true,
+
                 lightValuesSet: me.state.lightValuesSet.add(newDistanceBetween),
-                lightValuesArray: Array.from(me.state.lightValuesSet)
+                lightTravelledDistances: Array.from(me.state.lightValuesSet),
+
+                targetDistancesSet: me.state.targetDistancesSet.add(newTargetDistanceValue),
+                targetDistances: Array.from(me.state.targetDistancesSet)
             }));
         }
 

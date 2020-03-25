@@ -18,6 +18,7 @@ export default class Chart extends React.Component{
                 <h1>Graph</h1>
                 <LineGraph
                     data={this.props.lightValues}
+                    targetDistances={this.props.targetDistances}
                     {...styles}
                 />
             </div>
