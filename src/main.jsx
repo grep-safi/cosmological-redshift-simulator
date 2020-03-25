@@ -20,6 +20,9 @@ class CosmologicalRedshiftSim extends React.Component {
             targetDistancesSet: new Set(),
             targetDistances: [175],
 
+            lightDistancesSet: new Set(),
+            lightDistances: [175],
+
             animationRate: 1.5,
             startBtnText: 'play animation',
             isPlaying: false,
@@ -36,6 +39,7 @@ class CosmologicalRedshiftSim extends React.Component {
         // Initializing the sets with their initial data values
         this.state.lightValuesSet.add(0);
         this.state.targetDistancesSet.add(this.state.parameters.initialSeparationDistance);
+        this.state.lightDistancesSet.add(this.state.parameters.initialSeparationDistance);
 
         this.raf = null;
 
@@ -79,6 +83,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 <Chart
                     lightValues={this.state.lightTravelledDistances}
                     targetDistances={this.state.targetDistances}
+                    lightDistances={this.state.lightDistances}
                 />
             </div>
         </React.Fragment>;
@@ -108,6 +113,9 @@ class CosmologicalRedshiftSim extends React.Component {
         let newTargetDistanceValue = (0.05 * me.state.parameters.expansionRate)
             + this.state.targetDistances[this.state.targetDistances.length - 1];
 
+        let newLightDistance = -(0.05 * me.state.parameters.expansionRate)
+            + this.state.lightDistances[this.state.lightDistances.length - 1];
+
         if (me.state.isPlaying) {
             me.setState(({
                 distanceTravelledLight: newLightDist,
@@ -118,7 +126,10 @@ class CosmologicalRedshiftSim extends React.Component {
                 lightTravelledDistances: Array.from(me.state.lightValuesSet),
 
                 targetDistancesSet: me.state.targetDistancesSet.add(newTargetDistanceValue),
-                targetDistances: Array.from(me.state.targetDistancesSet)
+                targetDistances: Array.from(me.state.targetDistancesSet),
+
+                lightDistancesSet: me.state.lightDistancesSet.add(newLightDistance),
+                lightDistances: Array.from(me.state.lightDistancesSet)
             }));
         }
 
@@ -148,11 +159,15 @@ class CosmologicalRedshiftSim extends React.Component {
     onResetClick(e) {
         e.preventDefault();
         this.stopAnimation();
+
         this.state.lightValuesSet.clear();
         this.state.lightValuesSet.add(0);
 
         this.state.targetDistancesSet.clear();
         this.state.targetDistancesSet.add(175);
+
+        this.state.lightDistancesSet.clear();
+        this.state.lightDistancesSet.add(175);
 
         this.setState(this.initialState);
     }
