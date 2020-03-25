@@ -14,13 +14,8 @@ class CosmologicalRedshiftSim extends React.Component {
                 expansionRate: 10,
             },
 
-            lightValuesSet: new Set(),
             lightTravelledDistances: [0],
-
-            targetDistancesSet: new Set(),
             targetDistances: [175],
-
-            lightDistancesSet: new Set(),
             lightDistances: [175],
 
             animationRate: 1.5,
@@ -35,12 +30,6 @@ class CosmologicalRedshiftSim extends React.Component {
 
 
         this.state = this.initialState;
-
-        // Initializing the sets with their initial data values
-        this.state.lightValuesSet.add(0);
-        this.state.targetDistancesSet.add(this.state.parameters.initialSeparationDistance);
-        this.state.lightDistancesSet.add(this.state.parameters.initialSeparationDistance);
-
         this.raf = null;
 
         this.stopAnimation = this.stopAnimation.bind(this);
@@ -112,6 +101,7 @@ class CosmologicalRedshiftSim extends React.Component {
 
         let newDistanceBetween = me.state.distanceTravelledBodies + rate;
 
+        console.log('part 2 iive reset so what the fuck is going on here', this.state.lightTravelledDistances);
         if (me.state.isPlaying) {
             this.updateDataSets(this.state.lightTravelledDistances, rate);
             this.updateDataSets(this.state.targetDistances, rate);
@@ -128,8 +118,7 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     updateDataSets(dataSet, progressionRate) {
-
-        console.log('this is an array', dataSet, 'lightDistances', this.state.lightTravelledDistances);
+        console.log('pratsy 3 iive reset so what the fuck is going on here', this.state.lightTravelledDistances);
         let possibleValue = progressionRate + dataSet[dataSet.length - 1];
         if (!dataSet.includes(possibleValue)) {
             this.setState({
@@ -162,6 +151,12 @@ class CosmologicalRedshiftSim extends React.Component {
         e.preventDefault();
         this.stopAnimation();
         this.setState(this.initialState);
+
+        this.setState({
+            lightTravelledDistances: [0],
+            targetDistances:  [175],
+            lightDistances: [175]
+        });
     }
 }
 
