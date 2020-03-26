@@ -174,6 +174,12 @@ class CosmologicalRedshiftSim extends React.Component {
         }
 
         let index = this.state.index;
+
+        console.log(`targetDistances last val --> ${this.state.targetDistances[this.state.targetDistances.length - 1]} 
+            index --> ${index} 
+            newest value --> ${this.state.completeTargetDistances[index]}
+            array length --> ${this.state.targetDistances.length}}`);
+
         this.state.targetDistances.push(this.state.completeTargetDistances[index]);
         this.state.lightDistances.push(this.state.completeLightDistances[index]);
         this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);

@@ -255,8 +255,13 @@ export default class Redshift extends React.Component {
     }
 
     shrinkBackground(scaling) {
-        this.bg.scale.x = (1 - (scaling / (scaling + 500)));
-        this.bg.position.x += 0.6;
+        this.bg.scale.x *= 0.999;
+        this.bg.position.x *= 0.999;
+
+        this.us.width *= 0.999;
+        this.us.height *= 0.999;
+        this.galaxy.width *= 0.999;
+        this.galaxy.height *= 0.999;
     }
 
     updateTextValues() {

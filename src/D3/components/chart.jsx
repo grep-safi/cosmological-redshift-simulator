@@ -14,6 +14,7 @@ export default class Chart extends React.Component{
 
     render() {
         // console.log(`Light vals: ${this.props.lightValues}, targetDistances: ${this.props.targetDistances}, lightDistances: ${this.props.lightDistances}`);
+        // console.log(`Target dist: `);
         return (
             <div>
                 <h1>Graph</h1>
