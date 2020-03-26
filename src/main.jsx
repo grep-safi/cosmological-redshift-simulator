@@ -5,24 +5,24 @@ import NavBar from "./UserControls/NavBar";
 import Parameters from "./UserControls/Parameters";
 import Chart from "./D3/components/chart.jsx";
 
-const SCALING_FACTOR = 350;
-
-const scaleToDistance = (pixel)    => pixel / SCALING_FACTOR;
-const scaleToPixel    = (distance) => distance * SCALING_FACTOR;
-
 class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
         super(props);
         this.initialState = {
             parameters: {
                 initialSeparationDistance: 5,
-                expansionRate: 1.0,
+                expansionRate: 1,
             },
 
+            times: [0],
             targetDistances: [5],
             lightDistances: [5],
             lightTravelledDistances: [0],
-            times: [0],
+
+            completeTimes: [0],
+            completeTargetDistances: [5],
+            completeLightDistances: [5],
+            completeLightTravelledDistances: [0],
 
             animationRate: 1.5,
             startBtnText: 'play animation',
@@ -32,6 +32,9 @@ class CosmologicalRedshiftSim extends React.Component {
 
             distanceTravelledLight: 0,
             distanceBetweenBodies: 50,
+
+            index: 0,
+            maxIndex: 0,
         };
 
 
@@ -85,6 +88,53 @@ class CosmologicalRedshiftSim extends React.Component {
         </React.Fragment>;
     }
 
+    componentDidMount() {
+        this.calculateData();
+    }
+
+    calculateData() {
+        let dt = 0.001;
+        let expansion_rate = 0.1;
+        let current_time = 0.0;
+
+        let initial_separation = 5;
+        let current_separation = initial_separation;
+        let light_travel_distance = 0.0;
+        let distance_to_light = initial_separation;
+
+        let timeLines = [0];
+        let target_distances = [initial_separation];
+        let light_distances = [initial_separation];
+        let light_traveled_distances = [0.0];
+
+        let maxSimIndex = 0;
+
+        while ((distance_to_light > 0)) {
+            current_separation += current_separation * expansion_rate*dt;
+            distance_to_light += distance_to_light * expansion_rate*dt;
+
+            distance_to_light -= dt;
+            light_travel_distance = light_travel_distance + dt;
+
+            current_time += dt;
+
+            timeLines.push(current_time);
+            target_distances.push(current_separation);
+            light_distances.push(distance_to_light);
+            light_traveled_distances.push(light_travel_distance);
+
+            maxSimIndex += 1;
+        }
+
+        this.setState({
+            completeTimes: timeLines,
+            completeTargetDistances: target_distances,
+            completeLightDistances: light_distances,
+            completeLightTravelledDistances: light_traveled_distances,
+            maxIndex: maxSimIndex,
+        })
+    }
+
     handleNewParameters(newParams) {
         this.setState({ parameters: newParams });
 
@@ -108,51 +158,26 @@ class CosmologicalRedshiftSim extends React.Component {
             return;
         }
 
-        // console.log(`Be 50: ${currentSeparation}`);
-        let tD = this.state.targetDistances[this.state.targetDistances.length - 1];
-        let lD = this.state.lightDistances[this.state.lightDistances.length - 1];
-        let lTD = this.state.lightTravelledDistances[this.state.lightTravelledDistances.length - 1];
-        let time = this.state.times[this.state.times.length - 1];
-        console.log(`target_distances: ${tD}, lightDist: ${lD}, light travelled: ${lTD}, time: ${time}`);
-
-        let dt = 0.001;
-        let expansion = 0.01 / 1e9;
-        let ratePerYear = (expansion / 1e8);
-
-        let currentSeparation = this.state.targetDistances[this.state.targetDistances.length - 1];
-        console.log(`yeet ${ratePerYear*dt} ${currentSeparation * ratePerYear} ${currentSeparation * ratePerYear * dt}
-        ${currentSeparation + currentSeparation * ratePerYear * dt}`);
-
-        // let currentSeparation = this.state.targetDistances[this.state.targetDistances.length - 1];
-        currentSeparation = currentSeparation + currentSeparation * ratePerYear * dt;
-
-        let distToLight = this.state.lightDistances[this.state.lightDistances.length - 1];
-        distToLight = distToLight + distToLight * ratePerYear * dt;
-        distToLight = distToLight - dt;
-
-        let lightTravel = this.state.lightTravelledDistances[this.state.lightDistances.length - 1];
-        lightTravel = lightTravel + dt;
-
-        let currentTime = this.state.times[this.state.times.length - 1];
-        currentTime = currentTime + dt;
-
-        // Update array values
-        this.state.times.push(currentTime);
-        this.state.targetDistances.push(currentSeparation);
-        this.state.lightDistances.push(distToLight);
-        this.state.lightTravelledDistances.push(lightTravel);
+        let index = this.state.index;
+        this.state.targetDistances.push(this.state.completeTargetDistances[index]);
+        this.state.lightDistances.push(this.state.completeLightDistances[index]);
+        this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);
+        this.state.times.push(this.state.completeTimes[index]);
 
         if (this.state.isPlaying) {
             this.setState({
-                distanceTravelledLight: lightTravel,
-                distanceBetweenBodies: currentSeparation,
+                // distanceTravelledLight: lightTravel,
+                // distanceBetweenBodies: currentSeparation,
                 simulationStarted: true,
                 targetDistances: this.state.targetDistances,
                 lightDistances: this.state.lightDistances,
                 lightTravelledDistances: this.state.lightTravelledDistances,
                 times: this.state.times,
+                index: this.state.index + 20,
+                simulationEnded: index >= this.state.maxIndex
             });
         }
+        console.log(`its oveer now: ${index >= this.state.maxIndex}`);
 
         this.raf = requestAnimationFrame(this.animate.bind(this));
     }
@@ -194,8 +219,8 @@ class CosmologicalRedshiftSim extends React.Component {
 
         this.setState({
             lightTravelledDistances: [0],
-            targetDistances:  [50],
-            lightDistances: [50],
+            targetDistances:  [5],
+            lightDistances: [5],
             times: [0]
         });
     }

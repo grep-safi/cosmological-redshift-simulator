@@ -5,10 +5,10 @@ import XYAxis       from './x-y-axis';
 import { curveMonotoneX, max, scaleLinear, line } from 'd3/dist/d3';
 
 // Returns the largest X coordinate from the data set
-const xMax = (data) => max(data) + 1;
+const xMax = (data) => max(data);
 
 // Returns the largest Y coordinate from the data set
-const yMax = (data) => max(data) + 1;
+const yMax = (data) => max(data);
 
 // Returns a function that "scales" X coordinates from the data to fit the chart
 const xScale = (props) => {
