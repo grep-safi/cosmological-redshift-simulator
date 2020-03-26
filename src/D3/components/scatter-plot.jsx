@@ -2,7 +2,7 @@ import React from 'react';
 // import DataCircles  from './data-circles';
 import Line  from './line';
 import XYAxis       from './x-y-axis';
-import { max, scaleLinear, line } from 'd3/dist/d3';
+import { curveMonotoneX, max, scaleLinear, line } from 'd3/dist/d3';
 
 // Returns the largest X coordinate from the data set
 const xMax = (data) => data.length;
@@ -30,7 +30,8 @@ const yScale = (props) => {
 const lineGenerator = (xScaleLine, yScaleLine) => {
     return line()
         .x((d, i) => xScaleLine(i))
-        .y(d => yScaleLine(d.y));
+        .y(d => yScaleLine(d.y))
+        .curve(curveMonotoneX)
 };
 
 export default (props) => {
