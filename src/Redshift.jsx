@@ -141,7 +141,7 @@ export default class Redshift extends React.Component {
         this.directLine.lineStyle(2, 0xfcff4d);
 
         // Initializes the start point of the line
-        console.log(`init separaton: ${(initialSeparation)} `);
+        // console.log(`init separaton: ${(initialSeparation)} `);
         let lineStart = CENTER_X - initialSeparation;
         this.directLine.moveTo(lineStart, CENTER_Y - 7);
 
@@ -241,9 +241,19 @@ export default class Redshift extends React.Component {
 
     updateBodiesAnimation() {
         if (!this.lightReached) {
-            // The % (modulo) is for when the bodies go outside the canvas range
-            let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies / 2) % (2 * CENTER_X - 75);
-            // console.log(`yeah, im the culprit ${distanceFromCenter} dist bw ${this.props.distanceBetweenBodies}`);
+            let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies / 2);
+            if (distanceFromCenter > CENTER_X - 75) {
+                // distanceFromCenter %= (CENTER_X - 75) + scaleToPixel((this.props.params.initialSeparationDistance) / 2) + 30;
+                // distanceFromCenter -= scaleToPixel((this.props.params.initialSeparationDistance) / 2) + 30;
+                // distanceFromCenter %= (CENTER_X - 75);
+                // distanceFromCenter %= scaleToPixel(this.props.params.initialSeparationDistance);
+                // distanceFromCenter += scaleToPixel((this.props.params.initialSeparationDistance) / 2) + 30;
+                // let mod = distanceFromCenter % (CENTER_X - 75);
+                // let temp = mod / (CENTER_X - 75) * (CENTER_X - 75 - scaleToPixel(this.props.params.initialSeparationDistance));
+                // temp += scaleToPixel(this.props.params.initialSeparationDistance);
+                // distanceFromCenter = temp;
+            }
+            console.log(`yeah, im the culprit ${distanceFromCenter} dist bw ${this.props.distanceBetweenBodies / 2}`);
             this.us.x = CENTER_X + distanceFromCenter;
             this.galaxy.x = CENTER_X - distanceFromCenter;
         }
