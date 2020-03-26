@@ -135,12 +135,13 @@ export default class Redshift extends React.Component {
     }
 
     updateLightLine() {
+        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
         // Prepares line for redrawing on canvas
         this.directLine.clear();
         this.directLine.lineStyle(2, 0xfcff4d);
 
         // Initializes the start point of the line
-        let lineStart = CENTER_X - this.props.params.initialSeparationDistance;
+        let lineStart = CENTER_X - initialSeparation;
         this.directLine.moveTo(lineStart, CENTER_Y - 7);
 
         // If light has reached us, then don't let the line go any further
@@ -167,8 +168,9 @@ export default class Redshift extends React.Component {
     }
 
     updateInitialSeparationLine(constant) {
+        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
         this.updateLine(
-            CENTER_X + constant * this.props.params.initialSeparationDistance,
+            CENTER_X + constant * initialSeparation,
             CENTER_X + constant * 60,
             this.us.y + 35,
             this.us.y + 35
@@ -185,9 +187,10 @@ export default class Redshift extends React.Component {
     }
 
     updateInitialVerticals(constant) {
+        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
         this.updateLine(
-            CENTER_X + constant * this.props.params.initialSeparationDistance,
-            CENTER_X + constant * this.props.params.initialSeparationDistance,
+            CENTER_X + constant * initialSeparation,
+            CENTER_X + constant * initialSeparation,
             this.us.y + 15,
             this.us.y + 35
         );
@@ -226,9 +229,10 @@ export default class Redshift extends React.Component {
     }
 
     updateBodiesAnimation() {
+        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
         if (!this.lightReached) {
-            this.us.x = CENTER_X + this.props.distanceTravelledBodies + this.props.params.initialSeparationDistance;
-            this.galaxy.x = CENTER_X - this.props.distanceTravelledBodies - this.props.params.initialSeparationDistance;
+            this.us.x = CENTER_X + this.props.distanceTravelledBodies + initialSeparation;
+            this.galaxy.x = CENTER_X - this.props.distanceTravelledBodies - initialSeparation;
         }
     }
 
@@ -236,7 +240,7 @@ export default class Redshift extends React.Component {
         let initialSeparation = this.props.params.initialSeparationDistance;
         let separationDist = (this.us.x - this.galaxy.x) / 2;
 
-        this.initialSeparationValue.text = `${scaleToDistance(initialSeparation).toFixed(2).toString()} billion light years`;
+        this.initialSeparationValue.text = `${initialSeparation.toFixed(2).toString()} billion light years`;
         this.separationValue.text = `${scaleToDistance(separationDist).toFixed(2).toString()} billion light years`;
 
         this.galaxyName.x = this.galaxy.x;
