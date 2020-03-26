@@ -21,8 +21,8 @@ export default class Parameters extends React.Component {
                     <SingleVariableControl
                         name={"initialSeparationDistance"}
                         displayName={"Initial Separation Distance: "}
-                        min={0.30}
-                        max={0.70}
+                        min={10}
+                        max={100}
                         step={0.01}
                         decimals={2}
                         value={this.props.params.initialSeparationDistance}
@@ -33,7 +33,7 @@ export default class Parameters extends React.Component {
                         name={"expansionRate"}
                         displayName={"Universe Expansion Rate: "}
                         min={0.00}
-                        max={20.00}
+                        max={2.00}
                         step={0.01}
                         decimals={1}
                         value={this.props.params.expansionRate}

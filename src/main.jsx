@@ -15,13 +15,14 @@ class CosmologicalRedshiftSim extends React.Component {
         super(props);
         this.initialState = {
             parameters: {
-                initialSeparationDistance: 0.5,
-                expansionRate: 10,
+                initialSeparationDistance: 50,
+                expansionRate: 1.0,
             },
 
+            targetDistances: [50],
+            lightDistances: [50],
             lightTravelledDistances: [0],
-            targetDistances: [0.5],
-            lightDistances: [0.5],
+            times: [0],
 
             animationRate: 1.5,
             startBtnText: 'play animation',
@@ -30,7 +31,7 @@ class CosmologicalRedshiftSim extends React.Component {
             simulationEnded: false,
 
             distanceTravelledLight: 0,
-            distanceBetweenBodies: 0.5,
+            distanceBetweenBodies: 50,
         };
 
 
@@ -78,6 +79,7 @@ class CosmologicalRedshiftSim extends React.Component {
                     lightValues={this.state.lightTravelledDistances}
                     targetDistances={this.state.targetDistances}
                     lightDistances={this.state.lightDistances}
+                    times={this.state.times}
                 />
             </div>
         </React.Fragment>;
@@ -86,10 +88,10 @@ class CosmologicalRedshiftSim extends React.Component {
     handleNewParameters(newParams) {
         this.setState({ parameters: newParams });
 
-        if (this.state.simulationStarted) {
+        if (!this.state.simulationStarted) {
             this.setState({
                 targetDistances: [newParams.initialSeparationDistance],
-                lightDistances: [newParams.initialSeparationDistance]
+                lightDistances: [newParams.initialSeparationDistance],
             })
         }
     }
@@ -105,40 +107,44 @@ class CosmologicalRedshiftSim extends React.Component {
             return;
         }
 
-        const me = this;
-        let speedOfLight = 2;
+        let dt = 0.01;
+        let currentSeparation = this.state.targetDistances[this.state.targetDistances.length - 1];
+        let ratePerYear = this.state.parameters.expansionRate / 100.0;
+        currentSeparation = currentSeparation + currentSeparation * ratePerYear * dt;
 
-        let newLightDist = me.state.distanceTravelledLight + speedOfLight;
-        let rate = (0.05 * me.state.parameters.expansionRate);
+        let distToLight = this.state.lightDistances[this.state.lightDistances.length - 1];
+        distToLight = distToLight + distToLight * ratePerYear * dt;
+        distToLight = distToLight - dt;
 
-        let temp = this.state.distanceBetweenBodies + rate;
+        let lightTravel = this.state.lightTravelledDistances[this.state.lightDistances.length - 1];
+        lightTravel = lightTravel + dt;
 
-        if (me.state.isPlaying) {
-            // This should be light travelled distance
-            this.updateDataSets(this.state.lightTravelledDistances, rate);
-            // This should be distance between the bodies
-            this.updateDataSets(this.state.targetDistances, rate);
-            // This should be difference between light position and body position
-            this.updateDataSets(this.state.lightDistances, -rate);
+        let currentTime = this.state.times[this.state.times.length - 1] + dt;
 
-            me.setState(({
-                distanceTravelledLight: newLightDist,
+        if (this.state.isPlaying) {
+            this.setState(({
+                distanceTravelledLight: lightTravel,
+                distanceBetweenBodies: currentSeparation,
                 simulationStarted: true,
+                targetDistances: this.state.targetDistances.push(currentSeparation),
+                lightDistances: this.state.lightDistances.push(distToLight),
+                lightTravelledDistances: this.state.lightTravelledDistances.push(lightTravel),
+                times: this.state.times.push(currentTime),
             }));
         }
 
         this.raf = requestAnimationFrame(this.animate.bind(this));
     }
 
-    updateDataSets(dataSet, progressionRate) {
-        let possibleValue = progressionRate + dataSet[dataSet.length - 1];
-        possibleValue = Math.round(possibleValue * 100000) / 100000;
-        if (!dataSet.includes(possibleValue)) {
-            this.setState({
-                dataSet: dataSet.push(possibleValue)
-            });
-        }
-    }
+    // updateDataSets(dataSet, progressionRate) {
+    //     let possibleValue = progressionRate + dataSet[dataSet.length - 1];
+    //     possibleValue = Math.round(possibleValue * 100000) / 100000;
+    //     if (!dataSet.includes(possibleValue)) {
+    //         this.setState({
+    //             dataSet: dataSet.push(possibleValue)
+    //         });
+    //     }
+    // }
 
     onStartClick() {
         if (!this.state.isPlaying) {
@@ -167,8 +173,9 @@ class CosmologicalRedshiftSim extends React.Component {
 
         this.setState({
             lightTravelledDistances: [0],
-            targetDistances:  [0.5],
-            lightDistances: [0.5]
+            targetDistances:  [50],
+            lightDistances: [50],
+            times: [0]
         });
     }
 }
