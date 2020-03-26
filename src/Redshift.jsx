@@ -144,10 +144,9 @@ export default class Redshift extends React.Component {
         let lineStart = CENTER_X - initialSeparation;
         this.directLine.moveTo(lineStart, CENTER_Y - 7);
 
-        // console.log(`i should get 500 back ${scaleToPixel(scaleToDistance(500))}`);
         // If light has reached us, then don't let the line go any further
-        let distanceMoved = lineStart + scaleToPixel(this.props.distanceTravelledLight);
-        // let distanceMoved = lineStart + this.props.distanceTravelledLight;
+        // let distanceMoved = lineStart + scaleToPixel(this.props.distanceTravelledLight);
+        let distanceMoved = lineStart + this.props.distanceTravelledLight;
         if (distanceMoved >= this.us.x) {
             distanceMoved = this.us.x;
             this.lightReached = true;
@@ -233,7 +232,8 @@ export default class Redshift extends React.Component {
 
     updateBodiesAnimation() {
         let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
-        let distanceBodies = scaleToPixel(this.props.distanceTravelledBodies);
+        // let distanceBodies = scaleToPixel(this.props.distanceTravelledBodies);
+        let distanceBodies = this.props.distanceTravelledBodies;
         if (!this.lightReached) {
             this.us.x = CENTER_X + distanceBodies + initialSeparation;
             this.galaxy.x = CENTER_X - distanceBodies - initialSeparation;

@@ -32,10 +32,10 @@ export default class Parameters extends React.Component {
                     <SingleVariableControl
                         name={"expansionRate"}
                         displayName={"Universe Expansion Rate: "}
-                        min={0.005}
-                        max={0.015}
-                        step={0.0001}
-                        decimals={4}
+                        min={3.00}
+                        max={20.00}
+                        step={0.01}
+                        decimals={1}
                         value={this.props.params.expansionRate}
                         onChange={this.handleSingleVariableChange}
                     />
