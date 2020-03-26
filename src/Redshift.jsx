@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const CENTER_X = 460;
 const CENTER_Y = 106;
 
-const SCALING_FACTOR = 350;
+const SCALING_FACTOR = 3.5;
 
 const scaleToDistance = (pixel)    => pixel / SCALING_FACTOR;
 const scaleToPixel    = (distance) => distance * SCALING_FACTOR;
@@ -236,8 +236,6 @@ export default class Redshift extends React.Component {
         // let distanceBodies = this.props.distanceTravelledBodies;
 
         if (!this.lightReached) {
-            // this.us.x = CENTER_X + distanceBodies + initialSeparation;
-            // this.galaxy.x = CENTER_X - distanceBodies - initialSeparation;
             // The % (modulo) is for when the bodies go outside the canvas range
             let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies / 2) % (2 * CENTER_X - 75);
             this.us.x = CENTER_X + distanceFromCenter;
@@ -250,7 +248,7 @@ export default class Redshift extends React.Component {
         let separationDist = this.props.distanceBetweenBodies;
 
         this.initialSeparationValue.text = `${initialSeparation.toFixed(2).toString()} billion light years`;
-        this.separationValue.text = `${scaleToDistance(separationDist).toFixed(2).toString()} billion light years`;
+        this.separationValue.text = `${separationDist.toFixed(2).toString()} billion light years`;
 
         this.galaxyName.x = this.galaxy.x;
         this.galaxyName.y = this.galaxy.y - 45;
@@ -277,7 +275,6 @@ Redshift.propTypes = {
         expansionRate: PropTypes.number.isRequired,
     }).isRequired,
     distanceTravelledLight: PropTypes.number.isRequired,
-    distanceTravelledBodies: PropTypes.number.isRequired,
     distanceBetweenBodies: PropTypes.number.isRequired,
     isPlaying: PropTypes.bool.isRequired
 };
