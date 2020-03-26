@@ -8,4 +8,5 @@ DONE 3. Reformat the axis of the D3 Graph so they don't touch the numbers
 6. Add legend to the D3 chart labelling what each line is
 7. Attach image of photon (little squiggly line) to end of light beam
 8. Add animation rate parameter
+9. Add documentation
 
