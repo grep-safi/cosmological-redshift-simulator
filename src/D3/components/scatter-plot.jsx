@@ -5,7 +5,7 @@ import XYAxis       from './x-y-axis';
 import { curveMonotoneX, max, scaleLinear, line } from 'd3/dist/d3';
 
 // Returns the largest X coordinate from the data set
-const xMax = (data) => data.length;
+const xMax = (data) => max(data) + 1;
 
 // Returns the largest Y coordinate from the data set
 const yMax = (data) => max(data) + 1;
@@ -13,7 +13,7 @@ const yMax = (data) => max(data) + 1;
 // Returns a function that "scales" X coordinates from the data to fit the chart
 const xScale = (props) => {
     return scaleLinear()
-        .domain([0, xMax(props.data)])
+        .domain([0, xMax(props.times)])
         // .domain([0, 280])
         .range([props.padding, props.width - props.padding]);
         // .range([props.padding, props.width - props.padding * 2]);
@@ -29,32 +29,24 @@ const yScale = (props) => {
 
 const lineGenerator = (xScaleLine, yScaleLine) => {
     return line()
-        .x((d, i) => xScaleLine(i))
+        .x((d, i) => xScaleLine(d.t))
         .y(d => yScaleLine(d.y))
         .curve(curveMonotoneX)
 };
 
 export default (props) => {
     const scales = { xScale: xScale(props), yScale: yScale(props) };
+    let timeVals = props.times;
 
-    const lineDataLightVal = props.data.map(d => {return {"y": d}; });
-    const lineDataTargetDist = props.targetDistances.map(d => {return {"y": d}; });
-    const lineDataLightDist = props.lightDistances.map(d => {return {"y": d}; });
+    const lineDataLightVal = props.lightValues.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
+    const lineDataTargetDist = props.targetDistances.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
+    const lineDataLightDist = props.lightDistances.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
 
     const lineGenLightVal = lineGenerator(scales.xScale, scales.yScale);
     const lineGenTargetDist = lineGenerator(scales.xScale, scales.yScale);
     const lineGenLightDist = lineGenerator(scales.xScale, scales.yScale);
     return <svg width={props.width} height={props.height}>
-        {/*<DataCircles {...props} {...scales} />*/}
-        {/*<DataCircles*/}
-        {/*    data={props.targetDistances}*/}
-        {/*    {...scales} />*/}
-        {/*<DataCircles*/}
-        {/*    data={props.lightDistances}*/}
-        {/*    {...scales} />*/}
-
-        <XYAxis {...props} {...scales} />
-
+       <XYAxis {...props} {...scales} />
         <Line
             data={lineDataLightVal}
             lineGenerator={lineGenLightVal}

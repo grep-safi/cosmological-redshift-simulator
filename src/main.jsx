@@ -15,12 +15,12 @@ class CosmologicalRedshiftSim extends React.Component {
         super(props);
         this.initialState = {
             parameters: {
-                initialSeparationDistance: 50,
+                initialSeparationDistance: 5,
                 expansionRate: 1.0,
             },
 
-            targetDistances: [50],
-            lightDistances: [50],
+            targetDistances: [5],
+            lightDistances: [5],
             lightTravelledDistances: [0],
             times: [0],
 
@@ -48,14 +48,14 @@ class CosmologicalRedshiftSim extends React.Component {
             />
 
             <div className="box">
-                <Redshift
-                    params={this.state.parameters}
-                    distanceTravelledLight={this.state.distanceTravelledLight}
-                    distanceBetweenBodies={this.state.distanceBetweenBodies}
-                    isPlaying={this.state.isPlaying}
-                    simulationStarted={this.state.simulationStarted}
-                    changeSimState={() => {this.changeSimState()} }
-                />
+                {/*<Redshift*/}
+                {/*    params={this.state.parameters}*/}
+                {/*    distanceTravelledLight={this.state.distanceTravelledLight}*/}
+                {/*    distanceBetweenBodies={this.state.distanceBetweenBodies}*/}
+                {/*    isPlaying={this.state.isPlaying}*/}
+                {/*    simulationStarted={this.state.simulationStarted}*/}
+                {/*    changeSimState={() => {this.changeSimState()} }*/}
+                {/*/>*/}
             </div>
 
             <div className="animationButton">
@@ -74,14 +74,14 @@ class CosmologicalRedshiftSim extends React.Component {
                 />
             </div>
 
-            {/*<div className="box">*/}
-            {/*    <Chart*/}
-            {/*        lightValues={this.state.lightTravelledDistances}*/}
-            {/*        targetDistances={this.state.targetDistances}*/}
-            {/*        lightDistances={this.state.lightDistances}*/}
-            {/*        times={this.state.times}*/}
-            {/*    />*/}
-            {/*</div>*/}
+            <div className="box">
+                <Chart
+                    lightValues={this.state.lightTravelledDistances}
+                    targetDistances={this.state.targetDistances}
+                    lightDistances={this.state.lightDistances}
+                    times={this.state.times}
+                />
+            </div>
         </React.Fragment>;
     }
 
@@ -108,9 +108,22 @@ class CosmologicalRedshiftSim extends React.Component {
             return;
         }
 
-        let dt = 0.50;
+        // console.log(`Be 50: ${currentSeparation}`);
+        let tD = this.state.targetDistances[this.state.targetDistances.length - 1];
+        let lD = this.state.lightDistances[this.state.lightDistances.length - 1];
+        let lTD = this.state.lightTravelledDistances[this.state.lightTravelledDistances.length - 1];
+        let time = this.state.times[this.state.times.length - 1];
+        console.log(`target_distances: ${tD}, lightDist: ${lD}, light travelled: ${lTD}, time: ${time}`);
+
+        let dt = 0.001;
+        let expansion = 0.01 / 1e9;
+        let ratePerYear = (expansion / 1e8);
+
         let currentSeparation = this.state.targetDistances[this.state.targetDistances.length - 1];
-        let ratePerYear = this.state.parameters.expansionRate / 100.0;
+        console.log(`yeet ${ratePerYear*dt} ${currentSeparation * ratePerYear} ${currentSeparation * ratePerYear * dt}
+        ${currentSeparation + currentSeparation * ratePerYear * dt}`);
+
+        // let currentSeparation = this.state.targetDistances[this.state.targetDistances.length - 1];
         currentSeparation = currentSeparation + currentSeparation * ratePerYear * dt;
 
         let distToLight = this.state.lightDistances[this.state.lightDistances.length - 1];
@@ -120,13 +133,14 @@ class CosmologicalRedshiftSim extends React.Component {
         let lightTravel = this.state.lightTravelledDistances[this.state.lightDistances.length - 1];
         lightTravel = lightTravel + dt;
 
-        let currentTime = this.state.times[this.state.times.length - 1] + dt;
+        let currentTime = this.state.times[this.state.times.length - 1];
+        currentTime = currentTime + dt;
 
         // Update array values
+        this.state.times.push(currentTime);
         this.state.targetDistances.push(currentSeparation);
         this.state.lightDistances.push(distToLight);
         this.state.lightTravelledDistances.push(lightTravel);
-        this.state.times.push(currentTime);
 
         if (this.state.isPlaying) {
             this.setState({
