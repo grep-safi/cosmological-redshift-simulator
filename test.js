@@ -2,7 +2,7 @@ let dt = 0.001;
 let expansion_rate = 0.1;
 let current_time = 0.0;
 
-let initial_separation = 5;
+let initial_separation = 9.9999999999999;
 let current_separation = initial_separation;
 let light_travel_distance = 0.0;
 let distance_to_light = initial_separation;
@@ -30,6 +30,8 @@ while ((distance_to_light > 0)) {
 
     n += 1;
 }
+
+console.log(`completed with ${n} iterations`);
 
 
 // let dt = 0.001;
