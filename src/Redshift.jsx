@@ -49,7 +49,8 @@ export default class Redshift extends React.Component {
 
         starryBackground.x -= 300;
         starryBackground.y -= 100;
-        stage.addChild(starryBackground);
+        this.bg = starryBackground;
+        stage.addChild(this.bg);
 
         me.us = me.drawBody('us', 'img/earth.svg', 20);
         me.galaxy = me.drawBody('galaxy', 'img/galaxy.png', 45);
@@ -241,22 +242,21 @@ export default class Redshift extends React.Component {
 
     updateBodiesAnimation() {
         if (!this.lightReached) {
+            let halfOfScreen = CENTER_X - 10;
             let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies / 2);
-            if (distanceFromCenter > CENTER_X - 75) {
-                // distanceFromCenter %= (CENTER_X - 75) + scaleToPixel((this.props.params.initialSeparationDistance) / 2) + 30;
-                // distanceFromCenter -= scaleToPixel((this.props.params.initialSeparationDistance) / 2) + 30;
-                // distanceFromCenter %= (CENTER_X - 75);
-                // distanceFromCenter %= scaleToPixel(this.props.params.initialSeparationDistance);
-                // distanceFromCenter += scaleToPixel((this.props.params.initialSeparationDistance) / 2) + 30;
-                // let mod = distanceFromCenter % (CENTER_X - 75);
-                // let temp = mod / (CENTER_X - 75) * (CENTER_X - 75 - scaleToPixel(this.props.params.initialSeparationDistance));
-                // temp += scaleToPixel(this.props.params.initialSeparationDistance);
-                // distanceFromCenter = temp;
+
+            if (distanceFromCenter > halfOfScreen - 20) {
+                this.shrinkBackground(distanceFromCenter);
+            } else {
+                this.us.x = CENTER_X + distanceFromCenter;
+                this.galaxy.x = CENTER_X - distanceFromCenter;
             }
-            console.log(`yeah, im the culprit ${distanceFromCenter} dist bw ${this.props.distanceBetweenBodies / 2}`);
-            this.us.x = CENTER_X + distanceFromCenter;
-            this.galaxy.x = CENTER_X - distanceFromCenter;
         }
+    }
+
+    shrinkBackground(scaling) {
+        this.bg.scale.x = (1 - (scaling / (scaling + 500)));
+        this.bg.position.x += 0.6;
     }
 
     updateTextValues() {

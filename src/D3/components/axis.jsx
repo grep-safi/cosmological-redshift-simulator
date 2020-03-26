@@ -39,7 +39,7 @@ export default class Axes extends Component {
             />
 
             <text
-                x="415"
+                x="440"
                 y="285"
                 dy=".8em"
                 fontSize=".9em"
