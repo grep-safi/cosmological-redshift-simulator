@@ -74,14 +74,14 @@ class CosmologicalRedshiftSim extends React.Component {
                 />
             </div>
 
-            <div className="box">
-                <Chart
-                    lightValues={this.state.lightTravelledDistances}
-                    targetDistances={this.state.targetDistances}
-                    lightDistances={this.state.lightDistances}
-                    times={this.state.times}
-                />
-            </div>
+            {/*<div className="box">*/}
+            {/*    <Chart*/}
+            {/*        lightValues={this.state.lightTravelledDistances}*/}
+            {/*        targetDistances={this.state.targetDistances}*/}
+            {/*        lightDistances={this.state.lightDistances}*/}
+            {/*        times={this.state.times}*/}
+            {/*    />*/}
+            {/*</div>*/}
         </React.Fragment>;
     }
 
@@ -92,6 +92,7 @@ class CosmologicalRedshiftSim extends React.Component {
             this.setState({
                 targetDistances: [newParams.initialSeparationDistance],
                 lightDistances: [newParams.initialSeparationDistance],
+                distanceBetweenBodies: newParams.initialSeparationDistance
             })
         }
     }
@@ -107,7 +108,7 @@ class CosmologicalRedshiftSim extends React.Component {
             return;
         }
 
-        let dt = 0.01;
+        let dt = 0.50;
         let currentSeparation = this.state.targetDistances[this.state.targetDistances.length - 1];
         let ratePerYear = this.state.parameters.expansionRate / 100.0;
         currentSeparation = currentSeparation + currentSeparation * ratePerYear * dt;
@@ -121,16 +122,22 @@ class CosmologicalRedshiftSim extends React.Component {
 
         let currentTime = this.state.times[this.state.times.length - 1] + dt;
 
+        // Update array values
+        this.state.targetDistances.push(currentSeparation);
+        this.state.lightDistances.push(distToLight);
+        this.state.lightTravelledDistances.push(lightTravel);
+        this.state.times.push(currentTime);
+
         if (this.state.isPlaying) {
-            this.setState(({
+            this.setState({
                 distanceTravelledLight: lightTravel,
                 distanceBetweenBodies: currentSeparation,
                 simulationStarted: true,
-                targetDistances: this.state.targetDistances.push(currentSeparation),
-                lightDistances: this.state.lightDistances.push(distToLight),
-                lightTravelledDistances: this.state.lightTravelledDistances.push(lightTravel),
-                times: this.state.times.push(currentTime),
-            }));
+                targetDistances: this.state.targetDistances,
+                lightDistances: this.state.lightDistances,
+                lightTravelledDistances: this.state.lightTravelledDistances,
+                times: this.state.times,
+            });
         }
 
         this.raf = requestAnimationFrame(this.animate.bind(this));

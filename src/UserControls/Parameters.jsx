@@ -21,7 +21,7 @@ export default class Parameters extends React.Component {
                     <SingleVariableControl
                         name={"initialSeparationDistance"}
                         displayName={"Initial Separation Distance: "}
-                        min={10}
+                        min={20}
                         max={100}
                         step={0.01}
                         decimals={2}
