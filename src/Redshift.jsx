@@ -6,8 +6,10 @@ import PropTypes from 'prop-types';
 const CENTER_X = 460;
 const CENTER_Y = 106;
 
-const scaleToDistance = (pixel)    => pixel / 1000;
-const scaleToPixel    = (distance) => distance * 1000;
+const SCALING_FACTOR = 350;
+
+const scaleToDistance = (pixel)    => pixel / SCALING_FACTOR;
+const scaleToPixel    = (distance) => distance * SCALING_FACTOR;
 
 export default class Redshift extends React.Component {
     constructor(props) {
@@ -84,12 +86,11 @@ export default class Redshift extends React.Component {
 
     drawText(name, x, y) {
         const bodyText = new PIXI.Text(name, {
-            fontFamily: 'Garamond',
+            fontFamily: 'Arial',
             fontSize: 14,
             fill: 0xe4d1a0, // butter
         });
 
-        // angleText.rotation = degToRad(-90);
         bodyText.resolution = 3;
         bodyText.anchor.set(0.5);
         bodyText.position.x = x;
@@ -235,8 +236,8 @@ export default class Redshift extends React.Component {
         let initialSeparation = this.props.params.initialSeparationDistance;
         let separationDist = (this.us.x - this.galaxy.x) / 2;
 
-        this.initialSeparationValue.text = initialSeparation.toFixed(0).toString();
-        this.separationValue.text = separationDist.toFixed(0).toString();
+        this.initialSeparationValue.text = `${scaleToDistance(initialSeparation).toFixed(2).toString()} billion light years`;
+        this.separationValue.text = `${scaleToDistance(separationDist).toFixed(2).toString()} billion light years`;
 
         this.galaxyName.x = this.galaxy.x;
         this.galaxyName.y = this.galaxy.y - 45;
