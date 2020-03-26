@@ -8,7 +8,7 @@ import { max, scaleLinear, line } from 'd3/dist/d3';
 const xMax = (data) => data.length;
 
 // Returns the largest Y coordinate from the data set
-const yMax = (data) => max(data) + 10;
+const yMax = (data) => max(data) + 1;
 
 // Returns a function that "scales" X coordinates from the data to fit the chart
 const xScale = (props) => {
@@ -22,7 +22,7 @@ const xScale = (props) => {
 // Returns a function that "scales" Y coordinates from the data to fit the chart
 const yScale = (props) => {
     return scaleLinear()
-        .domain([0, yMax(props.targetDistances) + 1])
+        .domain([0, yMax(props.targetDistances)])
         // .domain([0, 300])
         .range([props.height - props.padding + 10, props.padding - 20]);
 };
