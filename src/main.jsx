@@ -11,7 +11,7 @@ class CosmologicalRedshiftSim extends React.Component {
         this.initialState = {
             parameters: {
                 initialSeparationDistance: 5,
-                expansionRate: 1,
+                expansionRate: 0.1,
             },
 
             times: [0],
@@ -94,7 +94,7 @@ class CosmologicalRedshiftSim extends React.Component {
 
     calculateData() {
         let dt = 0.001;
-        let expansion_rate = 0.1;
+        let expansion_rate = this.state.parameters.expansionRate;
         let current_time = 0.0;
 
         let initial_separation = 5;
@@ -132,6 +132,11 @@ class CosmologicalRedshiftSim extends React.Component {
             completeLightDistances: light_distances,
             completeLightTravelledDistances: light_traveled_distances,
             maxIndex: maxSimIndex,
+
+            lightTravelledDistances: [0],
+            targetDistances:  [this.state.parameters.initialSeparationDistance],
+            lightDistances: [this.state.parameters.initialSeparationDistance],
+            times: [0]
         })
     }
 
@@ -140,8 +145,8 @@ class CosmologicalRedshiftSim extends React.Component {
 
         if (!this.state.simulationStarted) {
             this.setState({
-                targetDistances: [newParams.initialSeparationDistance],
-                lightDistances: [newParams.initialSeparationDistance],
+                completeTargetDistances: [newParams.initialSeparationDistance],
+                completeLightDistances: [newParams.initialSeparationDistance],
                 distanceBetweenBodies: newParams.initialSeparationDistance
             })
         }
@@ -174,7 +179,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 lightTravelledDistances: this.state.lightTravelledDistances,
                 times: this.state.times,
                 index: this.state.index + 20,
-                simulationEnded: index >= this.state.maxIndex
+                simulationEnded: index >= this.state.maxIndex - 21
             });
         }
         console.log(`its oveer now: ${index >= this.state.maxIndex}`);
@@ -194,6 +199,7 @@ class CosmologicalRedshiftSim extends React.Component {
 
     onStartClick() {
         if (!this.state.isPlaying) {
+            this.calculateData();
             this.raf = requestAnimationFrame(this.animate.bind(this));
             this.setState({
                 isPlaying: true,
@@ -216,13 +222,7 @@ class CosmologicalRedshiftSim extends React.Component {
         e.preventDefault();
         this.stopAnimation();
         this.setState(this.initialState);
-
-        this.setState({
-            lightTravelledDistances: [0],
-            targetDistances:  [5],
-            lightDistances: [5],
-            times: [0]
-        });
+        this.calculateData();
     }
 }
 
