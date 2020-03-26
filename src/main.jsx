@@ -109,7 +109,7 @@ class CosmologicalRedshiftSim extends React.Component {
 
         let maxSimIndex = 0;
 
-        while ((distance_to_light > 0)) {
+        while ((distance_to_light > 0) && maxSimIndex < 200000) {
             current_separation += current_separation * expansion_rate*dt;
             distance_to_light += distance_to_light * expansion_rate*dt;
 
