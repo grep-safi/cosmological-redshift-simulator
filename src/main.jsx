@@ -30,8 +30,8 @@ class CosmologicalRedshiftSim extends React.Component {
             simulationStarted: false,
             simulationEnded: false,
 
-            distanceTravelledLight: 0,
-            distanceBetweenBodies: 50,
+            distanceTravelledLight: 5,
+            distanceBetweenBodies: 5,
 
             index: 0,
             maxIndex: 0,
@@ -51,14 +51,14 @@ class CosmologicalRedshiftSim extends React.Component {
             />
 
             <div className="box">
-                {/*<Redshift*/}
-                {/*    params={this.state.parameters}*/}
-                {/*    distanceTravelledLight={this.state.distanceTravelledLight}*/}
-                {/*    distanceBetweenBodies={this.state.distanceBetweenBodies}*/}
-                {/*    isPlaying={this.state.isPlaying}*/}
-                {/*    simulationStarted={this.state.simulationStarted}*/}
-                {/*    changeSimState={() => {this.changeSimState()} }*/}
-                {/*/>*/}
+                <Redshift
+                    params={this.state.parameters}
+                    distanceTravelledLight={this.state.distanceTravelledLight}
+                    distanceBetweenBodies={this.state.distanceBetweenBodies}
+                    isPlaying={this.state.isPlaying}
+                    simulationStarted={this.state.simulationStarted}
+                    changeSimState={() => {this.changeSimState()} }
+                />
             </div>
 
             <div className="animationButton">
@@ -97,7 +97,7 @@ class CosmologicalRedshiftSim extends React.Component {
         let expansion_rate = this.state.parameters.expansionRate;
         let current_time = 0.0;
 
-        let initial_separation = 5;
+        let initial_separation = this.state.parameters.initialSeparationDistance;
         let current_separation = initial_separation;
         let light_travel_distance = 0.0;
         let distance_to_light = initial_separation;
@@ -125,6 +125,16 @@ class CosmologicalRedshiftSim extends React.Component {
 
             maxSimIndex += 1;
         }
+
+
+        console.log(`GREAT: light travelled distances first: ${light_traveled_distances[0]} 
+            last: ${light_traveled_distances[maxSimIndex - 1]}\``);
+
+        console.log(`GREAT: light distances (bw earth and photon) first: ${light_distances[0]}
+            last: ${light_distances[maxSimIndex - 1]}`);
+
+        console.log(`GREAT: targett distances first: ${target_distances[0]} 
+            last: ${target_distances[maxSimIndex - 1]}\``);
 
         this.setState({
             completeTimes: timeLines,
@@ -171,18 +181,20 @@ class CosmologicalRedshiftSim extends React.Component {
 
         if (this.state.isPlaying) {
             this.setState({
-                // distanceTravelledLight: lightTravel,
-                // distanceBetweenBodies: currentSeparation,
+                distanceTravelledLight: this.state.completeLightDistances[index],
+                distanceBetweenBodies: this.state.completeTargetDistances[index],
+
                 simulationStarted: true,
+
                 targetDistances: this.state.targetDistances,
                 lightDistances: this.state.lightDistances,
                 lightTravelledDistances: this.state.lightTravelledDistances,
                 times: this.state.times,
+
                 index: this.state.index + 20,
                 simulationEnded: index >= this.state.maxIndex - 21
             });
         }
-        console.log(`its oveer now: ${index >= this.state.maxIndex}`);
 
         this.raf = requestAnimationFrame(this.animate.bind(this));
     }

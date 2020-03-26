@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const CENTER_X = 460;
 const CENTER_Y = 106;
 
-const SCALING_FACTOR = 3;
+const SCALING_FACTOR = 50;
 
 const scaleToDistance = (pixel)    => pixel / SCALING_FACTOR;
 const scaleToPixel    = (distance) => distance * SCALING_FACTOR;
@@ -135,18 +135,26 @@ export default class Redshift extends React.Component {
     }
 
     updateLightLine() {
-        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
+        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance) / 2;
         // Prepares line for redrawing on canvas
         this.directLine.clear();
         this.directLine.lineStyle(2, 0xfcff4d);
 
         // Initializes the start point of the line
+        console.log(`init separaton: ${(initialSeparation)} `);
         let lineStart = CENTER_X - initialSeparation;
         this.directLine.moveTo(lineStart, CENTER_Y - 7);
 
         // If light has reached us, then don't let the line go any further
         // let distanceMoved = lineStart + scaleToPixel(this.props.distanceTravelledLight);
-        let distanceMoved = lineStart + this.props.distanceTravelledLight;
+        // let distanceMoved = lineStart + (this.us.x - scaleToPixel(this.props.distanceTravelledLight));
+        let distanceMoved = (this.us.x - scaleToPixel(this.props.distanceTravelledLight));
+        if (!this.props.isPlaying) {
+            distanceMoved = lineStart;
+        }
+        // let distanceMoved = lineStart + (this.us.x - scaleToPixel(this.props.distanceTravelledLight) - 460);
+        // console.log(`dist bw bodies: ${scaleToPixel(this.props.distanceBetweenBodies)} and light travelled: ${scaleToPixel(this.props.distanceTravelledLight)}`);
+        // console.log(`dist bw bodies: ${(this.props.distanceBetweenBodies)} and light travelled: ${scaleToPixel(this.props.distanceTravelledLight)}`);
         if (distanceMoved >= this.us.x) {
             distanceMoved = this.us.x;
             this.lightReached = true;
@@ -170,7 +178,7 @@ export default class Redshift extends React.Component {
     }
 
     updateInitialSeparationLine(constant) {
-        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
+        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance / 2);
         // console.log(`ussss ${CENTER_X - this.us.x}`);
         this.updateLine(
             CENTER_X + constant * initialSeparation,
@@ -190,7 +198,7 @@ export default class Redshift extends React.Component {
     }
 
     updateInitialVerticals(constant) {
-        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
+        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance / 2);
         this.updateLine(
             CENTER_X + constant * initialSeparation,
             CENTER_X + constant * initialSeparation,
@@ -232,13 +240,10 @@ export default class Redshift extends React.Component {
     }
 
     updateBodiesAnimation() {
-        // let distanceBodies = scaleToPixel(this.props.distanceTravelledBodies);
-        // let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
-        // let distanceBodies = this.props.distanceTravelledBodies;
-
         if (!this.lightReached) {
             // The % (modulo) is for when the bodies go outside the canvas range
-            let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies) % (2 * CENTER_X - 75);
+            let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies / 2) % (2 * CENTER_X - 75);
+            // console.log(`yeah, im the culprit ${distanceFromCenter} dist bw ${this.props.distanceBetweenBodies}`);
             this.us.x = CENTER_X + distanceFromCenter;
             this.galaxy.x = CENTER_X - distanceFromCenter;
         }
@@ -248,8 +253,8 @@ export default class Redshift extends React.Component {
         let initialSeparation = this.props.params.initialSeparationDistance;
         let separationDist = this.props.distanceBetweenBodies;
 
-        this.initialSeparationValue.text = `${(initialSeparation / 10).toFixed(2).toString()} billion light years`;
-        this.separationValue.text = `${(separationDist / 10).toFixed(2).toString()} billion light years`;
+        this.initialSeparationValue.text = `${(initialSeparation).toFixed(2).toString()} billion light years`;
+        this.separationValue.text = `${(separationDist).toFixed(2).toString()} billion light years`;
 
         this.galaxyName.x = this.galaxy.x;
         this.galaxyName.y = this.galaxy.y - 45;
