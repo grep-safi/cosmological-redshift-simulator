@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const CENTER_X = 460;
 const CENTER_Y = 106;
 
-const SCALING_FACTOR = 3.5;
+const SCALING_FACTOR = 3;
 
 const scaleToDistance = (pixel)    => pixel / SCALING_FACTOR;
 const scaleToPixel    = (distance) => distance * SCALING_FACTOR;
@@ -171,6 +171,7 @@ export default class Redshift extends React.Component {
 
     updateInitialSeparationLine(constant) {
         let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
+        // console.log(`ussss ${CENTER_X - this.us.x}`);
         this.updateLine(
             CENTER_X + constant * initialSeparation,
             CENTER_X + constant * 60,
@@ -237,7 +238,7 @@ export default class Redshift extends React.Component {
 
         if (!this.lightReached) {
             // The % (modulo) is for when the bodies go outside the canvas range
-            let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies / 2) % (2 * CENTER_X - 75);
+            let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies) % (2 * CENTER_X - 75);
             this.us.x = CENTER_X + distanceFromCenter;
             this.galaxy.x = CENTER_X - distanceFromCenter;
         }
@@ -247,8 +248,8 @@ export default class Redshift extends React.Component {
         let initialSeparation = this.props.params.initialSeparationDistance;
         let separationDist = this.props.distanceBetweenBodies;
 
-        this.initialSeparationValue.text = `${initialSeparation.toFixed(2).toString()} billion light years`;
-        this.separationValue.text = `${separationDist.toFixed(2).toString()} billion light years`;
+        this.initialSeparationValue.text = `${(initialSeparation / 10).toFixed(2).toString()} billion light years`;
+        this.separationValue.text = `${(separationDist / 10).toFixed(2).toString()} billion light years`;
 
         this.galaxyName.x = this.galaxy.x;
         this.galaxyName.y = this.galaxy.y - 45;
