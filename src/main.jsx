@@ -85,6 +85,13 @@ class CosmologicalRedshiftSim extends React.Component {
 
     handleNewParameters(newParams) {
         this.setState({ parameters: newParams });
+
+        if (this.state.simulationStarted) {
+            this.setState({
+                targetDistances: [newParams.initialSeparationDistance],
+                lightDistances: [newParams.initialSeparationDistance]
+            })
+        }
     }
 
     changeSimState() {
