@@ -231,9 +231,15 @@ export default class Redshift extends React.Component {
     }
 
     updateBodiesAnimation() {
-        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
         // let distanceBodies = scaleToPixel(this.props.distanceTravelledBodies);
+        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance);
         let distanceBodies = this.props.distanceTravelledBodies;
+        let epsilon = 75;
+
+        if (this.us.x > (CENTER_X * 2 - epsilon)) {
+
+        }
+
         if (!this.lightReached) {
             this.us.x = CENTER_X + distanceBodies + initialSeparation;
             this.galaxy.x = CENTER_X - distanceBodies - initialSeparation;
