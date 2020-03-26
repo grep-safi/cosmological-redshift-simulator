@@ -21,10 +21,10 @@ export default class Parameters extends React.Component {
                     <SingleVariableControl
                         name={"initialSeparationDistance"}
                         displayName={"Initial Separation Distance: "}
-                        min={100}
-                        max={250}
+                        min={0.30}
+                        max={0.70}
                         step={0.01}
-                        decimals={0}
+                        decimals={2}
                         value={this.props.params.initialSeparationDistance}
                         onChange={this.handleSingleVariableChange}
                     />
@@ -56,6 +56,7 @@ export default class Parameters extends React.Component {
             return;
         }
 
+        // If they're trying to change initial separation distance after the simulation has started
         alert("You can't change the INITIAL Separation Distance after starting the simulation, silly." +
             " Hit reset and give it another go");
     }

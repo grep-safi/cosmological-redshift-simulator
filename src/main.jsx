@@ -5,18 +5,23 @@ import NavBar from "./UserControls/NavBar";
 import Parameters from "./UserControls/Parameters";
 import Chart from "./D3/components/chart.jsx";
 
+const SCALING_FACTOR = 350;
+
+const scaleToDistance = (pixel)    => pixel / SCALING_FACTOR;
+const scaleToPixel    = (distance) => distance * SCALING_FACTOR;
+
 class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
         super(props);
         this.initialState = {
             parameters: {
-                initialSeparationDistance: 175,
+                initialSeparationDistance: 0.5,
                 expansionRate: 10,
             },
 
             lightTravelledDistances: [0],
-            targetDistances: [175],
-            lightDistances: [175],
+            targetDistances: [0.5],
+            lightDistances: [0.5],
 
             animationRate: 1.5,
             startBtnText: 'play animation',
@@ -151,8 +156,8 @@ class CosmologicalRedshiftSim extends React.Component {
 
         this.setState({
             lightTravelledDistances: [0],
-            targetDistances:  [175],
-            lightDistances: [175]
+            targetDistances:  [0.5],
+            lightDistances: [0.5]
         });
     }
 }
