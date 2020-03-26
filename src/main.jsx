@@ -30,7 +30,7 @@ class CosmologicalRedshiftSim extends React.Component {
             simulationEnded: false,
 
             distanceTravelledLight: 0,
-            distanceTravelledBodies: 0,
+            distanceBetweenBodies: 0.5,
         };
 
 
@@ -50,7 +50,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 <Redshift
                     params={this.state.parameters}
                     distanceTravelledLight={this.state.distanceTravelledLight}
-                    distanceTravelledBodies={this.state.distanceTravelledBodies}
+                    distanceBetweenBodies={this.state.distanceBetweenBodies}
                     isPlaying={this.state.isPlaying}
                     simulationStarted={this.state.simulationStarted}
                     changeSimState={() => {this.changeSimState()} }
@@ -111,7 +111,8 @@ class CosmologicalRedshiftSim extends React.Component {
         let newLightDist = me.state.distanceTravelledLight + speedOfLight;
         let rate = (0.05 * me.state.parameters.expansionRate);
 
-        let newDistanceBetween = me.state.distanceTravelledBodies + rate;
+        let temp = this.state.distanceBetweenBodies + rate;
+
         if (me.state.isPlaying) {
             // This should be light travelled distance
             this.updateDataSets(this.state.lightTravelledDistances, rate);
@@ -122,7 +123,6 @@ class CosmologicalRedshiftSim extends React.Component {
 
             me.setState(({
                 distanceTravelledLight: newLightDist,
-                distanceTravelledBodies: newDistanceBetween,
                 simulationStarted: true,
             }));
         }
