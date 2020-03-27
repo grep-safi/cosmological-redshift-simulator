@@ -47,8 +47,10 @@ export default class Redshift extends React.Component {
             PIXI.Texture.from('img/starry-background.jpg')
         );
 
-        starryBackground.x -= 300;
-        starryBackground.y -= 100;
+        starryBackground.x -= 5150 / 2;
+        starryBackground.y -= 3433 / 2;
+        // starryBackground.x -= 300;
+        // starryBackground.y -= 100;
         this.bg = starryBackground;
         stage.addChild(this.bg);
 
@@ -255,13 +257,21 @@ export default class Redshift extends React.Component {
     }
 
     shrinkBackground(scaling) {
-        this.bg.scale.x *= 0.999;
-        this.bg.position.x *= 0.999;
 
-        this.us.width *= 0.999;
-        this.us.height *= 0.999;
-        this.galaxy.width *= 0.999;
-        this.galaxy.height *= 0.999;
+        this.bg.scale.x -= 0.00043;
+        this.bg.position.x += 1.25;
+
+        // We need the position
+        // this.bg.scale.x -= 0.00001;
+        // this.bg.position.x += 2.5;
+        // this.bg.position.x *= 1.00000001;
+        // this.bg.scale.y *= 0.999;
+
+
+        // this.us.width *= 0.999;
+        // this.us.height *= 0.999;
+        // this.galaxy.width *= 0.999;
+        // this.galaxy.height *= 0.999;
     }
 
     updateTextValues() {
