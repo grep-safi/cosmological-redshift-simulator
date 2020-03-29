@@ -47,7 +47,7 @@ export default class Redshift extends React.Component {
             PIXI.Texture.from('img/starry-background.jpg')
         );
 
-        starryBackground.x -= 5150 / 2;
+        starryBackground.x = -5150 / 2 + CENTER_X;
         starryBackground.y -= 3433 / 2;
         // starryBackground.x -= 300;
         // starryBackground.y -= 100;
@@ -256,9 +256,16 @@ export default class Redshift extends React.Component {
         }
     }
 
+    // Natural width of the image is 5150 px
+    // Size of the strip is 920 px
     shrinkBackground(scaling) {
-        this.bg.scale.x -= 0.00043;
-        this.bg.position.x += 1.25;
+        if (!(this.bg.scale.x <= 0)) {
+            this.bg.scale.x = 1 - (this.props.distanceBetweenBodies / 115.0);
+            this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
+            console.log(`I shouldn't be printing scale: ${this.bg.scale.x} and evaluation: ${!(this.bg.scale.x <= 0)}`);
+        } else {
+            this.bg.scale.x = 0;
+        }
     }
 
     updateTextValues() {
