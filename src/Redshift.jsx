@@ -248,7 +248,7 @@ export default class Redshift extends React.Component {
             let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies / 2);
 
             if (distanceFromCenter > halfOfScreen - 20) {
-                this.shrinkBackground(distanceFromCenter);
+                this.shrinkBackground();
             } else {
                 this.us.x = CENTER_X + distanceFromCenter;
                 this.galaxy.x = CENTER_X - distanceFromCenter;
@@ -258,7 +258,7 @@ export default class Redshift extends React.Component {
 
     // Natural width of the image is 5150 px
     // Size of the strip is 920 px
-    shrinkBackground(scaling) {
+    shrinkBackground() {
         if (!(this.bg.scale.x <= 0)) {
             this.bg.scale.x = 1 - (this.props.distanceBetweenBodies / 115.0);
             this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
