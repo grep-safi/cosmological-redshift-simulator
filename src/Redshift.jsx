@@ -151,9 +151,7 @@ export default class Redshift extends React.Component {
 
         // If light has reached us, then don't let the line go any further
         let distanceMoved = (this.us.x - scaleToPixel(this.props.distanceTravelledLight));
-        if (!this.props.isPlaying) {
-            distanceMoved = lineStart;
-        }
+        if (!this.props.isPlaying) distanceMoved = lineStart;
 
         if (distanceMoved >= this.us.x) {
             distanceMoved = this.us.x;
@@ -162,6 +160,8 @@ export default class Redshift extends React.Component {
         } else {
             this.lightReached = false;
         }
+
+        console.log(`Distance moved ${distanceMoved} and dist travelled light ${this.props.distanceTravelledLight}`);
 
         // Draws the other end of the light ray (line)
         distanceMoved = (lineStart - distanceMoved) >= 0 ? lineStart : distanceMoved;

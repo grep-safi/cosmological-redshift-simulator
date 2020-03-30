@@ -1,7 +1,7 @@
 TODO
 
-1. When bodies go out of bounds, bring them back closer together
-2. Add scaling for all displayed values (from pixels to light years, etc.)
+DONE 1. When bodies go out of bounds, bring them back closer together
+DONE 2. Add scaling for all displayed values (from pixels to light years, etc.)
 DONE 3. Reformat the axis of the D3 Graph so they don't touch the numbers
 4. Change the color for initial and final separation distance on Redshift.jsx
 5. Reformat and recolor page so it looks better
@@ -9,5 +9,5 @@ DONE 3. Reformat the axis of the D3 Graph so they don't touch the numbers
 7. Attach image of photon (little squiggly line) to end of light beam
 8. Add animation rate parameter
 9. Add documentation
-10. Shrink the size of the galaxy and planet when they go out of bounds
+DONE 10. Shrink the size of the galaxy and planet when they go out of bounds
 
