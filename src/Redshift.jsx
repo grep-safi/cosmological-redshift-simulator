@@ -148,20 +148,15 @@ export default class Redshift extends React.Component {
         this.directLine.lineStyle(2, 0xfcff4d);
 
         // Initializes the start point of the line
-        // console.log(`init separaton: ${(initialSeparation)} `);
         let lineStart = CENTER_X - initialSeparation;
         this.directLine.moveTo(lineStart, CENTER_Y - 7);
 
         // If light has reached us, then don't let the line go any further
-        // let distanceMoved = lineStart + scaleToPixel(this.props.distanceTravelledLight);
-        // let distanceMoved = lineStart + (this.us.x - scaleToPixel(this.props.distanceTravelledLight));
         let distanceMoved = (this.us.x - scaleToPixel(this.props.distanceTravelledLight));
         if (!this.props.isPlaying) {
             distanceMoved = lineStart;
         }
-        // let distanceMoved = lineStart + (this.us.x - scaleToPixel(this.props.distanceTravelledLight) - 460);
-        // console.log(`dist bw bodies: ${scaleToPixel(this.props.distanceBetweenBodies)} and light travelled: ${scaleToPixel(this.props.distanceTravelledLight)}`);
-        // console.log(`dist bw bodies: ${(this.props.distanceBetweenBodies)} and light travelled: ${scaleToPixel(this.props.distanceTravelledLight)}`);
+
         if (distanceMoved >= this.us.x) {
             distanceMoved = this.us.x;
             this.lightReached = true;
@@ -171,8 +166,9 @@ export default class Redshift extends React.Component {
         }
 
         // Draws the other end of the light ray (line)
+        distanceMoved = (lineStart - distanceMoved) >= 0 ? lineStart : distanceMoved;
+
         this.directLine.lineTo(distanceMoved, CENTER_Y - 7);
-        // console.log(`dist moved: ${distanceMoved} linestart: ${lineStart}`);
     }
 
     updateTopLineBody(body) {
@@ -186,7 +182,6 @@ export default class Redshift extends React.Component {
 
     updateInitialSeparationLine(constant) {
         let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance / 2);
-        // console.log(`ussss ${CENTER_X - this.us.x}`);
         this.updateLine(
             CENTER_X + constant * initialSeparation,
             CENTER_X + constant * 60,
@@ -271,10 +266,6 @@ export default class Redshift extends React.Component {
             let distAtContraction = 17.228377773099474;
             this.bg.scale.x = 1 - ((this.props.distanceBetweenBodies - distAtContraction) / 92.0);
             this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
-            let delta = 1;
-            if (this.props.distanceBetweenBodies <= 93 + delta && this.props.distanceBetweenBodies >= 93 - delta) {
-                console.log(`I shouldn't be printing scale: ${this.props.distanceBetweenBodies - distAtContraction}`);
-            }
         } else {
             this.bg.scale.x = 0;
         }
