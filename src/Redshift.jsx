@@ -49,10 +49,10 @@ export default class Redshift extends React.Component {
 
         starryBackground.x = -5150 / 2 + CENTER_X;
         starryBackground.y -= 3433 / 2;
-        // starryBackground.x -= 300;
-        // starryBackground.y -= 100;
+
         this.bg = starryBackground;
         stage.addChild(this.bg);
+
 
         me.us = me.drawBody('us', 'img/earth.svg', 20);
         me.galaxy = me.drawBody('galaxy', 'img/galaxy.png', 45);
@@ -67,6 +67,10 @@ export default class Redshift extends React.Component {
 
         me.separationText = me.drawText('Final Separation', CENTER_X, CENTER_Y + 132);
         me.separationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 148);
+
+        me.warningMessage = me.drawText("The bodies have gone beyond the observable universe!" +
+            " (diameter: 93 billion light years)", CENTER_X, CENTER_Y - 25);
+        me.warningMessage.visible = false;
 
         me.start();
     }
@@ -252,20 +256,29 @@ export default class Redshift extends React.Component {
             } else {
                 this.us.x = CENTER_X + distanceFromCenter;
                 this.galaxy.x = CENTER_X - distanceFromCenter;
+                this.bg.scale.x = 1;
+                this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
             }
         }
+
+        this.warningMessage.visible = this.props.distanceBetweenBodies >= 93;
     }
 
     // Natural width of the image is 5150 px
     // Size of the strip is 920 px
     shrinkBackground() {
         if (!(this.bg.scale.x <= 0)) {
-            this.bg.scale.x = 1 - (this.props.distanceBetweenBodies / 115.0);
+            let distAtContraction = 17.228377773099474;
+            this.bg.scale.x = 1 - ((this.props.distanceBetweenBodies - distAtContraction) / 92.0);
             this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
-            console.log(`I shouldn't be printing scale: ${this.bg.scale.x} and evaluation: ${!(this.bg.scale.x <= 0)}`);
+            let delta = 1;
+            if (this.props.distanceBetweenBodies <= 93 + delta && this.props.distanceBetweenBodies >= 93 - delta) {
+                console.log(`I shouldn't be printing scale: ${this.props.distanceBetweenBodies - distAtContraction}`);
+            }
         } else {
             this.bg.scale.x = 0;
         }
+
     }
 
     updateTextValues() {
