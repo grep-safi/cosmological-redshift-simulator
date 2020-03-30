@@ -14,25 +14,21 @@ const yMax = (data) => max(data);
 const xScale = (props) => {
     return scaleLinear()
         .domain([0, xMax(props.times)])
-        // .domain([0, 280])
         .range([props.padding, props.width - props.padding]);
-        // .range([props.padding, props.width - props.padding * 2]);
 };
 
 // Returns a function that "scales" Y coordinates from the data to fit the chart
 const yScale = (props) => {
     return scaleLinear()
         .domain([0, yMax(props.targetDistances)])
-        // .domain([0, 300])
         .range([props.height - props.padding + 10, props.padding - 20]);
 };
 
 const lineGenerator = (xScaleLine, yScaleLine) => {
     return line()
-        .x((d, i) => xScaleLine(d.t))
+        .x(d => xScaleLine(d.t))
         .y(d => yScaleLine(d.y))
         .curve(curveCardinal)
-        // .curve(curveMonotoneX)
 };
 
 export default (props) => {

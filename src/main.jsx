@@ -93,6 +93,7 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     calculateData() {
+
         let dt = 0.001;
         let expansion_rate = this.state.parameters.expansionRate;
         let current_time = 0.0;
@@ -106,6 +107,13 @@ class CosmologicalRedshiftSim extends React.Component {
         let target_distances = [initial_separation];
         let light_distances = [initial_separation];
         let light_traveled_distances = [0.0];
+
+        // Resume back here
+
+        // if (!this.state.simulationEnded && this.state.simulationStarted) {
+        //     initial_separation = this.state.completeTargetDistances
+        //
+        // }
 
         let maxSimIndex = 0;
 
@@ -204,16 +212,6 @@ class CosmologicalRedshiftSim extends React.Component {
 
         this.raf = requestAnimationFrame(this.animate.bind(this));
     }
-
-    // updateDataSets(dataSet, progressionRate) {
-    //     let possibleValue = progressionRate + dataSet[dataSet.length - 1];
-    //     possibleValue = Math.round(possibleValue * 100000) / 100000;
-    //     if (!dataSet.includes(possibleValue)) {
-    //         this.setState({
-    //             dataSet: dataSet.push(possibleValue)
-    //         });
-    //     }
-    // }
 
     onStartClick() {
         if (!this.state.isPlaying) {

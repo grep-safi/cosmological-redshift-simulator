@@ -62,12 +62,10 @@ export default class Axes extends Component {
         </React.Fragment>;
     }
 }
-//
-// Axes.propTypes = {
-//     yScale: PropTypes.func.isRequired,
-//     xScale: PropTypes.func.isRequired,
-//     height: PropTypes.number.isRequired,
-//     offset: PropTypes.number.isRequired,
-//     padding: PropTypes.number.isRequired,
-//     paddingLeft: PropTypes.number.isRequired
-// };
+
+Axes.propTypes = {
+    yScale: PropTypes.func.isRequired,
+    xScale: PropTypes.func.isRequired,
+    height: PropTypes.number.isRequired,
+    paddingLeft: PropTypes.number.isRequired
+};

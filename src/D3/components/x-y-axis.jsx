@@ -2,7 +2,7 @@ import React  from 'react';
 import Axis   from './axis';
 
 export default (props) => {
-    const xSettings = {
+    const settings = {
         translate: `translate(0, ${props.height - props.padding})`,
         xScale: props.xScale,
         yScale: props.yScale,
@@ -12,13 +12,7 @@ export default (props) => {
         paddingLeft: 45
     };
 
-    const ySettings = {
-        translate: `translate(${props.padding}, 0)`,
-        scale: props.yScale,
-    };
-
     return <g className="xy-axis">
-        <Axis {...xSettings}/>
-        {/*<Axis {...ySettings}/>*/}
+        <Axis {...settings}/>
     </g>
 }
