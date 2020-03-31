@@ -125,18 +125,7 @@ class CosmologicalRedshiftSim extends React.Component {
 
             maxSimIndex += 1;
         }
-        console.log(`timeLines ${timeLines.length}, times: ${this.state.times.length}`);
 
-        // console.log(`GREAT: light travelled distances first: ${light_traveled_distances[0]}
-        //     last: ${light_traveled_distances[maxSimIndex - 1]}\``);
-        //
-        // console.log(`GREAT: light distances (bw earth and photon) first: ${light_distances[0]}
-        //     last: ${light_distances[maxSimIndex - 1]}`);
-        //
-        // console.log(`GREAT: target distances first: ${target_distances[0]}
-        //     last: ${target_distances[maxSimIndex - 1]}\``);
-
-        // console.log(`index: ${this.state.index}`);
         this.setState({
             completeTimes: timeLines,
             completeTargetDistances: target_distances,
@@ -158,8 +147,11 @@ class CosmologicalRedshiftSim extends React.Component {
             this.setState({
                 completeTargetDistances: [newParams.initialSeparationDistance],
                 completeLightDistances: [newParams.initialSeparationDistance],
-                distanceBetweenBodies: newParams.initialSeparationDistance,
 
+                targetDistances: [newParams.initialSeparationDistance],
+                lightDistances: [newParams.initialSeparationDistance],
+
+                distanceBetweenBodies: newParams.initialSeparationDistance,
                 distanceTravelledLight: newParams.initialSeparationDistance,
             })
         }
@@ -174,7 +166,6 @@ class CosmologicalRedshiftSim extends React.Component {
     animate() {
         if (this.state.simulationEnded) return;
 
-        console.log(`index: ${this.state.index}`);
         let index = this.state.index;
 
         this.state.targetDistances.push(this.state.completeTargetDistances[index]);
@@ -228,7 +219,18 @@ class CosmologicalRedshiftSim extends React.Component {
         e.preventDefault();
         this.stopAnimation();
         this.setState(this.initialState);
-        this.calculateData();
+        // Reset the array values
+        this.setState({
+            times: [0],
+            targetDistances: [5],
+            lightDistances: [5],
+            lightTravelledDistances: [0],
+
+            completeTimes: [0],
+            completeTargetDistances: [5],
+            completeLightDistances: [5],
+            completeLightTravelledDistances: [0],
+        });
     }
 }
 

@@ -272,7 +272,9 @@ export default class Redshift extends React.Component {
         let initialSeparation = this.props.params.initialSeparationDistance;
         let separationDist = this.props.distanceBetweenBodies;
 
-        this.initialSeparationValue.text = `${(initialSeparation).toFixed(2).toString()} billion light years`;
+        this.initialSeparationValue.text =
+            `${(initialSeparation).toFixed(2).toString()} billion light years`;
+
         this.separationValue.text = `${(separationDist).toFixed(2).toString()} billion light years`;
 
         this.galaxyName.x = this.galaxy.x;

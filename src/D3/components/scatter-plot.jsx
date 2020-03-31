@@ -2,7 +2,7 @@ import React from 'react';
 // import DataCircles  from './data-circles';
 import Line  from './line';
 import XYAxis       from './x-y-axis';
-import { curveCardinal, curveMonotoneX, max, scaleLinear, line } from 'd3/dist/d3';
+import { curveCardinal, max, scaleLinear, line } from 'd3/dist/d3';
 
 // Returns the largest X coordinate from the data set
 // const xMax = (data) => max(data) + 1.0;
@@ -39,8 +39,6 @@ export default (props) => {
     const lineDataLightVal = props.lightValues.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
     const lineDataTargetDist = props.targetDistances.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
     const lineDataLightDist = props.lightDistances.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
-
-    // console.log(`linedatalightdist : ${lineDataLightDist}`);
 
     const lineGenLightVal = lineGenerator(scales.xScale, scales.yScale);
     const lineGenTargetDist = lineGenerator(scales.xScale, scales.yScale);
