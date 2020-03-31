@@ -157,12 +157,6 @@ class CosmologicalRedshiftSim extends React.Component {
         }
     }
 
-    changeSimState() {
-        this.setState({
-            simulationEnded: true
-        })
-    }
-
     animate() {
         if (this.state.simulationEnded) return;
 
@@ -186,7 +180,6 @@ class CosmologicalRedshiftSim extends React.Component {
                 times: this.state.times,
 
                 index: this.state.index + 20,
-                // index: this.state.index + 1,
                 simulationEnded: index >= this.state.maxIndex - 21
             });
         }

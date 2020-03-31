@@ -153,14 +153,6 @@ export default class Redshift extends React.Component {
         let distanceMoved = (this.us.x - scaleToPixel(this.props.distanceTravelledLight));
         if (!this.props.simulationStarted) distanceMoved = lineStart;
 
-        if (distanceMoved >= this.us.x) {
-            distanceMoved = this.us.x;
-            this.lightReached = true;
-            this.props.changeSimState();
-        } else {
-            this.lightReached = false;
-        }
-
         // Draws the other end of the light ray (line)
         distanceMoved = (lineStart - distanceMoved) >= 0 ? lineStart : distanceMoved;
 
@@ -238,18 +230,16 @@ export default class Redshift extends React.Component {
     }
 
     updateBodiesAnimation() {
-        if (!this.lightReached) {
-            let halfOfScreen = CENTER_X - 10;
-            let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies / 2);
+        let halfOfScreen = CENTER_X - 10;
+        let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies / 2);
 
-            if (distanceFromCenter > halfOfScreen - 20) {
-                this.shrinkBackground();
-            } else {
-                this.us.x = CENTER_X + distanceFromCenter;
-                this.galaxy.x = CENTER_X - distanceFromCenter;
-                this.bg.scale.x = 1;
-                this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
-            }
+        if (distanceFromCenter > halfOfScreen - 20) {
+            this.shrinkBackground();
+        } else {
+            this.us.x = CENTER_X + distanceFromCenter;
+            this.galaxy.x = CENTER_X - distanceFromCenter;
+            this.bg.scale.x = 1;
+            this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
         }
 
         this.warningMessage.visible = this.props.distanceBetweenBodies >= 93;
@@ -265,7 +255,6 @@ export default class Redshift extends React.Component {
         } else {
             this.bg.scale.x = 0;
         }
-
     }
 
     updateTextValues() {
