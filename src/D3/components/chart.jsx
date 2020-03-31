@@ -13,6 +13,7 @@ export default class Chart extends React.Component{
     }
 
     render() {
+        // console.log(`Time array: ${this.props.times}`);
         return (
             <div>
                 <h1>Graph</h1>

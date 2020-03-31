@@ -5,7 +5,8 @@ import XYAxis       from './x-y-axis';
 import { curveCardinal, curveMonotoneX, max, scaleLinear, line } from 'd3/dist/d3';
 
 // Returns the largest X coordinate from the data set
-const xMax = (data) => max(data);
+// const xMax = (data) => max(data) + 1.0;
+const xMax = (data) => max(data) + 0.1;
 
 // Returns the largest Y coordinate from the data set
 const yMax = (data) => max(data);
@@ -38,6 +39,8 @@ export default (props) => {
     const lineDataLightVal = props.lightValues.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
     const lineDataTargetDist = props.targetDistances.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
     const lineDataLightDist = props.lightDistances.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
+
+    // console.log(`linedatalightdist : ${lineDataLightDist}`);
 
     const lineGenLightVal = lineGenerator(scales.xScale, scales.yScale);
     const lineGenTargetDist = lineGenerator(scales.xScale, scales.yScale);
