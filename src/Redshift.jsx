@@ -16,8 +16,6 @@ export default class Redshift extends React.Component {
         this.start = this.start.bind(this);
         this.stop = this.stop.bind(this);
         this.animate = this.animate.bind(this);
-
-        this.lightReached = false;
     }
 
     render() {

@@ -1,5 +1,4 @@
 import React from 'react';
-// import DataCircles  from './data-circles';
 import Line  from './line';
 import XYAxis       from './x-y-axis';
 import { curveCardinal, max, scaleLinear, line } from 'd3/dist/d3';
@@ -34,15 +33,18 @@ const lineGenerator = (xScaleLine, yScaleLine) => {
 
 export default (props) => {
     const scales = { xScale: xScale(props), yScale: yScale(props) };
-    let timeVals = props.times;
+    let timeValues = props.times;
 
-    const lineDataLightVal = props.lightValues.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
-    const lineDataTargetDist = props.targetDistances.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
-    const lineDataLightDist = props.lightDistances.map((d, i) => {return {"y": d, "t": timeVals[i]}; });
+    // Data sets for each line
+    const lineDataLightVal = props.lightValues.map((d, i) => {return {"y": d, "t": timeValues[i]}; });
+    const lineDataLightDist = props.lightDistances.map((d, i) => {return {"y": d, "t": timeValues[i]}; });
+    const lineDataTargetDist = props.targetDistances.map((d, i) => {return {"y": d, "t": timeValues[i]}; });
 
+    // Line generators for each data set
     const lineGenLightVal = lineGenerator(scales.xScale, scales.yScale);
     const lineGenTargetDist = lineGenerator(scales.xScale, scales.yScale);
     const lineGenLightDist = lineGenerator(scales.xScale, scales.yScale);
+
     return <svg width={props.width} height={props.height}>
        <XYAxis {...props} {...scales} />
         <Line
@@ -50,7 +52,7 @@ export default (props) => {
             lineGenerator={lineGenLightVal}
             width={props.width}
             height={props.height}
-            id={'id1'}
+            id={'lightValID'}
             color={'blue'}
         />
         <Line
@@ -58,7 +60,7 @@ export default (props) => {
             lineGenerator={lineGenTargetDist}
             width={props.width}
             height={props.height}
-            id={'id2'}
+            id={'targetDistID'}
             color={'black'}
         />
         <Line
@@ -66,13 +68,13 @@ export default (props) => {
             lineGenerator={lineGenLightDist}
             width={props.width}
             height={props.height}
-            id={'id3'}
+            id={'lightDistID'}
             color={'red'}
         />
 
         {/*Horizontal Upper line*/}
         <line x1={39} y1={24.5} x2={886} y2={24.5} style={{stroke: "rgb(0,0,0)"}} />
-        {/*Vertical Line Right*/}
+        {/*Vertical Right Line*/}
         <line x1={885.5} y1={265} x2={885.5} y2={25} style={{stroke: "rgb(0,0,0)"}} />
 
     </svg>

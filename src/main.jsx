@@ -133,11 +133,11 @@ class CosmologicalRedshiftSim extends React.Component {
             completeLightTravelledDistances: light_traveled_distances,
             maxIndex: maxSimIndex,
 
-            lightTravelledDistances: light_traveled_distances.slice(0, this.state.index + 1),
-            targetDistances:  target_distances.slice(0, this.state.index + 1),
-            lightDistances: light_distances.slice(0, this.state.index + 1),
-            times: timeLines.slice(0, this.state.index + 1),
-        })
+            lightTravelledDistances: this.state.lightTravelledDistances.slice(0, this.state.index + 1),
+            targetDistances:  this.state.targetDistances.slice(0, this.state.index + 1),
+            lightDistances: this.state.lightDistances.slice(0, this.state.index + 1),
+            times: this.state.times.slice(0, this.state.index + 1),
+        });
     }
 
     handleNewParameters(newParams) {

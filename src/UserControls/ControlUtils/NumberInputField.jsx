@@ -89,4 +89,4 @@ NumberInputField.propTypes = {
     value: PropTypes.number,
     decimals: PropTypes.number,
     onNewValue: PropTypes.func,
-}
+};
