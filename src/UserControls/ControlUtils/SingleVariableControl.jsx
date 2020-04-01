@@ -17,9 +17,10 @@ export default class SingleVariableControl extends React.Component {
         const value = Number.parseFloat(this.props.value).toFixed(this.props.decimals);
         return (
             <label>
-                {this.props.displayName}&nbsp;
+                {this.props.displayName}
                 <NumberInputField
                     type="number"
+                    className={this.props.className}
                     name={this.props.name}
                     min={this.props.min}
                     max={this.props.max}
@@ -28,9 +29,10 @@ export default class SingleVariableControl extends React.Component {
                     value={this.props.value}
                     decimals={this.props.decimals}
                 />
-                &nbsp;&nbsp;
+                &nbsp; &nbsp;
                 <input
                     type="range"
+                    className={this.props.className}
                     name={this.props.name}
                     min={this.props.min}
                     max={this.props.max}

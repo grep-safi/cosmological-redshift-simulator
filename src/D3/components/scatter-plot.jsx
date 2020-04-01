@@ -70,7 +70,10 @@ export default (props) => {
             color={'red'}
         />
 
-        <line x1={46} y1={25.5} x2={805.5} y2={25.5} style={{stroke: "rgb(0,0,0)"}} />
-        <line x1={805.5} y1={265} x2={805.5} y2={25} style={{stroke: "rgb(0,0,0)"}} />
+        {/*Horizontal Upper line*/}
+        <line x1={39} y1={24.5} x2={886} y2={24.5} style={{stroke: "rgb(0,0,0)"}} />
+        {/*Vertical Line Right*/}
+        <line x1={885.5} y1={265} x2={885.5} y2={25} style={{stroke: "rgb(0,0,0)"}} />
+
     </svg>
 }

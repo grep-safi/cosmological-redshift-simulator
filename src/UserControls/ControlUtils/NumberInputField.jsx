@@ -34,6 +34,7 @@ export default class NumberInputField extends React.Component {
                 <input
                     type="number"
                     name="numberInput"
+                    className={this.props.className}
                     min={this.props.min}
                     max={this.props.max}
                     step={this.props.step}
