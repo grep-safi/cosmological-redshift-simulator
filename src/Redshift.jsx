@@ -42,11 +42,11 @@ export default class Redshift extends React.Component {
         this.app.stage.addChild(stage);
 
         const starryBackground = new PIXI.Sprite(
-            PIXI.Texture.from('img/starry-background.svg')
+            PIXI.Texture.from('assets/starry-background.svg')
         );
 
         // const starryBackground = new PIXI.Sprite(
-        //     PIXI.Texture.from('img/starry-background.jpg')
+        //     PIXI.Texture.from('assets/starry-background.jpg')
         // );
 
         starryBackground.x = -5150 / 2 + CENTER_X;
@@ -56,8 +56,8 @@ export default class Redshift extends React.Component {
         stage.addChild(this.bg);
 
 
-        me.us = me.drawBody('us', 'img/earth.svg', 20);
-        me.galaxy = me.drawBody('galaxy', 'img/galaxy.png', 45);
+        me.us = me.drawBody('us', 'assets/earth.svg', 20);
+        me.galaxy = me.drawBody('galaxy', 'assets/galaxy.png', 45);
 
         me.directLine = me.drawLine();
 

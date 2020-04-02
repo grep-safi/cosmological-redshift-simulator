@@ -14,6 +14,8 @@ class CosmologicalRedshiftSim extends React.Component {
                 expansionRate: 10,
             },
 
+            graphDisplayed: false,
+
             times: [0],
             targetDistances: [6.50],
             lightDistances: [6.50],
@@ -50,7 +52,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 onResetClick={this.onResetClick.bind(this)}
             />
 
-            <div className="box">
+            <div>
                 <Redshift
                     params={this.state.parameters}
                     distanceTravelledLight={this.state.distanceTravelledLight}
@@ -64,7 +66,7 @@ class CosmologicalRedshiftSim extends React.Component {
             <div className="animationButton">
                 <button type="box"
                         className="btn btn-danger btn-sm"
-                        onClick={() => {this.onStartClick()} }>
+                        onClick={() => this.onStartClick() }>
                     {this.state.startBtnText}
                 </button>
             </div>
@@ -77,12 +79,25 @@ class CosmologicalRedshiftSim extends React.Component {
                 />
             </div>
 
-            <div className="box" id="chart">
+            <div className="checkBox">
+                <input type="checkbox"
+                       onChange={() => this.displayGraph()}
+                       checked={this.state.graphDisplayed}
+                       id="graphDisplay"
+                />
+                <label className="checkBoxText" htmlFor="graphDisplay" id="text">
+                    Display Graph
+                </label>
+
+            </div>
+
+            <div id="chart">
                 <Chart
                     lightValues={this.state.lightTravelledDistances}
                     targetDistances={this.state.targetDistances}
                     lightDistances={this.state.lightDistances}
                     times={this.state.times}
+                    displayGraph={this.state.graphDisplayed}
                 />
             </div>
         </React.Fragment>;
@@ -90,6 +105,13 @@ class CosmologicalRedshiftSim extends React.Component {
 
     componentDidMount() {
         this.calculateData();
+    }
+
+    displayGraph(e) {
+        console.log(`displayGraph: ${this.state.graphDisplayed}`);
+        this.setState({
+            graphDisplayed: !this.state.graphDisplayed
+        });
     }
 
     calculateData() {

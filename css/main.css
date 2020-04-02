@@ -1,7 +1,8 @@
 html body {
     /*background-color: rgb(255,255,255);*/
     /*background-color: rgb(0,0,0);*/
-    background-color: rgba(0,0,11,0.84);
+    /*background-color: rgba(0,0,11,0.84);*/
+    background-color: rgba(0,1,2,0.84);
 }
 
 body>.container {
@@ -21,16 +22,24 @@ body>.container {
     background-color: transparent;
 }
 
-/*.box {*/
-/*    border: 1px solid #555;*/
-/*    padding: 0.5em;*/
-/*}*/
-
 .animationButton {
     position: relative;
     left: 770px;
     bottom: 65px;
     z-index: 1;
+}
+
+.checkBox {
+    position: absolute;
+    bottom: 135px;
+    left: 980px;
+}
+
+.checkBoxText {
+    color: chartreuse;
+    position: relative;
+    left: 5px;
+    top: 1px;
 }
 
 .yAxis line {

@@ -13,6 +13,8 @@ export default class Chart extends React.Component{
     }
 
     render() {
+        if (!this.props.displayGraph) return null;
+
         return (
             <div>
                 <h4 align={"center"} style={{color: "rgb(0, 255, 255)", marginBottom: "-15px"}}>Distance vs Time</h4>
