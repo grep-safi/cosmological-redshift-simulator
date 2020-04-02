@@ -1,5 +1,5 @@
 import React       from 'react';
-import LineGraph from './scatter-plot';
+import LineGraph from './LineGraph';
 
 const styles = {
     width   : 600,

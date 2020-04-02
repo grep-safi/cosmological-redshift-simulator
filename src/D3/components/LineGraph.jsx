@@ -1,5 +1,5 @@
 import React from 'react';
-import Line  from './line';
+import Line  from './Line';
 import XYAxis       from './x-y-axis';
 import { curveCardinal, max, scaleLinear, line } from 'd3/dist/d3';
 
