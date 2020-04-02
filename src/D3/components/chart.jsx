@@ -2,8 +2,8 @@ import React       from 'react';
 import LineGraph from './scatter-plot';
 
 const styles = {
-    width   : 930,
-    height  : 300,
+    width   : 600,
+    height  : 260,
     padding : 45,
 };
 

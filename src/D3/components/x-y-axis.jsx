@@ -6,7 +6,7 @@ export default (props) => {
         translate: `translate(0, ${props.height - props.padding})`,
         xScale: props.xScale,
         yScale: props.yScale,
-        height: 265,
+        height: 225,
         offSet: 0,
         padding: 30,
         paddingLeft: 45

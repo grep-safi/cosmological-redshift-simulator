@@ -3,7 +3,8 @@ import * as PIXI from 'pixi.js';
 import PropTypes from 'prop-types';
 
 const CENTER_X = 460;
-const CENTER_Y = 106;
+const CENTER_Y = 300;
+// const CENTER_Y = 106 * 4;
 
 const SCALING_FACTOR = 50;
 
@@ -29,7 +30,8 @@ export default class Redshift extends React.Component {
         this.app = new PIXI.Application({
             width: CENTER_X * 2,
             height: CENTER_Y * 2,
-            backgroundColor: 0x241B23,
+            // backgroundColor: 0x241B23,
+            backgroundColor: 0xffffff,
             antialias: true,
         });
 
@@ -40,8 +42,12 @@ export default class Redshift extends React.Component {
         this.app.stage.addChild(stage);
 
         const starryBackground = new PIXI.Sprite(
-            PIXI.Texture.from('img/starry-background.jpg')
+            PIXI.Texture.from('img/starry-background.svg')
         );
+
+        // const starryBackground = new PIXI.Sprite(
+        //     PIXI.Texture.from('img/starry-background.jpg')
+        // );
 
         starryBackground.x = -5150 / 2 + CENTER_X;
         starryBackground.y -= 3433 / 2;
@@ -58,14 +64,14 @@ export default class Redshift extends React.Component {
         me.galaxyName = me.drawText('Galaxy', me.galaxy.x, me.galaxy.y);
         me.usName = me.drawText('Us', me.us.x, me.us.y);
 
-        me.initialSeparationText = me.drawText('Initial Separation', CENTER_X, CENTER_Y + 87);
-        me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 105);
+        me.initialSeparationText = me.drawText('Initial Separation', CENTER_X, CENTER_Y + 145);
+        me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 163);
 
-        me.separationText = me.drawText('Final Separation', CENTER_X, CENTER_Y + 132);
-        me.separationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 148);
+        me.separationText = me.drawText('Final Separation', CENTER_X, CENTER_Y + 190);
+        me.separationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 206);
 
         me.warningMessage = me.drawText("The bodies have gone beyond the observable universe!" +
-            " (diameter: 93 billion light years)", CENTER_X, CENTER_Y - 25);
+            " (diameter: 93 billion light years)", CENTER_X, me.galaxy.y - 10);
         me.warningMessage.visible = false;
 
         me.start();
@@ -107,7 +113,7 @@ export default class Redshift extends React.Component {
     drawBody(name, file, size) {
         const body = new PIXI.Container();
         body.name = name;
-        body.position = new PIXI.Point(CENTER_X, 48.5 + 50);
+        body.position = new PIXI.Point(CENTER_X, CENTER_Y + 50);
 
         const bodySprite = new PIXI.Sprite(PIXI.Texture.from(file));
         bodySprite.anchor.set(0.5);
@@ -145,7 +151,7 @@ export default class Redshift extends React.Component {
 
         // Initializes the start point of the line
         let lineStart = CENTER_X - initialSeparation;
-        this.directLine.moveTo(lineStart, CENTER_Y - 7);
+        this.directLine.moveTo(lineStart, CENTER_Y + 50);
 
         // If light has reached us, then don't let the line go any further
         let distanceMoved = (this.us.x - scaleToPixel(this.props.distanceTravelledLight));
@@ -154,7 +160,7 @@ export default class Redshift extends React.Component {
         // Draws the other end of the light ray (line)
         distanceMoved = (lineStart - distanceMoved) >= 0 ? lineStart : distanceMoved;
 
-        this.directLine.lineTo(distanceMoved, CENTER_Y - 7);
+        this.directLine.lineTo(distanceMoved, CENTER_Y + 50);
     }
 
     updateTopLineBody(body) {

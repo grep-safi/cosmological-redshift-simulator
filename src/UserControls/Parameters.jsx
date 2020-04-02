@@ -17,7 +17,7 @@ export default class Parameters extends React.Component {
             <React.Fragment>
                 <br/>
                 <fieldset>
-                    <legend>Parameters</legend>
+                    <legend style={{color: "#00178c"}}>Parameters</legend>
                     <SingleVariableControl
                         name={"initialSeparationDistance"}
                         displayName={"Initial Separation Distance: "}
@@ -35,7 +35,8 @@ export default class Parameters extends React.Component {
                         displayName={"Universe Expansion Rate: "}
                         className={"expansionParameter"}
                         min={0.00}
-                        max={0.20}
+                        // max={0.20}
+                        max={20.0}
                         step={0.01}
                         decimals={2}
                         value={this.props.params.expansionRate}
@@ -49,8 +50,8 @@ export default class Parameters extends React.Component {
     }
 
     handleSingleVariableChange(key, value) {
-        let changeInitialParamIsLegal = !(key === 'initialSeparationDistance' && this.props.simulationStarted);
-        if (changeInitialParamIsLegal) {
+        let paramChangeIsLegal = !(key === 'initialSeparationDistance' && this.props.simulationStarted);
+        if (paramChangeIsLegal) {
             this.props.onChange({
                 ...this.props.params,
                 [key]: value

@@ -61,7 +61,7 @@ export default (props) => {
             width={props.width}
             height={props.height}
             id={'targetDistID'}
-            color={'black'}
+            color={'green'}
         />
         <Line
             data={lineDataLightDist}
@@ -73,9 +73,9 @@ export default (props) => {
         />
 
         {/*Horizontal Upper line*/}
-        <line x1={39} y1={24.5} x2={886} y2={24.5} style={{stroke: "rgb(0,0,0)"}} />
-        {/*Vertical Right Line*/}
-        <line x1={885.5} y1={265} x2={885.5} y2={25} style={{stroke: "rgb(0,0,0)"}} />
+        {/*<line x1={39} y1={24.5} x2={886} y2={24.5} style={{stroke: "rgb(0,0,0)"}} />*/}
+        {/*/!*Vertical Right Line*!/*/}
+        {/*<line x1={885.5} y1={265} x2={885.5} y2={25} style={{stroke: "rgb(0,0,0)"}} />*/}
 
     </svg>
 }
