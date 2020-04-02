@@ -39,26 +39,27 @@ export default class Axes extends Component {
             />
 
             <text
-                x="316"
+                // x="316"
+                x="386"
                 y="245"
                 dy=".8em"
                 fontSize=".9em"
                 fontWeight="bold"
                 className="axisLabelText"
                 textAnchor="end">
-                Time
+                Time in Billions of Years
             </text>
 
             <text
                 transform="rotate(-90)"
-                x="-95"
+                x="-15"
                 y="0"
                 dy=".8em"
                 fontSize=".9em"
                 fontWeight="bold"
                 className="axisLabelText"
                 textAnchor="end">
-                Distance
+                Distance in Billions of Light Years
             </text>
 
         </React.Fragment>;

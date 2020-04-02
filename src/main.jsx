@@ -4,6 +4,7 @@ import Redshift from './Redshift';
 import NavBar from "./UserControls/NavBar";
 import Parameters from "./UserControls/Parameters";
 import Chart from "./D3/components/Chart";
+import Legend from "./D3/components/Legend";
 
 class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
@@ -14,7 +15,8 @@ class CosmologicalRedshiftSim extends React.Component {
                 expansionRate: 10,
             },
 
-            graphDisplayed: false,
+            // graphDisplayed: false,
+            graphDisplayed: true,
 
             times: [0],
             targetDistances: [6.50],
@@ -90,11 +92,20 @@ class CosmologicalRedshiftSim extends React.Component {
                 <label className="checkBoxText" htmlFor="graphDisplay" id="text">
                     Display Graph
                 </label>
-
             </div>
 
             <div id="chart">
                 <Chart
+                    lightValues={this.state.lightTravelledDistances}
+                    targetDistances={this.state.targetDistances}
+                    lightDistances={this.state.lightDistances}
+                    times={this.state.times}
+                    displayGraph={this.state.graphDisplayed}
+                />
+            </div>
+
+            <div id="legend">
+                <Legend
                     lightValues={this.state.lightTravelledDistances}
                     targetDistances={this.state.targetDistances}
                     lightDistances={this.state.lightDistances}

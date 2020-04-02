@@ -62,7 +62,7 @@ export default class Redshift extends React.Component {
         me.directLine = me.drawLine();
 
         me.galaxyName = me.drawText('Galaxy', me.galaxy.x, me.galaxy.y);
-        me.usName = me.drawText('Us', me.us.x, me.us.y);
+        me.usName = me.drawText('Earth', me.us.x, me.us.y);
 
         me.initialSeparationText = me.drawText('Initial Separation', CENTER_X, CENTER_Y + 145);
         me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 163);

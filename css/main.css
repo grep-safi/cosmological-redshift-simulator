@@ -26,6 +26,20 @@ input[type=number]{
     background-color: transparent;
 }
 
+#legend {
+    position: relative;
+    bottom: 1100px;
+    left: 750px;
+    /*background-color: black;*/
+    background-color: black;
+    width: 150px;
+    height: 150px;
+}
+
+.legendText {
+    fill: darkmagenta;
+}
+
 .graphTitleText {
     color: aqua;
     position: relative;

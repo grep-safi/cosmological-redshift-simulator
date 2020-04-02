@@ -72,6 +72,8 @@ export default (props) => {
             color={'red'}
         />
 
+
+
         {/*Horizontal Upper line*/}
         {/*<line x1={39} y1={24.5} x2={886} y2={24.5} style={{stroke: "rgb(0,0,0)"}} />*/}
         {/*/!*Vertical Right Line*!/*/}
