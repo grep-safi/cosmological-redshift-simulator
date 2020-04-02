@@ -70,7 +70,7 @@ export default class Redshift extends React.Component {
         me.separationText = me.drawText('Final Separation', CENTER_X, CENTER_Y + 190);
         me.separationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 206);
 
-        me.warningMessage = me.drawText("The bodies have gone beyond the observable universe!" +
+        me.warningMessage = me.drawText("The bodies have expanded beyond the observable universe!" +
             " (diameter: 93 billion light years)", CENTER_X, me.galaxy.y - 10);
         me.warningMessage.visible = false;
 
@@ -246,7 +246,7 @@ export default class Redshift extends React.Component {
             this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
         }
 
-        this.warningMessage.visible = this.props.distanceBetweenBodies >= 93;
+        this.warningMessage.visible = this.props.distanceBetweenBodies >= 93.0;
     }
 
     // Natural width of the image is 5150 px

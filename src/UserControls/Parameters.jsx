@@ -15,9 +15,9 @@ export default class Parameters extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <br/>
+                <br />
                 <fieldset>
-                    <legend style={{color: "#00178c"}}>Parameters</legend>
+                    <legend style={{ color: "#00178c" }}>Parameters</legend>
                     <SingleVariableControl
                         name={"initialSeparationDistance"}
                         displayName={"Initial Separation Distance: "}
@@ -29,7 +29,7 @@ export default class Parameters extends React.Component {
                         value={this.props.params.initialSeparationDistance}
                         onChange={this.handleSingleVariableChange}
                     />
-                    <br/>
+                    <br />
                     <SingleVariableControl
                         name={"expansionRate"}
                         displayName={"Universe Expansion Rate: "}
@@ -42,20 +42,27 @@ export default class Parameters extends React.Component {
                         value={this.props.params.expansionRate}
                         onChange={this.handleSingleVariableChange}
                     />
-                    <br/>
+                    <br />
                 </fieldset>
-                <br/>
+                <br />
             </React.Fragment>
         )
     }
 
     handleSingleVariableChange(key, value) {
-        let paramChangeIsLegal = !(key === 'initialSeparationDistance' && this.props.simulationStarted);
-        if (paramChangeIsLegal) {
+        let separationDistChangeIsLegal = !(key === 'initialSeparationDistance'
+            && this.props.simulationStarted);
+        let expansionRateChangeIsLegal = !(key === 'expansionRate' && this.props.isPlaying);
+        if (separationDistChangeIsLegal && expansionRateChangeIsLegal) {
             this.props.onChange({
                 ...this.props.params,
                 [key]: value
             });
+            return;
+        }
+
+        if (!expansionRateChangeIsLegal) {
+            alert("Hit pause and then change expansion rate!");
             return;
         }
 

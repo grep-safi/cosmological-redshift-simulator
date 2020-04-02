@@ -14,7 +14,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 expansionRate: 10,
             },
 
-            graphDisplayed: true,
+            graphDisplayed: false,
 
             times: [0],
             targetDistances: [6.50],
@@ -59,14 +59,14 @@ class CosmologicalRedshiftSim extends React.Component {
                     distanceBetweenBodies={this.state.distanceBetweenBodies}
                     isPlaying={this.state.isPlaying}
                     simulationStarted={this.state.simulationStarted}
-                    changeSimState={() => {this.changeSimState()} }
+                    changeSimState={() => { this.changeSimState() }}
                 />
             </div>
 
             <div className="animationButton">
                 <button type="box"
-                        className="btn btn-danger btn-sm"
-                        onClick={() => this.onStartClick() }>
+                    className="btn btn-danger btn-sm"
+                    onClick={() => this.onStartClick()}>
                     {this.state.startBtnText}
                 </button>
             </div>
@@ -76,14 +76,15 @@ class CosmologicalRedshiftSim extends React.Component {
                     params={this.state.parameters}
                     onChange={this.handleNewParameters.bind(this)}
                     simulationStarted={this.state.simulationStarted}
+                    isPlaying={this.state.isPlaying}
                 />
             </div>
 
             <div className="checkBox">
                 <input type="checkbox"
-                       onChange={() => this.displayGraph()}
-                       checked={this.state.graphDisplayed}
-                       id="graphDisplay"
+                    onChange={() => this.displayGraph()}
+                    checked={this.state.graphDisplayed}
+                    id="graphDisplay"
                 />
                 <label className="checkBoxText" htmlFor="graphDisplay" id="text">
                     Display Graph
@@ -132,8 +133,8 @@ class CosmologicalRedshiftSim extends React.Component {
 
         let maxSimIndex = this.state.index;
         while ((distance_to_light > 0) && maxSimIndex < 200000) {
-            current_separation += current_separation * expansion_rate*dt;
-            distance_to_light += distance_to_light * expansion_rate*dt;
+            current_separation += current_separation * expansion_rate * dt;
+            distance_to_light += distance_to_light * expansion_rate * dt;
 
             distance_to_light -= dt;
             light_travel_distance = light_travel_distance + dt;
@@ -156,7 +157,7 @@ class CosmologicalRedshiftSim extends React.Component {
             maxIndex: maxSimIndex,
 
             lightTravelledDistances: this.state.lightTravelledDistances.slice(0, this.state.index + 1),
-            targetDistances:  this.state.targetDistances.slice(0, this.state.index + 1),
+            targetDistances: this.state.targetDistances.slice(0, this.state.index + 1),
             lightDistances: this.state.lightDistances.slice(0, this.state.index + 1),
             times: this.state.times.slice(0, this.state.index + 1),
         });

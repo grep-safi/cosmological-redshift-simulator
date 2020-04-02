@@ -16,7 +16,7 @@ body>.container {
 
 #chart {
     position: relative;
-    bottom: 850px;
+    bottom: 860px;
     left: 175px;
     /*background-color: black;*/
     background-color: transparent;
@@ -26,7 +26,7 @@ body>.container {
     color: aqua;
     position: relative;
     left: 225px;
-    top: 20px;
+    top: 25px;
 
 }
 
