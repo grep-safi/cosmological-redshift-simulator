@@ -1,5 +1,4 @@
 import React       from 'react';
-import LineGraph from './LineGraph';
 
 const styles = {
     width   : 150,

@@ -100,7 +100,7 @@ export default class Redshift extends React.Component {
             fill: 0xe4d1a0, // butter
         });
 
-        bodyText.resolution = 3;
+        // bodyText.resolution = 3;
         bodyText.anchor.set(0.5);
         bodyText.position.x = x;
         bodyText.position.y = y - 60;
