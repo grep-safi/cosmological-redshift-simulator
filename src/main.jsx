@@ -106,10 +106,6 @@ class CosmologicalRedshiftSim extends React.Component {
 
             <div id="legend">
                 <Legend
-                    lightValues={this.state.lightTravelledDistances}
-                    targetDistances={this.state.targetDistances}
-                    lightDistances={this.state.lightDistances}
-                    times={this.state.times}
                     displayGraph={this.state.graphDisplayed}
                 />
             </div>
