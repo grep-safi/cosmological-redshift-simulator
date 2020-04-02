@@ -30,8 +30,8 @@ export default class Redshift extends React.Component {
         this.app = new PIXI.Application({
             width: CENTER_X * 2,
             height: CENTER_Y * 2,
-            // backgroundColor: 0x241B23,
             backgroundColor: 0xffffff,
+            // backgroundColor: 0x001aff, // Super sick blue background
             antialias: true,
         });
 
@@ -50,7 +50,7 @@ export default class Redshift extends React.Component {
         // );
 
         starryBackground.x = -5150 / 2 + CENTER_X;
-        starryBackground.y = -3433 / 2 + CENTER_Y;
+        starryBackground.y = -3433 / 2 + CENTER_Y + 70;
 
         this.bg = starryBackground;
         stage.addChild(this.bg);
