@@ -76,6 +76,7 @@ class CosmologicalRedshiftSim extends React.Component {
                     params={this.state.parameters}
                     onChange={this.handleNewParameters.bind(this)}
                     simulationStarted={this.state.simulationStarted}
+                    simulationEnded={this.state.simulationEnded}
                     isPlaying={this.state.isPlaying}
                 />
             </div>

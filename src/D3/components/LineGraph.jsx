@@ -53,7 +53,7 @@ export default (props) => {
             width={props.width}
             height={props.height}
             id={'lightValID'}
-            color={'blue'}
+            color={'yellow'}
         />
         <Line
             data={lineDataTargetDist}

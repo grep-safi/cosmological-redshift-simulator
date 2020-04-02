@@ -50,7 +50,7 @@ export default class Redshift extends React.Component {
         // );
 
         starryBackground.x = -5150 / 2 + CENTER_X;
-        starryBackground.y -= 3433 / 2;
+        starryBackground.y = -3433 / 2 + CENTER_Y;
 
         this.bg = starryBackground;
         stage.addChild(this.bg);
