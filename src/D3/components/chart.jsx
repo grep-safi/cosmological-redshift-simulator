@@ -17,7 +17,7 @@ export default class Chart extends React.Component{
 
         return (
             <div>
-                <h4 align={"center"} style={{color: "rgb(0, 255, 255)", marginBottom: "-15px"}}>Distance vs Time</h4>
+                <h4 className="graphTitleText" >Distance vs Time</h4>
                 <LineGraph
                     {...this.props}
                     {...styles}

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Redshift from './Redshift';
 import NavBar from "./UserControls/NavBar";
 import Parameters from "./UserControls/Parameters";
-import Chart from "./D3/components/chart.jsx";
+import Chart from "./D3/components/Chart";
 
 class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 expansionRate: 10,
             },
 
-            graphDisplayed: false,
+            graphDisplayed: true,
 
             times: [0],
             targetDistances: [6.50],

@@ -15,11 +15,19 @@ body>.container {
 }
 
 #chart {
-    position: absolute;
-    bottom: 397px;
-    left: 370px;
+    position: relative;
+    bottom: 850px;
+    left: 175px;
     /*background-color: black;*/
     background-color: transparent;
+}
+
+.graphTitleText {
+    color: aqua;
+    position: relative;
+    left: 225px;
+    top: 20px;
+
 }
 
 .animationButton {
@@ -30,9 +38,9 @@ body>.container {
 }
 
 .checkBox {
-    position: absolute;
-    bottom: 135px;
-    left: 980px;
+    position: relative;
+    bottom: 300px;
+    left: 765px;
 }
 
 .checkBoxText {
