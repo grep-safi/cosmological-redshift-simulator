@@ -11,6 +11,8 @@ body>.container {
 #sim-container {
     user-select: none;
     width: 930px;
+    height: 800px;
+
 }
 
 input[type=number]{
@@ -45,7 +47,7 @@ input[type=number]{
     position: relative;
     left: 225px;
     top: 25px;
-
+    width: 225px;
 }
 
 .animationButton {
@@ -150,16 +152,20 @@ input[type=number]{
 }
 
 #animationSpeedText {
+    background-color: black;
     color: darkgoldenrod;
     position: relative;
     right: 25px;
+    width: 75px;
 }
 
 #animationSpeedTextLineTwo {
+    background-color: black;
     color: darkgoldenrod;
     position: relative;
     right: 14px;
     bottom: 5px;
+    width: 50px;
 }
 
 .Redshift>canvas {
