@@ -28,6 +28,7 @@ export default class Parameters extends React.Component {
                         decimals={2}
                         value={this.props.params.initialSeparationDistance}
                         onChange={this.handleSingleVariableChange}
+                        backgroundColors={this.props.backgroundColors}
                     />
                     <br />
                     <SingleVariableControl
@@ -35,12 +36,12 @@ export default class Parameters extends React.Component {
                         displayName={"Universe Expansion Rate: "}
                         className={"expansionParameter"}
                         min={0.00}
-                        // max={0.20}
                         max={20.0}
                         step={0.01}
                         decimals={2}
                         value={this.props.params.expansionRate}
                         onChange={this.handleSingleVariableChange}
+                        backgroundColors={this.props.backgroundColors}
                     />
                     <br />
                 </fieldset>

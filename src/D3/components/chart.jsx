@@ -13,8 +13,6 @@ export default class Chart extends React.Component{
     }
 
     render() {
-        // if (!this.props.displayGraph) return null;
-
         return (
             <div style={{
                 visibility: this.props.displayGraph ? 'visible' : 'hidden'

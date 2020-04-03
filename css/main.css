@@ -31,7 +31,7 @@ input[type=number]{
     position: relative;
     bottom: 1100px;
     left: 750px;
-    background-color: black;
+    /*background-color: black;*/
     width: 150px;
     height: 150px;
 }
@@ -50,6 +50,13 @@ input[type=number]{
     width: 225px;
 }
 
+.parameterNameText {
+    color: #64d390;
+    width: 420px;
+}
+
+/*style={{color: "#64d390", backgroundColor: "black", width: "420px"}}*/
+
 .animationButton {
     position: relative;
     left: 770px;
@@ -63,9 +70,9 @@ input[type=number]{
     left: 765px;
 }
 
-.checkBoxText {
+#checkBoxText {
     color: chartreuse;
-    background-color: black;
+    /*background-color: black;*/
     position: relative;
     left: 5px;
     top: 1px;
@@ -152,7 +159,7 @@ input[type=number]{
 }
 
 #animationSpeedText {
-    background-color: black;
+    /*background-color: black;*/
     color: darkgoldenrod;
     position: relative;
     right: 25px;
@@ -160,7 +167,7 @@ input[type=number]{
 }
 
 #animationSpeedTextLineTwo {
-    background-color: black;
+    /*background-color: black;*/
     color: darkgoldenrod;
     position: relative;
     right: 14px;
@@ -172,3 +179,12 @@ input[type=number]{
     width: 910px;
     height: 600px;
 }
+
+.withinUniverse {
+    background-color: black;
+}
+
+.outsideUniverse {
+    background-color: white;
+}
+

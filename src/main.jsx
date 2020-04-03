@@ -36,6 +36,8 @@ class CosmologicalRedshiftSim extends React.Component {
             distanceTravelledLight: 6.50,
             distanceBetweenBodies: 6.50,
 
+            backgroundColors: "withinUniverse",
+
             index: 0,
             maxIndex: 0,
         };
@@ -80,6 +82,7 @@ class CosmologicalRedshiftSim extends React.Component {
                     simulationStarted={this.state.simulationStarted}
                     simulationEnded={this.state.simulationEnded}
                     isPlaying={this.state.isPlaying}
+                    backgroundColors={this.state.backgroundColors}
                 />
             </div>
 
@@ -89,7 +92,7 @@ class CosmologicalRedshiftSim extends React.Component {
                     checked={this.state.graphDisplayed}
                     id="graphDisplay"
                 />
-                <label className="checkBoxText" htmlFor="graphDisplay" id="text">
+                <label className={this.state.backgroundColors} htmlFor="graphDisplay" id="checkBoxText">
                     Display Graph
                 </label>
             </div>
@@ -104,15 +107,15 @@ class CosmologicalRedshiftSim extends React.Component {
                 />
             </div>
 
-            <div id="legend">
+            <div className={this.state.backgroundColors} id="legend">
                 <Legend
                     displayGraph={this.state.graphDisplayed}
                 />
             </div>
 
             <div className="animationSlider">
-                <h6 id="animationSpeedText">Animation </h6>
-                <h6 id="animationSpeedTextLineTwo">Speed</h6>
+                <h6 className={this.state.backgroundColors} id="animationSpeedText">Animation </h6>
+                <h6 className={this.state.backgroundColors} id="animationSpeedTextLineTwo">Speed</h6>
                 <input
                     type="range"
                     min={1}
@@ -205,6 +208,8 @@ class CosmologicalRedshiftSim extends React.Component {
     animate() {
         if (this.state.simulationEnded) return;
 
+        let cssContainers = this.state.distanceBetweenBodies >= 100 ? "outsideUniverse" : "withinUniverse";
+
         let index = this.state.index;
         let speedOfAnimation = this.state.animationRate;
 
@@ -215,6 +220,8 @@ class CosmologicalRedshiftSim extends React.Component {
         this.state.lightDistances.push(this.state.completeLightDistances[index]);
         this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);
         this.state.times.push(this.state.completeTimes[index]);
+
+        console.log(`backgroundColors: ${this.state.backgroundColors}`);
 
         if (this.state.isPlaying) {
             this.setState({
@@ -229,7 +236,9 @@ class CosmologicalRedshiftSim extends React.Component {
                 times: this.state.times,
 
                 index: this.state.index + speedOfAnimation,
-                simulationEnded: simulationWillComplete
+                simulationEnded: simulationWillComplete,
+
+                backgroundColors: cssContainers
             });
         }
 
