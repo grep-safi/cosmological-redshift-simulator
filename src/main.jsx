@@ -15,8 +15,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 expansionRate: 10,
             },
 
-            // graphDisplayed: false,
-            graphDisplayed: true,
+            graphDisplayed: false,
 
             times: [0],
             targetDistances: [6.50],
@@ -116,7 +115,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 <h6 id="animationSpeedTextLineTwo">Speed</h6>
                 <input
                     type="range"
-                    min={5}
+                    min={1}
                     max={100}
                     step={1}
                     value={this.state.animationRate}
@@ -255,7 +254,7 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     changeAnimationRate(event) {
-        let min = 5;
+        let min = 1;
         let max = 100;
         this.setState({
             animationRate: this.convertEntryToValidNumber(event.target.value, min, max),

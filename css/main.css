@@ -1,7 +1,4 @@
 html body {
-    /*background-color: rgb(255,255,255);*/
-    /*background-color: rgb(0,0,0);*/
-    /*background-color: rgba(0,0,11,0.84);*/
     /*background-color: rgba(0,1,2,0.84);*/ /* Default*/
     /*background-color: rgba(0,6,41,0.98); !* Dark Blue *!*/
     background-color: rgba(0,16,27,0.98); /* Dark Grey Bluish */
@@ -131,6 +128,17 @@ input[type=number]{
     width: 20px;
     height: 150px;
     padding: 0;
+
+    /*background: linear-gradient(to left, #82CFD0 0%, #82CFD0 50%, #fff 50%, #fff 100%);*/
+    /*border: solid 1px #82CFD0;*/
+    /*border-radius: 8px;*/
+    /*!*height: 7px;*!*/
+    /*!*width: 356px;*!*/
+    /*outline: none;*/
+    /*transition: background 450ms ease-in;*/
+    /*-webkit-appearance: none;*/
+
+    /*z-index: 500;*/
 }
 
 .animationSlider input {
@@ -157,5 +165,4 @@ input[type=number]{
 .Redshift>canvas {
     width: 910px;
     height: 600px;
-    /*height: 212px;*/
 }
