@@ -28,7 +28,7 @@ class CosmologicalRedshiftSim extends React.Component {
             completeLightDistances: [6.50],
             completeLightTravelledDistances: [0],
 
-            animationRate: 1.5,
+            animationRate: 20,
             startBtnText: 'play animation',
             isPlaying: false,
             simulationStarted: false,
@@ -64,6 +64,7 @@ class CosmologicalRedshiftSim extends React.Component {
                     changeSimState={() => { this.changeSimState() }}
                 />
             </div>
+
 
             <div className="animationButton">
                 <button type="box"
@@ -109,6 +110,20 @@ class CosmologicalRedshiftSim extends React.Component {
                     displayGraph={this.state.graphDisplayed}
                 />
             </div>
+
+            <div className="animationSlider">
+                <h7 id="animationSpeedText">Animation </h7>
+                <h7 id="animationSpeedTextLineTwo">Speed</h7>
+                <input
+                    type="range"
+                    min={5}
+                    max={100}
+                    step={1}
+                    value={this.state.animationRate}
+                    onChange={this.changeAnimationRate.bind(this)}
+                />
+            </div>
+
         </React.Fragment>;
     }
 
@@ -233,6 +248,12 @@ class CosmologicalRedshiftSim extends React.Component {
                 startBtnText: 'play animation'
             });
         }
+    }
+
+    changeAnimationRate(event) {
+        this.setState({
+            animationRate: event.target.value,
+        })
     }
 
     stopAnimation() {

@@ -12,10 +12,10 @@ export default class Legend extends React.Component{
     }
 
     render() {
-        if (!this.props.displayGraph) return null;
-
         return (
-            <div>
+            <div style={{
+                visibility: this.props.displayGraph ? 'visible' : 'hidden'
+            }}>
                 <svg width={styles.width} height={styles.height}>
                     <text
                         x="150"
