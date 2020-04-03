@@ -13,9 +13,7 @@ export default class Legend extends React.Component{
 
     render() {
         return (
-            <div style={{
-                visibility: this.props.displayGraph ? 'visible' : 'hidden'
-            }}>
+            <div className={this.props.backgroundColors} id="legend">
                 <svg width={styles.width} height={styles.height}>
                     <text
                         x="150"

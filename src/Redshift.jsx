@@ -8,7 +8,7 @@ const CENTER_Y = 300;
 
 const SCALING_FACTOR = 50;
 
-const scaleToPixel    = (distance) => distance * SCALING_FACTOR;
+const scaleToPixel   = distance => distance * SCALING_FACTOR;
 
 export default class Redshift extends React.Component {
     constructor(props) {

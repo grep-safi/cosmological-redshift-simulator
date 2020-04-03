@@ -107,9 +107,9 @@ class CosmologicalRedshiftSim extends React.Component {
                 />
             </div>
 
-            <div className={this.state.backgroundColors} id="legend">
+            <div style={{ visibility: this.state.graphDisplayed ? 'visible' : 'hidden' }}>
                 <Legend
-                    displayGraph={this.state.graphDisplayed}
+                    backgroundColors={this.state.backgroundColors}
                 />
             </div>
 

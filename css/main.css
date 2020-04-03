@@ -55,8 +55,6 @@ input[type=number]{
     width: 420px;
 }
 
-/*style={{color: "#64d390", backgroundColor: "black", width: "420px"}}*/
-
 .animationButton {
     position: relative;
     left: 770px;
