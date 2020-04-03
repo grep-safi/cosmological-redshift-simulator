@@ -142,14 +142,12 @@ input[type=number]{
 }
 
 #animationSpeedText {
-    background-color: black;
     color: darkgoldenrod;
     position: relative;
     right: 25px;
 }
 
 #animationSpeedTextLineTwo {
-    background-color: black;
     color: darkgoldenrod;
     position: relative;
     right: 14px;

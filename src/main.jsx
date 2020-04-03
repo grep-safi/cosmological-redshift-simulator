@@ -207,13 +207,16 @@ class CosmologicalRedshiftSim extends React.Component {
         if (this.state.simulationEnded) return;
 
         let index = this.state.index;
+        let speedOfAnimation = this.state.animationRate;
+
+        let simulationWillComplete = index >= this.state.maxIndex - (speedOfAnimation + 1);
+        if (simulationWillComplete) { index = this.state.maxIndex - 1; }
 
         this.state.targetDistances.push(this.state.completeTargetDistances[index]);
         this.state.lightDistances.push(this.state.completeLightDistances[index]);
         this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);
         this.state.times.push(this.state.completeTimes[index]);
 
-        let speedOfAnimation = this.state.animationRate;
         if (this.state.isPlaying) {
             this.setState({
                 distanceTravelledLight: this.state.completeLightDistances[index],
@@ -226,11 +229,8 @@ class CosmologicalRedshiftSim extends React.Component {
                 lightTravelledDistances: this.state.lightTravelledDistances,
                 times: this.state.times,
 
-                // index: this.state.index + this.state.animationRate,
-                // simulationEnded: index >= this.state.maxIndex - (this.state.animationRate + 1)
-
                 index: this.state.index + speedOfAnimation,
-                simulationEnded: index >= this.state.maxIndex - (speedOfAnimation + 1),
+                simulationEnded: simulationWillComplete
             });
         }
 

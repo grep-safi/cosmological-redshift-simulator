@@ -16,7 +16,7 @@ export default class SingleVariableControl extends React.Component {
     render() {
         const value = Number.parseFloat(this.props.value).toFixed(this.props.decimals);
         return (
-            <label style={{color: "#64d390", backgroundColor: "black"}}>
+            <label style={{color: "#64d390", backgroundColor: "black", width: "420px"}}>
                 {this.props.displayName}
                 <NumberInputField
                     type="number"
