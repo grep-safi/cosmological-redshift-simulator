@@ -17,7 +17,6 @@ export default class Parameters extends React.Component {
             <React.Fragment>
                 <br />
                 <fieldset>
-                    {/*<legend id="parameterText" style={{ color: "rgba(195,87,122,0.84)" }}>Parameters</legend>*/}
                     <legend id="parameterText">Parameters</legend>
                     <SingleVariableControl
                         name={"initialSeparationDistance"}

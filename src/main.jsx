@@ -112,8 +112,8 @@ class CosmologicalRedshiftSim extends React.Component {
             </div>
 
             <div className="animationSlider">
-                <h7 id="animationSpeedText">Animation </h7>
-                <h7 id="animationSpeedTextLineTwo">Speed</h7>
+                <h6 id="animationSpeedText">Animation </h6>
+                <h6 id="animationSpeedTextLineTwo">Speed</h6>
                 <input
                     type="range"
                     min={5}
@@ -213,6 +213,7 @@ class CosmologicalRedshiftSim extends React.Component {
         this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);
         this.state.times.push(this.state.completeTimes[index]);
 
+        let speedOfAnimation = this.state.animationRate;
         if (this.state.isPlaying) {
             this.setState({
                 distanceTravelledLight: this.state.completeLightDistances[index],
@@ -225,8 +226,11 @@ class CosmologicalRedshiftSim extends React.Component {
                 lightTravelledDistances: this.state.lightTravelledDistances,
                 times: this.state.times,
 
-                index: this.state.index + 20,
-                simulationEnded: index >= this.state.maxIndex - 21
+                // index: this.state.index + this.state.animationRate,
+                // simulationEnded: index >= this.state.maxIndex - (this.state.animationRate + 1)
+
+                index: this.state.index + speedOfAnimation,
+                simulationEnded: index >= this.state.maxIndex - (speedOfAnimation + 1),
             });
         }
 
@@ -251,9 +255,31 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     changeAnimationRate(event) {
+        let min = 5;
+        let max = 100;
         this.setState({
-            animationRate: event.target.value,
+            animationRate: this.convertEntryToValidNumber(event.target.value, min, max),
         })
+    }
+
+    /**
+     * Converts string into a number, and ensures that it is within the valid
+     * range of numbers, using the "min" and "max" provided by the props passed
+     * to this component.
+     * @param  {String} value The direct input string from user.
+     * @param  {Number} min   The value to default to for min
+     * @param  {Number} max   The value to default to for max
+     * @return {Number} The validated number output
+     */
+    convertEntryToValidNumber(value, min, max) {
+        let type = typeof(value);
+        if (isNaN(value) || type !== 'string' && type !== 'number') {
+            return min;
+        }
+        let result = Number.parseFloat(value);
+        result = Math.min(max, result);
+        result = Math.max(min, result);
+        return result;
     }
 
     stopAnimation() {

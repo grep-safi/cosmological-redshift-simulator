@@ -32,7 +32,6 @@ input[type=number]{
     position: relative;
     bottom: 1100px;
     left: 750px;
-    /*background-color: black;*/
     background-color: black;
     width: 150px;
     height: 150px;
@@ -67,6 +66,7 @@ input[type=number]{
 
 .checkBoxText {
     color: chartreuse;
+    background-color: black;
     position: relative;
     left: 5px;
     top: 1px;
@@ -146,7 +146,6 @@ input[type=number]{
     color: darkgoldenrod;
     position: relative;
     right: 25px;
-    width: 160px;
 }
 
 #animationSpeedTextLineTwo {
@@ -154,6 +153,7 @@ input[type=number]{
     color: darkgoldenrod;
     position: relative;
     right: 14px;
+    bottom: 5px;
 }
 
 .Redshift>canvas {
