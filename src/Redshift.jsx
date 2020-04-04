@@ -144,7 +144,8 @@ export default class Redshift extends React.Component {
     }
 
     updateLightLine() {
-        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance) / 2;
+        // let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance) / 2;
+        let initialSeparation = this.getScaledInitialSeparation();
         // Prepares line for redrawing on canvas
         this.directLine.clear();
         this.directLine.lineStyle(2, 0xfcff4d);
@@ -155,12 +156,22 @@ export default class Redshift extends React.Component {
 
         // If light has reached us, then don't let the line go any further
         let distanceMoved = (this.us.x - scaleToPixel(this.props.distanceTravelledLight));
+        // let distanceMoved = (scaleToPixel(this.props.distanceTravelledLight));
         if (!this.props.simulationStarted) distanceMoved = lineStart;
 
         // Draws the other end of the light ray (line)
         distanceMoved = (lineStart - distanceMoved) >= 0 ? lineStart : distanceMoved;
 
         this.directLine.lineTo(distanceMoved, CENTER_Y + 50);
+    }
+
+    getScaledInitialSeparation() {
+        let initialSeparation = this.props.params.initialSeparationDistance / 2;
+        let currWidth = 17.228377773099474;
+        let maxWidth = this.props.distanceBetweenBodies > currWidth ? this.props.distanceBetweenBodies : currWidth;
+        initialSeparation = (initialSeparation / maxWidth) * 860;
+        initialSeparation = initialSeparation > 65 ? initialSeparation : 65;
+        return initialSeparation;
     }
 
     updateTopLineBody(body) {
@@ -172,11 +183,12 @@ export default class Redshift extends React.Component {
         );
     }
 
-    updateInitialSeparationLine(constant) {
-        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance / 2);
+    updateInitialSeparationLine(shift) {
+        let initialSeparation = this.getScaledInitialSeparation();
+
         this.updateLine(
-            CENTER_X + constant * initialSeparation,
-            CENTER_X + constant * 60,
+            CENTER_X + shift * initialSeparation,
+            CENTER_X + shift * 60,
             this.us.y + 35,
             this.us.y + 35
         );
@@ -192,7 +204,8 @@ export default class Redshift extends React.Component {
     }
 
     updateInitialVerticals(constant) {
-        let initialSeparation = scaleToPixel(this.props.params.initialSeparationDistance / 2);
+        let initialSeparation = this.getScaledInitialSeparation();
+
         this.updateLine(
             CENTER_X + constant * initialSeparation,
             CENTER_X + constant * initialSeparation,
@@ -234,10 +247,10 @@ export default class Redshift extends React.Component {
     }
 
     updateBodiesAnimation() {
-        let halfOfScreen = CENTER_X - 10;
+        let halfOfScreen = CENTER_X;
         let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies / 2);
 
-        if (distanceFromCenter > halfOfScreen - 20) {
+        if (distanceFromCenter > halfOfScreen - 30) {
             this.shrinkBackground();
         } else {
             this.us.x = CENTER_X + distanceFromCenter;

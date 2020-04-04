@@ -221,11 +221,10 @@ class CosmologicalRedshiftSim extends React.Component {
         this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);
         this.state.times.push(this.state.completeTimes[index]);
 
-        console.log(`backgroundColors: ${this.state.backgroundColors}`);
-
         if (this.state.isPlaying) {
             this.setState({
                 distanceTravelledLight: this.state.completeLightDistances[index],
+                // distanceTravelledLight: this.state.completeTargetDistances[index],
                 distanceBetweenBodies: this.state.completeTargetDistances[index],
 
                 simulationStarted: true,
