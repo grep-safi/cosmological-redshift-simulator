@@ -12,7 +12,7 @@ class CosmologicalRedshiftSim extends React.Component {
         this.initialState = {
             parameters: {
                 initialSeparationDistance: 6.50,
-                expansionRate: 10,
+                expansionRate: 6.50,
             },
 
             graphDisplayed: false,
@@ -133,13 +133,22 @@ class CosmologicalRedshiftSim extends React.Component {
         this.calculateData();
     }
 
-    displayGraph(e) {
-        console.log(`displayGraph: ${this.state.graphDisplayed}`);
-        this.setState({
-            graphDisplayed: !this.state.graphDisplayed
-        });
+    displayGraph() {
+        this.setState({ graphDisplayed: !this.state.graphDisplayed });
     }
 
+    /**
+     * calculateData() completes the underlying calculation for the data
+     * and stores it within four arrays:
+     * 1. Time array
+     * 2. Target distances array
+     * 3. Light Distances array
+     * 4. Light travelled distances array
+     *
+     * Each of these is then stored as state variables with the word
+     * "complete" prepended to them (because we do not want the graph and
+     * drawings to be immediately displayed--rather, we need it to be "animated")
+     */
     calculateData() {
         let dt = 0.001;
         let expansion_rate = this.state.parameters.expansionRate / 100;
@@ -220,6 +229,7 @@ class CosmologicalRedshiftSim extends React.Component {
         this.state.lightDistances.push(this.state.completeLightDistances[index]);
         this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);
         this.state.times.push(this.state.completeTimes[index]);
+        console.log(`yup111: ${this.state.completeLightTravelledDistances[this.state.completeLightTravelledDistances.length - 1]}`);
 
         if (this.state.isPlaying) {
             this.setState({

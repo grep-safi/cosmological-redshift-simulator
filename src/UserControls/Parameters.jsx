@@ -36,7 +36,7 @@ export default class Parameters extends React.Component {
                         displayName={"Universe Expansion Rate: "}
                         className={"expansionParameter"}
                         min={0.00}
-                        max={20.0}
+                        max={13.00}
                         step={0.01}
                         decimals={2}
                         value={this.props.params.expansionRate}
@@ -74,9 +74,7 @@ export default class Parameters extends React.Component {
 }
 
 Parameters.propTypes = {
-    params: PropTypes.exact({
-        initialSeparationDistance: PropTypes.number.isRequired,
-        expansionRate: PropTypes.number.isRequired,
+    params: PropTypes.exact({ initialSeparationDistance: PropTypes.number.isRequired, expansionRate: PropTypes.number.isRequired,
     }).isRequired,
     onChange: PropTypes.func.isRequired,
     simulationStarted: PropTypes.bool.isRequired

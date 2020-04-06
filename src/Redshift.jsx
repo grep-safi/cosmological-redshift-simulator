@@ -30,8 +30,8 @@ export default class Redshift extends React.Component {
         this.app = new PIXI.Application({
             width: CENTER_X * 2,
             height: CENTER_Y * 2,
-            // backgroundColor: 0xffffff,
-            backgroundColor: 0x001aff, // Super sick blue background
+            backgroundColor: 0xffffff,
+            // backgroundColor: 0x001aff, // Super sick blue background
             antialias: true,
         });
 
@@ -44,10 +44,6 @@ export default class Redshift extends React.Component {
         const starryBackground = new PIXI.Sprite(
             PIXI.Texture.from('assets/starry-background.svg')
         );
-
-        // const starryBackground = new PIXI.Sprite(
-        //     PIXI.Texture.from('assets/starry-background.jpg')
-        // );
 
         starryBackground.x = -5150 / 2 + CENTER_X;
         starryBackground.y = -3433 / 2 + CENTER_Y + 70;
@@ -295,8 +291,6 @@ export default class Redshift extends React.Component {
         this.updateTextValues();
         this.updateLightLine();
         this.updateLines();
-
-        this.app.renderer.backgroundColor = 0xffffff;
 
         this.frameId = requestAnimationFrame(this.animate);
     }
