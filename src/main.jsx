@@ -101,7 +101,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 </label>
             </div>
 
-            <div className="checkBox">
+            <div className="checkBox" id="animationCheckBox">
                 <input type="checkbox"
                        onChange={() => this.displayAnimationRate()}
                        checked={this.state.displayAnimationRate}
@@ -112,7 +112,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 </label>
             </div>
 
-            <div className="checkBox">
+            <div className="checkBox" id="parametersCheckBox">
                 <input type="checkbox"
                        onChange={() => this.displayParams()}
                        checked={this.state.displayParameters}
