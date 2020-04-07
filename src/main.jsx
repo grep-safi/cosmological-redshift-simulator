@@ -16,6 +16,8 @@ class CosmologicalRedshiftSim extends React.Component {
             },
 
             graphDisplayed: false,
+            displayParameters: true,
+            displayAnimationRate: true,
 
             times: [0],
             targetDistances: [6.50],
@@ -69,21 +71,23 @@ class CosmologicalRedshiftSim extends React.Component {
 
             <div className="animationButton">
                 <button type="box"
-                    className="btn btn-danger btn-sm"
-                    onClick={() => this.onStartClick()}>
+                        className="btn btn-danger btn-sm"
+                        onClick={() => this.onStartClick()}>
                     {this.state.startBtnText}
                 </button>
             </div>
 
-            <div className="parameters">
-                <Parameters
-                    params={this.state.parameters}
-                    onChange={this.handleNewParameters.bind(this)}
-                    simulationStarted={this.state.simulationStarted}
-                    simulationEnded={this.state.simulationEnded}
-                    isPlaying={this.state.isPlaying}
-                    backgroundColors={this.state.backgroundColors}
-                />
+            <div style={{ visibility: this.state.displayParameters ? 'visible' : 'hidden' }}>
+                <div className="parameters">
+                    <Parameters
+                        params={this.state.parameters}
+                        onChange={this.handleNewParameters.bind(this)}
+                        simulationStarted={this.state.simulationStarted}
+                        simulationEnded={this.state.simulationEnded}
+                        isPlaying={this.state.isPlaying}
+                        backgroundColors={this.state.backgroundColors}
+                    />
+                </div>
             </div>
 
             <div className="checkBox">
@@ -94,6 +98,28 @@ class CosmologicalRedshiftSim extends React.Component {
                 />
                 <label className={this.state.backgroundColors} htmlFor="graphDisplay" id="checkBoxText">
                     Display Graph
+                </label>
+            </div>
+
+            <div className="checkBox">
+                <input type="checkbox"
+                       onChange={() => this.displayAnimationRate()}
+                       checked={this.state.displayAnimationRate}
+                       id="animationRateDisplay"
+                />
+                <label className={this.state.backgroundColors} htmlFor="animationRateDisplay" id="checkBoxText">
+                    Display Animation Slider
+                </label>
+            </div>
+
+            <div className="checkBox">
+                <input type="checkbox"
+                       onChange={() => this.displayParams()}
+                       checked={this.state.displayParameters}
+                       id="displayParams"
+                />
+                <label className={this.state.backgroundColors} htmlFor="displayParams" id="checkBoxText">
+                    Display Parameters
                 </label>
             </div>
 
@@ -113,17 +139,19 @@ class CosmologicalRedshiftSim extends React.Component {
                 />
             </div>
 
-            <div className="animationSlider">
-                <h6 className={this.state.backgroundColors} id="animationSpeedText">Animation </h6>
-                <h6 className={this.state.backgroundColors} id="animationSpeedTextLineTwo">Speed</h6>
-                <input
-                    type="range"
-                    min={1}
-                    max={100}
-                    step={1}
-                    value={this.state.animationRate}
-                    onChange={this.changeAnimationRate.bind(this)}
-                />
+            <div style={{ visibility: this.state.displayAnimationRate ? 'visible' : 'hidden' }}>
+                <div className="animationSlider">
+                    <h6 className={this.state.backgroundColors} id="animationSpeedText">Animation </h6>
+                    <h6 className={this.state.backgroundColors} id="animationSpeedTextLineTwo">Speed</h6>
+                    <input
+                        type="range"
+                        min={1}
+                        max={100}
+                        step={1}
+                        value={this.state.animationRate}
+                        onChange={this.changeAnimationRate.bind(this)}
+                    />
+                </div>
             </div>
 
         </React.Fragment>;
@@ -135,6 +163,14 @@ class CosmologicalRedshiftSim extends React.Component {
 
     displayGraph() {
         this.setState({ graphDisplayed: !this.state.graphDisplayed });
+    }
+
+    displayAnimationRate() {
+        this.setState({ displayAnimationRate: !this.state.displayAnimationRate });
+    }
+
+    displayParams() {
+        this.setState({ displayParameters: !this.state.displayParameters });
     }
 
     /**
