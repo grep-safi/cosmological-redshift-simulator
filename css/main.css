@@ -125,9 +125,14 @@ input[type=number]{
 
 .parameters {
     position: relative;
-    bottom: 200px;
+    bottom: 202px;
     left: 30px;
+}
 
+.paramAlertText {
+    position: relative;
+    bottom: 963px;
+    left: 30px;
 }
 
 .separationParameter {

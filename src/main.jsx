@@ -42,6 +42,7 @@ class CosmologicalRedshiftSim extends React.Component {
 
             index: 0,
             maxIndex: 0,
+            simulationWillNeverEnd: false,
         };
 
 
@@ -154,6 +155,20 @@ class CosmologicalRedshiftSim extends React.Component {
                 </div>
             </div>
 
+            <div style={{ visibility: this.state.simulationWillNeverEnd ? 'visible' : 'hidden' }}>>
+                <div className="paramAlertText">
+                    <svg width={500} height={100}>
+                        <text
+                            x="0"
+                            y="30"
+                            fill="orchid"
+                        >
+                            With this configuration, the light from the galaxy will never reach Earth
+                        </text>
+                    </svg>
+                </div>
+            </div>
+
         </React.Fragment>;
     }
 
@@ -230,6 +245,8 @@ class CosmologicalRedshiftSim extends React.Component {
             targetDistances: this.state.targetDistances.slice(0, this.state.index + 1),
             lightDistances: this.state.lightDistances.slice(0, this.state.index + 1),
             times: this.state.times.slice(0, this.state.index + 1),
+
+            simulationWillNeverEnd: maxSimIndex === 200000,
         });
     }
 
