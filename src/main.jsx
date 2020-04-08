@@ -325,31 +325,7 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     changeAnimationRate(event) {
-        let min = 1;
-        let max = 100;
-        this.setState({
-            animationRate: this.convertEntryToValidNumber(event.target.value, min, max),
-        })
-    }
-
-    /**
-     * Converts string into a number, and ensures that it is within the valid
-     * range of numbers, using the "min" and "max" provided by the props passed
-     * to this component.
-     * @param  {String} value The direct input string from user.
-     * @param  {Number} min   The value to default to for min
-     * @param  {Number} max   The value to default to for max
-     * @return {Number} The validated number output
-     */
-    convertEntryToValidNumber(value, min, max) {
-        let type = typeof(value);
-        if (isNaN(value) || type !== 'string' && type !== 'number') {
-            return min;
-        }
-        let result = Number.parseFloat(value);
-        result = Math.min(max, result);
-        result = Math.max(min, result);
-        return result;
+        this.setState({ animationRate: Number.parseFloat(event.target.value), });
     }
 
     stopAnimation() {

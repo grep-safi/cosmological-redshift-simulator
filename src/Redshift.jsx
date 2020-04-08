@@ -263,7 +263,8 @@ export default class Redshift extends React.Component {
     shrinkBackground() {
         if (!(this.bg.scale.x <= 0)) {
             let distAtContraction = 17.228377773099474;
-            this.bg.scale.x = 1 - ((this.props.distanceBetweenBodies - distAtContraction) / 92.0);
+            // this.bg.scale.x = 1 - ((this.props.distanceBetweenBodies - distAtContraction) / 92.0);
+            this.bg.scale.x = 1 + ((this.props.distanceBetweenBodies - distAtContraction) / 92.0);
             this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
         } else {
             this.bg.scale.x = 0;
