@@ -3,7 +3,9 @@ html {
 }
 
 body {
-    background-color: rgba(0,16,27,0.98); /* Dark Grey Bluish */
+    /*background-color: rgba(0,16,27,0.98); !* Dark Grey Bluish *!*/
+    background-color: rgba(39,38,41,0.98)
+    /*overflow-x: hidden;*/
 }
 
 body>.container {
@@ -16,25 +18,46 @@ body>.container {
     height: 800px;
 }
 
+.Redshift {
+    position: relative;
+    top: 280px;
+    width: 910px;
+    height: 290px;
+}
+
+/*.Redshift>canvas {*/
+/*    position: relative;*/
+/*    top: 275px;*/
+/*    width: 910px;*/
+/*    height: 290px;*/
+/*}*/
+
 input[type=number]{
     width: 60px;
 }
 
 #chart {
     position: relative;
-    bottom: 920px;
+    /*overflow-x: hidden;*/
     left: 175px;
-    /*background-color: black;*/
+    height: 280px;
+    bottom: 5px;
     background-color: transparent;
 }
 
 #legend {
     position: relative;
-    bottom: 1160px;
+    bottom: 250px;
     left: 750px;
-    /*background-color: black;*/
-    width: 150px;
-    /*height: 150px;*/
+}
+
+#topHalf {
+    background-color: black;
+    position: relative;
+    height: 280px;
+    /*bottom: 490px;*/
+    bottom: 495px;
+    width: 920px;
 }
 
 .legendText {
@@ -47,7 +70,7 @@ input[type=number]{
     color: chocolate;
     position: relative;
     left: 225px;
-    top: 25px;
+    top: 5px;
     width: 225px;
 }
 
@@ -58,24 +81,18 @@ input[type=number]{
 
 .animationButton {
     position: relative;
-    left: 770px;
-    bottom: 65px;
+    left: 710px;
+    /*bottom: 65px;*/
+    top: 330px;
     z-index: 1;
 }
 
 .checkBox {
     position: relative;
-    bottom: 290px;
-    /*left: 765px;*/
-    left: 550px;
-}
-
-#animationCheckBox {
-    bottom: 275px;
-}
-
-#parametersCheckBox {
-    bottom: 330px;
+    /*bottom: 290px;*/
+    top: 100px;
+    left: 705px;
+    /*left: 550px;*/
 }
 
 #checkBoxText {
@@ -123,7 +140,7 @@ input[type=number]{
 
 .parameters {
     position: relative;
-    bottom: 202px;
+    top: 220px;
     left: 30px;
 }
 
@@ -146,7 +163,7 @@ input[type=number]{
 .animationSlider {
     position: relative;
     left: 80px;
-    bottom: 1310px;
+    bottom: 410px;
     width: 20px;
     height: 150px;
     padding: 0;
@@ -161,7 +178,6 @@ input[type=number]{
 }
 
 #animationSpeedText {
-    /*background-color: black;*/
     color: darkgoldenrod;
     position: relative;
     right: 25px;
@@ -169,24 +185,9 @@ input[type=number]{
 }
 
 #animationSpeedTextLineTwo {
-    /*background-color: black;*/
     color: darkgoldenrod;
     position: relative;
     right: 14px;
     bottom: 5px;
     width: 50px;
 }
-
-.Redshift>canvas {
-    width: 910px;
-    height: 600px;
-}
-
-.withinUniverse {
-    background-color: black;
-}
-
-.outsideUniverse {
-    background-color: white;
-}
-

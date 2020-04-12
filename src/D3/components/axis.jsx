@@ -35,13 +35,12 @@ export default class Axes extends Component {
             />
 
             <g className="xAxis" ref={this.xAxis}
-               transform={`translate(0, ${this.props.height})`}
+               transform={`translate(0, ${this.props.height + 5})`}
             />
 
             <text
-                // x="316"
                 x="386"
-                y="245"
+                y="225"
                 dy=".8em"
                 fontSize=".9em"
                 fontWeight="bold"
@@ -52,7 +51,8 @@ export default class Axes extends Component {
 
             <text
                 transform="rotate(-90)"
-                x="-15"
+                // x="-15"
+                x="0"
                 y="0"
                 dy=".8em"
                 fontSize=".9em"

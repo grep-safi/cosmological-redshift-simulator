@@ -13,7 +13,7 @@ export default class Legend extends React.Component{
 
     render() {
         return (
-            <div className={this.props.backgroundColors} id="legend">
+            <div id="legend">
                 <svg width={styles.width} height={styles.height}>
                     <text
                         x="150"

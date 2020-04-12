@@ -15,10 +15,6 @@ class CosmologicalRedshiftSim extends React.Component {
                 expansionRate: 6.50,
             },
 
-            graphDisplayed: false,
-            displayParameters: true,
-            displayAnimationRate: true,
-
             times: [0],
             targetDistances: [6.50],
             lightDistances: [6.50],
@@ -38,8 +34,6 @@ class CosmologicalRedshiftSim extends React.Component {
             distanceTravelledLight: 6.50,
             distanceBetweenBodies: 6.50,
 
-            backgroundColors: "withinUniverse",
-
             index: 0,
             maxIndex: 0,
             simulationWillNeverEnd: false,
@@ -58,17 +52,14 @@ class CosmologicalRedshiftSim extends React.Component {
                 onResetClick={this.onResetClick.bind(this)}
             />
 
-            <div>
-                <Redshift
-                    params={this.state.parameters}
-                    distanceTravelledLight={this.state.distanceTravelledLight}
-                    distanceBetweenBodies={this.state.distanceBetweenBodies}
-                    isPlaying={this.state.isPlaying}
-                    simulationStarted={this.state.simulationStarted}
-                    changeSimState={() => { this.changeSimState() }}
-                />
-            </div>
-
+            <Redshift
+                params={this.state.parameters}
+                distanceTravelledLight={this.state.distanceTravelledLight}
+                distanceBetweenBodies={this.state.distanceBetweenBodies}
+                isPlaying={this.state.isPlaying}
+                simulationStarted={this.state.simulationStarted}
+                changeSimState={() => { this.changeSimState() }}
+            />
 
             <div className="animationButton">
                 <button type="box"
@@ -78,72 +69,30 @@ class CosmologicalRedshiftSim extends React.Component {
                 </button>
             </div>
 
-            <div style={{ visibility: this.state.displayParameters ? 'visible' : 'hidden' }}>
-                <div className="parameters">
-                    <Parameters
-                        params={this.state.parameters}
-                        onChange={this.handleNewParameters.bind(this)}
-                        simulationStarted={this.state.simulationStarted}
-                        simulationEnded={this.state.simulationEnded}
-                        isPlaying={this.state.isPlaying}
-                        backgroundColors={this.state.backgroundColors}
-                    />
-                </div>
-            </div>
-
-            <div className="checkBox">
-                <input type="checkbox"
-                    onChange={() => this.displayGraph()}
-                    checked={this.state.graphDisplayed}
-                    id="graphDisplay"
+            <div className="parameters">
+                <Parameters
+                    params={this.state.parameters}
+                    onChange={this.handleNewParameters.bind(this)}
+                    simulationStarted={this.state.simulationStarted}
+                    simulationEnded={this.state.simulationEnded}
+                    isPlaying={this.state.isPlaying}
+                    backgroundColors={this.state.backgroundColors}
                 />
-                <label className={this.state.backgroundColors} htmlFor="graphDisplay" id="checkBoxText">
-                    Display Graph
-                </label>
             </div>
 
-            <div className="checkBox" id="animationCheckBox">
-                <input type="checkbox"
-                       onChange={() => this.displayAnimationRate()}
-                       checked={this.state.displayAnimationRate}
-                       id="animationRateDisplay"
-                />
-                <label className={this.state.backgroundColors} htmlFor="animationRateDisplay" id="checkBoxText">
-                    Display Animation Slider
-                </label>
-            </div>
-
-            <div className="checkBox" id="parametersCheckBox">
-                <input type="checkbox"
-                       onChange={() => this.displayParams()}
-                       checked={this.state.displayParameters}
-                       id="displayParams"
-                />
-                <label className={this.state.backgroundColors} htmlFor="displayParams" id="checkBoxText">
-                    Display Parameters
-                </label>
-            </div>
-
-            <div id="chart">
+            <div id={"topHalf"}>
                 <Chart
                     lightValues={this.state.lightTravelledDistances}
                     targetDistances={this.state.targetDistances}
                     lightDistances={this.state.lightDistances}
                     times={this.state.times}
-                    displayGraph={this.state.graphDisplayed}
                 />
-            </div>
 
-            <div style={{ visibility: this.state.graphDisplayed ? 'visible' : 'hidden' }}>
-                <Legend
-                    backgroundColors={this.state.backgroundColors}
-                />
-            </div>
+                <Legend/>
 
-            <div style={{ visibility: this.state.displayAnimationRate ? 'visible' : 'hidden' }}>
                 <div className="animationSlider">
-                    <h6 className={this.state.backgroundColors} id="animationSpeedText">Animation </h6>
-                    <h6 className={this.state.backgroundColors} id="animationSpeedTextLineTwo">Speed</h6>
+                    <h6  id="animationSpeedText">Animation </h6>
+                    <h6  id="animationSpeedTextLineTwo">Speed</h6>
                     <input
                         type="range"
                         min={1}
@@ -153,6 +102,7 @@ class CosmologicalRedshiftSim extends React.Component {
                         onChange={this.changeAnimationRate.bind(this)}
                     />
                 </div>
+
             </div>
 
             <div style={{ visibility: this.state.simulationWillNeverEnd ? 'visible' : 'hidden' }}>>
@@ -174,18 +124,6 @@ class CosmologicalRedshiftSim extends React.Component {
 
     componentDidMount() {
         this.calculateData();
-    }
-
-    displayGraph() {
-        this.setState({ graphDisplayed: !this.state.graphDisplayed });
-    }
-
-    displayAnimationRate() {
-        this.setState({ displayAnimationRate: !this.state.displayAnimationRate });
-    }
-
-    displayParams() {
-        this.setState({ displayParameters: !this.state.displayParameters });
     }
 
     /**

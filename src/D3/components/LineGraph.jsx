@@ -21,7 +21,8 @@ const xScale = (props) => {
 const yScale = (props) => {
     return scaleLinear()
         .domain([0, yMax(props.targetDistances)])
-        .range([props.height - props.padding + 10, props.padding - 20]);
+        // .range([props.height - props.padding + 10, props.padding - 10]);
+        .range([props.height - props.padding - 10, props.padding - 40]);
 };
 
 const lineGenerator = (xScaleLine, yScaleLine) => {

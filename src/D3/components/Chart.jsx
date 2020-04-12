@@ -14,9 +14,7 @@ export default class Chart extends React.Component{
 
     render() {
         return (
-            <div style={{
-                visibility: this.props.displayGraph ? 'visible' : 'hidden'
-            }}>
+            <div id="chart">
                 <h4 className="graphTitleText" >Distance vs Time</h4>
                 <LineGraph
                     {...this.props}

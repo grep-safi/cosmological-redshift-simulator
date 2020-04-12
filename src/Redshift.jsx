@@ -3,7 +3,7 @@ import * as PIXI from 'pixi.js';
 import PropTypes from 'prop-types';
 
 const CENTER_X = 460;
-const CENTER_Y = 300;
+const CENTER_Y = 145;
 // const CENTER_Y = 106 * 4;
 
 const SCALING_FACTOR = 50;
@@ -22,7 +22,8 @@ export default class Redshift extends React.Component {
     render() {
         return (
             <div className="Redshift"
-                 ref={(thisDiv) => {this.el = thisDiv;}} />
+                 ref={(thisDiv) => {this.el = thisDiv;}}
+            />
         );
     }
 
