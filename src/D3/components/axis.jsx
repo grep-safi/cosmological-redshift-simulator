@@ -31,11 +31,11 @@ export default class Axes extends Component {
     render() {
         return <React.Fragment>
             <g className="yAxis" ref={this.yAxis}
-               transform={`translate(${this.props.paddingLeft}, 0)`}
+               transform={`translate(${this.props.paddingLeft - 2}, 0)`}
             />
 
             <g className="xAxis" ref={this.xAxis}
-               transform={`translate(0, ${this.props.height + 5})`}
+               transform={`translate(-2, ${this.props.height + 5})`}
             />
 
             <text
