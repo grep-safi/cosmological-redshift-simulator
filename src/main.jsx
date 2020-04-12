@@ -142,34 +142,6 @@ class CosmologicalRedshiftSim extends React.Component {
         this.calculateData();
     }
 
-    createBackground() {
-        let width = 910;
-        let height = 290;
-        let maxRadius = 3.5;
-        let numOfStars = 110;
-
-        let bgStars = [];
-        for (let i = 0; i < numOfStars; i++) {
-            let circleX = Math.random() * (width - 5) + 5;
-            let circleY = Math.random() * (height - 5) + 5;
-            let radius = Math.random() * (maxRadius - 1) + 1;
-            let starOpacity = Math.random() * (0.25) + 0.75;
-            let fill = "rgba(255,255,255," + starOpacity + ")";
-
-            let starProperties = {
-                cx: circleX,
-                cy: circleY,
-                r: radius,
-                fill: fill,
-                key: i,
-            };
-
-            bgStars.push(starProperties);
-        }
-
-        this.setState({ backgroundStars: bgStars});
-    };
-
     /**
      * calculateData() completes the underlying calculation for the data
      * and stores it within four arrays:
@@ -292,10 +264,10 @@ class CosmologicalRedshiftSim extends React.Component {
             let star = this.state.backgroundStars[i];
             let circleX = star.cx;
             let circleY = star.cy;
+            let speedOfConvergence = this.state.animationRate / 100;
 
-            let incrementX = circleX < 455 ? 0.25 : -0.25;
-            // let incrementY = 0;
-            let incrementY = circleY < 145 ? 0.05 : -0.05;
+            let incrementX = circleX < 455 ? speedOfConvergence : -1 * speedOfConvergence;
+            let incrementY = circleY < 145 ? speedOfConvergence / 5 : -1 * speedOfConvergence / 5;
 
             circleX += incrementX;
             circleY += incrementY;
@@ -314,14 +286,16 @@ class CosmologicalRedshiftSim extends React.Component {
             newBackgroundStars.push(starProperties);
         }
 
-        if (Math.random() > 0.8) {
+        let likelihoodOfCreation = 1.2 - (this.state.animationRate / 100);
+        likelihoodOfCreation = likelihoodOfCreation > 0.95 ? 0.95 : likelihoodOfCreation;
+        if (Math.random() > likelihoodOfCreation) {
             let circleX;
             let circleY;
             let shift = 20;
 
             if (Math.random() < 0.5) {
                 if (Math.random() < 0.5) {
-                    circleX = Math.random() * (shift) + width;
+                    circleX = Math.random() * (shift) + width + 5;
                 } else {
                     circleX = Math.random() * shift * -1;
                     this.setState({ q3: this.state.q3 + 1});
@@ -330,7 +304,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 circleY = Math.random() * height;
             } else {
                 if (Math.random() < 0.5) {
-                    circleY = Math.random() * (shift) + height;
+                    circleY = Math.random() * (shift) + height + 5;
                 } else {
                     circleY = Math.random() * shift * -1;
                 }

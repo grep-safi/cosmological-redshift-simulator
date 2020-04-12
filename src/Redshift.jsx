@@ -229,10 +229,13 @@ export default class Redshift extends React.Component {
     }
 
     updateBodiesAnimation() {
+        let halfOfScreen = CENTER_X;
         let distanceFromCenter = scaleToPixel(this.props.distanceBetweenBodies / 2);
 
-        this.us.x = CENTER_X + distanceFromCenter;
-        this.galaxy.x = CENTER_X - distanceFromCenter;
+        if (!(distanceFromCenter > halfOfScreen - 30)) {
+            this.us.x = CENTER_X + distanceFromCenter;
+            this.galaxy.x = CENTER_X - distanceFromCenter;
+        }
     }
 
     updateTextValues() {
