@@ -40,7 +40,7 @@ class CosmologicalRedshiftSim extends React.Component {
             maxIndex: 0,
             simulationWillNeverEnd: false,
 
-            backgroundStars: [],
+            backgroundStars: data,
         };
 
 
@@ -80,7 +80,6 @@ class CosmologicalRedshiftSim extends React.Component {
                     simulationStarted={this.state.simulationStarted}
                     simulationEnded={this.state.simulationEnded}
                     isPlaying={this.state.isPlaying}
-                    backgroundColors={this.state.backgroundColors}
                 />
             </div>
 
@@ -134,12 +133,6 @@ class CosmologicalRedshiftSim extends React.Component {
 
     componentDidMount() {
         this.calculateData();
-        this.loadBackground();
-        // this.createBackground();
-    }
-
-    loadBackground() {
-        this.setState({ backgroundStars: data});
     }
 
     createBackground() {
@@ -153,7 +146,6 @@ class CosmologicalRedshiftSim extends React.Component {
             let circleX = Math.random() * (width - 5) + 5;
             let circleY = Math.random() * (height - 5) + 5;
             let radius = Math.random() * (maxRadius - 1) + 1;
-            // let starOpacity = `rgba(255,255,255,${Math.random()})`;
             let starOpacity = Math.random() * (0.25) + 0.75;
             let fill = "rgba(255,255,255," + starOpacity + ")";
 
@@ -169,8 +161,6 @@ class CosmologicalRedshiftSim extends React.Component {
         }
 
         this.setState({ backgroundStars: bgStars});
-        let tmp = bgStars[35];
-        console.log(`me:::: ${tmp.fill}`);
     };
 
     /**
@@ -255,41 +245,59 @@ class CosmologicalRedshiftSim extends React.Component {
     animate() {
         if (this.state.simulationEnded) return;
 
-        let cssContainers = this.state.distanceBetweenBodies >= 100 ? "outsideUniverse" : "withinUniverse";
-
         let index = this.state.index;
         let speedOfAnimation = this.state.animationRate;
 
         let simulationWillComplete = index >= this.state.maxIndex - (speedOfAnimation + 1);
         if (simulationWillComplete) { index = this.state.maxIndex - 1; }
 
+        this.shrinkBackground();
+
         this.state.targetDistances.push(this.state.completeTargetDistances[index]);
         this.state.lightDistances.push(this.state.completeLightDistances[index]);
         this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);
         this.state.times.push(this.state.completeTimes[index]);
-        console.log(`yup111: ${this.state.completeLightTravelledDistances[this.state.completeLightTravelledDistances.length - 1]}`);
 
-        if (this.state.isPlaying) {
-            this.setState({
-                distanceTravelledLight: this.state.completeLightDistances[index],
-                // distanceTravelledLight: this.state.completeTargetDistances[index],
-                distanceBetweenBodies: this.state.completeTargetDistances[index],
+        this.setState({
+            distanceTravelledLight: this.state.completeLightDistances[index],
+            distanceBetweenBodies: this.state.completeTargetDistances[index],
 
-                simulationStarted: true,
+            simulationStarted: true,
 
-                targetDistances: this.state.targetDistances,
-                lightDistances: this.state.lightDistances,
-                lightTravelledDistances: this.state.lightTravelledDistances,
-                times: this.state.times,
+            targetDistances: this.state.targetDistances,
+            lightDistances: this.state.lightDistances,
+            lightTravelledDistances: this.state.lightTravelledDistances,
+            times: this.state.times,
 
-                index: this.state.index + speedOfAnimation,
-                simulationEnded: simulationWillComplete,
-
-                backgroundColors: cssContainers
-            });
-        }
+            index: this.state.index + speedOfAnimation,
+            simulationEnded: simulationWillComplete,
+        });
 
         this.raf = requestAnimationFrame(this.animate.bind(this));
+    }
+
+    shrinkBackground() {
+        let newBackgroundStars = [];
+        for (let i = 0; i < this.state.backgroundStars.length; i++) {
+            let star = this.state.backgroundStars[i];
+            let circleX = star.cx;
+            let circleY = star.cy;
+
+            let incrementX = circleX < 455 ? 1 : -1;
+            let incrementY = circleY < 145 ? 1 : -1;
+
+            let starProperties = {
+                cx: circleX + incrementX,
+                cy: circleY + incrementY,
+                r: star.r,
+                fill: star.fill,
+                key: i,
+            };
+
+            newBackgroundStars.push(starProperties);
+        }
+
+        this.setState({ backgroundStars: newBackgroundStars});
     }
 
     onStartClick() {
