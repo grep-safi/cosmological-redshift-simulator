@@ -6,6 +6,7 @@ import Parameters from "./UserControls/Parameters";
 import Chart from "./D3/components/Chart";
 import Legend from "./D3/components/Legend";
 import DynamicBackground from "./DynamicBackground";
+import { data } from './Data';
 
 class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
@@ -133,7 +134,12 @@ class CosmologicalRedshiftSim extends React.Component {
 
     componentDidMount() {
         this.calculateData();
-        this.createBackground();
+        this.loadBackground();
+        // this.createBackground();
+    }
+
+    loadBackground() {
+        this.setState({ backgroundStars: data});
     }
 
     createBackground() {
