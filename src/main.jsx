@@ -5,6 +5,7 @@ import NavBar from "./UserControls/NavBar";
 import Parameters from "./UserControls/Parameters";
 import Chart from "./D3/components/Chart";
 import Legend from "./D3/components/Legend";
+import DynamicBackground from "./DynamicBackground";
 
 class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
@@ -37,6 +38,8 @@ class CosmologicalRedshiftSim extends React.Component {
             index: 0,
             maxIndex: 0,
             simulationWillNeverEnd: false,
+
+            backgroundStars: [],
         };
 
 
@@ -119,12 +122,50 @@ class CosmologicalRedshiftSim extends React.Component {
                 </div>
             </div>
 
+            <div id={"dynamicBackground"}>
+                <DynamicBackground
+                    backgroundStars={this.state.backgroundStars}
+                />
+            </div>
+
         </React.Fragment>;
     }
 
     componentDidMount() {
         this.calculateData();
+        this.createBackground();
     }
+
+    createBackground() {
+        let width = 910;
+        let height = 290;
+        let maxRadius = 3.5;
+        let numOfStars = 110;
+
+        let bgStars = [];
+        for (let i = 0; i < numOfStars; i++) {
+            let circleX = Math.random() * (width - 5) + 5;
+            let circleY = Math.random() * (height - 5) + 5;
+            let radius = Math.random() * (maxRadius - 1) + 1;
+            // let starOpacity = `rgba(255,255,255,${Math.random()})`;
+            let starOpacity = Math.random() * (0.25) + 0.75;
+            let fill = "rgba(255,255,255," + starOpacity + ")";
+
+            let starProperties = {
+                cx: circleX,
+                cy: circleY,
+                r: radius,
+                fill: fill,
+                key: i,
+            };
+
+            bgStars.push(starProperties);
+        }
+
+        this.setState({ backgroundStars: bgStars});
+        let tmp = bgStars[35];
+        console.log(`me:::: ${tmp.fill}`);
+    };
 
     /**
      * calculateData() completes the underlying calculation for the data

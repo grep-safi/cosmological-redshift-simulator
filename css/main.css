@@ -4,7 +4,7 @@ html {
 
 body {
     /*background-color: rgba(0,16,27,0.98); !* Dark Grey Bluish *!*/
-    background-color: rgba(39,38,41,0.98)
+    background-color: rgba(39,38,41,0.98);
     /*overflow-x: hidden;*/
 }
 
@@ -23,14 +23,15 @@ body>.container {
     top: 280px;
     width: 910px;
     height: 290px;
+    z-index: 10;
 }
 
-/*.Redshift>canvas {*/
-/*    position: relative;*/
-/*    top: 275px;*/
-/*    width: 910px;*/
-/*    height: 290px;*/
-/*}*/
+#dynamicBackground {
+    border-style: dashed;
+    border-color: azure;
+    position: relative;
+    bottom: 613px;
+}
 
 input[type=number]{
     width: 60px;

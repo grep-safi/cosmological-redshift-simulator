@@ -31,8 +31,8 @@ export default class Redshift extends React.Component {
         this.app = new PIXI.Application({
             width: CENTER_X * 2,
             height: CENTER_Y * 2,
-            backgroundColor: 0xffffff,
-            // backgroundColor: 0x001aff, // Super sick blue background
+            // backgroundColor: 0x000000,
+            transparent: true,
             antialias: true,
         });
 
@@ -41,17 +41,6 @@ export default class Redshift extends React.Component {
         const me = this;
         const stage = new PIXI.Container();
         this.app.stage.addChild(stage);
-
-        const starryBackground = new PIXI.Sprite(
-            PIXI.Texture.from('assets/starry-background.svg')
-        );
-
-        starryBackground.x = -5150 / 2 + CENTER_X;
-        starryBackground.y = -3433 / 2 + CENTER_Y + 70;
-
-        this.bg = starryBackground;
-        stage.addChild(this.bg);
-
 
         me.us = me.drawBody('us', 'assets/earth.svg', 20);
         me.galaxy = me.drawBody('galaxy', 'assets/galaxy.png', 45);
@@ -252,8 +241,6 @@ export default class Redshift extends React.Component {
         } else {
             this.us.x = CENTER_X + distanceFromCenter;
             this.galaxy.x = CENTER_X - distanceFromCenter;
-            this.bg.scale.x = 1;
-            this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
         }
 
         this.warningMessage.visible = this.props.distanceBetweenBodies >= 93.0;
@@ -262,14 +249,14 @@ export default class Redshift extends React.Component {
     // Natural width of the image is 5150 px
     // Size of the strip is 920 px
     shrinkBackground() {
-        if (!(this.bg.scale.x <= 0)) {
-            let distAtContraction = 17.228377773099474;
-            // this.bg.scale.x = 1 - ((this.props.distanceBetweenBodies - distAtContraction) / 92.0);
-            this.bg.scale.x = 1 + ((this.props.distanceBetweenBodies - distAtContraction) / 92.0);
-            this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
-        } else {
-            this.bg.scale.x = 0;
-        }
+        // if (!(this.bg.scale.x <= 0)) {
+        //     let distAtContraction = 17.228377773099474;
+        //     // this.bg.scale.x = 1 - ((this.props.distanceBetweenBodies - distAtContraction) / 92.0);
+        //     this.bg.scale.x = 1 + ((this.props.distanceBetweenBodies - distAtContraction) / 92.0);
+        //     this.bg.position.x = -(this.bg.width / 2) + CENTER_X;
+        // } else {
+        //     this.bg.scale.x = 0;
+        // }
     }
 
     updateTextValues() {

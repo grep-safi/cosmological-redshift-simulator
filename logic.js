@@ -1,3 +1,48 @@
+const fs = require('fs')
+
+// Data which will write in a file.
+let data = "amsdoginasdo jakds ";
+
+// Write data in 'Output.txt' .
+// fs.writeFile('output.txt', data, {'flags': 'a'}, (err) => {
+//
+//     In case of a error throw err.
+    // if (err) throw err;
+// });
+
+// fs.appendFileSync("output.txt", 'My Text', {'flags': 'a+'});
+
+let width = 910;
+let height = 290;
+let maxRadius = 3.5;
+let numOfStars = 110;
+
+let bgStars = [];
+for (let i = 0; i < numOfStars; i++) {
+    let circleX = Math.random() * (width - 5) + 5;
+    let circleY = Math.random() * (height - 5) + 5;
+    let radius = Math.random() * (maxRadius - 1) + 1;
+    // let starOpacity = `rgba(255,255,255,${Math.random()})`;
+    let starOpacity = Math.random() * (0.25) + 0.75;
+    let fill = "rgba(255,255,255," + starOpacity + ")";
+
+    let starProperties = {
+        cx: circleX,
+        cy: circleY,
+        r: radius,
+        fill: fill,
+        key: i,
+    };
+
+    bgStars.push(starProperties);
+    let temp = {...starProperties};
+    console.log(temp);
+    fs.appendFileSync("output.txt", temp + '\n', {'flags': 'a+'});
+}
+
+
+
+
 // let dt = 0.001;
 // let expansion_rate = 0.10;
 // let current_time = 0.0;
