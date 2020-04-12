@@ -283,17 +283,25 @@ class CosmologicalRedshiftSim extends React.Component {
             let circleX = star.cx;
             let circleY = star.cy;
 
-            let incrementX = circleX < 455 ? 1 : -1;
-            let incrementY = circleY < 145 ? 1 : -1;
+            let incrementX = circleX < 455 ? 0.25 : -0.25;
+            // let incrementY = 0;
+            let incrementY = circleY < 145 ? 0.05 : -0.05;
+
+            circleX += incrementX;
+            circleY += incrementY;
 
             let starProperties = {
-                cx: circleX + incrementX,
-                cy: circleY + incrementY,
+                cx: circleX,
+                cy: circleY,
                 r: star.r,
                 fill: star.fill,
                 key: i,
             };
 
+            if ((circleX > 455 - 1 && circleX < 455 + 1) || (circleY < 145 - 1 && circleY > 145 + 1 )) {
+                console.log(`printiing `);
+                continue;
+            }
             newBackgroundStars.push(starProperties);
         }
 
