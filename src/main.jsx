@@ -41,6 +41,13 @@ class CosmologicalRedshiftSim extends React.Component {
             simulationWillNeverEnd: false,
 
             backgroundStars: data,
+
+
+
+            q1: 0,
+            q2: 0,
+            q3: 0,
+            q4: 0,
         };
 
 
@@ -253,6 +260,21 @@ class CosmologicalRedshiftSim extends React.Component {
 
         this.shrinkBackground();
 
+        let count1 = 0;
+        let count2 = 0;
+
+        for (let i = 0; i < this.state.backgroundStars.length; i++) {
+           if (this.state.backgroundStars[i].cx > 455) {
+               count1 += 1;
+           } else {
+               count2 += 1;
+           }
+        }
+
+        // console.log(`itttttttt: ${count1} ${count2}`);
+        // console.log(`length of arr: ${this.state.backgroundStars.length}`);
+        // console.log(`each: ${this.state.q1} ${this.state.q2} ${this.state.q3} ${this.state.q4}`);
+
         this.state.targetDistances.push(this.state.completeTargetDistances[index]);
         this.state.lightDistances.push(this.state.completeLightDistances[index]);
         this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);
@@ -277,13 +299,16 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     shrinkBackground() {
+        let width = 910;
+        let height = 290;
+
         let newBackgroundStars = [];
         for (let i = 0; i < this.state.backgroundStars.length; i++) {
             let star = this.state.backgroundStars[i];
             let circleX = star.cx;
             let circleY = star.cy;
 
-            let incrementX = circleX < 455 ? 0.25 : -0.25;
+            let incrementX = circleX < 455 ? 0.25 : -1.25;
             // let incrementY = 0;
             let incrementY = circleY < 145 ? 0.05 : -0.05;
 
@@ -298,10 +323,57 @@ class CosmologicalRedshiftSim extends React.Component {
                 key: i,
             };
 
-            if ((circleX > 455 - 1 && circleX < 455 + 1) || (circleY < 145 - 1 && circleY > 145 + 1 )) {
-                console.log(`printiing `);
-                continue;
+            // if ((circleX > 455 - 1 && circleX < 455 + 1) || (circleY > 145 - 1 && circleY < 145 + 1 )) {
+            //     // console.log(`printiing `);
+            //     continue;
+            // }
+            newBackgroundStars.push(starProperties);
+        }
+
+        for (let i = 0; i < 1; i++) {
+            let circleX;
+            let circleY;
+            let shift = 20;
+
+            if (Math.random() < 0.5) {
+                if (Math.random() < 0.5) {
+                    circleX = Math.random() * (width + shift) + width;
+                } else {
+                    circleX = Math.random() * shift * -1;
+                    this.setState({ q3: this.state.q3 + 1});
+                }
+
+                circleY = Math.random() * height;
+            } else {
+                if (Math.random() < 0.5) {
+                    circleY = Math.random() * (height + shift) + height;
+                } else {
+                    circleY = Math.random() * shift * -1;
+                }
+
+                circleX = Math.random() * width;
             }
+
+            if (circleX >= width) {
+                this.setState({ q1: this.state.q1 + 1});
+            } else if (circleX <= 0) {
+                this.setState({ q2: this.state.q2 + 1});
+            }
+
+            console.log(`da qs: ${this.state.q1}  ${this.state.q2}`);
+
+            let radius = Math.random() * (3.5 - 1) + 1;
+            let starOpacity = Math.random() * (0.25) + 0.75;
+            let fill = "rgba(255,255,255," + starOpacity + ")";
+
+            let starProperties = {
+                cx: circleX,
+                cy: circleY,
+                r: radius,
+                fill: fill,
+                key: i,
+            };
+
             newBackgroundStars.push(starProperties);
         }
 
