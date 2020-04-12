@@ -1,7 +1,7 @@
 import React from 'react';
 
 const dimensions = {
-    width: 910,
+    width: 920,
     height: 290,
 };
 
@@ -37,7 +37,7 @@ export default (props) => {
     return <svg width={dimensions.width} height={dimensions.height}>
         <rect width="100%" height="100%" fill="black"/>
         <g>{ props.backgroundStars.map(renderCircles(props)) }</g>
-        <circle cx="900" cy="50" r="5" fill="rgba(150,0,30,0.945463252323423)" />
+        {/*<circle cx="900" cy="50" r="5" fill="rgba(150,0,30,0.945463252323423)" />*/}
         {/*<circle cx="883.4670120918533" cy="254.77864781639826" r="2.914660136421845" fill="rgba(255,255,255,1)" />*/}
 
         {/*<circle cx="90" cy="50" r="5" fill="#a8a8a8" />*/}

@@ -21,13 +21,17 @@ body>.container {
 .Redshift {
     position: relative;
     top: 280px;
-    width: 910px;
+    width: 920px;
     height: 290px;
     z-index: 10;
 }
 
+.Redshift>canvas {
+    width: 920px;
+
+}
+
 #dynamicBackground {
-    border-style: dashed;
     border-color: azure;
     position: relative;
     bottom: 613px;

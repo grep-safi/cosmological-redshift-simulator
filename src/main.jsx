@@ -308,7 +308,7 @@ class CosmologicalRedshiftSim extends React.Component {
             let circleX = star.cx;
             let circleY = star.cy;
 
-            let incrementX = circleX < 455 ? 0.25 : -1.25;
+            let incrementX = circleX < 455 ? 0.25 : -0.25;
             // let incrementY = 0;
             let incrementY = circleY < 145 ? 0.05 : -0.05;
 
@@ -323,10 +323,9 @@ class CosmologicalRedshiftSim extends React.Component {
                 key: i,
             };
 
-            // if ((circleX > 455 - 1 && circleX < 455 + 1) || (circleY > 145 - 1 && circleY < 145 + 1 )) {
-            //     // console.log(`printiing `);
-            //     continue;
-            // }
+            if ((circleX > 455 - 1 && circleX < 455 + 1) || (circleY > 145 - 1 && circleY < 145 + 1 )) {
+                continue;
+            }
             newBackgroundStars.push(starProperties);
         }
 
@@ -337,7 +336,7 @@ class CosmologicalRedshiftSim extends React.Component {
 
             if (Math.random() < 0.5) {
                 if (Math.random() < 0.5) {
-                    circleX = Math.random() * (width + shift) + width;
+                    circleX = Math.random() * (shift) + width;
                 } else {
                     circleX = Math.random() * shift * -1;
                     this.setState({ q3: this.state.q3 + 1});
@@ -346,7 +345,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 circleY = Math.random() * height;
             } else {
                 if (Math.random() < 0.5) {
-                    circleY = Math.random() * (height + shift) + height;
+                    circleY = Math.random() * (shift) + height;
                 } else {
                     circleY = Math.random() * shift * -1;
                 }
