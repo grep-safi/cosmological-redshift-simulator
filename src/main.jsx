@@ -63,14 +63,14 @@ class CosmologicalRedshiftSim extends React.Component {
                 onResetClick={this.onResetClick.bind(this)}
             />
 
-            <Redshift
-                params={this.state.parameters}
-                distanceTravelledLight={this.state.distanceTravelledLight}
-                distanceBetweenBodies={this.state.distanceBetweenBodies}
-                isPlaying={this.state.isPlaying}
-                simulationStarted={this.state.simulationStarted}
-                changeSimState={() => { this.changeSimState() }}
-            />
+            {/*<Redshift*/}
+            {/*    params={this.state.parameters}*/}
+            {/*    distanceTravelledLight={this.state.distanceTravelledLight}*/}
+            {/*    distanceBetweenBodies={this.state.distanceBetweenBodies}*/}
+            {/*    isPlaying={this.state.isPlaying}*/}
+            {/*    simulationStarted={this.state.simulationStarted}*/}
+            {/*    changeSimState={() => { this.changeSimState() }}*/}
+            {/*/>*/}
 
             <div className="animationButton">
                 <button type="box"

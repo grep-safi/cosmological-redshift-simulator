@@ -31,11 +31,6 @@ const renderCircles = (props) => {
 export default (props) => {
     let distanceFromCenter = scaleToPixel(props.distanceBetweenBodies / 2);
 
-    // if (!(distanceFromCenter > halfOfScreen - 30)) {
-    //     this.us.x = CENTER_X + distanceFromCenter;
-    //     this.galaxy.x = CENTER_X - distanceFromCenter;
-    // }
-
     let sizeShift = 10;
     let galaxySizeShift = 25;
     let xPositionEarth;
@@ -44,13 +39,14 @@ export default (props) => {
     let initialEarthX = CENTER_X + scaleToPixel(props.params.initialSeparationDistance / 2);
     let initialGalaxyX = CENTER_X - scaleToPixel(props.params.initialSeparationDistance / 2);
 
-    let initialSeparation = props.params.initialSeparationDistance;
+    let initialSeparation = props.params.initialSeparationDistance.toFixed(2);
+    let currentSeparation = props.distanceBetweenBodies.toFixed(2);
 
     if (!(distanceFromCenter > CENTER_X - 30)) {
         xPositionEarth = CENTER_X + distanceFromCenter - sizeShift;
         xPositionGalaxy = CENTER_X - distanceFromCenter - galaxySizeShift;
     } else {
-        xPositionEarth = CENTER_X - 30;
+        xPositionEarth = 2 * CENTER_X - 40;
         xPositionGalaxy = 30;
     }
 
@@ -62,44 +58,51 @@ export default (props) => {
             {/*The stars in the background*/}
             <g>{ props.backgroundStars.map(renderCircles(props)) }</g>
 
-            <line x1={0} y1={0} x2={200} y2={200} style={{stroke: "rgb(255,0,0)", strokeWidth:"2"}}/>
 
             {/*SVG images for Earth and Galaxy*/}
-            <image x={xPositionEarth} y={135} href="../assets/earth.svg" height="20" width="20"/>
-            <image x={xPositionGalaxy} y={120} href="../assets/GalaxySVG.svg" height="50" width="50"/>
+            <image x={xPositionEarth} y={135 - 10} href="../assets/earth.svg" height="20" width="20"/>
+            <image x={xPositionGalaxy} y={120 - 10} href="../assets/GalaxySVG.svg" height="50" width="50"/>
 
             {/*Text that hovers above Earth and Galaxy*/}
-            <text x={xPositionEarth - 15} y={103} fontSize={"1.3em"} fill={"darkgoldenrod"}>Earth</text>
-            <text x={xPositionGalaxy - 5} y={103} fontSize={"1.3em"} fill={"darkgoldenrod"}>Galaxy</text>
+            <text x={xPositionEarth - 15} y={103 - 10} fontSize={"1.3em"} fill={"darkgoldenrod"}>Earth</text>
+            <text x={xPositionGalaxy - 5} y={103 - 10} fontSize={"1.3em"} fill={"darkgoldenrod"}>Galaxy</text>
 
             {/*Lines above Earth and Galaxy but below "Earth" and "Galaxy" text*/}
-            <line x1={xPositionEarth + 10} y1={130} x2={xPositionEarth + 10} y2={110} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
-            <line x1={xPositionGalaxy + 25} y1={127} x2={xPositionGalaxy + 25} y2={110} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+            <line x1={xPositionEarth + 10} y1={130 - 10} x2={xPositionEarth + 10} y2={110 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+            <line x1={xPositionGalaxy + 25} y1={127 - 10} x2={xPositionGalaxy + 25} y2={110 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
 
-            {/*Lines below Earth and Galaxy*/}
-            <line x1={initialEarthX + 1} y1={165} x2={initialEarthX + 1} y2={185} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
-            <line x1={initialGalaxyX - 1} y1={165} x2={initialGalaxyX - 1} y2={185} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+            <g visibility={"visible"}>
 
-            {/*Line connecting initial separation distance*/}
-            <line x1={initialEarthX + 2} y1={185} x2={initialGalaxyX - 2} y2={185} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+                {/*Lines below Earth and Galaxy*/}
+                <line x1={initialEarthX + 1} y1={165 - 10} x2={initialEarthX + 1} y2={185 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+                <line x1={initialGalaxyX - 1} y1={165 - 10} x2={initialGalaxyX - 1} y2={185 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
 
-            {/*Line tip at middle of initial separation distance*/}
-            <line x1={(initialGalaxyX + initialEarthX) / 2} y1={185} x2={(initialGalaxyX + initialEarthX) / 2} y2={195} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+                {/*Line connecting initial separation distance*/}
+                <line x1={initialEarthX + 2} y1={185 - 10} x2={initialGalaxyX - 2} y2={185 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
 
-            <text x={((initialGalaxyX + initialEarthX) / 2) - 80} y={210} fontSize={"1.0em"} fill={"lightcoral"}>Initial Separation Distance</text>
-            <text x={((initialGalaxyX + initialEarthX) / 2) - 60} y={230} fontSize={"1.0em"} fill={"lightcoral"}>{initialSeparation} billions of years</text>
-            {/*-----------------------------------------------*/}
+                {/*Line tip at middle of initial separation distance*/}
+                <line x1={(initialGalaxyX + initialEarthX) / 2} y1={185 - 10} x2={(initialGalaxyX + initialEarthX) / 2} y2={195 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
 
-            {/*Lines below Earth and Galaxy*/}
-            <line x1={xPositionEarth + 10} y1={230} x2={xPositionEarth + 10} y2={251} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
-            <line x1={xPositionGalaxy + 25} y1={230} x2={xPositionGalaxy + 25} y2={251} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+                {/*Text values for initial separation distance*/}
+                <text x={((initialGalaxyX + initialEarthX) / 2) - 80} y={210 - 10} fontSize={"1.0em"} fill={"lightcoral"}>Initial Separation Distance</text>
+                <text x={((initialGalaxyX + initialEarthX) / 2) - 60} y={230 - 10} fontSize={"1.0em"} fill={"lightcoral"}>{initialSeparation} billions of years</text>
 
-            {/*Line connecting initial separation distance*/}
-            <line x1={xPositionEarth + 10} y1={250} x2={xPositionGalaxy + 25} y2={250} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+                {/*-----------------------------------------------*/}
 
-            {/*Line tip at middle of initial separation distance*/}
-            {/*<line x1={(xPositionGalaxy + xPositionEarth) / 2} y1={185} x2={(xPositionGalaxy + xPositionEarth) / 2} y2={195} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>*/}
+                {/*Current Lines below Earth and Galaxy*/}
+                <line x1={xPositionEarth + 10} y1={230 - 10} x2={xPositionEarth + 10} y2={251 - 10} style={{stroke: "green", strokeWidth:"2"}}/>
+                <line x1={xPositionGalaxy + 25} y1={230 - 10} x2={xPositionGalaxy + 25} y2={251 - 10} style={{stroke: "green", strokeWidth:"2"}}/>
 
+                {/*Line connecting current separation distance*/}
+                <line x1={xPositionEarth + 10} y1={250 - 10} x2={xPositionGalaxy + 25} y2={250 - 10} style={{stroke: "green", strokeWidth:"2"}}/>
+
+                {/*Line tip at middle of initial current distance*/}
+                <line x1={(initialGalaxyX + initialEarthX) / 2} y1={251 - 10} x2={(initialGalaxyX + initialEarthX) / 2} y2={260 - 10} style={{stroke: "green", strokeWidth:"2"}}/>
+
+                {/*Text values for current separation distance*/}
+                <text x={((initialGalaxyX + initialEarthX) / 2) - 80} y={275 - 10} fontSize={"1.0em"} fill={"lightcoral"}>Current Separation Distance</text>
+                <text x={((initialGalaxyX + initialEarthX) / 2) - 60} y={290 - 10} fontSize={"1.0em"} fill={"lightcoral"}>{currentSeparation} billions of years</text>
+            </g>
         </svg>
     );
 }

@@ -18,23 +18,23 @@ body>.container {
     height: 800px;
 }
 
-.Redshift {
-    position: relative;
-    top: 280px;
-    width: 920px;
-    height: 290px;
-    z-index: 10;
-}
+/*!*.Redshift {*!*/
+/*!*    position: relative;*!*/
+/*!*    top: 280px;*!*/
+/*!*    width: 920px;*!*/
+/*!*    height: 290px;*!*/
+/*!*    z-index: 10;*!*/
+/*!*}*!*/
 
-.Redshift>canvas {
-    width: 920px;
+/*.Redshift>canvas {*/
+/*    width: 920px;*/
 
-}
+/*}*/
 
 #dynamicBackground {
     border-color: azure;
     position: relative;
-    bottom: 613px;
+    /*bottom: 613px;*/
 }
 
 input[type=number]{
@@ -46,22 +46,20 @@ input[type=number]{
     /*overflow-x: hidden;*/
     left: 175px;
     height: 280px;
-    bottom: 5px;
     background-color: transparent;
 }
 
 #legend {
-    position: relative;
-    bottom: 250px;
-    left: 750px;
+    /*position: relative;*/
+    /*bottom: 250px;*/
+    /*left: 750px;*/
 }
 
 #topHalf {
     background-color: black;
     position: relative;
     height: 280px;
-    /*bottom: 490px;*/
-    bottom: 495px;
+    bottom: 100px;
     width: 920px;
 }
 
@@ -122,7 +120,6 @@ input[type=number]{
 
 .xAxis line {
     stroke: aqua;
-    color: ;
 }
 
 .xAxis path {
