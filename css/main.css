@@ -34,6 +34,7 @@ body>.container {
 #dynamicBackground {
     border-color: azure;
     position: relative;
+    top: 10px;
     /*bottom: 613px;*/
 }
 
@@ -50,16 +51,16 @@ input[type=number]{
 }
 
 #legend {
-    /*position: relative;*/
-    /*bottom: 250px;*/
-    /*left: 750px;*/
+    position: relative;
+    bottom: 250px;
+    left: 750px;
 }
 
 #topHalf {
     background-color: black;
-    position: relative;
+    /*position: relative;*/
     height: 280px;
-    bottom: 100px;
+    /*bottom: 200px;*/
     width: 920px;
 }
 
@@ -86,7 +87,7 @@ input[type=number]{
     position: relative;
     left: 710px;
     /*bottom: 65px;*/
-    top: 330px;
+    top: 30px;
     z-index: 1;
 }
 
@@ -143,7 +144,7 @@ input[type=number]{
 
 .parameters {
     position: relative;
-    top: 220px;
+    bottom: 40px;
     left: 30px;
 }
 

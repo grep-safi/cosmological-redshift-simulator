@@ -72,23 +72,6 @@ class CosmologicalRedshiftSim extends React.Component {
             {/*    changeSimState={() => { this.changeSimState() }}*/}
             {/*/>*/}
 
-            <div className="animationButton">
-                <button type="box"
-                        className="btn btn-danger btn-sm"
-                        onClick={() => this.onStartClick()}>
-                    {this.state.startBtnText}
-                </button>
-            </div>
-
-            <div className="parameters">
-                <Parameters
-                    params={this.state.parameters}
-                    onChange={this.handleNewParameters.bind(this)}
-                    simulationStarted={this.state.simulationStarted}
-                    simulationEnded={this.state.simulationEnded}
-                    isPlaying={this.state.isPlaying}
-                />
-            </div>
 
             <div id={"topHalf"}>
                 <Chart
@@ -115,20 +98,6 @@ class CosmologicalRedshiftSim extends React.Component {
 
             </div>
 
-            <div style={{ visibility: this.state.simulationWillNeverEnd ? 'visible' : 'hidden' }}>>
-                <div className="paramAlertText">
-                    <svg width={500} height={100}>
-                        <text
-                            x="0"
-                            y="30"
-                            fill="orchid"
-                        >
-                            With this configuration, the light from the galaxy will never reach Earth
-                        </text>
-                    </svg>
-                </div>
-            </div>
-
             <div id={"dynamicBackground"}>
                 <DynamicBackground
                     params={this.state.parameters}
@@ -138,6 +107,24 @@ class CosmologicalRedshiftSim extends React.Component {
                     simulationStarted={this.state.simulationStarted}
                     changeSimState={() => { this.changeSimState() }}
                     backgroundStars={this.state.backgroundStars}
+                />
+            </div>
+
+            <div className="animationButton">
+                <button type="box"
+                        className="btn btn-danger btn-sm"
+                        onClick={() => this.onStartClick()}>
+                    {this.state.startBtnText}
+                </button>
+            </div>
+
+            <div className="parameters">
+                <Parameters
+                    params={this.state.parameters}
+                    onChange={this.handleNewParameters.bind(this)}
+                    simulationStarted={this.state.simulationStarted}
+                    simulationEnded={this.state.simulationEnded}
+                    isPlaying={this.state.isPlaying}
                 />
             </div>
 
