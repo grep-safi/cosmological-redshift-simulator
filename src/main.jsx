@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Redshift from './Redshift';
 import NavBar from "./UserControls/NavBar";
 import Parameters from "./UserControls/Parameters";
 import Chart from "./D3/components/Chart";
@@ -61,16 +60,6 @@ class CosmologicalRedshiftSim extends React.Component {
                 onResetClick={this.onResetClick.bind(this)}
             />
 
-            {/*<Redshift*/}
-            {/*    params={this.state.parameters}*/}
-            {/*    distanceTravelledLight={this.state.distanceTravelledLight}*/}
-            {/*    distanceBetweenBodies={this.state.distanceBetweenBodies}*/}
-            {/*    isPlaying={this.state.isPlaying}*/}
-            {/*    simulationStarted={this.state.simulationStarted}*/}
-            {/*    changeSimState={() => { this.changeSimState() }}*/}
-            {/*/>*/}
-
-
             <div id={"topHalf"}>
                 <Chart
                     lightValues={this.state.lightTravelledDistances}
@@ -129,36 +118,7 @@ class CosmologicalRedshiftSim extends React.Component {
         </React.Fragment>;
     }
 
-    componentDidMount() {
-        this.calculateData();
-
-        // for (let i = 0; i < this.state.backgroundStars.length; i++) {
-        //     let star = this.state.backgroundStars[i];
-        //     let circleX = star.cx;
-        //     let circleY = star.cy;
-        //
-        //     let incrementX = star.deltaX;
-        //     let incrementY = star.deltaY;
-        //
-        //     let cirX = circleX;
-        //     let cirY = circleY;
-        //
-        //     circleX += incrementX;
-        //     circleY += incrementY;
-        //
-        //     let starProperties = {
-        //         cx: circleX,
-        //         cy: circleY,
-        //         r: star.r,
-        //         fill: star.fill,
-        //         key: i,
-        //     };
-        //
-        //     console.log(`oldX ${cirX} incrementX ${starProperties.cx} incrementY ${typeof(starProperties.cx)} oldY ${cirY} `);
-        //     arr.push(starProperties);
-        // }
-
-    }
+    componentDidMount() { this.calculateData(); }
 
     /**
      * calculateData() completes the underlying calculation for the data
@@ -248,8 +208,7 @@ class CosmologicalRedshiftSim extends React.Component {
         let simulationWillComplete = index >= this.state.maxIndex - (speedOfAnimation + 1);
         if (simulationWillComplete) { index = this.state.maxIndex - 1; }
 
-        // if (this.state.distanceBetweenBodies >  17.228377773099474) { this.shrinkBackground(); }
-        this.shrinkBackground();
+        if (this.state.distanceBetweenBodies >  17.228377773099474) { this.shrinkBackground(); }
 
         this.state.targetDistances.push(this.state.completeTargetDistances[index]);
         this.state.lightDistances.push(this.state.completeLightDistances[index]);
@@ -284,10 +243,10 @@ class CosmologicalRedshiftSim extends React.Component {
             let circleX = star.cx;
             let circleY = star.cy;
 
-            let speedOfConvergence = this.state.animationRate / 100;
+            let speedOfConvergence = this.state.animationRate / 500;
 
-            let incrementX = star.deltaX;
-            let incrementY = star.deltaY;
+            let incrementX = star.deltaX * speedOfConvergence;
+            let incrementY = star.deltaY * speedOfConvergence;
 
             circleX -= incrementX;
             circleY -= incrementY;
@@ -305,7 +264,6 @@ class CosmologicalRedshiftSim extends React.Component {
             if ((circleX > 455 - 1 && circleX < 455 + 1) || (circleY > 145 - 1 && circleY < 145 + 1 )) {
                 continue;
             }
-
 
             newBackgroundStars.push(starProperties);
         }

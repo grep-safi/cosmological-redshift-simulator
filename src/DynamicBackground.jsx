@@ -6,27 +6,24 @@ const dimensions = {
 };
 
 const CENTER_X = 460;
-const CENTER_Y = 145;
 
 const SCALING_FACTOR = 50;
 const scaleToPixel   = distance => distance * SCALING_FACTOR;
 
-const renderCircles = (props) => {
+const renderCircles = () => {
     return (circleProperties, index) => {
-        // console.log(typeof(props.backgroundStars.fill));
         const circleProps = {
             cx: circleProperties.cx,
             cy: circleProperties.cy,
             r: circleProperties.r,
-            // fill: props.backgroundStars.fill,
             fill: circleProperties.fill,
-            // fill: "#a8a8a8",
             key: index,
         };
 
         return <circle {...circleProps} />;
     };
 };
+
 
 export default (props) => {
     let distanceFromCenter = scaleToPixel(props.distanceBetweenBodies / 2);
@@ -55,7 +52,7 @@ export default (props) => {
     let finalLightLine = xPositionEarth - scaleToPixel(props.distanceTravelledLight) + 10;
     if (!props.simulationStarted) finalLightLine = initialLightLine;
 
-    // finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine : finalLightLine;
+    finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine : finalLightLine;
 
     return (
         <svg width={dimensions.width} height={dimensions.height}>
@@ -63,11 +60,11 @@ export default (props) => {
             <rect width="100%" height="100%" fill="black"/>
 
             {/*The stars in the background*/}
-            <g>{ props.backgroundStars.map(renderCircles(props)) }</g>
+            <g>{ props.backgroundStars.map(renderCircles()) }</g>
 
             {/*SVG images for Earth and Galaxy*/}
-            <image x={xPositionEarth} y={135 - 10} href="../assets/earth.svg" height="20" width="20"/>
-            <image x={xPositionGalaxy} y={120 - 10} href="../assets/GalaxySVG.svg" height="50" width="50"/>
+            <image x={xPositionEarth} y={135 - 10} href="./assets/earth.svg" height="20" width="20"/>
+            <image x={xPositionGalaxy} y={120 - 10} href="./assets/GalaxySVG.svg" height="50" width="50"/>
 
             <rect x={xPositionEarth - 14} y={103 - 25} width="45" height="16" fill="black"/>
             <rect x={xPositionGalaxy - 5} y={103 - 25} width="63" height="19" fill="black"/>
