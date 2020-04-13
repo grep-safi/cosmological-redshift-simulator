@@ -46,17 +46,16 @@ export default (props) => {
     if (!(distanceFromCenter > CENTER_X - 40)) {
         xPositionEarth = CENTER_X + distanceFromCenter - sizeShift;
         xPositionGalaxy = CENTER_X - distanceFromCenter - galaxySizeShift;
-        console.log(`${xPositionEarth} ${xPositionGalaxy} <----`)
     } else {
         xPositionEarth = 868.2624688305211;
         xPositionGalaxy = 16.737531169478814;
     }
 
     let initialLightLine = initialGalaxyX;
-    let finalLightLine = xPositionEarth - scaleToPixel(props.distanceTravelledLight);
+    let finalLightLine = xPositionEarth - scaleToPixel(props.distanceTravelledLight) + 10;
     if (!props.simulationStarted) finalLightLine = initialLightLine;
 
-    finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine : finalLightLine;
+    // finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine : finalLightLine;
 
     return (
         <svg width={dimensions.width} height={dimensions.height}>
@@ -81,8 +80,6 @@ export default (props) => {
             <line x1={xPositionEarth + 10} y1={130 - 10} x2={xPositionEarth + 10} y2={110 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
             <line x1={xPositionGalaxy + 25} y1={127 - 10} x2={xPositionGalaxy + 25} y2={110 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
 
-            {/*Light line*/}
-            <line x1={initialLightLine} y1={135} x2={finalLightLine} y2={135} style={{stroke: "yellow", strokeWidth:"2"}}/>
 
             <g visibility={"visible"}>
 
@@ -122,6 +119,10 @@ export default (props) => {
                 <text x={((initialGalaxyX + initialEarthX) / 2) - 80} y={275 - 10} fontSize={"1.0em"} fill={"lightcoral"}>Current Separation Distance</text>
                 <text x={((initialGalaxyX + initialEarthX) / 2) - 60} y={290 - 10} fontSize={"1.0em"} fill={"lightcoral"}>{currentSeparation} billions of years</text>
             </g>
+
+            {/*Light line*/}
+            <line x1={initialLightLine} y1={135} x2={finalLightLine} y2={135} style={{stroke: "yellow", strokeWidth:"2"}}/>
+            {/*<line x1={297.5} y1={135} x2={700} y2={135} style={{stroke: "yellow", strokeWidth:"2"}}/>*/}
         </svg>
     );
 }

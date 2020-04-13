@@ -1,3 +1,6 @@
+let width = 910;
+let height = 290;
+
 let data =
     [
     {"cx":165.8003383986615,"cy":211.879583395683,"r":2.4905074378873935,"fill":"rgba(255,255,255,0.9203882979994444)","key":0},
@@ -111,5 +114,18 @@ let data =
     {"cx":512.2680082340969,"cy":172.72780533138018,"r":1.2297941016913567,"fill":"rgba(255,255,255,0.8042257640811243)","key":108},
     {"cx":269.43217069753416,"cy":121.0101060783046,"r":2.2840886804307923,"fill":"rgba(255,255,255,0.757693407668539)","key":109}
 ];
+
+let alpha = 1.2;
+for (let i = 0; i < data.length; i++) {
+    let x = data[i].cx;
+    let y = data[i].cy;
+
+    let theta = Math.atan2(y - (height / 2), x - (width / 2));
+    let deltaX = (alpha * Math.cos(theta));
+    let deltaY = (alpha * Math.sin(theta));
+
+    data[i].deltaX = deltaX;
+    data[i].deltaY = deltaY;
+}
 
 export { data };
