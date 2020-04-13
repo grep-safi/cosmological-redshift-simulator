@@ -225,6 +225,8 @@ class CosmologicalRedshiftSim extends React.Component {
 
         if (this.state.distanceBetweenBodies >  17.228377773099474) { this.shrinkBackground(); }
 
+        console.log(`length: ${this.state.backgroundStars.length}`);
+
         this.state.targetDistances.push(this.state.completeTargetDistances[index]);
         this.state.lightDistances.push(this.state.completeLightDistances[index]);
         this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);

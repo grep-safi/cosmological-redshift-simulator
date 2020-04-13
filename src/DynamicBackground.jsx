@@ -59,9 +59,13 @@ export default (props) => {
             <g>{ props.backgroundStars.map(renderCircles(props)) }</g>
 
 
+
             {/*SVG images for Earth and Galaxy*/}
             <image x={xPositionEarth} y={135 - 10} href="../assets/earth.svg" height="20" width="20"/>
             <image x={xPositionGalaxy} y={120 - 10} href="../assets/GalaxySVG.svg" height="50" width="50"/>
+
+            <rect x={xPositionEarth - 14} y={103 - 25} width="45" height="16" fill="black"/>
+            <rect x={xPositionGalaxy - 5} y={103 - 25} width="63" height="19" fill="black"/>
 
             {/*Text that hovers above Earth and Galaxy*/}
             <text x={xPositionEarth - 15} y={103 - 10} fontSize={"1.3em"} fill={"darkgoldenrod"}>Earth</text>
@@ -84,8 +88,11 @@ export default (props) => {
                 <line x1={(initialGalaxyX + initialEarthX) / 2} y1={185 - 10} x2={(initialGalaxyX + initialEarthX) / 2} y2={195 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
 
                 {/*Text values for initial separation distance*/}
+                <rect x={((initialGalaxyX + initialEarthX) / 2) - 80} y={210 - 22} width="178" height="15" fill="black"/>
+                <rect x={((initialGalaxyX + initialEarthX) / 2) - 60} y={230 - 27} width="143" height="17" fill="black"/>
+
                 <text x={((initialGalaxyX + initialEarthX) / 2) - 80} y={210 - 10} fontSize={"1.0em"} fill={"lightcoral"}>Initial Separation Distance</text>
-                <text x={((initialGalaxyX + initialEarthX) / 2) - 60} y={230 - 10} fontSize={"1.0em"} fill={"lightcoral"}>{initialSeparation} billions of years</text>
+                <text x={((initialGalaxyX + initialEarthX) / 2) - 60} y={230 - 13} fontSize={"1.0em"} fill={"lightcoral"}>{initialSeparation} billions of years</text>
 
                 {/*-----------------------------------------------*/}
 
@@ -98,6 +105,9 @@ export default (props) => {
 
                 {/*Line tip at middle of initial current distance*/}
                 <line x1={(initialGalaxyX + initialEarthX) / 2} y1={251 - 10} x2={(initialGalaxyX + initialEarthX) / 2} y2={260 - 10} style={{stroke: "green", strokeWidth:"2"}}/>
+
+                <rect x={((initialGalaxyX + initialEarthX) / 2) - 80} y={275 - 22} width="193" height="15" fill="black"/>
+                <rect x={((initialGalaxyX + initialEarthX) / 2) - 60} y={290 - 22} width="143" height="15" fill="black"/>
 
                 {/*Text values for current separation distance*/}
                 <text x={((initialGalaxyX + initialEarthX) / 2) - 80} y={275 - 10} fontSize={"1.0em"} fill={"lightcoral"}>Current Separation Distance</text>
