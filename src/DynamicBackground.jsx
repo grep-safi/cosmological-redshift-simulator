@@ -42,6 +42,7 @@ export default (props) => {
     let initialSeparation = props.params.initialSeparationDistance.toFixed(2);
     let currentSeparation = props.distanceBetweenBodies.toFixed(2);
 
+
     if (!(distanceFromCenter > CENTER_X - 30)) {
         xPositionEarth = CENTER_X + distanceFromCenter - sizeShift;
         xPositionGalaxy = CENTER_X - distanceFromCenter - galaxySizeShift;
@@ -50,6 +51,12 @@ export default (props) => {
         xPositionGalaxy = 30;
     }
 
+    let initialLightLine= initialGalaxyX;
+    let finalLightLine = xPositionEarth - scaleToPixel(props.distanceTravelledLight);
+    if (!props.simulationStarted) finalLightLine = initialLightLine;
+
+    finalLightLine = (initialLightLine - finalLightLine) >= 0 ? initialLightLine : finalLightLine;
+
     return (
         <svg width={dimensions.width} height={dimensions.height}>
             {/*Black background*/}
@@ -57,8 +64,6 @@ export default (props) => {
 
             {/*The stars in the background*/}
             <g>{ props.backgroundStars.map(renderCircles(props)) }</g>
-
-
 
             {/*SVG images for Earth and Galaxy*/}
             <image x={xPositionEarth} y={135 - 10} href="../assets/earth.svg" height="20" width="20"/>
@@ -74,6 +79,9 @@ export default (props) => {
             {/*Lines above Earth and Galaxy but below "Earth" and "Galaxy" text*/}
             <line x1={xPositionEarth + 10} y1={130 - 10} x2={xPositionEarth + 10} y2={110 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
             <line x1={xPositionGalaxy + 25} y1={127 - 10} x2={xPositionGalaxy + 25} y2={110 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+
+            {/*Light line*/}
+            <line x1={initialLightLine} y1={135} x2={finalLightLine} y2={135} style={{stroke: "yellow", strokeWidth:"2"}}/>
 
             <g visibility={"visible"}>
 
