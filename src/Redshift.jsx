@@ -50,12 +50,18 @@ export default class Redshift extends React.Component {
         me.galaxyName = me.drawText('Galaxy', me.galaxy.x, me.galaxy.y);
         me.usName = me.drawText('Earth', me.us.x, me.us.y);
         me.usName.visible = false;
+        me.galaxyName.visible = false;
 
         me.initialSeparationText = me.drawText('Initial Separation', CENTER_X, CENTER_Y + 95);
+        me.initialSeparationText.visible = false;
         me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 118);
+        me.initialSeparationValue.visible = false;
 
         me.separationText = me.drawText('Current Separation', CENTER_X, CENTER_Y + 140);
         me.separationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 156);
+
+        me.separationValue.visible = false;
+        me.separationText.visible = false;
 
         me.start();
     }
@@ -209,24 +215,24 @@ export default class Redshift extends React.Component {
     // Updates all the lines
     updateLines() {
         // Draws the vertical lines on top of galaxy and planet
-        this.updateTopLineBody(this.us);
-        this.updateTopLineBody(this.galaxy);
+        // this.updateTopLineBody(this.us);
+        // this.updateTopLineBody(this.galaxy);
 
-        // Draws initial separation distance lines on the bottom
-        this.updateInitialSeparationLine(-1);
-        this.updateInitialSeparationLine(1);
+        // // Draws initial separation distance lines on the bottom
+        // this.updateInitialSeparationLine(-1);
+        // this.updateInitialSeparationLine(1);
 
         // Draws final separation distance lines on the bottom (below initial separation distance lines)
-        this.updateFinalSeparationLine(this.us, 1);
-        this.updateFinalSeparationLine(this.galaxy, -1);
+        // this.updateFinalSeparationLine(this.us, 1);
+        // this.updateFinalSeparationLine(this.galaxy, -1);
 
-        // Draws vertical lines on the bottom of the galaxy and planet connecting to INITIAL separation distance lines
-        this.updateInitialVerticals(1);
-        this.updateInitialVerticals(-1);
+        // // Draws vertical lines on the bottom of the galaxy and planet connecting to INITIAL separation distance lines
+        // this.updateInitialVerticals(1);
+        // this.updateInitialVerticals(-1);
 
         // Draws vertical lines on the bottom of the galaxy and planet connecting to FINAL separation distance lines
-        this.updateFinalVerticals(this.us);
-        this.updateFinalVerticals(this.galaxy);
+        // this.updateFinalVerticals(this.us);
+        // this.updateFinalVerticals(this.galaxy);
     }
 
     updateBodiesAnimation() {

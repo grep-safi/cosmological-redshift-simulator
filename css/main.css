@@ -122,6 +122,7 @@ input[type=number]{
 
 .xAxis line {
     stroke: aqua;
+    color: ;
 }
 
 .xAxis path {
