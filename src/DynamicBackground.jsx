@@ -43,19 +43,20 @@ export default (props) => {
     let currentSeparation = props.distanceBetweenBodies.toFixed(2);
 
 
-    if (!(distanceFromCenter > CENTER_X - 30)) {
+    if (!(distanceFromCenter > CENTER_X - 40)) {
         xPositionEarth = CENTER_X + distanceFromCenter - sizeShift;
         xPositionGalaxy = CENTER_X - distanceFromCenter - galaxySizeShift;
+        console.log(`${xPositionEarth} ${xPositionGalaxy} <----`)
     } else {
-        xPositionEarth = 2 * CENTER_X - 40;
-        xPositionGalaxy = 30;
+        xPositionEarth = 868.2624688305211;
+        xPositionGalaxy = 16.737531169478814;
     }
 
-    let initialLightLine= initialGalaxyX;
+    let initialLightLine = initialGalaxyX;
     let finalLightLine = xPositionEarth - scaleToPixel(props.distanceTravelledLight);
     if (!props.simulationStarted) finalLightLine = initialLightLine;
 
-    finalLightLine = (initialLightLine - finalLightLine) >= 0 ? initialLightLine : finalLightLine;
+    finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine : finalLightLine;
 
     return (
         <svg width={dimensions.width} height={dimensions.height}>

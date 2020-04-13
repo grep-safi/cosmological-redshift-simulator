@@ -281,6 +281,7 @@ class CosmologicalRedshiftSim extends React.Component {
             newBackgroundStars.push(starProperties);
         }
 
+        // This is using animation speed to determine how quickly I need to draw the extra points
         let likelihoodOfCreation = 1.2 - (this.state.animationRate / 100);
         likelihoodOfCreation = likelihoodOfCreation > 0.95 ? 0.95 : likelihoodOfCreation;
         if (Math.random() > likelihoodOfCreation) {
