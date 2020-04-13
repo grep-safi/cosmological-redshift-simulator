@@ -131,6 +131,12 @@ class CosmologicalRedshiftSim extends React.Component {
 
             <div id={"dynamicBackground"}>
                 <DynamicBackground
+                    params={this.state.parameters}
+                    distanceTravelledLight={this.state.distanceTravelledLight}
+                    distanceBetweenBodies={this.state.distanceBetweenBodies}
+                    isPlaying={this.state.isPlaying}
+                    simulationStarted={this.state.simulationStarted}
+                    changeSimState={() => { this.changeSimState() }}
                     backgroundStars={this.state.backgroundStars}
                 />
             </div>
@@ -230,7 +236,7 @@ class CosmologicalRedshiftSim extends React.Component {
         let simulationWillComplete = index >= this.state.maxIndex - (speedOfAnimation + 1);
         if (simulationWillComplete) { index = this.state.maxIndex - 1; }
 
-        if (this.state.distanceBetweenBodies > 17) { this.shrinkBackground(); }
+        if (this.state.distanceBetweenBodies >  17.228377773099474) { this.shrinkBackground(); }
 
         this.state.targetDistances.push(this.state.completeTargetDistances[index]);
         this.state.lightDistances.push(this.state.completeLightDistances[index]);

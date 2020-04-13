@@ -42,19 +42,20 @@ export default class Redshift extends React.Component {
         const stage = new PIXI.Container();
         this.app.stage.addChild(stage);
 
-        me.us = me.drawBody('us', 'assets/earth.svg', 20);
-        me.galaxy = me.drawBody('galaxy', 'assets/galaxy.png', 45);
+        me.us = me.drawBody('us', 'assets/earth.svg', 0);
+        me.galaxy = me.drawBody('galaxy', 'assets/galaxy.png', 0);
 
         me.directLine = me.drawLine();
 
         me.galaxyName = me.drawText('Galaxy', me.galaxy.x, me.galaxy.y);
         me.usName = me.drawText('Earth', me.us.x, me.us.y);
+        me.usName.visible = false;
 
-        me.initialSeparationText = me.drawText('Initial Separation', CENTER_X, CENTER_Y + 145);
-        me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 163);
+        me.initialSeparationText = me.drawText('Initial Separation', CENTER_X, CENTER_Y + 95);
+        me.initialSeparationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 118);
 
-        me.separationText = me.drawText('Final Separation', CENTER_X, CENTER_Y + 190);
-        me.separationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 206);
+        me.separationText = me.drawText('Current Separation', CENTER_X, CENTER_Y + 140);
+        me.separationValue = me.drawText(me.props.params.initialSeparationDistance, CENTER_X, CENTER_Y + 156);
 
         me.start();
     }
@@ -95,7 +96,7 @@ export default class Redshift extends React.Component {
     drawBody(name, file, size) {
         const body = new PIXI.Container();
         body.name = name;
-        body.position = new PIXI.Point(CENTER_X, CENTER_Y + 50);
+        body.position = new PIXI.Point(CENTER_X, CENTER_Y);
 
         const bodySprite = new PIXI.Sprite(PIXI.Texture.from(file));
         bodySprite.anchor.set(0.5);

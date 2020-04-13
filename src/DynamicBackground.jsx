@@ -5,9 +5,11 @@ const dimensions = {
     height: 290,
 };
 
-const possibleWhites = {
+const CENTER_X = 460;
+const CENTER_Y = 145;
 
-};
+const SCALING_FACTOR = 50;
+const scaleToPixel   = distance => distance * SCALING_FACTOR;
 
 const renderCircles = (props) => {
     return (circleProperties, index) => {
@@ -22,29 +24,40 @@ const renderCircles = (props) => {
             key: index,
         };
 
-        // console.log(`cx: ${coords.cx}`);
-        // console.log(`cy: ${coords.cy}`);
-        // console.log(`r: ${coords.r}`);
-        // console.log(`fill: ${coords.fill}`);
-        // console.log(`index: ${index}`);
-
         return <circle {...circleProps} />;
     };
 };
 
 export default (props) => {
+    let distanceFromCenter = scaleToPixel(props.distanceBetweenBodies / 2);
 
-    return <svg width={dimensions.width} height={dimensions.height}>
-        <rect width="100%" height="100%" fill="black"/>
-        <g>{ props.backgroundStars.map(renderCircles(props)) }</g>
-        {/*<circle cx="900" cy="50" r="5" fill="rgba(150,0,30,0.945463252323423)" />*/}
-        {/*<circle cx="883.4670120918533" cy="254.77864781639826" r="2.914660136421845" fill="rgba(255,255,255,1)" />*/}
+    // if (!(distanceFromCenter > halfOfScreen - 30)) {
+    //     this.us.x = CENTER_X + distanceFromCenter;
+    //     this.galaxy.x = CENTER_X - distanceFromCenter;
+    // }
 
-        {/*<circle cx="90" cy="50" r="5" fill="#a8a8a8" />*/}
-        {/*<circle cx="100" cy="50" r="5" fill="#d1d1d1" />*/}
-        {/*<circle cx="200" cy="50" r="5" fill="#e6e6e6" />*/}
-        {/*<circle cx="250" cy="50" r="5" fill="#d1d1d1" />*/}
-        {/*<circle cx="130" cy="50" r="5" fill="#d1d1d1" />*/}
-        {/*<circle cx="190" cy="50" r="5" fill="#d1d1d1" />*/}
-    </svg>
+    let sizeShift = 10;
+    let galaxySizeShift = 25;
+    let xPositionEarth = CENTER_X + distanceFromCenter - sizeShift;
+    let xPositionGalaxy = CENTER_X - distanceFromCenter - galaxySizeShift;
+
+    return (
+        <svg width={dimensions.width} height={dimensions.height}>
+            <rect width="100%" height="100%" fill="black"/>
+            <g>{ props.backgroundStars.map(renderCircles(props)) }</g>
+
+            <line x1={0} y1={0} x2={200} y2={200} style={{stroke: "rgb(255,0,0)", strokeWidth:"2"}}/>
+
+            <image x={xPositionEarth} y={135} href="../assets/earth.svg" height="20" width="20"/>
+            <image x={xPositionGalaxy} y={120} href="../assets/GalaxySVG.svg" height="50" width="50"/>
+
+            <text x={xPositionEarth - 8} y={105} fill={"rgb(228, 209, 160)"}>Earth</text>
+
+        </svg>
+    );
 }
+
+
+// Remember to credit:
+// <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
+// <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
