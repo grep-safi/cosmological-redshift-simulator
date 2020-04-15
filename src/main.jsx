@@ -26,7 +26,7 @@ class CosmologicalRedshiftSim extends React.Component {
             completeLightDistances: [6.50],
             completeLightTravelledDistances: [0],
 
-            animationRate: 20,
+            animationRate: 50,
             startBtnText: 'play animation',
             isPlaying: false,
             simulationStarted: false,
@@ -40,11 +40,6 @@ class CosmologicalRedshiftSim extends React.Component {
             simulationWillNeverEnd: false,
 
             backgroundStars: data,
-
-            q1: 0,
-            q2: 0,
-            q3: 0,
-            q4: 0,
         };
 
 
@@ -68,7 +63,7 @@ class CosmologicalRedshiftSim extends React.Component {
                     times={this.state.times}
                 />
 
-                <Legend/>
+                <Legend />
 
                 <div className="animationSlider">
                     <h6  id="animationSpeedText">Animation </h6>
@@ -208,7 +203,10 @@ class CosmologicalRedshiftSim extends React.Component {
         let simulationWillComplete = index >= this.state.maxIndex - (speedOfAnimation + 1);
         if (simulationWillComplete) { index = this.state.maxIndex - 1; }
 
-        if (this.state.distanceBetweenBodies >  17.228377773099474) { this.shrinkBackground(); }
+        // if (this.state.distanceBetweenBodies >  17.228377773099474) { this.shrinkBackground(); }
+        this.shrinkBackground();
+
+        // console.log(`length of arr: ${this.state.backgroundStars.length}`);
 
         this.state.targetDistances.push(this.state.completeTargetDistances[index]);
         this.state.lightDistances.push(this.state.completeLightDistances[index]);
@@ -221,10 +219,10 @@ class CosmologicalRedshiftSim extends React.Component {
 
             simulationStarted: true,
 
-            targetDistances: this.state.targetDistances,
-            lightDistances: this.state.lightDistances,
-            lightTravelledDistances: this.state.lightTravelledDistances,
-            times: this.state.times,
+            // targetDistances: this.state.targetDistances,
+            // lightDistances: this.state.lightDistances,
+            // lightTravelledDistances: this.state.lightTravelledDistances,
+            // times: this.state.times,
 
             index: this.state.index + speedOfAnimation,
             simulationEnded: simulationWillComplete,
@@ -258,36 +256,34 @@ class CosmologicalRedshiftSim extends React.Component {
                 deltaY: star.deltaY,
                 r: star.r,
                 fill: star.fill,
-                key: i,
+                key: star.key,
+                center: star.center,
             };
 
-            if ((circleX > 455 - 1 && circleX < 455 + 1) || (circleY > 145 - 1 && circleY < 145 + 1 )) {
+            if (star.center === undefined && (circleX > 455 - 1 && circleX < 455 + 1) && (circleY > 145 - 1 && circleY < 145 + 1 )) {
+                // console.log(`im being deleted`);
                 continue;
             }
 
             newBackgroundStars.push(starProperties);
         }
 
-        // This is using animation speed to determine how quickly I need to draw the extra points
-        let likelihoodOfCreation = 1.2 - (this.state.animationRate / 100);
-        likelihoodOfCreation = likelihoodOfCreation > 0.95 ? 0.95 : likelihoodOfCreation;
-        if (Math.random() > likelihoodOfCreation) {
+        for(let i = 0; i < (110 - newBackgroundStars.length); i++) {
             let circleX;
             let circleY;
-            let shift = 20;
+            let shift = 1;
 
             if (Math.random() < 0.5) {
                 if (Math.random() < 0.5) {
-                    circleX = Math.random() * (shift) + width + 5;
+                    circleX = Math.random() * (shift) + width;
                 } else {
                     circleX = Math.random() * shift * -1;
-                    this.setState({ q3: this.state.q3 + 1});
                 }
 
                 circleY = Math.random() * height;
             } else {
                 if (Math.random() < 0.5) {
-                    circleY = Math.random() * (shift) + height + 5;
+                    circleY = Math.random() * (shift) + height;
                 } else {
                     circleY = Math.random() * shift * -1;
                 }
@@ -295,19 +291,12 @@ class CosmologicalRedshiftSim extends React.Component {
                 circleX = Math.random() * width;
             }
 
-            if (circleX >= width) {
-                this.setState({ q1: this.state.q1 + 1});
-            } else if (circleX <= 0) {
-                this.setState({ q2: this.state.q2 + 1});
-            }
-
-
             let radius = Math.random() * (3.5 - 1) + 1;
             let starOpacity = Math.random() * (0.25) + 0.75;
             let fill = "rgba(255,255,255," + starOpacity + ")";
 
             let theta = Math.atan2(circleY - (height / 2), circleX - (width / 2));
-            let alpha = 0.5;
+            let alpha = 1.2;
             let deltaX = (alpha * Math.cos(theta));
             let deltaY = (alpha * Math.sin(theta));
 
@@ -320,6 +309,8 @@ class CosmologicalRedshiftSim extends React.Component {
                 fill: fill,
                 key: newBackgroundStars.length + 1,
             };
+
+            console.log(`freshly created star: x: ${starProperties.cx} y: ${starProperties.cy}`);
 
             newBackgroundStars.push(starProperties);
         }
@@ -372,5 +363,5 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 }
 
-const domContainer = document.querySelector('#sim-container');
+const domContainer = document.querySelector('#React-Simulation');
 ReactDOM.render(<CosmologicalRedshiftSim />, domContainer);

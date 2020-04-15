@@ -1,48 +1,35 @@
 html {
-    /*background-color: rgba(0,16,27,0.98); !* Dark Grey Bluish *!*/
-    background-color: rgba(15,14,17,1.00);
+    background-color: rgba(0,16,27,0.98); /* Dark Grey Bluish */
+    /*background-color: rgba(15,14,17,1.00);*/
 }
 
 body {
     /*background-color: rgba(0,16,27,0.98); !* Dark Grey Bluish *!*/
     background-color: rgba(39,38,41,0.98);
-    /*overflow-x: hidden;*/
+    /*align-content: center;*/
+    /*align-self: center;*/
+    /*width: 960px;*/
 }
 
-body>.container {
-    width: 960px;
-}
+/*body>.container {*/
+/*    width: 960px;*/
+/*}*/
 
-.earth {
-    width: 50px;
-    height: 50px;
-    left: 50px;
-}
+/*.earth {*/
+/*    width: 50px;*/
+/*    height: 50px;*/
+/*    left: 50px;*/
+/*}*/
 
-#sim-container {
+#React-Simulation {
     user-select: none;
     width: 930px;
     height: 800px;
 }
 
-/*!*.Redshift {*!*/
-/*!*    position: relative;*!*/
-/*!*    top: 280px;*!*/
-/*!*    width: 920px;*!*/
-/*!*    height: 290px;*!*/
-/*!*    z-index: 10;*!*/
-/*!*}*!*/
-
-/*.Redshift>canvas {*/
-/*    width: 920px;*/
-
-/*}*/
-
 #dynamicBackground {
-    border-color: azure;
     position: relative;
     top: 10px;
-    /*bottom: 613px;*/
 }
 
 input[type=number]{
@@ -61,13 +48,16 @@ input[type=number]{
     position: relative;
     bottom: 250px;
     left: 750px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: teal;
+    border-width: 1px;
+    width: 160px;
 }
 
 #topHalf {
     background-color: black;
-    /*position: relative;*/
     height: 280px;
-    /*bottom: 200px;*/
     width: 920px;
 }
 
@@ -152,12 +142,6 @@ input[type=number]{
 .parameters {
     position: relative;
     bottom: 40px;
-    left: 30px;
-}
-
-.paramAlertText {
-    position: relative;
-    bottom: 963px;
     left: 30px;
 }
 
