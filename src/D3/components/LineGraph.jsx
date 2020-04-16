@@ -46,7 +46,7 @@ export default (props) => {
     const lineGenTargetDist = lineGenerator(scales.xScale, scales.yScale);
     const lineGenLightDist = lineGenerator(scales.xScale, scales.yScale);
 
-    return <svg width={props.width} height={props.height}>
+    return (<svg width={props.width} height={props.height}>
        <XYAxis {...props} {...scales} />
         <Line
             data={lineDataLightVal}
@@ -73,12 +73,10 @@ export default (props) => {
             color={'red'}
         />
 
-
-
         {/*Horizontal Upper line*/}
         {/*<line x1={39} y1={24.5} x2={886} y2={24.5} style={{stroke: "rgb(0,0,0)"}} />*/}
         {/*/!*Vertical Right Line*!/*/}
         {/*<line x1={885.5} y1={265} x2={885.5} y2={25} style={{stroke: "rgb(0,0,0)"}} />*/}
 
-    </svg>
+    </svg>);
 }
