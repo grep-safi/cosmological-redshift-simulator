@@ -63,19 +63,20 @@ export default (props) => {
             <g>{ props.backgroundStars.map(renderCircles()) }</g>
 
             {/*SVG images for Earth and Galaxy*/}
-            <image x={xPositionEarth} y={135 - 10} href="./assets/earth.svg" height="20" width="20"/>
-            <image x={xPositionGalaxy} y={120 - 10} href="./assets/GalaxySVG.svg" height="50" width="50"/>
+            <image x={xPositionEarth - 8} y={95} href="./assets/earth.svg" height="35" width="35"/>
+            <image x={xPositionGalaxy - 25} y={60} href="./assets/GalaxySVG.svg" height="100" width="100"/>
 
-            <rect x={xPositionEarth - 14} y={103 - 25} width="45" height="16" fill="black"/>
-            <rect x={xPositionGalaxy - 5} y={103 - 25} width="63" height="19" fill="black"/>
+            {/*Black boxes under the text that make them clear*/}
+            {/*<rect x={xPositionEarth - 14} y={60} width="45" height="16" fill="white"/>*/}
+            {/*<rect x={xPositionGalaxy - 5} y={60} width="63" height="19" fill="white"/>*/}
 
             {/*Text that hovers above Earth and Galaxy*/}
-            <text x={xPositionEarth - 15} y={103 - 10} fontSize={"1.3em"} fill={"darkgoldenrod"}>Earth</text>
-            <text x={xPositionGalaxy - 5} y={103 - 10} fontSize={"1.3em"} fill={"darkgoldenrod"}>Galaxy</text>
+            <text x={xPositionEarth - 15} y={50} fontSize={"1.3em"} fill={"darkgoldenrod"}>Earth</text>
+            <text x={xPositionGalaxy - 5} y={50} fontSize={"1.3em"} fill={"darkgoldenrod"}>Galaxy</text>
 
             {/*Lines above Earth and Galaxy but below "Earth" and "Galaxy" text*/}
-            <line x1={xPositionEarth + 10} y1={130 - 10} x2={xPositionEarth + 10} y2={110 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
-            <line x1={xPositionGalaxy + 25} y1={127 - 10} x2={xPositionGalaxy + 25} y2={110 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+            <line x1={xPositionEarth + 10} y1={60} x2={xPositionEarth + 10} y2={80} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+            <line x1={xPositionGalaxy + 25} y1={60} x2={xPositionGalaxy + 25} y2={80} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
 
 
             <g visibility={"visible"}>
@@ -118,7 +119,7 @@ export default (props) => {
             </g>
 
             {/*Light line*/}
-            <line x1={initialLightLine} y1={135} x2={finalLightLine} y2={135} style={{stroke: "yellow", strokeWidth:"2"}}/>
+            <line x1={initialLightLine} y1={112} x2={finalLightLine} y2={112} style={{stroke: "yellow", strokeWidth:"2"}}/>
             {/*<line x1={297.5} y1={135} x2={700} y2={135} style={{stroke: "yellow", strokeWidth:"2"}}/>*/}
         </svg>
     );

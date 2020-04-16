@@ -104,29 +104,29 @@ input[type=number]{
     top: 1px;
 }
 
-.yAxis line {
-    stroke: aqua;
-}
+/*.yAxis line {*/
+/*    stroke: aqua;*/
+/*}*/
 
-.yAxis path {
-    stroke: aqua;
-}
+/*.yAxis path {*/
+/*    stroke: aqua;*/
+/*}*/
 
-.yAxis text {
-    stroke: aqua;
-}
+/*.yAxis text {*/
+/*    stroke: aqua;*/
+/*}*/
 
-.xAxis line {
-    stroke: aqua;
-}
+/*.xAxis line {*/
+/*    stroke: aqua;*/
+/*}*/
 
-.xAxis path {
-    stroke: aqua;
-}
+/*.xAxis path {*/
+/*    stroke: aqua;*/
+/*}*/
 
-.xAxis text {
-    stroke: aqua;
-}
+/*.xAxis text {*/
+/*    stroke: aqua;*/
+/*}*/
 
 .axisLabelText {
     fill: chartreuse;
