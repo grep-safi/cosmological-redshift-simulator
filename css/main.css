@@ -218,3 +218,12 @@ input[type=number]{
     bottom: 5px;
     width: 50px;
 }
+
+
+.radiusShrinkingSlider {
+    position: relative;
+    display: inline-block;
+    background-color: blanchedalmond;
+    left: 700px;
+    bottom: 150px;
+}
