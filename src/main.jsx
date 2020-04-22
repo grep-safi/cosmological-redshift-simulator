@@ -26,7 +26,7 @@ class CosmologicalRedshiftSim extends React.Component {
             completeLightDistances: [6.50],
             completeLightTravelledDistances: [0],
 
-            animationRate: 30,
+            animationRate: 70,
             startBtnText: 'play animation',
             isPlaying: false,
             simulationStarted: false,
@@ -40,6 +40,18 @@ class CosmologicalRedshiftSim extends React.Component {
             simulationWillNeverEnd: false,
 
             backgroundStars: data,
+
+
+
+
+
+
+
+
+
+
+
+            radShrink: 50,
         };
 
 
@@ -113,6 +125,18 @@ class CosmologicalRedshiftSim extends React.Component {
             <div className={"units"}>
                 <p id={"separationUnits"}>Billion Light Years</p>
                 <p id={"expansionUnits"}>% per Billion Years</p>
+            </div>
+
+            <div className="radiusShrinkingSlider">
+                <p>radius shrink: </p>
+                <input
+                    type="range"
+                    min={1}
+                    max={100}
+                    step={1}
+                    value={this.state.radShrink}
+                    onChange={this.changeRadShrink.bind(this)}
+                />
             </div>
 
         </React.Fragment>;
@@ -245,21 +269,27 @@ class CosmologicalRedshiftSim extends React.Component {
             let star = this.state.backgroundStars[i];
             let circleX = star.cx;
             let circleY = star.cy;
+            let radius = star.r;
+            let distToCenter = Math.sqrt(Math.pow((circleX - (width / 2)), 2) + Math.pow((circleY - (height / 2)), 2));
 
             let speedOfConvergence = this.state.animationRate / 500;
 
             let incrementX = star.deltaX * speedOfConvergence;
             let incrementY = star.deltaY * speedOfConvergence;
+            let incrementRadius = (1 - (distToCenter / 1100)) * speedOfConvergence / this.state.radShrink;
+            // let rad = (1 -)
+            // let incrementRadius = (1 - (distToCenter / 1100)) * speedOfConvergence / 20;
 
             circleX -= incrementX;
             circleY -= incrementY;
+            radius -= incrementRadius;
 
             let starProperties = {
                 cx: circleX,
                 cy: circleY,
                 deltaX: star.deltaX,
                 deltaY: star.deltaY,
-                r: star.r,
+                r: radius,
                 fill: star.fill,
                 key: star.key,
                 center: star.center,
@@ -301,7 +331,7 @@ class CosmologicalRedshiftSim extends React.Component {
             let fill = "rgba(255,255,255," + starOpacity + ")";
 
             let theta = Math.atan2(circleY - (height / 2), circleX - (width / 2));
-            let alpha = 1.2;
+            let alpha = 5;
             let deltaX = (alpha * Math.cos(theta));
             let deltaY = (alpha * Math.sin(theta));
 
@@ -340,6 +370,11 @@ class CosmologicalRedshiftSim extends React.Component {
 
     changeAnimationRate(event) {
         this.setState({ animationRate: Number.parseFloat(event.target.value), });
+    }
+
+    changeRadShrink(event) {
+        console.log(`radius shrink: ${this.state.radShrink}`);
+        this.setState({ radShrink: Number.parseFloat(event.target.value), });
     }
 
     stopAnimation() {

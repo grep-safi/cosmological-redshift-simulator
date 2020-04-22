@@ -24,6 +24,14 @@ const renderCircles = () => {
     };
 };
 
+const getScaledInitialSeparation = (initDist, currDist) => {
+    let initialSeparation = initDist / 2;
+    let currWidth = 17.228377773099474;
+    let maxWidth = currDist > currWidth ? currDist : currWidth;
+    initialSeparation = (initialSeparation / maxWidth) * 860;
+    initialSeparation = initialSeparation > 0.5 ? initialSeparation : 0.5;
+    return initialSeparation;
+}
 
 export default (props) => {
     let distanceFromCenter = scaleToPixel(props.distanceBetweenBodies / 2);
@@ -33,8 +41,8 @@ export default (props) => {
     let xPositionEarth;
     let xPositionGalaxy;
 
-    let initialEarthX = CENTER_X + scaleToPixel(props.params.initialSeparationDistance / 2);
-    let initialGalaxyX = CENTER_X - scaleToPixel(props.params.initialSeparationDistance / 2);
+    let initialEarthX = CENTER_X + getScaledInitialSeparation(props.params.initialSeparationDistance, props.distanceBetweenBodies);
+    let initialGalaxyX = CENTER_X - getScaledInitialSeparation(props.params.initialSeparationDistance, props.distanceBetweenBodies);
 
     let initialSeparation = props.params.initialSeparationDistance.toFixed(2);
     let currentSeparation = props.distanceBetweenBodies.toFixed(2);
@@ -63,8 +71,8 @@ export default (props) => {
             <g>{ props.backgroundStars.map(renderCircles()) }</g>
 
             {/*SVG images for Earth and Galaxy*/}
-            <image x={xPositionEarth} y={135 - 10} href="../assets/earth.svg" height="20" width="20"/>
-            <image x={xPositionGalaxy} y={120 - 10} href="../assets/GalaxySVG.svg" height="50" width="50"/>
+            <image x={xPositionEarth} y={135 - 10} href="./assets/Earth.svg" height="20" width="20"/>
+            <image x={xPositionGalaxy} y={120 - 10} href="./assets/GalaxySVG.svg" height="50" width="50"/>
 
             <rect x={xPositionEarth - 14} y={103 - 25} width="45" height="16" fill="black"/>
             <rect x={xPositionGalaxy - 5} y={103 - 25} width="63" height="19" fill="black"/>

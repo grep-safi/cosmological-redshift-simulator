@@ -116,7 +116,7 @@ let data =
         {"cx":455,"cy":145,"r":3.3,"fill":"rgba(255,255,255,1.0)","key":110, "center": true}
     ];
 
-let alpha = 1.2;
+let alpha = 5;
 for (let i = 0; i < data.length; i++) {
     let x = data[i].cx;
     let y = data[i].cy;
