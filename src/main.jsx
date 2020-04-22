@@ -26,7 +26,7 @@ class CosmologicalRedshiftSim extends React.Component {
             completeLightDistances: [6.50],
             completeLightTravelledDistances: [0],
 
-            animationRate: 50,
+            animationRate: 30,
             startBtnText: 'play animation',
             isPlaying: false,
             simulationStarted: false,
@@ -108,6 +108,11 @@ class CosmologicalRedshiftSim extends React.Component {
                     simulationEnded={this.state.simulationEnded}
                     isPlaying={this.state.isPlaying}
                 />
+            </div>
+
+            <div className={"units"}>
+                <p id={"separationUnits"}>Billion Light Years</p>
+                <p id={"expansionUnits"}>% per Billion Years</p>
             </div>
 
         </React.Fragment>;
@@ -203,8 +208,8 @@ class CosmologicalRedshiftSim extends React.Component {
         let simulationWillComplete = index >= this.state.maxIndex - (speedOfAnimation + 1);
         if (simulationWillComplete) { index = this.state.maxIndex - 1; }
 
-        // if (this.state.distanceBetweenBodies >  17.228377773099474) { this.shrinkBackground(); }
-        this.shrinkBackground();
+        if (this.state.distanceBetweenBodies >  17.228377773099474) { this.shrinkBackground(); }
+        // this.shrinkBackground();
 
         // console.log(`length of arr: ${this.state.backgroundStars.length}`);
 
@@ -309,8 +314,6 @@ class CosmologicalRedshiftSim extends React.Component {
                 fill: fill,
                 key: newBackgroundStars.length + 1,
             };
-
-            console.log(`freshly created star: x: ${starProperties.cx} y: ${starProperties.cy}`);
 
             newBackgroundStars.push(starProperties);
         }

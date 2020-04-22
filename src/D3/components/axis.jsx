@@ -31,8 +31,8 @@ export default class Axes extends Component {
         xAxisNode.call(xAxis);
         yAxisNode.call(yAxis);
 
-        this.drawColors(xAxisNode);
-        this.drawColors(yAxisNode);
+        // this.drawColors(xAxisNode);
+        // this.drawColors(yAxisNode);
     }
 
     drawColors(axis) {
@@ -48,11 +48,11 @@ export default class Axes extends Component {
 
     render() {
         return <React.Fragment>
-            <g ref={this.yAxis}
+            <g className={"yAxis"} ref={this.yAxis}
                transform={`translate(${this.props.paddingLeft - 2}, 0)`}
             />
 
-            <g ref={this.xAxis}
+            <g className={"xAxis"} ref={this.xAxis}
                transform={`translate(-2, ${this.props.height + 5})`}
             />
 

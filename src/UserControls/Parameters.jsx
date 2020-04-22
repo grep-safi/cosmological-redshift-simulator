@@ -22,6 +22,7 @@ export default class Parameters extends React.Component {
                         name={"initialSeparationDistance"}
                         displayName={"Initial Separation Distance: "}
                         className={"separationParameter"}
+                        id={"separationSlider"}
                         min={3.0}
                         max={10.0}
                         step={0.01}
@@ -35,6 +36,7 @@ export default class Parameters extends React.Component {
                         name={"expansionRate"}
                         displayName={"Universe Expansion Rate: "}
                         className={"expansionParameter"}
+                        id={"expansionSlider"}
                         min={0.00}
                         max={13.00}
                         step={0.01}
