@@ -115,7 +115,17 @@ class CosmologicalRedshiftSim extends React.Component {
                 <p id={"expansionUnits"}>% per Billion Years</p>
             </div>
 
+            <div className={"timeElapsed"}>
+                <p id={"timeElapsedText"}>Time Elapsed: </p>
+                <p id={"timeElapsedNumber"}>{this.getTimeElapsed()}</p>
+                <p id={"timeUnits"}>Billions of Years</p>
+            </div>
+
         </React.Fragment>;
+    }
+
+    getTimeElapsed() {
+        return this.state.times[this.state.times.length - 1].toFixed(2);
     }
 
     componentDidMount() { this.calculateData(); }

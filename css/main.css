@@ -219,6 +219,32 @@ input[type=number]{
     width: 50px;
 }
 
+.timeElapsed {
+    position: relative;
+    display: inline-block;
+    bottom: 580px;
+    left: 650px;
+
+    height: 80px;
+}
+
+#timeElapsedText {
+    color: #64d390;
+    position: relative;
+    text-align: center;
+    top: 18px;
+}
+
+#timeElapsedNumber {
+    color: #64d390;
+    text-align: center;
+}
+
+#timeUnits {
+    color: #64d390;
+    position: relative;
+    bottom: 20px;
+}
 
 .radiusShrinkingSlider {
     position: relative;
