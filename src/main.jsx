@@ -40,18 +40,6 @@ class CosmologicalRedshiftSim extends React.Component {
             simulationWillNeverEnd: false,
 
             backgroundStars: data,
-
-
-
-
-
-
-
-
-
-
-
-            radShrink: 50,
         };
 
 
@@ -125,18 +113,6 @@ class CosmologicalRedshiftSim extends React.Component {
             <div className={"units"}>
                 <p id={"separationUnits"}>Billion Light Years</p>
                 <p id={"expansionUnits"}>% per Billion Years</p>
-            </div>
-
-            <div className="radiusShrinkingSlider">
-                <p>radius shrink: </p>
-                <input
-                    type="range"
-                    min={1}
-                    max={100}
-                    step={1}
-                    value={this.state.radShrink}
-                    onChange={this.changeRadShrink.bind(this)}
-                />
             </div>
 
         </React.Fragment>;
@@ -276,13 +252,15 @@ class CosmologicalRedshiftSim extends React.Component {
 
             let incrementX = star.deltaX * speedOfConvergence;
             let incrementY = star.deltaY * speedOfConvergence;
-            let incrementRadius = (1 - (distToCenter / 1100)) * speedOfConvergence / this.state.radShrink;
+            let incrementRadius = (1 - (distToCenter / 1100)) * speedOfConvergence / 35;
             // let rad = (1 -)
             // let incrementRadius = (1 - (distToCenter / 1100)) * speedOfConvergence / 20;
 
             circleX -= incrementX;
             circleY -= incrementY;
             radius -= incrementRadius;
+            // Make sure radius isn't negative or it'll throw an error
+            radius = radius < 0 ? 0 : radius;
 
             let starProperties = {
                 cx: circleX,
@@ -370,11 +348,6 @@ class CosmologicalRedshiftSim extends React.Component {
 
     changeAnimationRate(event) {
         this.setState({ animationRate: Number.parseFloat(event.target.value), });
-    }
-
-    changeRadShrink(event) {
-        console.log(`radius shrink: ${this.state.radShrink}`);
-        this.setState({ radShrink: Number.parseFloat(event.target.value), });
     }
 
     stopAnimation() {
