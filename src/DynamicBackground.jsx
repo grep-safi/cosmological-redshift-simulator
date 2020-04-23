@@ -62,6 +62,8 @@ export default (props) => {
 
     // The + 2 is there for making sure light isn't completely invisible after shrinking down
     finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine + 2 : finalLightLine;
+    let lightColor = props.lightWavelengthColor;
+    console.log(`light wav length color: ${lightColor} aand type: ${typeof lightColor}`);
 
     return (
         <svg width={dimensions.width} height={dimensions.height}>
@@ -143,7 +145,8 @@ export default (props) => {
             </g>
 
             {/* Light line */}
-            <line x1={initialLightLine} y1={135} x2={finalLightLine} y2={135} style={{stroke: "yellow", strokeWidth:"2"}}/>
+            <line x1={initialLightLine} y1={135} x2={finalLightLine} y2={135} style={{stroke: lightColor, strokeWidth:"2"}}/>
+            {/*<line x1={initialLightLine} y1={135} x2={finalLightLine} y2={135} style={{stroke: "#ff9000", strokeWidth:"2"}}/>*/}
             {/* <line x1={initialLightLine} y1={112} x2={finalLightLine} y2={112} style={{stroke: "yellow", strokeWidth:"2"}}/> */}
         </svg>
     );
