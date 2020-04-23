@@ -12,18 +12,18 @@ class CosmologicalRedshiftSim extends React.Component {
         super(props);
         this.initialState = {
             parameters: {
-                initialSeparationDistance: 6.50,
-                expansionRate: 6.50,
+                initialSeparationDistance: 7.00,
+                expansionRate: 10.0,
             },
 
             times: [0],
-            targetDistances: [6.50],
-            lightDistances: [6.50],
+            targetDistances: [7.00],
+            lightDistances: [7.00],
             lightTravelledDistances: [0],
 
             completeTimes: [0],
-            completeTargetDistances: [6.50],
-            completeLightDistances: [6.50],
+            completeTargetDistances: [7.00],
+            completeLightDistances: [7.00],
             completeLightTravelledDistances: [0],
 
             animationRate: 70,
@@ -32,8 +32,8 @@ class CosmologicalRedshiftSim extends React.Component {
             simulationStarted: false,
             simulationEnded: false,
 
-            distanceTravelledLight: 6.50,
-            distanceBetweenBodies: 6.50,
+            distanceTravelledLight: 7.00,
+            distanceBetweenBodies: 7.00,
 
             index: 0,
             maxIndex: 0,
@@ -362,13 +362,13 @@ class CosmologicalRedshiftSim extends React.Component {
         // Reset the array values
         this.setState({
             times: [0],
-            targetDistances: [6.50],
-            lightDistances: [6.50],
+            targetDistances: [7.00],
+            lightDistances: [7.00],
             lightTravelledDistances: [0],
 
             completeTimes: [0],
-            completeTargetDistances: [6.50],
-            completeLightDistances: [6.50],
+            completeTargetDistances: [7.00],
+            completeLightDistances: [7.00],
             completeLightTravelledDistances: [0],
         });
     }
