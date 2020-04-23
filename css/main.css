@@ -246,10 +246,6 @@ input[type=number]{
     bottom: 20px;
 }
 
-.radiusShrinkingSlider {
-    position: relative;
-    display: inline-block;
-    background-color: blanchedalmond;
-    left: 700px;
-    bottom: 150px;
+.survey {
+    /*position: relative;*/
 }

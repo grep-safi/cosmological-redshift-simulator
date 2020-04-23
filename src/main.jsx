@@ -121,6 +121,14 @@ class CosmologicalRedshiftSim extends React.Component {
                 <p id={"timeUnits"}>Billions of Years</p>
             </div>
 
+            {/*<div id="survey">*/}
+            {/*    <a href="https://tinyurl.com/yd4n28bx"*/}
+            {/*       target="_blank"*/}
+            {/*       rel="noopener noreferrer">*/}
+            {/*        <button type="button" className="btn btn-warning">Give us feedback!</button>*/}
+            {/*    </a>*/}
+            {/*</div>*/}
+
         </React.Fragment>;
     }
 
