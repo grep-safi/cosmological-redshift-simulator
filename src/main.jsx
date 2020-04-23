@@ -65,6 +65,12 @@ class CosmologicalRedshiftSim extends React.Component {
 
                 <Legend />
 
+                <div className={"timeElapsed"}>
+                    <p id={"timeElapsedText"}>Time Elapsed: </p>
+                    <p id={"timeElapsedNumber"}>{this.getTimeElapsed()}</p>
+                    <p id={"timeUnits"}>Billions of Years</p>
+                </div>
+
                 <div className="animationSlider">
                     <h6  id="animationSpeedText">Animation </h6>
                     <h6  id="animationSpeedTextLineTwo">Speed</h6>
@@ -92,42 +98,40 @@ class CosmologicalRedshiftSim extends React.Component {
                 />
             </div>
 
-            <div className="animationButton">
-                <button type="box"
-                        className="btn btn-danger btn-sm"
-                        onClick={() => this.onStartClick()}>
-                    {this.state.startBtnText}
-                </button>
+            <div className={"bottomSettings"}>
+                <div className="animationButton">
+                    <button type="box"
+                            className="btn btn-danger btn-sm"
+                            onClick={() => this.onStartClick()}>
+                        {this.state.startBtnText}
+                    </button>
+                </div>
+
+                <div className="parameters">
+                    <Parameters
+                        params={this.state.parameters}
+                        onChange={this.handleNewParameters.bind(this)}
+                        simulationStarted={this.state.simulationStarted}
+                        simulationEnded={this.state.simulationEnded}
+                        isPlaying={this.state.isPlaying}
+                    />
+                </div>
+
+                <div className={"units"}>
+                    <p id={"separationUnits"}>Billion Light Years</p>
+                    <p id={"expansionUnits"}>% per Billion Years</p>
+                </div>
+
+                <div className="survey">
+                    <a href="https://tinyurl.com/yd4n28bx"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <button type="button" className="btn btn-warning">Give us feedback!</button>
+                    </a>
+                </div>
             </div>
 
-            <div className="parameters">
-                <Parameters
-                    params={this.state.parameters}
-                    onChange={this.handleNewParameters.bind(this)}
-                    simulationStarted={this.state.simulationStarted}
-                    simulationEnded={this.state.simulationEnded}
-                    isPlaying={this.state.isPlaying}
-                />
-            </div>
 
-            <div className={"units"}>
-                <p id={"separationUnits"}>Billion Light Years</p>
-                <p id={"expansionUnits"}>% per Billion Years</p>
-            </div>
-
-            <div className={"timeElapsed"}>
-                <p id={"timeElapsedText"}>Time Elapsed: </p>
-                <p id={"timeElapsedNumber"}>{this.getTimeElapsed()}</p>
-                <p id={"timeUnits"}>Billions of Years</p>
-            </div>
-
-            {/*<div id="survey">*/}
-            {/*    <a href="https://tinyurl.com/yd4n28bx"*/}
-            {/*       target="_blank"*/}
-            {/*       rel="noopener noreferrer">*/}
-            {/*        <button type="button" className="btn btn-warning">Give us feedback!</button>*/}
-            {/*    </a>*/}
-            {/*</div>*/}
 
         </React.Fragment>;
     }
