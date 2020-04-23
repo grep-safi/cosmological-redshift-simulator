@@ -63,7 +63,7 @@ export default (props) => {
     // The + 2 is there for making sure light isn't completely invisible after shrinking down
     finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine + 2 : finalLightLine;
     let lightColor = props.lightWavelengthColor;
-    console.log(`light wav length color: ${lightColor} aand type: ${typeof lightColor}`);
+    if (lightColor === "#000000") { lightColor = "#808080"; }
 
     return (
         <svg width={dimensions.width} height={dimensions.height}>
