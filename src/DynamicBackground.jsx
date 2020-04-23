@@ -31,7 +31,7 @@ const getScaledInitialSeparation = (initDist, currDist) => {
     initialSeparation = (initialSeparation / maxWidth) * 860;
     initialSeparation = initialSeparation > 0.5 ? initialSeparation : 0.5;
     return initialSeparation;
-}
+};
 
 export default (props) => {
     let distanceFromCenter = scaleToPixel(props.distanceBetweenBodies / 2);
@@ -60,7 +60,8 @@ export default (props) => {
     let finalLightLine = xPositionEarth - scaleToPixel(props.distanceTravelledLight) + 10;
     if (!props.simulationStarted) finalLightLine = initialLightLine;
 
-    finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine : finalLightLine;
+    // The + 2 is there for making sure light isn't completely invisible after shrinking down
+    finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine + 2 : finalLightLine;
 
     return (
         <svg width={dimensions.width} height={dimensions.height}>
