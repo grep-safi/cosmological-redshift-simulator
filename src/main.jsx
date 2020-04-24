@@ -41,9 +41,10 @@ class CosmologicalRedshiftSim extends React.Component {
 
             backgroundStars: data,
             wavelength: 400,
-            lightWavelengthColor: "#8300b5"
+            redShift: 0,
+            hubbleConstant: 98,
+            lightWavelengthColor: "#8300b5",
         };
-
 
         this.state = this.initialState;
         this.raf = null;
@@ -132,6 +133,15 @@ class CosmologicalRedshiftSim extends React.Component {
                         <button type="button" className="btn btn-warning">Give us feedback!</button>
                     </a>
                 </div>
+
+                <div className={"criticalValues"}>
+                    <p id={"wavelengthText"}>Wavelength:</p>
+                    <p id={"wavelengthValue"}>{this.state.wavelength.toFixed(0)} nm</p>
+                    <p id={"redShiftText"}>Redshift Factor (Z):</p>
+                    <p id={"redShiftFactorValue"}>{this.state.redShift.toFixed(1)}</p>
+                    <p id={"hubbleText"}>Hubble Constant:</p>
+                    <p id={"hubbleConstValue"}>{this.state.hubbleConstant.toFixed(0)} km/s / Mpc</p>
+                </div>
             </div>
 
         </React.Fragment>;
@@ -206,7 +216,11 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     handleNewParameters(newParams) {
-        this.setState({ parameters: newParams });
+        let hubbleConst = (this.state.parameters.expansionRate / 100) * 978.440076093849;
+        this.setState({
+            parameters: newParams,
+            hubbleConstant: hubbleConst
+        });
 
         if (!this.state.simulationStarted) {
             this.setState({
@@ -239,9 +253,13 @@ class CosmologicalRedshiftSim extends React.Component {
         this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);
         this.state.times.push(this.state.completeTimes[index]);
 
+        let ratio = this.state.completeTargetDistances[index] / this.state.parameters.initialSeparationDistance;
         // new wavelength
-        let wv = (this.state.completeTargetDistances[index] / this.state.parameters.initialSeparationDistance) * 400;
+        let wv = ratio * 400;
+
+        // color of light
         let hexColor = this.getHex(wv);
+        let redShiftValue = ratio - 1;
 
         this.setState({
             distanceTravelledLight: this.state.completeLightDistances[index],
@@ -257,6 +275,7 @@ class CosmologicalRedshiftSim extends React.Component {
             index: this.state.index + speedOfAnimation,
             simulationEnded: simulationWillComplete,
             wavelength: wv,
+            redShift: redShiftValue,
             lightWavelengthColor: hexColor,
         });
 

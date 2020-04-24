@@ -264,3 +264,35 @@ input[type=number]{
     height: 150px;
     width: 920px;
 }
+
+.criticalValues {
+    background: #64d390;
+    position: relative;
+    display: inline-block;
+    bottom: 138px;
+    left: 300px;
+}
+
+#wavelengthValue {
+    text-align: center;
+}
+
+#redShiftFactorValue {
+    text-align: center;
+}
+
+#hubbleConstValue {
+    text-align: center;
+}
+
+#wavelengthText {
+    text-align: center;
+}
+
+#redShiftText {
+    text-align: center;
+}
+
+#hubbleText {
+    text-align: center;
+}
