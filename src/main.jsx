@@ -40,6 +40,7 @@ class CosmologicalRedshiftSim extends React.Component {
             simulationWillNeverEnd: false,
 
             backgroundStars: data,
+            wavelength: 400,
             lightWavelengthColor: "#8300b5"
         };
 
@@ -132,8 +133,6 @@ class CosmologicalRedshiftSim extends React.Component {
                     </a>
                 </div>
             </div>
-
-
 
         </React.Fragment>;
     }
@@ -232,17 +231,17 @@ class CosmologicalRedshiftSim extends React.Component {
         let simulationWillComplete = index >= this.state.maxIndex - (speedOfAnimation + 1);
         if (simulationWillComplete) { index = this.state.maxIndex - 1; }
 
+        // If the Galaxy and Earth is on the edge, then shrink the background
         if (this.state.distanceBetweenBodies >  17.228377773099474) { this.shrinkBackground(); }
-        // this.shrinkBackground();
-
-        // console.log(`length of arr: ${this.state.backgroundStars.length}`);
 
         this.state.targetDistances.push(this.state.completeTargetDistances[index]);
         this.state.lightDistances.push(this.state.completeLightDistances[index]);
         this.state.lightTravelledDistances.push(this.state.completeLightTravelledDistances[index]);
         this.state.times.push(this.state.completeTimes[index]);
 
-        // console.log(`hex: ${this.getHex((this.state.distanceBetweenBodies / this.state.parameters.initialSeparationDistance) * 400)}`);
+        // new wavelength
+        let wv = (this.state.completeTargetDistances[index] / this.state.parameters.initialSeparationDistance) * 400;
+        let hexColor = this.getHex(wv);
 
         this.setState({
             distanceTravelledLight: this.state.completeLightDistances[index],
@@ -257,7 +256,8 @@ class CosmologicalRedshiftSim extends React.Component {
 
             index: this.state.index + speedOfAnimation,
             simulationEnded: simulationWillComplete,
-            lightWavelengthColor: this.getHex((this.state.distanceBetweenBodies / this.state.parameters.initialSeparationDistance) * 400)
+            wavelength: wv,
+            lightWavelengthColor: hexColor,
         });
 
         this.raf = requestAnimationFrame(this.animate.bind(this));

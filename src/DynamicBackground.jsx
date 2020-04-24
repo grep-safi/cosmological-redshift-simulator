@@ -47,7 +47,6 @@ export default (props) => {
     let initialSeparation = props.params.initialSeparationDistance.toFixed(2);
     let currentSeparation = props.distanceBetweenBodies.toFixed(2);
 
-
     if (!(distanceFromCenter > CENTER_X - 40)) {
         xPositionEarth = CENTER_X + distanceFromCenter - sizeShift;
         xPositionGalaxy = CENTER_X - distanceFromCenter - galaxySizeShift;
@@ -61,7 +60,7 @@ export default (props) => {
     if (!props.simulationStarted) finalLightLine = initialLightLine;
 
     // The + 2 is there for making sure light isn't completely invisible after shrinking down
-    finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine + 2 : finalLightLine;
+    finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine + 1 : finalLightLine;
     let lightColor = props.lightWavelengthColor;
     if (lightColor === "#000000") { lightColor = "#808080"; }
 
@@ -88,31 +87,14 @@ export default (props) => {
             <line x1={xPositionEarth + 10} y1={130 - 10} x2={xPositionEarth + 10} y2={110 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
             <line x1={xPositionGalaxy + 25} y1={127 - 10} x2={xPositionGalaxy + 25} y2={110 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
 
-            {/* SVG images for Earth and Galaxy
-            <image x={xPositionEarth - 8} y={95} href="./assets/earth.svg" height="35" width="35"/>
-            <image x={xPositionGalaxy - 25} y={60} href="./assets/GalaxySVG.svg" height="100" width="100"/>
-
-            {/*Black boxes under the text that make them clear*/}
-            {/* <rect x={xPositionEarth - 14} y={35} width="45" height="16" fill="black"/> */}
-            {/* <rect x={xPositionGalaxy - 5} y={35} width="63" height="19" fill="black"/> */}
-
-            {/*Text that hovers above Earth and Galaxy*/}
-            {/* <text x={xPositionEarth - 15} y={50} fontSize={"1.3em"} fill={"darkgoldenrod"}>Earth</text> */}
-            {/* <text x={xPositionGalaxy - 5} y={50} fontSize={"1.3em"} fill={"darkgoldenrod"}>Galaxy</text> */}
-
-            {/*Lines above Earth and Galaxy but below "Earth" and "Galaxy" text*/}
-            {/* <line x1={xPositionEarth + 10} y1={60} x2={xPositionEarth + 10} y2={80} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/> */}
-            {/* <line x1={xPositionGalaxy + 25} y1={60} x2={xPositionGalaxy + 25} y2={80} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/> */} */}
-
-
             <g visibility={"visible"}>
 
                 {/*Lines below Earth and Galaxy*/}
-                <line x1={initialEarthX + 1} y1={165 - 10} x2={initialEarthX + 1} y2={185 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
-                <line x1={initialGalaxyX - 1} y1={165 - 10} x2={initialGalaxyX - 1} y2={185 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+                <line x1={initialEarthX} y1={155} x2={initialEarthX} y2={175} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+                <line x1={initialGalaxyX} y1={155} x2={initialGalaxyX} y2={175} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
 
                 {/*Line connecting initial separation distance*/}
-                <line x1={initialEarthX + 2} y1={185 - 10} x2={initialGalaxyX - 2} y2={185 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
+                <line x1={initialEarthX + 1} y1={175} x2={initialGalaxyX - 1} y2={175} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
 
                 {/*Line tip at middle of initial separation distance*/}
                 <line x1={(initialGalaxyX + initialEarthX) / 2} y1={185 - 10} x2={(initialGalaxyX + initialEarthX) / 2} y2={195 - 10} style={{stroke: "cornflowerblue", strokeWidth:"2"}}/>
@@ -122,7 +104,7 @@ export default (props) => {
                 <rect x={((initialGalaxyX + initialEarthX) / 2) - 60} y={230 - 27} width="143" height="17" fill="black"/>
 
                 <text x={((initialGalaxyX + initialEarthX) / 2) - 80} y={210 - 10} fontSize={"1.0em"} fill={"lightcoral"}>Initial Separation Distance</text>
-                <text x={((initialGalaxyX + initialEarthX) / 2) - 60} y={230 - 13} fontSize={"1.0em"} fill={"lightcoral"}>{initialSeparation} billions of years</text>
+                <text x={((initialGalaxyX + initialEarthX) / 2) - 40} y={230 - 13} fontSize={"1.0em"} fill={"lightcoral"}>{initialSeparation} light years</text>
 
                 {/*-----------------------------------------------*/}
 
@@ -133,7 +115,7 @@ export default (props) => {
                 {/*Line connecting current separation distance*/}
                 <line x1={xPositionEarth + 10} y1={250 - 10} x2={xPositionGalaxy + 25} y2={250 - 10} style={{stroke: "green", strokeWidth:"2"}}/>
 
-                {/*Line tip at middle of initial current distance*/}
+                {/*Line tip at middle of current distance*/}
                 <line x1={(initialGalaxyX + initialEarthX) / 2} y1={251 - 10} x2={(initialGalaxyX + initialEarthX) / 2} y2={260 - 10} style={{stroke: "green", strokeWidth:"2"}}/>
 
                 <rect x={((initialGalaxyX + initialEarthX) / 2) - 80} y={275 - 22} width="193" height="15" fill="black"/>
@@ -141,7 +123,7 @@ export default (props) => {
 
                 {/*Text values for current separation distance*/}
                 <text x={((initialGalaxyX + initialEarthX) / 2) - 80} y={275 - 10} fontSize={"1.0em"} fill={"lightcoral"}>Current Separation Distance</text>
-                <text x={((initialGalaxyX + initialEarthX) / 2) - 60} y={290 - 10} fontSize={"1.0em"} fill={"lightcoral"}>{currentSeparation} billions of years</text>
+                <text x={((initialGalaxyX + initialEarthX) / 2) - 40} y={290 - 10} fontSize={"1.0em"} fill={"lightcoral"}>{currentSeparation} light years</text>
             </g>
 
             {/* Light line */}

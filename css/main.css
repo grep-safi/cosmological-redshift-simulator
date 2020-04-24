@@ -82,9 +82,9 @@ input[type=number]{
 
 .animationButton {
     position: relative;
-    left: 710px;
+    left: 800px;
     /*bottom: 65px;*/
-    top: 30px;
+    top: 10px;
     z-index: 1;
 }
 
@@ -252,8 +252,8 @@ input[type=number]{
 .survey {
     display: inline-block;
     position: relative;
-    bottom: 160px;
-    left: 550px;
+    bottom: 130px;
+    left: 625px;
 }
 
 .bottomSettings {
@@ -262,4 +262,5 @@ input[type=number]{
     top: 15px;
 
     height: 150px;
+    width: 920px;
 }
