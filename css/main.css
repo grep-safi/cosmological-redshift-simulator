@@ -280,34 +280,40 @@ input[type=number]{
 
 #wavelengthText {
     text-align: center;
+    color: darkcyan;
 }
 
 #wavelengthValue {
     text-align: center;
     position: relative;
     bottom: 20px;
+    color: darkgoldenrod;
 }
 
 #redShiftText {
     text-align: center;
     position: relative;
     bottom: 30px;
+    color: darkcyan;
 }
 
 #redShiftFactorValue {
     text-align: center;
     position: relative;
     bottom: 50px;
+    color: darkgoldenrod;
 }
 
 #hubbleText {
     text-align: center;
     position: relative;
     bottom: 60px;
+    color: darkcyan;
 }
 
 #hubbleConstValue {
     text-align: center;
     position: relative;
     bottom: 80px;
+    color: darkgoldenrod;
 }
