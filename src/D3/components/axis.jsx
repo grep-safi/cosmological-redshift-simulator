@@ -70,14 +70,14 @@ export default class Axes extends Component {
             <text
                 transform="rotate(-90)"
                 // x="-15"
-                x="0"
+                x="-30"
                 y="0"
                 dy=".8em"
                 fontSize=".9em"
                 fontWeight="bold"
                 className="axisLabelText"
                 textAnchor="end">
-                Distance in Billions of Light Years
+                Distance in Light Years
             </text>
 
         </React.Fragment>;
