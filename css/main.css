@@ -168,7 +168,7 @@ input[type=number]{
 .units {
     position: relative;
     display: inline-block;
-    bottom: 138px;
+    bottom: 300px;
     left: 300px;
 }
 
@@ -252,12 +252,12 @@ input[type=number]{
 .survey {
     display: inline-block;
     position: relative;
-    bottom: 130px;
+    bottom: 290px;
     left: 625px;
 }
 
 .bottomSettings {
-    background-color: lightslategrey;
+    background-color: black;
     position: relative;
     top: 15px;
 
@@ -266,33 +266,48 @@ input[type=number]{
 }
 
 .criticalValues {
-    background: #64d390;
+    background: black;
     position: relative;
     display: inline-block;
-    bottom: 138px;
-    left: 300px;
-}
+    bottom: 196px;
+    left: 310px;
+    height: 145px;
 
-#wavelengthValue {
-    text-align: center;
-}
-
-#redShiftFactorValue {
-    text-align: center;
-}
-
-#hubbleConstValue {
-    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: brown;
 }
 
 #wavelengthText {
     text-align: center;
 }
 
+#wavelengthValue {
+    text-align: center;
+    position: relative;
+    bottom: 20px;
+}
+
 #redShiftText {
     text-align: center;
+    position: relative;
+    bottom: 30px;
+}
+
+#redShiftFactorValue {
+    text-align: center;
+    position: relative;
+    bottom: 50px;
 }
 
 #hubbleText {
     text-align: center;
+    position: relative;
+    bottom: 60px;
+}
+
+#hubbleConstValue {
+    text-align: center;
+    position: relative;
+    bottom: 80px;
 }
