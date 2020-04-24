@@ -257,7 +257,7 @@ input[type=number]{
 }
 
 .bottomSettings {
-    background-color: black;
+    background-color: lightslategrey;
     position: relative;
     top: 15px;
 
