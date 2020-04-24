@@ -82,7 +82,7 @@ input[type=number]{
 
 .animationButton {
     position: relative;
-    left: 800px;
+    left: 780px;
     /*bottom: 65px;*/
     top: 10px;
     z-index: 1;
@@ -193,7 +193,7 @@ input[type=number]{
     width: 20px;
     height: 150px;
     padding: 0;
-    z-index: 11;
+    z-index: 2;
 }
 
 .animationSlider input {
@@ -316,4 +316,18 @@ input[type=number]{
     position: relative;
     bottom: 80px;
     color: darkgoldenrod;
+}
+
+#auto-pause-checkbox {
+    position: relative;
+    bottom: 75px;
+    left: 775px;
+    z-index: 3;
+}
+
+#auto-pause-text {
+    position: relative;
+    bottom: 74px;
+    left: 784px;
+    color: aliceblue;
 }

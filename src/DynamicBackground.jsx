@@ -41,8 +41,11 @@ export default (props) => {
     let xPositionEarth;
     let xPositionGalaxy;
 
-    let initialEarthX = CENTER_X + getScaledInitialSeparation(props.params.initialSeparationDistance, props.distanceBetweenBodies);
-    let initialGalaxyX = CENTER_X - getScaledInitialSeparation(props.params.initialSeparationDistance, props.distanceBetweenBodies);
+    let initSeparation = getScaledInitialSeparation(props.params.initialSeparationDistance,
+        props.distanceBetweenBodies);
+
+    let initialEarthX = CENTER_X + initSeparation;
+    let initialGalaxyX = CENTER_X - initSeparation;
 
     let initialSeparation = props.params.initialSeparationDistance.toFixed(2);
     let currentSeparation = props.distanceBetweenBodies.toFixed(2);
@@ -56,11 +59,14 @@ export default (props) => {
     }
 
     let initialLightLine = initialGalaxyX;
-    let finalLightLine = xPositionEarth - scaleToPixel(props.distanceTravelledLight) + 10;
+    let finalLightLine = xPositionEarth - scaleToPixel(props.distanceTravelledLight) + 15;
     if (!props.simulationStarted) finalLightLine = initialLightLine;
 
-    // The + 2 is there for making sure light isn't completely invisible after shrinking down
-    finalLightLine = (initialLightLine - finalLightLine) > 0 ? initialLightLine + 1 : finalLightLine;
+    // The + 1 is there for making sure light isn't completely invisible after shrinking down
+    if (initialLightLine - finalLightLine > 0) {
+        finalLightLine = initialLightLine + 1;
+    }
+
     let lightColor = props.lightWavelengthColor;
     if (lightColor === "#000000") { lightColor = "#808080"; }
 

@@ -7,6 +7,15 @@ import Legend from "./D3/components/Legend";
 import DynamicBackground from "./DynamicBackground";
 import { data } from './Data';
 
+const getScaledInitialSeparation = (initDist, currDist) => {
+    let initialSeparation = initDist / 2;
+    let currWidth = 17.228377773099474;
+    let maxWidth = currDist > currWidth ? currDist : currWidth;
+    initialSeparation = (initialSeparation / maxWidth) * 860;
+    initialSeparation = initialSeparation > 0.5 ? initialSeparation : 0.5;
+    return initialSeparation;
+};
+
 class CosmologicalRedshiftSim extends React.Component {
     constructor(props) {
         super(props);
@@ -31,6 +40,8 @@ class CosmologicalRedshiftSim extends React.Component {
             isPlaying: false,
             simulationStarted: false,
             simulationEnded: false,
+            alertUser: false,
+            notified: false,
 
             distanceTravelledLight: 7.00,
             distanceBetweenBodies: 7.00,
@@ -38,6 +49,7 @@ class CosmologicalRedshiftSim extends React.Component {
             index: 0,
             maxIndex: 0,
             simulationWillNeverEnd: false,
+            autoPause: true,
 
             backgroundStars: data,
             wavelength: 400,
@@ -144,6 +156,20 @@ class CosmologicalRedshiftSim extends React.Component {
                 </div>
             </div>
 
+
+            <div>
+                <input type="checkbox"
+                       onChange={this.changeAutoPause.bind(this)}
+                       checked={this.state.autoPause}
+                       id="auto-pause-checkbox"
+                />
+                <label className="" htmlFor="auto-pause-checkbox" id="auto-pause-text">
+                    Autopause
+                </label>
+
+                {/*<p id={"auto-pause-text"}>Autopause</p>*/}
+            </div>
+
         </React.Fragment>;
     }
 
@@ -236,8 +262,37 @@ class CosmologicalRedshiftSim extends React.Component {
         }
     }
 
+    notifyUser() {
+        let CENTER_X = 460;
+        let SCALING_FACTOR = 50;
+        let sizeShift = 10;
+        let scaleToPixel = distance => distance * SCALING_FACTOR;
+        let distanceFromCenter = scaleToPixel(this.state.distanceBetweenBodies / 2);
+
+        let initSeparation = getScaledInitialSeparation(this.state.parameters.initialSeparationDistance,
+            this.state.distanceBetweenBodies);
+
+        let xPositionEarth = CENTER_X + distanceFromCenter - sizeShift;
+        if (!(distanceFromCenter > CENTER_X - 40)) {
+            xPositionEarth = CENTER_X + distanceFromCenter - sizeShift;
+        } else {
+            xPositionEarth = 868.2624688305211;
+        }
+
+        let initialLightLine = CENTER_X - initSeparation;
+        let finalLightLine = xPositionEarth - scaleToPixel(this.state.distanceTravelledLight) + 15;
+        if (!this.state.simulationStarted) finalLightLine = initialLightLine;
+
+        return initialLightLine - finalLightLine > 0;
+    }
+
     animate() {
         if (this.state.simulationEnded) return;
+
+        if (this.state.autoPause && !this.state.notified && this.notifyUser()) {
+            alert('The simulation will never end because light will never reach Earth');
+            this.setState({ notified: true });
+        }
 
         let index = this.state.index;
         let speedOfAnimation = this.state.animationRate;
@@ -376,6 +431,7 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     onStartClick() {
+        console.log(`meeeee :): ${this.state.isPlaying}`);
         if (!this.state.isPlaying) {
             this.calculateData();
             this.raf = requestAnimationFrame(this.animate.bind(this));
@@ -419,6 +475,11 @@ class CosmologicalRedshiftSim extends React.Component {
         });
     }
 
+    changeAutoPause(e) {
+        this.setState({
+            autoPause: !this.state.autoPause,
+        });
+    }
 
     decimalToHex(dec) {
         let d = Math.round(dec);
@@ -501,6 +562,7 @@ class CosmologicalRedshiftSim extends React.Component {
         return "#" + this.decimalToHex(R) + this.decimalToHex(G) + this.decimalToHex(B);
     }
 }
+
 
 const domContainer = document.querySelector('#React-Simulation');
 ReactDOM.render(<CosmologicalRedshiftSim />, domContainer);
