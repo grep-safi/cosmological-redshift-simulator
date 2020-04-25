@@ -59,7 +59,7 @@ export default (props) => {
     }
 
     let initialLightLine = initialGalaxyX;
-    let finalLightLine = xPositionEarth - scaleToPixel(props.distanceTravelledLight) + 15;
+    let finalLightLine = xPositionEarth - scaleToPixel(props.distanceTravelledLight) + 10;
     if (!props.simulationStarted) finalLightLine = initialLightLine;
 
     // The + 1 is there for making sure light isn't completely invisible after shrinking down
@@ -110,7 +110,7 @@ export default (props) => {
                 <rect x={((initialGalaxyX + initialEarthX) / 2) - 60} y={230 - 27} width="143" height="17" fill="black"/>
 
                 <text x={((initialGalaxyX + initialEarthX) / 2) - 80} y={210 - 10} fontSize={"1.0em"} fill={"lightcoral"}>Initial Separation Distance</text>
-                <text x={((initialGalaxyX + initialEarthX) / 2) - 40} y={230 - 13} fontSize={"1.0em"} fill={"lightcoral"}>{initialSeparation} light years</text>
+                <text x={((initialGalaxyX + initialEarthX) / 2) - 63} y={230 - 13} fontSize={"1.0em"} fill={"lightcoral"}>{initialSeparation} billion light years</text>
 
                 {/*-----------------------------------------------*/}
 
@@ -129,7 +129,7 @@ export default (props) => {
 
                 {/*Text values for current separation distance*/}
                 <text x={((initialGalaxyX + initialEarthX) / 2) - 80} y={275 - 10} fontSize={"1.0em"} fill={"lightcoral"}>Current Separation Distance</text>
-                <text x={((initialGalaxyX + initialEarthX) / 2) - 40} y={290 - 10} fontSize={"1.0em"} fill={"lightcoral"}>{currentSeparation} light years</text>
+                <text x={((initialGalaxyX + initialEarthX) / 2) - 63} y={290 - 10} fontSize={"1.0em"} fill={"lightcoral"}>{currentSeparation} billion light years</text>
             </g>
 
             {/* Light line */}

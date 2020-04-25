@@ -134,7 +134,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 </div>
 
                 <div className={"units"}>
-                    <p id={"separationUnits"}>Light Years</p>
+                    <p id={"separationUnits"}>Billion Light Years</p>
                     <p id={"expansionUnits"}>% per Billion Years</p>
                 </div>
 
