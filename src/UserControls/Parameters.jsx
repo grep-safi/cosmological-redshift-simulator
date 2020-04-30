@@ -56,6 +56,7 @@ export default class Parameters extends React.Component {
         let separationDistChangeIsLegal = !(key === 'initialSeparationDistance'
             && this.props.simulationStarted);
         let expansionRateChangeIsLegal = !(key === 'expansionRate' && this.props.isPlaying);
+
         if (separationDistChangeIsLegal && expansionRateChangeIsLegal) {
             this.props.onChange({
                 ...this.props.params,
@@ -65,7 +66,8 @@ export default class Parameters extends React.Component {
         }
 
         if (!expansionRateChangeIsLegal) {
-            alert("Hit pause and then change expansion rate!");
+            this.props.changeAnimationState();
+            // alert("Hit pause and then change expansion rate!");
             return;
         }
 

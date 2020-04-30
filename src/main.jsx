@@ -108,7 +108,6 @@ class CosmologicalRedshiftSim extends React.Component {
                     distanceBetweenBodies={this.state.distanceBetweenBodies}
                     isPlaying={this.state.isPlaying}
                     simulationStarted={this.state.simulationStarted}
-                    changeSimState={() => { this.changeSimState() }}
                     backgroundStars={this.state.backgroundStars}
                     lightWavelengthColor={this.state.lightWavelengthColor}
                 />
@@ -118,7 +117,7 @@ class CosmologicalRedshiftSim extends React.Component {
                 <div className="animationButton">
                     <button type="box"
                             className="btn btn-danger btn-sm"
-                            onClick={() => this.onStartClick()}>
+                            onClick={this.onStartClick.bind(this)}>
                         {this.state.startBtnText}
                     </button>
                 </div>
@@ -130,6 +129,7 @@ class CosmologicalRedshiftSim extends React.Component {
                         simulationStarted={this.state.simulationStarted}
                         simulationEnded={this.state.simulationEnded}
                         isPlaying={this.state.isPlaying}
+                        changeAnimationState={this.changeAnimationState.bind(this)}
                     />
                 </div>
 
@@ -169,6 +169,13 @@ class CosmologicalRedshiftSim extends React.Component {
             </div>
 
         </React.Fragment>;
+    }
+
+    changeAnimationState() {
+        this.setState({
+            isPlaying: false,
+            startBtnText: 'play animation'
+        });
     }
 
     getTimeElapsed() {
@@ -285,7 +292,7 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     animate() {
-        if (this.state.simulationEnded) return;
+        if (this.state.simulationEnded || !this.state.isPlaying) return;
 
         if (this.state.autoPause && !this.state.notified && this.notifyUser()) {
             alert('The simulation will never end because light will never reach Earth');
@@ -429,7 +436,6 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     onStartClick() {
-        console.log(`meeeee :): ${this.state.isPlaying}`);
         if (!this.state.isPlaying) {
             this.calculateData();
             this.raf = requestAnimationFrame(this.animate.bind(this));
