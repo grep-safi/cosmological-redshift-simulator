@@ -166,8 +166,6 @@ class CosmologicalRedshiftSim extends React.Component {
                 <label className="" htmlFor="auto-pause-checkbox" id="auto-pause-text">
                     Autopause
                 </label>
-
-                {/*<p id={"auto-pause-text"}>Autopause</p>*/}
             </div>
 
         </React.Fragment>;
