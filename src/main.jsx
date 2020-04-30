@@ -240,7 +240,7 @@ class CosmologicalRedshiftSim extends React.Component {
     }
 
     handleNewParameters(newParams) {
-        let hubbleConst = (this.state.parameters.expansionRate / 100) * 978.440076093849;
+        let hubbleConst = (newParams.expansionRate / 100) * 978.440076093849;
         this.setState({
             parameters: newParams,
             hubbleConstant: hubbleConst
