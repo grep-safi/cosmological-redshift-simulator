@@ -10,6 +10,7 @@ export default class Parameters extends React.Component {
     constructor(props) {
         super(props);
         this.handleSingleVariableChange = this.handleSingleVariableChange.bind(this);
+        this.remindUser = true;
     }
 
     render() {
@@ -67,7 +68,11 @@ export default class Parameters extends React.Component {
 
         if (!expansionRateChangeIsLegal) {
             this.props.changeAnimationState();
-            // alert("Hit pause and then change expansion rate!");
+            if (this.remindUser) {
+                this.remindUser = !confirm("You must pause the simulation before changing the expansion rate\n\nClick " +
+                    "okay if you'd prefer not to be reminded again");
+            }
+
             return;
         }
 
