@@ -157,16 +157,16 @@ class CosmologicalRedshiftSim extends React.Component {
             </div>
 
 
-            <div>
-                <input type="checkbox"
-                       onChange={this.changeAutoPause.bind(this)}
-                       checked={this.state.autoPause}
-                       id="auto-pause-checkbox"
-                />
-                <label className="" htmlFor="auto-pause-checkbox" id="auto-pause-text">
-                    Autopause
-                </label>
-            </div>
+            {/*<div>*/}
+            {/*    <input type="checkbox"*/}
+            {/*           onChange={this.changeAutoPause.bind(this)}*/}
+            {/*           checked={this.state.autoPause}*/}
+            {/*           id="auto-pause-checkbox"*/}
+            {/*    />*/}
+            {/*    <label className="" htmlFor="auto-pause-checkbox" id="auto-pause-text">*/}
+            {/*        Autopause*/}
+            {/*    </label>*/}
+            {/*</div>*/}
 
         </React.Fragment>;
     }
