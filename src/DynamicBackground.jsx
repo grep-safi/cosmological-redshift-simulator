@@ -79,6 +79,7 @@ export default (props) => {
             <g>{ props.backgroundStars.map(renderCircles()) }</g>
 
             {/*SVG images for Earth and Galaxy*/}
+            {/*Galaxy made from: http://www.onlinewebfonts.com/icon*/}
             <image x={xPositionEarth} y={135 - 10} href="./assets/Earth.svg" height="20" width="20"/>
             <image x={xPositionGalaxy} y={120 - 10} href="./assets/GalaxySVG.svg" height="50" width="50"/>
 
@@ -134,13 +135,6 @@ export default (props) => {
 
             {/* Light line */}
             <line x1={initialLightLine} y1={135} x2={finalLightLine} y2={135} style={{stroke: lightColor, strokeWidth:"2"}}/>
-            {/*<line x1={initialLightLine} y1={135} x2={finalLightLine} y2={135} style={{stroke: "#ff9000", strokeWidth:"2"}}/>*/}
-            {/* <line x1={initialLightLine} y1={112} x2={finalLightLine} y2={112} style={{stroke: "yellow", strokeWidth:"2"}}/> */}
         </svg>
     );
 }
-
-
-// Remember to credit:
-// <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>
-// <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>

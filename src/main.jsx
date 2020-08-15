@@ -155,19 +155,6 @@ class CosmologicalRedshiftSim extends React.Component {
                     <p id={"hubbleConstValue"}>{this.state.hubbleConstant.toFixed(0)} km/s / Mpc</p>
                 </div>
             </div>
-
-
-            {/*<div>*/}
-            {/*    <input type="checkbox"*/}
-            {/*           onChange={this.changeAutoPause.bind(this)}*/}
-            {/*           checked={this.state.autoPause}*/}
-            {/*           id="auto-pause-checkbox"*/}
-            {/*    />*/}
-            {/*    <label className="" htmlFor="auto-pause-checkbox" id="auto-pause-text">*/}
-            {/*        Autopause*/}
-            {/*    </label>*/}
-            {/*</div>*/}
-
         </React.Fragment>;
     }
 
@@ -277,7 +264,7 @@ class CosmologicalRedshiftSim extends React.Component {
         let initSeparation = getScaledInitialSeparation(this.state.parameters.initialSeparationDistance,
             this.state.distanceBetweenBodies);
 
-        let xPositionEarth = CENTER_X + distanceFromCenter - sizeShift;
+        let xPositionEarth;
         if (!(distanceFromCenter > CENTER_X - 40)) {
             xPositionEarth = CENTER_X + distanceFromCenter - sizeShift;
         } else {
@@ -327,11 +314,6 @@ class CosmologicalRedshiftSim extends React.Component {
 
             simulationStarted: true,
 
-            // targetDistances: this.state.targetDistances,
-            // lightDistances: this.state.lightDistances,
-            // lightTravelledDistances: this.state.lightTravelledDistances,
-            // times: this.state.times,
-
             index: this.state.index + speedOfAnimation,
             simulationEnded: simulationWillComplete,
             wavelength: wv,
@@ -359,12 +341,11 @@ class CosmologicalRedshiftSim extends React.Component {
             let incrementX = star.deltaX * speedOfConvergence;
             let incrementY = star.deltaY * speedOfConvergence;
             let incrementRadius = (1 - (distToCenter / 1100)) * speedOfConvergence / 35;
-            // let rad = (1 -)
-            // let incrementRadius = (1 - (distToCenter / 1100)) * speedOfConvergence / 20;
 
             circleX -= incrementX;
             circleY -= incrementY;
             radius -= incrementRadius;
+
             // Make sure radius isn't negative or it'll throw an error
             radius = radius < 0 ? 0 : radius;
 
@@ -547,7 +528,6 @@ class CosmologicalRedshiftSim extends React.Component {
 
 
         // Let the intensity fall off near the vision limits
-
         let factor = 0;
         if (w >= 380 && w < 420)
             factor = 0.3 + 0.7*(w - 380) / (420 - 380);

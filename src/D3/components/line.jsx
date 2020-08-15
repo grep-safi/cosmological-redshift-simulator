@@ -2,8 +2,8 @@ import React from 'react';
 import { select } from 'd3-selection';
 
 export default class Line extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.ref = React.createRef();
     }
     componentDidMount() {

@@ -30,20 +30,6 @@ export default class Axes extends Component {
 
         xAxisNode.call(xAxis);
         yAxisNode.call(yAxis);
-
-        // this.drawColors(xAxisNode);
-        // this.drawColors(yAxisNode);
-    }
-
-    drawColors(axis) {
-        axis.selectAll("line")
-            .style("stroke", "red");
-
-        axis.selectAll("path")
-            .style("stroke", "red");
-
-        axis.selectAll("text")
-            .style("stroke", "red");
     }
 
     render() {
@@ -69,7 +55,6 @@ export default class Axes extends Component {
 
             <text
                 transform="rotate(-90)"
-                // x="-15"
                 x="-15"
                 y="0"
                 dy=".8em"

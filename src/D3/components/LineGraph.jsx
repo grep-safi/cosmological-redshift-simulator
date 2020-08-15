@@ -4,7 +4,6 @@ import XYAxis       from './x-y-axis';
 import { curveCardinal, max, scaleLinear, line } from 'd3/dist/d3';
 
 // Returns the largest X coordinate from the data set
-// const xMax = (data) => max(data) + 1.0;
 const xMax = (data) => max(data) + 0.1;
 
 // Returns the largest Y coordinate from the data set
@@ -21,7 +20,6 @@ const xScale = (props) => {
 const yScale = (props) => {
     return scaleLinear()
         .domain([0, yMax(props.targetDistances)])
-        // .range([props.height - props.padding + 10, props.padding - 10]);
         .range([props.height - props.padding - 10, props.padding - 40]);
 };
 
@@ -72,11 +70,5 @@ export default (props) => {
             id={'lightDistID'}
             color={'red'}
         />
-
-        {/*Horizontal Upper line*/}
-        {/*<line x1={39} y1={24.5} x2={886} y2={24.5} style={{stroke: "rgb(0,0,0)"}} />*/}
-        {/*/!*Vertical Right Line*!/*/}
-        {/*<line x1={885.5} y1={265} x2={885.5} y2={25} style={{stroke: "rgb(0,0,0)"}} />*/}
-
     </svg>);
 }
