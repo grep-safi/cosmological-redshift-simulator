@@ -96,9 +96,9 @@ class CosmologicalRedshiftSim extends React.Component {
                     <Legend />
 
                     <div className={"timeElapsed"}>
-                        <p id={"timeElapsedText"}>Time Elapsed: </p>
-                        <p id={"timeElapsedNumber"}>{this.getTimeElapsed()}</p>
-                        <p id={"timeUnits"}>Billions of Years</p>
+                        <p className={"timeText"}>Time Elapsed: </p>
+                        <p className={"timeText"}>{this.getTimeElapsed()}</p>
+                        <p className={"timeText"}>Billions of Years</p>
                     </div>
                 </div>
             </div>
