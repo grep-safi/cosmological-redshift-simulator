@@ -71,26 +71,12 @@ class CosmologicalRedshiftSim extends React.Component {
             />
 
             <div id={"topHalf"}>
-                <Chart
-                    lightValues={this.state.lightTravelledDistances}
-                    targetDistances={this.state.targetDistances}
-                    lightDistances={this.state.lightDistances}
-                    times={this.state.times}
-                />
-
-                <Legend />
-
-                <div className={"timeElapsed"}>
-                    <p id={"timeElapsedText"}>Time Elapsed: </p>
-                    <p id={"timeElapsedNumber"}>{this.getTimeElapsed()}</p>
-                    <p id={"timeUnits"}>Billions of Years</p>
-                </div>
-
                 <div className="animationSlider">
                     <h6  id="animationSpeedText">Animation </h6>
                     <h6  id="animationSpeedTextLineTwo">Speed</h6>
                     <input
                         type="range"
+                        id="animationSliderRange"
                         min={1}
                         max={100}
                         step={1}
@@ -99,6 +85,22 @@ class CosmologicalRedshiftSim extends React.Component {
                     />
                 </div>
 
+                <Chart
+                    lightValues={this.state.lightTravelledDistances}
+                    targetDistances={this.state.targetDistances}
+                    lightDistances={this.state.lightDistances}
+                    times={this.state.times}
+                />
+
+                <div className="legendAndText">
+                    <Legend />
+
+                    <div className={"timeElapsed"}>
+                        <p id={"timeElapsedText"}>Time Elapsed: </p>
+                        <p id={"timeElapsedNumber"}>{this.getTimeElapsed()}</p>
+                        <p id={"timeUnits"}>Billions of Years</p>
+                    </div>
+                </div>
             </div>
 
             <div id={"dynamicBackground"}>
