@@ -68,6 +68,8 @@
 .graphTitleText {
     color: chocolate;
     text-align: center;
+    width: 570px;
+    height: 28px;
 }
 
 .yAxis line,

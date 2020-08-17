@@ -12,8 +12,3 @@ body {
 input[type=number]{
     width: 65px;
 }
-
-#expansionSlider,
-#separationSlider {
-    width: 130px;
-}
