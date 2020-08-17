@@ -21,7 +21,8 @@ export default class Parameters extends React.Component {
                     displayName={"Initial Separation Distance: "}
                     className={"separationParameter"}
                     units={"Billion Light Years"}
-                    id={"separationSlider"}
+                    sliderID={"separationSlider"}
+                    numberID={"separationInput"}
                     min={3.0}
                     max={10.0}
                     step={0.01}
@@ -30,12 +31,14 @@ export default class Parameters extends React.Component {
                     onChange={this.handleSingleVariableChange}
                     backgroundColors={this.props.backgroundColors}
                 />
+
                 <SingleVariableControl
                     name={"expansionRate"}
                     displayName={"Universe Expansion Rate: "}
                     className={"expansionParameter"}
                     units={"% per Billion Years"}
-                    id={"expansionSlider"}
+                    sliderID={"expansionSlider"}
+                    numberID={"expansionInput"}
                     min={0.00}
                     max={13.00}
                     step={0.01}

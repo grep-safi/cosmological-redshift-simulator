@@ -120,11 +120,6 @@ class CosmologicalRedshiftSim extends React.Component {
                 <div className="parameters">
                     <h4 id="parameterText">Parameters</h4>
 
-                    {/*<div className={"units"}>*/}
-                    {/*    <p id={"separationUnits"}>Billion Light Years</p>*/}
-                    {/*    <p id={"expansionUnits"}>% per Billion Years</p>*/}
-                    {/*</div>*/}
-
                     <Parameters
                         params={this.state.parameters}
                         onChange={this.handleNewParameters.bind(this)}

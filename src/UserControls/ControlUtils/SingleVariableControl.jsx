@@ -17,7 +17,7 @@ export default class SingleVariableControl extends React.Component {
         const value = Number.parseFloat(this.props.value).toFixed(this.props.decimals);
 
         return (
-            <div>
+            <div className="single-input-row">
                 <div className="input-row">
                     <p className="separation-units">{this.props.displayName}</p>
                 </div>
@@ -26,6 +26,7 @@ export default class SingleVariableControl extends React.Component {
                         type="number"
                         className={this.props.className}
                         name={this.props.name}
+                        id={this.props.numberID}
                         min={this.props.min}
                         max={this.props.max}
                         step={this.props.step}
@@ -40,7 +41,7 @@ export default class SingleVariableControl extends React.Component {
                 <div className="input-row">
                     <input
                         type="range"
-                        id={this.props.id}
+                        id={this.props.sliderID}
                         name={this.props.name}
                         min={this.props.min}
                         max={this.props.max}

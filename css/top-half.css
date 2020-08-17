@@ -1,14 +1,11 @@
 #topHalf {
-    /*border: 1px solid red;*/
     background-color: black;
     height: 280px;
     width: 920px;
     margin-bottom: 10px;
-    /*display: inline-block;*/
 }
 
 #chart {
-    /*border: 1px solid teal;*/
     width: 570px;
     height: 280px;
     background-color: transparent;
@@ -17,17 +14,12 @@
 }
 
 #legend {
-    /*position: relative;*/
-    /*bottom: 60px;*/
-    /*left: 25px;*/
     border: 1px solid teal;
     border-radius: 5px;
     width: 160px;
-    /*display: inline-block;*/
 }
 
 .legendAndText {
-    /*border: 1px solid green;*/
     margin-left: 15px;
     margin-top: 10px;
     width: 160px;
@@ -64,7 +56,6 @@
     position: relative;
     left: 70px;
     top: 10px;
-    /*background-color: transparent;*/
 
     transform-origin: 75px 75px;
     transform: rotate(-90deg);
