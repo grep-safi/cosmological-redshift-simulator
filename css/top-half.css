@@ -59,11 +59,11 @@
 }
 
 #animationSliderRange {
-    width: 190px;
+    width: 170px;
     height: 20px;
     position: relative;
     left: 70px;
-    top: 40px;
+    top: 10px;
     /*background-color: transparent;*/
 
     transform-origin: 75px 75px;

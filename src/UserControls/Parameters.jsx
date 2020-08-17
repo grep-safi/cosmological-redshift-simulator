@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SingleVariableControl from "./ControlUtils/SingleVariableControl";
 
 /**
- * Parameters is a GUI interface that controls the
+ * Parameters is an interface that controls the
  * variables used to alter the orbit drawings in the OrbitView.
  */
 export default class Parameters extends React.Component {
@@ -15,41 +15,36 @@ export default class Parameters extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
-                <br />
-                <fieldset>
-                    <legend id="parameterText">Parameters</legend>
-                    <SingleVariableControl
-                        name={"initialSeparationDistance"}
-                        displayName={"Initial Separation Distance: "}
-                        className={"separationParameter"}
-                        id={"separationSlider"}
-                        min={3.0}
-                        max={10.0}
-                        step={0.01}
-                        decimals={2}
-                        value={this.props.params.initialSeparationDistance}
-                        onChange={this.handleSingleVariableChange}
-                        backgroundColors={this.props.backgroundColors}
-                    />
-                    <br />
-                    <SingleVariableControl
-                        name={"expansionRate"}
-                        displayName={"Universe Expansion Rate: "}
-                        className={"expansionParameter"}
-                        id={"expansionSlider"}
-                        min={0.00}
-                        max={13.00}
-                        step={0.01}
-                        decimals={2}
-                        value={this.props.params.expansionRate}
-                        onChange={this.handleSingleVariableChange}
-                        backgroundColors={this.props.backgroundColors}
-                    />
-                    <br />
-                </fieldset>
-                <br />
-            </React.Fragment>
+            <div>
+                <SingleVariableControl
+                    name={"initialSeparationDistance"}
+                    displayName={"Initial Separation Distance: "}
+                    className={"separationParameter"}
+                    units={"Billion Light Years"}
+                    id={"separationSlider"}
+                    min={3.0}
+                    max={10.0}
+                    step={0.01}
+                    decimals={2}
+                    value={this.props.params.initialSeparationDistance}
+                    onChange={this.handleSingleVariableChange}
+                    backgroundColors={this.props.backgroundColors}
+                />
+                <SingleVariableControl
+                    name={"expansionRate"}
+                    displayName={"Universe Expansion Rate: "}
+                    className={"expansionParameter"}
+                    units={"% per Billion Years"}
+                    id={"expansionSlider"}
+                    min={0.00}
+                    max={13.00}
+                    step={0.01}
+                    decimals={2}
+                    value={this.props.params.expansionRate}
+                    onChange={this.handleSingleVariableChange}
+                    backgroundColors={this.props.backgroundColors}
+                />
+            </div>
         )
     }
 

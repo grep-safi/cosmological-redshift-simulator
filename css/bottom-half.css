@@ -1,0 +1,76 @@
+.bottom-half {
+    background-color: black;
+    margin-top: 10px;
+
+    height: 150px;
+    min-height: 150px;
+
+    width: 920px;
+    min-width: 920px;
+}
+
+.parameters {
+    display: inline-block;
+    vertical-align: top;
+
+    width: 600px;
+    min-width: 600px;
+
+    height: 150px;
+    min-height: 150px;
+
+    border: 1px solid red;
+}
+
+.criticalValues {
+    display: inline-block;
+
+    width: 150px;
+    min-width: 150px;
+
+    height: 150px;
+    min-height: 150px;
+
+    border: 1px solid green;
+}
+
+.animation-and-survey-btns {
+    vertical-align: top;
+    display: inline-block;
+
+    width: 170px;
+    min-width: 170px;
+
+    height: 150px;
+    min-height: 150px;
+
+    border: 1px solid antiquewhite;
+}
+
+.input-row {
+    display: inline-block;
+}
+
+#parameterText {
+    color: deeppink;
+}
+
+.darkcyan-text {
+    text-align: center;
+    color: darkcyan;
+    margin-bottom: -5px;
+}
+
+.darkgoldenrod-text {
+    text-align: center;
+    color: darkgoldenrod;
+    margin-bottom: 5px;
+}
+
+.separation-units {
+    color: #64d390;
+}
+
+.units-text {
+    color: maroon;
+}

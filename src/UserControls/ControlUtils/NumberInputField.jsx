@@ -20,30 +20,27 @@ export default class NumberInputField extends React.Component {
     }
 
     render() {
-        let value;
-        if (this.state.hasFocus === true) {
-            value = this.state.value
-        } else {
-            value = this.padDecimals(this.props.value);
-        }
+        const value = this.state.hasFocus ? this.state.value : this.padDecimals(this.props.value);
         return (
-            <form
-                onSubmit={this.handleSubmit.bind(this)}
-                style={{display: "inline-block"}}
-            >
-                <input
-                    type="number"
-                    name="numberInput"
-                    className={this.props.className}
-                    min={this.props.min}
-                    max={this.props.max}
-                    step={this.props.step}
-                    onChange={this.handleChange.bind(this)}
-                    onFocus={this.handleFocus.bind(this)}
-                    onBlur={this.handleBlur.bind(this)}
-                    value={value}
-                />
-            </form>
+            <div>
+                <form
+                    onSubmit={this.handleSubmit.bind(this)}
+                    style={{display: "inline-block"}}
+                >
+                    <input
+                        type="number"
+                        name="numberInput"
+                        className={this.props.className}
+                        min={this.props.min}
+                        max={this.props.max}
+                        step={this.props.step}
+                        onChange={this.handleChange.bind(this)}
+                        onFocus={this.handleFocus.bind(this)}
+                        onBlur={this.handleBlur.bind(this)}
+                        value={value}
+                    />
+                </form>
+            </div>
         );
     }
 

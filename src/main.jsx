@@ -115,16 +115,16 @@ class CosmologicalRedshiftSim extends React.Component {
                 />
             </div>
 
-            <div className={"bottomSettings"}>
-                <div className="animationButton">
-                    <button type="box"
-                            className="btn btn-danger btn-sm"
-                            onClick={this.onStartClick.bind(this)}>
-                        {this.state.startBtnText}
-                    </button>
-                </div>
+            <div className={"bottom-half"}>
 
                 <div className="parameters">
+                    <h4 id="parameterText">Parameters</h4>
+
+                    {/*<div className={"units"}>*/}
+                    {/*    <p id={"separationUnits"}>Billion Light Years</p>*/}
+                    {/*    <p id={"expansionUnits"}>% per Billion Years</p>*/}
+                    {/*</div>*/}
+
                     <Parameters
                         params={this.state.parameters}
                         onChange={this.handleNewParameters.bind(this)}
@@ -135,27 +135,34 @@ class CosmologicalRedshiftSim extends React.Component {
                     />
                 </div>
 
-                <div className={"units"}>
-                    <p id={"separationUnits"}>Billion Light Years</p>
-                    <p id={"expansionUnits"}>% per Billion Years</p>
-                </div>
-
-                <div className="survey">
-                    <a href="https://tinyurl.com/yd4n28bx"
-                       target="_blank"
-                       rel="noopener noreferrer">
-                        <button type="button" className="btn btn-warning">Give us feedback!</button>
-                    </a>
-                </div>
 
                 <div className={"criticalValues"}>
-                    <p id={"wavelengthText"}>Wavelength:</p>
-                    <p id={"wavelengthValue"}>{this.state.wavelength.toFixed(0)} nm</p>
-                    <p id={"redShiftText"}>Redshift Factor (Z):</p>
-                    <p id={"redShiftFactorValue"}>{this.state.redShift.toFixed(1)}</p>
-                    <p id={"hubbleText"}>Hubble Constant:</p>
-                    <p id={"hubbleConstValue"}>{this.state.hubbleConstant.toFixed(0)} km/s / Mpc</p>
+                    <p className={"darkcyan-text"}>Wavelength:</p>
+                    <p className={"darkgoldenrod-text"}>{this.state.wavelength.toFixed(0)} nm</p>
+                    <p className={"darkcyan-text"}>Redshift Factor (Z):</p>
+                    <p className={"darkgoldenrod-text"}>{this.state.redShift.toFixed(1)}</p>
+                    <p className={"darkcyan-text"}>Hubble Constant:</p>
+                    <p className={"darkgoldenrod-text"}>{this.state.hubbleConstant.toFixed(0)} km/s / Mpc</p>
                 </div>
+
+                <div className="animation-and-survey-btns">
+                    <div className="animationButton">
+                        <button type="box"
+                                className="btn btn-danger btn-sm"
+                                onClick={this.onStartClick.bind(this)}>
+                            {this.state.startBtnText}
+                        </button>
+                    </div>
+
+                    <div className="survey">
+                        <a href="https://tinyurl.com/yd4n28bx"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <button type="button" className="btn btn-warning">Give us feedback!</button>
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </React.Fragment>;
     }

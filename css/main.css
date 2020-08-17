@@ -13,14 +13,7 @@ body {
     margin: 0 auto;
 }
 
-/*#dynamicBackground {*/
-/*    position: relative;*/
-/*    top: 10px;*/
-/*}*/
 
-/*input[type=number]{*/
-/*    width: 58px;*/
-/*}*/
 
 /*.parameterNameText {*/
 /*    color: #64d390;*/
@@ -53,12 +46,7 @@ body {
 
 
 
-/*#parameterText {*/
-/*    !*color: rgba(195,87,122,0.84);*!*/
-/*    color: deeppink;*/
-/*    position: relative;*/
-/*    left: 40px;*/
-/*}*/
+
 
 /*.parameters {*/
 /*    position: relative;*/
@@ -122,15 +110,6 @@ body {
 /*    left: 625px;*/
 /*}*/
 
-/*.bottomSettings {*/
-/*    background-color: black;*/
-/*    position: relative;*/
-/*    top: 15px;*/
-
-/*    height: 150px;*/
-/*    width: 920px;*/
-/*}*/
-
 /*.criticalValues {*/
 /*    background: black;*/
 /*    position: relative;*/
@@ -144,45 +123,6 @@ body {
 /*    border-color: brown;*/
 /*}*/
 
-/*#wavelengthText {*/
-/*    text-align: center;*/
-/*    color: darkcyan;*/
-/*}*/
-
-/*#wavelengthValue {*/
-/*    text-align: center;*/
-/*    position: relative;*/
-/*    bottom: 20px;*/
-/*    color: darkgoldenrod;*/
-/*}*/
-
-/*#redShiftText {*/
-/*    text-align: center;*/
-/*    position: relative;*/
-/*    bottom: 30px;*/
-/*    color: darkcyan;*/
-/*}*/
-
-/*#redShiftFactorValue {*/
-/*    text-align: center;*/
-/*    position: relative;*/
-/*    bottom: 50px;*/
-/*    color: darkgoldenrod;*/
-/*}*/
-
-/*#hubbleText {*/
-/*    text-align: center;*/
-/*    position: relative;*/
-/*    bottom: 60px;*/
-/*    color: darkcyan;*/
-/*}*/
-
-/*#hubbleConstValue {*/
-/*    text-align: center;*/
-/*    position: relative;*/
-/*    bottom: 80px;*/
-/*    color: darkgoldenrod;*/
-/*}*/
 
 /*#auto-pause-checkbox {*/
 /*    position: relative;*/
