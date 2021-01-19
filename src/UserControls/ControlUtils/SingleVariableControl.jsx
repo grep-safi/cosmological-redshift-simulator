@@ -52,34 +52,6 @@ export default class SingleVariableControl extends React.Component {
                 </div>
             </div>
         )
-
-        // return (
-        //     <label className={"parameterNameText"}>
-        //         {this.props.displayName}
-        //         <NumberInputField
-        //             type="number"
-        //             className={this.props.className}
-        //             name={this.props.name}
-        //             min={this.props.min}
-        //             max={this.props.max}
-        //             step={this.props.step}
-        //             onNewValue={this.handleNewValue.bind(this)}
-        //             value={this.props.value}
-        //             decimals={this.props.decimals}
-        //         />
-        //         &nbsp; &nbsp;
-        //         <input
-        //             type="range"
-        //             id={this.props.id}
-        //             name={this.props.name}
-        //             min={this.props.min}
-        //             max={this.props.max}
-        //             step={this.props.step}
-        //             onChange={this.handleChange.bind(this)}
-        //             value={value}
-        //         />
-        //     </label>
-        // );
     }
 
     handleNewValue(newValue) {
